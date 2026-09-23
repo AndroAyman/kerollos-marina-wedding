@@ -3,35 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#3b281e">
 
-<title>Kerollos & Marina</title>
+<title>Kerollos & Marina | Wedding Invitation</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
 <style>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
 
 :root{
     --brown-dark:#241811;
     --brown:#3a261b;
     --brown-light:#624635;
+
     --cream:#f7f0e3;
     --cream-light:#fcf8ef;
+
     --gold:#b9914f;
     --gold-light:#d8bd83;
     --gold-dark:#86652e;
+
     --black:#16110e;
     --text:#2a211c;
+
     --white:#ffffff;
+
     --shadow:0 20px 60px rgba(0,0,0,.25);
 }
 
+
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
 html{
@@ -45,103 +60,63 @@ body{
     overflow-x:hidden;
 }
 
-body.arabic{
-    direction:rtl;
-
-    /*
-       IMPORTANT:
-       Arabic uses exactly the same English fonts.
-       No Arabic-specific font is used.
-    */
-    font-family:"Cormorant Garamond",serif;
-}
-
-img{
-    max-width:100%;
-    display:block;
+body.locked{
+    overflow:hidden;
 }
 
 button,
 input,
 textarea{
-    font:inherit;
+    font-family:inherit;
 }
 
-/* =========================
-   LANGUAGE BUTTON
-========================= */
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
 
 .language-switch{
     position:fixed;
     top:22px;
     right:22px;
-    z-index:9999;
+    z-index:10000;
+}
 
-    border:1px solid rgba(185,145,79,.7);
-    background:rgba(247,240,227,.92);
-    color:var(--brown);
-
-    padding:9px 15px;
+.language-switch button{
+    border:1px solid rgba(255,255,255,.55);
+    background:rgba(20,13,9,.72);
+    color:#fff;
+    padding:9px 17px;
+    border-radius:3px;
 
     font-family:"Cinzel",serif;
-    font-size:10px;
-    letter-spacing:1.8px;
+    font-size:11px;
+    letter-spacing:2px;
 
     cursor:pointer;
+    backdrop-filter:blur(8px);
+
     transition:.3s;
 }
 
-.language-switch:hover{
-    background:var(--brown);
-    color:white;
+.language-switch button:hover{
+    background:var(--gold);
+    color:#17100c;
 }
 
-/* =========================
-   MUSIC
-========================= */
 
-.music-control{
-    position:fixed;
-    bottom:20px;
-    left:20px;
-    z-index:9999;
-
-    width:48px;
-    height:48px;
-
-    border-radius:50%;
-    border:1px solid rgba(185,145,79,.7);
-
-    background:rgba(247,240,227,.95);
-    color:var(--brown);
-
-    font-size:17px;
-
-    cursor:pointer;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.15);
-    transition:.3s;
-}
-
-.music-control:hover{
-    background:var(--brown);
-    color:white;
-}
-
-/* =========================
+/* =========================================================
    OPENING SCREEN
-========================= */
+========================================================= */
 
-.opening-screen{
+.opening{
     position:fixed;
     inset:0;
-    z-index:10000;
+    z-index:9000;
 
     background:
-        radial-gradient(circle at center,
-        rgba(185,145,79,.10),
-        transparent 40%),
-        var(--brown-dark);
+        radial-gradient(circle at center, rgba(140,100,60,.22), transparent 45%),
+        linear-gradient(135deg,#251710,#3c281c 50%,#1c120d);
 
     display:flex;
     align-items:center;
@@ -152,604 +127,1069 @@ textarea{
         visibility 1s ease;
 }
 
-.opening-screen.hidden{
+.opening.hidden{
     opacity:0;
     visibility:hidden;
     pointer-events:none;
 }
 
-.opening-content{
-    width:min(90%,600px);
-    text-align:center;
-    color:white;
-}
-
-.opening-small{
-    font-family:"Cinzel",serif;
-    font-size:11px;
-    letter-spacing:4px;
-    line-height:1.8;
-    color:var(--gold-light);
-    margin-bottom:35px;
-}
-
-.envelope{
-    width:min(90vw,430px);
-    height:270px;
-    margin:0 auto 30px;
-
-    position:relative;
-
-    background:#e9dcc5;
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.45);
-
-    cursor:pointer;
-
-    transform-style:preserve-3d;
-    transition:transform .5s ease;
-}
-
-.envelope:hover{
-    transform:translateY(-5px);
-}
-
-.envelope:before{
+.opening::before{
     content:"";
     position:absolute;
     inset:0;
 
+    background-image:
+        radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+
+    background-size:5px 5px;
+    opacity:.15;
+}
+
+
+/* =========================================================
+   OPENING CONTENT
+========================================================= */
+
+.opening-content{
+    position:relative;
+    z-index:2;
+
+    width:min(92vw,520px);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    text-align:center;
+}
+
+.coming-title{
+    color:#f6ead5;
+
+    font-family:"Cinzel",serif;
+    font-size:clamp(17px,4vw,25px);
+    letter-spacing:5px;
+    line-height:1.6;
+
+    margin-bottom:28px;
+
+    text-shadow:0 3px 20px rgba(0,0,0,.5);
+}
+
+.ornament{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:13px;
+
+    color:var(--gold-light);
+
+    margin:14px 0;
+}
+
+.ornament::before,
+.ornament::after{
+    content:"";
+    width:70px;
+    height:1px;
+    background:linear-gradient(
+        to right,
+        transparent,
+        var(--gold)
+    );
+}
+
+.ornament::after{
+    background:linear-gradient(
+        to left,
+        transparent,
+        var(--gold)
+    );
+}
+
+.ornament span{
+    font-size:18px;
+}
+
+
+/* =========================================================
+   ENVELOPE
+========================================================= */
+
+.envelope-area{
+    position:relative;
+
+    width:min(82vw,390px);
+    height:min(58vw,270px);
+
+    perspective:1200px;
+
+    cursor:pointer;
+
+    filter:drop-shadow(0 30px 30px rgba(0,0,0,.45));
+}
+
+.envelope{
+    position:absolute;
+    inset:0;
+
     background:
-        linear-gradient(135deg,
-        transparent 49.5%,
-        #d5c5aa 50%,
-        transparent 50.5%);
+        linear-gradient(
+            145deg,
+            #6a4b37,
+            #4a3021 48%,
+            #362116
+        );
+
+    border-radius:3px;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.08),
+        inset 0 0 30px rgba(0,0,0,.25);
+}
+
+.envelope-paper{
+    position:absolute;
+
+    left:7%;
+    right:7%;
+
+    bottom:7%;
+
+    height:76%;
+
+    background:var(--cream-light);
+
+    border-radius:2px;
+
+    z-index:1;
+
+    transform:translateY(15px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+
+    transition:
+        transform 1.4s cubic-bezier(.2,.8,.2,1),
+        z-index .1s 1s;
+}
+
+.envelope-paper::before{
+    content:"";
+    position:absolute;
+    inset:9px;
+
+    border:1px solid rgba(185,145,79,.45);
 }
 
 .envelope-flap{
     position:absolute;
+    z-index:4;
+
+    left:0;
     top:0;
-    left:0;
-
-    width:100%;
-    height:55%;
-
-    background:#f1e6d1;
-
-    clip-path:polygon(0 0,100% 0,50% 100%);
-
-    z-index:2;
-}
-
-.envelope-bottom{
-    position:absolute;
-    bottom:0;
-    left:0;
 
     width:100%;
     height:100%;
 
     background:
-        linear-gradient(30deg,
-        transparent 49.5%,
-        #d8c8ac 50%,
-        transparent 50.5%),
-        linear-gradient(-30deg,
-        transparent 49.5%,
-        #d8c8ac 50%,
-        transparent 50.5%);
+        linear-gradient(
+            145deg,
+            #75533b,
+            #4c3223
+        );
 
-    z-index:1;
+    clip-path:polygon(
+        0 0,
+        100% 0,
+        50% 60%
+    );
+
+    transform-origin:top center;
+
+    transition:
+        transform 1.2s cubic-bezier(.2,.75,.2,1);
+
+    filter:brightness(.95);
 }
+
+.envelope-bottom{
+    position:absolute;
+    z-index:3;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            155deg,
+            transparent 49%,
+            #5a3d2a 50%,
+            #422a1c 100%
+        );
+
+    clip-path:polygon(
+        0 100%,
+        100% 100%,
+        50% 45%
+    );
+
+    pointer-events:none;
+}
+
+.envelope-left,
+.envelope-right{
+    position:absolute;
+    inset:0;
+
+    z-index:3;
+
+    pointer-events:none;
+}
+
+.envelope-left{
+    clip-path:polygon(0 0,50% 50%,0 100%);
+    background:rgba(35,21,14,.28);
+}
+
+.envelope-right{
+    clip-path:polygon(100% 0,50% 50%,100% 100%);
+    background:rgba(35,21,14,.38);
+}
+
+
+/* =========================================================
+   KM SEAL
+========================================================= */
 
 .wax-seal{
     position:absolute;
 
+    z-index:6;
+
     left:50%;
-    top:52%;
+    top:50%;
 
     transform:translate(-50%,-50%);
 
-    width:86px;
-    height:86px;
+    width:76px;
+    height:76px;
 
     border-radius:50%;
 
     background:
         radial-gradient(
             circle at 35% 30%,
-            #333,
-            #050505 65%
+            #222,
+            #090807 65%,
+            #000
         );
 
-    border:4px solid var(--gold);
+    border:3px solid #0a0908;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.45),
+        inset 0 0 0 2px rgba(255,255,255,.08);
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    z-index:5;
-
-    box-shadow:
-        0 8px 20px rgba(0,0,0,.4),
-        inset 0 0 0 3px rgba(255,255,255,.05);
+    transition:
+        transform 1s ease,
+        opacity .6s ease;
 }
 
-.wax-seal span{
-    font-family:"Cinzel",serif;
-    font-weight:700;
-    font-size:21px;
-    letter-spacing:-2px;
+.wax-seal::before{
+    content:"";
+
+    position:absolute;
+    inset:6px;
+
+    border:1px solid var(--gold);
+    border-radius:50%;
+
+    opacity:.9;
+}
+
+.wax-logo{
     color:var(--gold-light);
+
+    font-family:"Great Vibes",cursive;
+    font-size:33px;
+
+    transform:rotate(-8deg);
+
+    position:relative;
+    z-index:2;
 }
 
-.open-text{
+.wax-logo span{
+    margin-left:-9px;
+}
+
+
+/* =========================================================
+   TAP TO OPEN
+========================================================= */
+
+.tap-open{
+    color:#f7ead6;
+
     font-family:"Cinzel",serif;
-    font-size:10px;
-    letter-spacing:3px;
-    color:white;
+
+    font-size:11px;
+    letter-spacing:4px;
+
+    margin-top:27px;
+
+    animation:breathe 2s infinite;
 }
 
-/* =========================
-   MAIN
-========================= */
+.tap-line{
+    width:80px;
+    height:1px;
 
-main{
+    background:var(--gold);
+
+    margin:12px auto 0;
+
+    opacity:.8;
+}
+
+@keyframes breathe{
+    0%,100%{opacity:.5}
+    50%{opacity:1}
+}
+
+
+/* =========================================================
+   OPENING ANIMATION
+========================================================= */
+
+.opening.opening-animation .envelope-flap{
+    transform:rotateX(180deg);
+    z-index:1;
+}
+
+.opening.opening-animation .envelope-paper{
+    transform:translateY(-120px);
+    z-index:5;
+}
+
+.opening.opening-animation .wax-seal{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.5);
+}
+
+.opening.opening-animation .tap-open{
+    opacity:0;
+}
+
+
+/* =========================================================
+   MAIN SITE
+========================================================= */
+
+.main-site{
+    opacity:0;
+    visibility:hidden;
+
+    transition:opacity 1.2s ease;
+
+    background:
+        linear-gradient(
+            rgba(247,240,227,.95),
+            rgba(247,240,227,.95)
+        ),
+        url("photos/1.jpg") center/cover fixed;
+}
+
+.main-site.visible{
     opacity:1;
+    visibility:visible;
 }
+
+
+/* =========================================================
+   PAPER / SECTIONS
+========================================================= */
 
 .paper-section{
     position:relative;
 
-    width:min(100%,1100px);
+    width:min(94%,820px);
+
     margin:0 auto;
 
-    background:var(--cream-light);
-
-    box-shadow:var(--shadow);
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-    min-height:100vh;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    padding:80px 25px;
+    padding:80px 35px;
 
     background:
         linear-gradient(
-            rgba(247,240,227,.72),
-            rgba(247,240,227,.92)
-        ),
-        url("photos/couple.jpg")
-        center/cover no-repeat;
+            rgba(252,248,239,.96),
+            rgba(247,240,227,.96)
+        );
+
+    box-shadow:0 15px 50px rgba(50,30,15,.08);
+
+    overflow:hidden;
 }
+
+.paper-section::before{
+    content:"";
+
+    position:absolute;
+    inset:16px;
+
+    border:1px solid rgba(185,145,79,.5);
+
+    pointer-events:none;
+}
+
+.paper-section::after{
+    content:"";
+
+    position:absolute;
+    inset:24px;
+
+    border:1px solid rgba(185,145,79,.18);
+
+    pointer-events:none;
+}
+
+
+/* =========================================================
+   ORNAMENTAL CORNERS
+========================================================= */
+
+.corner{
+    position:absolute;
+
+    width:80px;
+    height:80px;
+
+    color:var(--gold);
+
+    opacity:.8;
+
+    z-index:2;
+}
+
+.corner::before,
+.corner::after{
+    content:"";
+
+    position:absolute;
+
+    border-color:var(--gold);
+}
+
+.corner.top-left{
+    top:24px;
+    left:24px;
+
+    border-top:1px solid var(--gold);
+    border-left:1px solid var(--gold);
+}
+
+.corner.top-right{
+    top:24px;
+    right:24px;
+
+    border-top:1px solid var(--gold);
+    border-right:1px solid var(--gold);
+}
+
+.corner.bottom-left{
+    bottom:24px;
+    left:24px;
+
+    border-bottom:1px solid var(--gold);
+    border-left:1px solid var(--gold);
+}
+
+.corner.bottom-right{
+    bottom:24px;
+    right:24px;
+
+    border-bottom:1px solid var(--gold);
+    border-right:1px solid var(--gold);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    padding-top:100px;
+    text-align:center;
+}
+
+.hero-photo{
+    width:min(82vw,440px);
+
+    margin:0 auto 32px;
+
+    padding:9px;
+
+    background:#fff;
+
+    box-shadow:
+        0 18px 40px rgba(40,25,15,.22);
+
+    position:relative;
+}
+
+.hero-photo img{
+    display:block;
+
+    width:100%;
+    aspect-ratio:4/5;
+
+    object-fit:cover;
+}
+
+
+/* =========================================================
+   SCRIPTURE
+========================================================= */
 
 .scripture{
-    max-width:700px;
+    max-width:650px;
 
-    font-family:"Cormorant Garamond",serif;
-    font-size:clamp(18px,3vw,27px);
-    line-height:1.45;
+    margin:0 auto 32px;
 
-    font-style:italic;
+    color:#4d4037;
 
-    color:var(--brown);
+    font-family:"Playfair Display",serif;
 
-    margin-bottom:12px;
+    font-size:17px;
+
+    line-height:1.9;
+
+    letter-spacing:.5px;
 }
 
-.scripture-ref{
+.scripture-reference{
     font-family:"Cinzel",serif;
-    font-size:10px;
-    letter-spacing:3px;
-    color:var(--gold-dark);
 
-    margin-bottom:45px;
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    margin-top:8px;
+
+    color:var(--gold-dark);
 }
+
+
+/* =========================================================
+   THE WEDDING OF
+========================================================= */
 
 .small-heading{
     font-family:"Cinzel",serif;
-    font-size:11px;
-    letter-spacing:4px;
-    color:#604831;
 
-    margin-bottom:18px;
+    font-size:12px;
+
+    letter-spacing:5px;
+
+    color:#59483b;
+
+    margin-bottom:8px;
 }
 
 .couple-names{
     font-family:"Great Vibes",cursive;
 
-    font-size:clamp(50px,10vw,90px);
+    font-size:clamp(50px,10vw,82px);
 
     line-height:1;
 
-    color:var(--brown-dark);
+    color:#17110d;
 
-    margin-bottom:28px;
+    margin-bottom:25px;
 }
 
-.date-main{
-    font-family:"Cinzel",serif;
-    font-size:12px;
-    letter-spacing:4px;
+.couple-names span{
+    display:inline-block;
+}
+
+.couple-names .and{
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:.42em;
+
+    margin:0 13px;
+
     color:var(--gold-dark);
 
-    margin-bottom:8px;
+    vertical-align:middle;
 }
 
-.year-main{
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.wedding-date{
     font-family:"Cinzel",serif;
-    font-size:28px;
-    letter-spacing:8px;
 
-    color:var(--brown-dark);
-
-    margin-bottom:8px;
-}
-
-.day-main{
-    font-family:"Cinzel",serif;
-    font-size:10px;
     letter-spacing:4px;
 
-    color:#604831;
+    color:#35281f;
 
-    margin-bottom:30px;
+    line-height:1.8;
 }
 
-.church-main{
+.wedding-date .day{
+    font-size:17px;
+}
+
+.wedding-date .year{
+    font-size:38px;
+
+    color:var(--gold-dark);
+
+    margin:2px 0;
+}
+
+.wedding-date .weekday{
+    font-size:13px;
+}
+
+.wedding-date .time{
+    font-size:14px;
+
+    margin-top:4px;
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.location-title{
     font-family:"Cinzel",serif;
-    font-size:11px;
+
+    font-size:13px;
+
     letter-spacing:3px;
 
-    color:var(--brown-dark);
+    margin-top:14px;
+
+    line-height:1.7;
 }
 
-.city-main{
-    font-family:"Cormorant Garamond",serif;
+.location-city{
+    font-family:"Cinzel",serif;
+
+    font-size:12px;
+
+    letter-spacing:4px;
+
+    color:var(--gold-dark);
+}
+
+
+/* =========================================================
+   GOLD DIVIDER
+========================================================= */
+
+.divider{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:14px;
+
+    margin:42px auto;
+
+    color:var(--gold);
+}
+
+.divider::before,
+.divider::after{
+    content:"";
+
+    width:min(25vw,120px);
+
+    height:1px;
+
+    background:linear-gradient(
+        to right,
+        transparent,
+        var(--gold)
+    );
+}
+
+.divider::after{
+    background:linear-gradient(
+        to left,
+        transparent,
+        var(--gold)
+    );
+}
+
+.divider span{
     font-size:18px;
-
-    color:#604831;
-
-    margin-top:5px;
 }
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
 
 .special-message{
-    margin-top:45px;
-    max-width:650px;
+    text-align:center;
+
+    padding:70px 10px;
 }
 
 .special-message p{
-    font-family:"Cormorant Garamond",serif;
-    font-size:20px;
-    line-height:1.6;
-    font-style:italic;
+    font-family:"Cinzel",serif;
 
-    color:#604831;
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    line-height:2;
+
+    max-width:550px;
+
+    margin:auto;
 }
 
-/* =========================
+.heart{
+    color:var(--gold-dark);
+
+    font-size:20px;
+
+    margin-top:18px;
+}
+
+
+/* =========================================================
    COUNTDOWN
-========================= */
+========================================================= */
 
 .countdown-section{
-    padding:70px 25px;
     text-align:center;
 
-    background:var(--cream);
+    padding:20px 0 60px;
 }
 
 .countdown-title{
     font-family:"Cinzel",serif;
-    font-size:11px;
+
     letter-spacing:4px;
 
-    color:var(--gold-dark);
+    font-size:14px;
 
-    margin-bottom:30px;
+    margin-bottom:25px;
 }
 
 .countdown{
-    display:flex;
-    justify-content:center;
-    gap:clamp(18px,5vw,50px);
+    display:grid;
 
-    flex-wrap:wrap;
+    grid-template-columns:repeat(4,1fr);
+
+    gap:10px;
+
+    max-width:620px;
+
+    margin:auto;
 }
 
-.count-item{
-    min-width:70px;
+.count-box{
+    background:rgba(255,255,255,.48);
+
+    border:1px solid rgba(185,145,79,.5);
+
+    padding:20px 8px;
+
+    min-height:95px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 
 .count-number{
     font-family:"Cinzel",serif;
-    font-size:clamp(30px,6vw,48px);
 
-    color:var(--brown-dark);
+    font-size:27px;
 
-    line-height:1;
+    color:#211812;
 }
 
 .count-label{
-    margin-top:9px;
-
     font-family:"Cinzel",serif;
+
     font-size:8px;
+
     letter-spacing:2px;
 
-    color:#80664f;
+    color:var(--gold-dark);
+
+    margin-top:6px;
 }
 
-/* =========================
-   EVENTS
-========================= */
+
+/* =========================================================
+   EVENT
+========================================================= */
 
 .event{
-    padding:80px 30px;
     text-align:center;
 
-    border-top:1px solid rgba(185,145,79,.22);
+    padding:75px 20px;
 }
 
 .event-label{
     font-family:"Cinzel",serif;
-    font-size:10px;
-    letter-spacing:3px;
 
     color:var(--gold-dark);
+
+    font-size:10px;
+
+    letter-spacing:4px;
 
     margin-bottom:18px;
 }
 
 .event h2{
-    font-family:"Cinzel",serif;
-    font-size:clamp(20px,4vw,30px);
-    letter-spacing:3px;
+    font-family:"Playfair Display",serif;
 
-    color:var(--brown-dark);
+    font-size:32px;
+
+    font-weight:500;
 
     margin-bottom:20px;
 }
 
 .event-time{
     font-family:"Cinzel",serif;
-    font-size:11px;
-    letter-spacing:2px;
 
-    color:#604831;
+    font-size:13px;
 
-    margin-bottom:12px;
+    letter-spacing:3px;
+
+    margin-bottom:8px;
 }
 
 .event-place{
     font-family:"Cormorant Garamond",serif;
-    font-size:23px;
-    font-weight:600;
 
-    color:var(--brown);
+    font-size:21px;
+
+    margin-bottom:6px;
 }
 
 .event-address{
-    font-family:"Cormorant Garamond",serif;
-    font-size:17px;
+    font-size:16px;
 
-    color:#806c5b;
+    color:#78675b;
 
-    margin-top:5px;
+    margin-bottom:25px;
 }
 
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
 .gold-button{
-    display:inline-block;
+    display:inline-flex;
 
-    margin-top:28px;
+    align-items:center;
+    justify-content:center;
 
-    padding:12px 22px;
+    gap:8px;
+
+    padding:12px 25px;
 
     border:1px solid var(--gold);
 
     background:transparent;
 
-    color:var(--brown);
+    color:#38271c;
 
     text-decoration:none;
 
     font-family:"Cinzel",serif;
+
     font-size:9px;
+
     letter-spacing:2px;
 
-    transition:.3s;
+    cursor:pointer;
+
+    transition:.35s;
 }
 
 .gold-button:hover{
     background:var(--brown);
-    color:white;
+    color:#fff;
+
+    border-color:var(--brown);
 }
 
-/* =========================
-   RECEPTION
-========================= */
 
-.reception{
-    min-height:500px;
+/* =========================================================
+   HENNA
+========================================================= */
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
+.henna{
     text-align:center;
 
-    background:
-        linear-gradient(
-            rgba(247,240,227,.87),
-            rgba(247,240,227,.95)
-        ),
-        url("photos/couple.jpg")
-        center/cover no-repeat;
+    padding:35px 15px 65px;
 }
 
-.reception-subtitle{
-    font-family:"Great Vibes",cursive;
-    font-size:45px;
+.henna-title{
+    font-family:"Cinzel",serif;
 
-    color:#604831;
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    color:var(--gold-dark);
 
     margin-bottom:15px;
 }
 
+.henna h3{
+    font-family:"Playfair Display",serif;
+
+    font-size:28px;
+
+    font-weight:500;
+}
+
+
+/* =========================================================
+   RECEPTION
+========================================================= */
+
+.reception{
+    text-align:center;
+
+    padding:80px 20px;
+}
+
+.reception-subtitle{
+    font-family:"Great Vibes",cursive;
+
+    font-size:42px;
+
+    color:#604831;
+
+    margin-bottom:8px;
+}
+
 .reception h2{
     font-family:"Cinzel",serif;
-    font-size:clamp(22px,4vw,32px);
-    letter-spacing:3px;
 
-    color:var(--brown-dark);
+    font-size:20px;
 
-    margin-bottom:22px;
+    letter-spacing:4px;
+
+    color:#17110c;
+
+    margin-bottom:18px;
 }
 
 .reception-time{
     font-family:"Cinzel",serif;
-    font-size:12px;
-    letter-spacing:3px;
 
-    color:var(--gold-dark);
+    font-size:14px;
+
+    letter-spacing:3px;
 
     margin-bottom:10px;
 }
 
 .reception-place{
-    font-family:"Cormorant Garamond",serif;
-    font-size:25px;
-    font-weight:600;
+    font-size:23px;
 
-    color:var(--brown);
+    margin-bottom:5px;
 }
 
 .reception-address{
-    font-family:"Cormorant Garamond",serif;
-    font-size:17px;
+    color:#79675a;
 
-    color:#806c5b;
-
-    margin-top:5px;
-}
-
-/* =========================
-   HENNA
-========================= */
-
-.henna{
-    padding:85px 30px;
-    text-align:center;
-
-    background:var(--brown-dark);
-    color:white;
-}
-
-.henna-title{
-    font-family:"Great Vibes",cursive;
-    font-size:43px;
-
-    color:var(--gold-light);
-
-    margin-bottom:12px;
-}
-
-.henna h3{
-    font-family:"Cinzel",serif;
-    font-size:22px;
-    letter-spacing:4px;
-
-    color:white;
+    font-size:16px;
 
     margin-bottom:25px;
 }
 
-.henna .event-time,
-.henna .event-place,
-.henna .event-address{
-    color:#f3e7d3;
-}
 
-.henna .gold-button{
-    color:#f3e7d3;
-}
-
-/* =========================
+/* =========================================================
    GALLERY
-========================= */
+========================================================= */
 
 .gallery-section{
-    padding:80px 25px;
-
-    background:var(--cream-light);
-
-    text-align:center;
+    padding:70px 10px;
 }
 
-.gallery-title{
+.section-title{
+    text-align:center;
+
     font-family:"Cinzel",serif;
-    font-size:12px;
+
     letter-spacing:4px;
 
-    color:var(--gold-dark);
+    font-size:14px;
 
-    margin-bottom:40px;
+    margin-bottom:35px;
 }
 
 .gallery{
     display:grid;
 
-    grid-template-columns:
-        repeat(4,1fr);
+    grid-template-columns:repeat(2,1fr);
 
-    gap:12px;
+    gap:9px;
+
+    max-width:650px;
+
+    margin:auto;
 }
 
-.gallery img{
+.gallery-item{
+    overflow:hidden;
+
+    background:#fff;
+
+    padding:5px;
+
+    border:1px solid rgba(185,145,79,.3);
+}
+
+.gallery-item img{
+    display:block;
+
     width:100%;
-    aspect-ratio:1/1;
+    height:250px;
 
     object-fit:cover;
 
-    transition:
-        transform .4s ease,
-        filter .4s ease;
+    transition:transform .6s ease;
 }
 
-.gallery img:hover{
-    transform:scale(1.03);
-    filter:brightness(.9);
+.gallery-item:hover img{
+    transform:scale(1.05);
 }
 
-@media(max-width:700px){
 
-    .gallery{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-}
-
-/* =========================
+/* =========================================================
    RSVP
-========================= */
+========================================================= */
 
 .rsvp{
     text-align:center;
     padding:80px 35px;
-
-    background:var(--cream);
 }
 
 .rsvp-script{
@@ -810,6 +1250,7 @@ main{
     color:#59483b;
 
     margin-bottom:8px;
+
     margin-top:20px;
 }
 
@@ -858,6 +1299,7 @@ main{
 .form-input::placeholder,
 .form-textarea::placeholder{
     color:#9a8879;
+
     opacity:.8;
 }
 
@@ -871,19 +1313,28 @@ main{
         0 0 0 2px rgba(185,145,79,.12);
 }
 
+
+/* =========================================================
+   ATTENDANCE
+========================================================= */
+
 .attendance{
     display:flex;
+
     align-items:center;
 
     gap:10px;
 
     margin-top:5px;
+
     margin-bottom:10px;
 }
 
 .attendance input{
     position:absolute;
+
     opacity:0;
+
     pointer-events:none;
 }
 
@@ -894,6 +1345,7 @@ main{
     justify-content:center;
 
     min-width:85px;
+
     height:40px;
 
     padding:0 18px;
@@ -919,14 +1371,22 @@ main{
 
 .attendance label:hover{
     border-color:var(--gold);
+
     background:#fffdf8;
 }
 
 .attendance input:checked + label{
     background:var(--brown);
+
     color:#fff;
+
     border-color:var(--brown);
 }
+
+
+/* =========================================================
+   RSVP SUBMIT
+========================================================= */
 
 .submit-button{
     display:block;
@@ -956,101 +1416,45 @@ main{
 
 .submit-button:hover{
     background:#241811;
+
     border-color:#241811;
 }
 
 .submit-button:disabled{
     opacity:.6;
+
     cursor:wait;
 }
 
-/* =========================
-   TOAST
-========================= */
 
-.toast{
-    position:fixed;
-
-    left:50%;
-    bottom:30px;
-
-    transform:
-        translate(-50%,20px);
-
-    z-index:12000;
-
-    background:var(--brown-dark);
-
-    color:white;
-
-    padding:14px 22px;
-
-    border:1px solid var(--gold);
-
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:17px;
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:.4s;
-}
-
-.toast.show{
-    opacity:1;
-    visibility:visible;
-
-    transform:
-        translate(-50%,0);
-}
-
-/* =========================
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
-footer{
-    padding:70px 25px 55px;
-
+.footer{
     text-align:center;
 
-    background:var(--brown-dark);
-
-    color:white;
+    padding:100px 20px 80px;
 }
 
 .footer-message{
     font-family:"Cinzel",serif;
 
-    font-size:10px;
+    font-size:12px;
 
     letter-spacing:3px;
 
-    color:var(--gold-light);
-
-    margin-bottom:30px;
+    line-height:2;
 }
 
-/*
-   KM stays English and uses the exact
-   same English font even when Arabic mode is active.
-*/
 .footer-km{
-    font-family:"Cinzel",serif !important;
+    font-family:"Great Vibes",cursive;
 
-    font-size:45px;
+    font-size:65px;
 
-    font-weight:600;
+    color:var(--gold-dark);
 
-    letter-spacing:4px;
-
-    color:white;
-
-    direction:ltr;
-
-    unicode-bidi:plaintext;
-
-    margin-bottom:20px;
+    margin-top:30px;
 }
 
 .footer-date{
@@ -1058,376 +1462,731 @@ footer{
 
     font-size:10px;
 
-    letter-spacing:4px;
+    letter-spacing:3px;
+
+    color:#766255;
+
+    margin-top:5px;
+}
+
+
+/* =========================================================
+   MUSIC BUTTON
+========================================================= */
+
+.music-control{
+    position:fixed;
+
+    left:20px;
+    top:20px;
+
+    z-index:10000;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.music-button{
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    border:1px solid var(--gold-light);
+
+    background:var(--brown);
 
     color:var(--gold-light);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    box-shadow:0 7px 25px rgba(0,0,0,.3);
+
+    transition:.3s;
 }
 
-/* =========================
-   ARABIC MODE
-========================= */
+.music-button.playing{
+    animation:musicPulse 1.7s infinite;
+
+    background:#21150e;
+}
+
+@keyframes musicPulse{
+    0%{
+        box-shadow:
+            0 0 0 0 rgba(185,145,79,.55),
+            0 7px 25px rgba(0,0,0,.3);
+    }
+
+    70%{
+        box-shadow:
+            0 0 0 15px rgba(185,145,79,0),
+            0 7px 25px rgba(0,0,0,.3);
+    }
+
+    100%{
+        box-shadow:
+            0 0 0 0 rgba(185,145,79,0),
+            0 7px 25px rgba(0,0,0,.3);
+    }
+}
+
+.music-hint{
+    background:rgba(30,20,14,.88);
+
+    color:#f6ead7;
+
+    padding:7px 11px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+
+    border-radius:3px;
+
+    white-space:nowrap;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+
+    left:50%;
+
+    bottom:25px;
+
+    transform:translate(-50%,20px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    z-index:11000;
+
+    background:#2c1c14;
+
+    color:#fff;
+
+    padding:12px 20px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    letter-spacing:1px;
+
+    transition:.4s;
+}
+
+.toast.show{
+    opacity:1;
+
+    visibility:visible;
+
+    transform:translate(-50%,0);
+}
+
+
+/* =========================================================
+   ARABIC
+   Important:
+   No RTL direction is used.
+   The website layout stays exactly the same.
+========================================================= */
+
+body.arabic{
+    font-family:"Amiri",serif;
+}
+
 
 /*
-   IMPORTANT:
-   Arabic does NOT switch to another font.
-   It uses the exact same fonts as English.
+   Arabic text uses Amiri.
+   Names, KM and the wax seal stay in their
+   original English fonts.
 */
 
-body.arabic .small-heading,
-body.arabic .countdown-title,
-body.arabic .event-label,
-body.arabic .section-title,
-body.arabic .rsvp h2,
-body.arabic .footer-message,
-body.arabic .form-label,
-body.arabic .submit-button,
-body.arabic .location-title,
-body.arabic .location-city{
-    font-family:"Cinzel",serif;
-    letter-spacing:normal;
-}
-
+body.arabic .coming-title,
+body.arabic .tap-open,
 body.arabic .scripture,
+body.arabic .scripture-reference,
+body.arabic .small-heading,
+body.arabic .wedding-date,
+body.arabic .location-title,
+body.arabic .location-city,
 body.arabic .special-message p,
+body.arabic .countdown-title,
+body.arabic .count-label,
+body.arabic .event-label,
+body.arabic .event h2,
 body.arabic .event-time,
 body.arabic .event-place,
 body.arabic .event-address,
+body.arabic .gold-button,
+body.arabic .henna-title,
+body.arabic .henna h3,
+body.arabic .reception h2,
 body.arabic .reception-time,
 body.arabic .reception-place,
 body.arabic .reception-address,
-body.arabic .henna-title,
-body.arabic .form-input,
-body.arabic .form-textarea{
-    font-family:"Cormorant Garamond",serif;
+body.arabic .section-title,
+body.arabic .rsvp h2,
+body.arabic .form-label,
+body.arabic .submit-button,
+body.arabic .footer-message{
+    font-family:"Amiri",serif;
 }
 
-body.arabic .couple-names,
-body.arabic .reception-subtitle,
+
+/*
+   Keep the original English decorative font
+   for the couple names.
+*/
+
+body.arabic .couple-names{
+    font-family:"Great Vibes",cursive;
+}
+
+
+/*
+   Keep the original English font for
+   the reception decorative phrase.
+*/
+
+body.arabic .reception-subtitle{
+    font-family:"Great Vibes",cursive;
+}
+
+
+/*
+   Keep the original English font for RSVP
+   decorative phrase.
+*/
+
 body.arabic .rsvp-script{
     font-family:"Great Vibes",cursive;
 }
 
+
+/*
+   Keep KM at the footer exactly as it is.
+*/
+
 body.arabic .footer-km{
-    font-family:"Cinzel",serif !important;
-    direction:ltr;
-    letter-spacing:4px;
+    font-family:"Great Vibes",cursive;
 }
 
-body.arabic .couple-names{
-    font-size:clamp(45px,9vw,85px);
-    line-height:1.2;
+
+/*
+   Keep KM inside the wax seal exactly as it is.
+*/
+
+body.arabic .wax-logo{
+    font-family:"Great Vibes",cursive;
 }
 
-body.arabic .reception-subtitle{
-    font-size:42px;
-}
 
-body.arabic .rsvp-script{
-    font-size:44px;
-}
-
-body.arabic .language-switch{
-    right:auto;
-    left:22px;
-}
-
-body.arabic .music-control{
-    left:auto;
-    right:20px;
-}
+/*
+   Keep the form layout exactly the same.
+*/
 
 body.arabic .rsvp-form{
-    text-align:right;
+    text-align:left;
 }
 
-/* Keep names in English */
-.couple-names{
-    direction:ltr;
+
+/*
+   Arabic text line-height adjustments only.
+   No sizes or layout positions are changed.
+*/
+
+body.arabic .scripture{
+    line-height:1.9;
 }
 
-/* =========================
+body.arabic .special-message p{
+    line-height:2;
+}
+
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media(max-width:600px){
 
     .language-switch{
-        top:15px;
-        right:15px;
+        top:14px;
+        right:14px;
     }
 
-    body.arabic .language-switch{
-        right:auto;
-        left:15px;
+    .music-control{
+        top:14px;
+        left:14px;
     }
 
-    .hero{
-        padding:80px 18px 60px;
+    .music-hint{
+        display:none;
     }
 
-    .opening-small{
-        font-size:9px;
+    .opening-content{
+        width:94vw;
+    }
+
+    .coming-title{
+        font-size:15px;
         letter-spacing:3px;
     }
 
-    .envelope{
-        height:220px;
+    .envelope-area{
+        width:85vw;
+        height:56vw;
     }
 
     .wax-seal{
-        width:72px;
-        height:72px;
+        width:66px;
+        height:66px;
     }
 
-    .wax-seal span{
-        font-size:18px;
+    .wax-logo{
+        font-size:29px;
+    }
+
+    .paper-section{
+        width:96%;
+        padding:65px 22px;
+    }
+
+    .paper-section::before{
+        inset:11px;
+    }
+
+    .paper-section::after{
+        inset:17px;
+    }
+
+    .hero{
+        padding-top:75px;
+    }
+
+    .hero-photo{
+        width:88%;
     }
 
     .scripture{
-        font-size:18px;
+        font-size:15px;
+        line-height:1.8;
     }
 
     .couple-names{
-        font-size:52px;
+        font-size:58px;
     }
 
-    body.arabic .couple-names{
-        font-size:48px;
+    .couple-names .and{
+        margin:0 6px;
     }
 
-    .event{
-        padding:65px 20px;
+    .wedding-date .year{
+        font-size:32px;
+    }
+
+    .countdown{
+        gap:5px;
+    }
+
+    .count-box{
+        padding:15px 4px;
+        min-height:80px;
+    }
+
+    .count-number{
+        font-size:21px;
+    }
+
+    .count-label{
+        font-size:6px;
+        letter-spacing:1px;
+    }
+
+    .event h2{
+        font-size:27px;
+    }
+
+    .gallery{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .gallery-item img{
+        height:180px;
     }
 
     .rsvp{
-        padding:65px 18px;
+        padding:65px 22px;
+    }
+
+    .rsvp-script{
+        font-size:38px;
+    }
+
+    .rsvp h2{
+        font-size:13px;
+        letter-spacing:2px;
+        line-height:1.7;
+        padding:0 15px;
     }
 
     .rsvp-form{
-        padding:25px 20px;
+        padding:24px 20px;
     }
 
-    .reception-subtitle{
-        font-size:38px;
+    .attendance label{
+        min-width:75px;
     }
 
-    body.arabic .reception-subtitle{
-        font-size:38px;
-    }
-
-    .henna-title{
-        font-size:38px;
-    }
-
-    .footer-km{
-        font-size:40px;
+    .footer{
+        padding:80px 15px 70px;
     }
 }
 
 </style>
 </head>
 
-<body>
+<body class="locked">
 
-<!-- =========================
-     LANGUAGE
-========================= -->
+<!-- =========================================================
+     LANGUAGE SWITCH
+========================================================= -->
 
-<button
-    class="language-switch"
-    id="languageButton"
-    type="button">
-    عربي
-</button>
+<div class="language-switch">
+    <button id="languageButton">عربي</button>
+</div>
 
 
-<!-- =========================
-     OPENING SCREEN
-========================= -->
+<!-- =========================================================
+     MUSIC
+========================================================= -->
 
-<div class="opening-screen" id="openingScreen">
+<div class="music-control">
 
-    <div class="opening-content">
+    <button
+        class="music-button"
+        id="musicButton"
+        aria-label="Play music">
+        ▶
+    </button>
 
-        <div
-            class="opening-small"
-            data-en="SOMETHING BEAUTIFUL<br>IS COMING"
-            data-ar="شيء جميل<br>قادم">
-            SOMETHING BEAUTIFUL<br>IS COMING
-        </div>
-
-        <div class="envelope" id="envelope">
-
-            <div class="envelope-flap"></div>
-
-            <div class="envelope-bottom"></div>
-
-            <div class="wax-seal">
-                <span>KM</span>
-            </div>
-
-        </div>
-
-        <div
-            class="open-text"
-            data-en="TAP TO OPEN"
-            data-ar="اضغط للفتح">
-            TAP TO OPEN
-        </div>
-
+    <div
+        class="music-hint"
+        id="musicHint"
+        data-en="♫ Play Music"
+        data-ar="♫ تشغيل الموسيقى">
+        ♫ Play Music
     </div>
 
 </div>
 
 
-<!-- =========================
-     MUSIC
-========================= -->
+<!-- =========================================================
+     AUDIO
+========================================================= -->
 
-<audio
-    id="weddingMusic"
-    src="photos/music.mp3"
-    loop>
+<audio id="weddingMusic" loop preload="auto">
+    <source src="photos/music.mp3" type="audio/mpeg">
 </audio>
 
-<button
-    class="music-control"
-    id="musicControl"
-    type="button"
-    aria-label="Music">
-    ♫
-</button>
+
+<!-- =========================================================
+     OPENING ENVELOPE
+========================================================= -->
+
+<section class="opening" id="opening">
+
+    <div class="opening-content">
+
+        <div class="coming-title"
+             data-en="SOMETHING BEAUTIFUL<br>IS COMING"
+             data-ar="شيء جميل<br>قادم">
+            SOMETHING BEAUTIFUL<br>
+            IS COMING
+        </div>
+
+        <div class="ornament">
+            <span>❦</span>
+        </div>
 
 
-<!-- =========================
-     HERO
-========================= -->
+        <div class="envelope-area" id="envelope">
 
-<main>
+            <div class="envelope">
 
-<section class="paper-section hero">
+                <div class="envelope-paper"></div>
 
-    <div
-        class="scripture"
-        data-en="WHAT THEREFORE GOD HAS JOINED TOGETHER,<br>LET NOT MAN SEPARATE"
-        data-ar="فَمَا جَمَعَهُ اللهُ لاَ يُفَرِّقُهُ إِنْسَانٌ">
-        WHAT THEREFORE GOD HAS JOINED TOGETHER,<br>
-        LET NOT MAN SEPARATE
-    </div>
+                <div class="envelope-flap"></div>
 
-    <div class="scripture-ref">
-        MATTHEW 19:6
-    </div>
+                <div class="envelope-left"></div>
+                <div class="envelope-right"></div>
 
-    <div
-        class="small-heading"
-        data-en="THE WEDDING OF"
-        data-ar="زفاف">
-        THE WEDDING OF
-    </div>
+                <div class="envelope-bottom"></div>
 
-    <div class="couple-names">
-        Kerollos &amp; Marina
-    </div>
+                <div class="wax-seal">
 
-    <div
-        class="date-main"
-        data-en="04th OF OCTOBER"
-        data-ar="04 أكتوبر">
-        04th OF OCTOBER
-    </div>
+                    <div class="wax-logo">
+                        K<span>M</span>
+                    </div>
 
-    <div class="year-main">
-        2026
-    </div>
+                </div>
 
-    <div
-        class="day-main"
-        data-en="SUNDAY"
-        data-ar="الأحد">
-        SUNDAY
-    </div>
+            </div>
 
-    <div
-        class="church-main"
-        data-en="AT. SAINT SHENODA CHURCH"
-        data-ar="كنيسة القديس شنودة">
-        AT. SAINT SHENODA CHURCH
-    </div>
+        </div>
 
-    <div
-        class="city-main"
-        data-en="HURGHADA"
-        data-ar="الغردقة">
-        HURGHADA
-    </div>
 
-    <div class="special-message">
+        <div class="tap-open"
+             data-en="TAP TO OPEN"
+             data-ar="اضغط للفتح">
+            TAP TO OPEN
+        </div>
 
-        <p
-            data-en="We can't wait to celebrate this beautiful beginning with the people we love most."
-            data-ar="لا نستطيع الانتظار للاحتفال بهذه البداية الجميلة مع أحب الناس إلى قلوبنا.">
-            We can't wait to celebrate this beautiful beginning with the people we love most.
-        </p>
+        <div class="tap-line"></div>
 
     </div>
 
 </section>
 
 
-<!-- =========================
-     COUNTDOWN
-========================= -->
+<!-- =========================================================
+     MAIN WEBSITE
+========================================================= -->
 
-<section class="countdown-section">
+<main class="main-site" id="mainSite">
+
+
+<!-- =========================================================
+     MAIN INVITATION
+========================================================= -->
+
+<section class="paper-section hero">
+
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+    <div class="corner bottom-left"></div>
+    <div class="corner bottom-right"></div>
+
+
+    <div class="hero-photo">
+
+        <img
+            src="photos/couple.jpg"
+            alt="Kerollos and Marina">
+
+    </div>
+
+
+    <div
+        class="scripture"
+        data-en="“WHAT THEREFORE GOD HAS JOINED TOGETHER,<br>LET NOT MAN SEPARATE”"
+        data-ar="«فَالَّذِي جَمَعَهُ اللَّهُ لاَ يُفَرِّقْهُ إِنْسَانٌ»">
+
+        “WHAT THEREFORE GOD HAS JOINED TOGETHER,
+        <br>
+        LET NOT MAN SEPARATE
+
+        <div
+            class="scripture-reference"
+            data-en="MATTHEW 19:6"
+            data-ar="مَتَّى 19: 6">
+            MATTHEW 19:6
+        </div>
+
+    </div>
+
+
+    <div class="divider">
+        <span>❦</span>
+    </div>
+
+
+    <div
+        class="small-heading"
+        data-en="THE WEDDING OF"
+        data-ar="حفل زفاف">
+        THE WEDDING OF
+    </div>
+
+
+    <div class="couple-names">
+
+        <span>Kerollos</span>
+
+        <span class="and">&</span>
+
+        <span>Marina</span>
+
+    </div>
+
+
+    <div class="wedding-date">
+
+        <div
+            class="day"
+            data-en="04<sup>th</sup> OF OCTOBER"
+            data-ar="04 أكتوبر">
+            04<sup>th</sup> OF OCTOBER
+        </div>
+
+        <div class="year">
+            2026
+        </div>
+
+        <div
+            class="weekday"
+            data-en="SUNDAY"
+            data-ar="الأحد">
+            SUNDAY
+        </div>
+
+        <div
+            class="time"
+            data-en="AT 5:00 PM"
+            data-ar="الساعة 5:00 مساءً">
+            AT 5:00 PM
+        </div>
+
+    </div>
+
+
+    <div
+        class="location-title"
+        data-en="AT. SAINT SHENODA CHURCH"
+        data-ar="في كنيسة القديس شنودة">
+        AT. SAINT SHENODA CHURCH
+    </div>
+
+    <div
+        class="location-city"
+        data-en="HURGHADA"
+        data-ar="الغردقة">
+        HURGHADA
+    </div>
+
+
+    <div class="divider">
+        <span>✦</span>
+    </div>
+
+
+    <div class="special-message">
+
+        <p
+            data-en="WE CAN'T WAIT TO CELEBRATE<br>OUR SPECIAL DAY WITH YOU"
+            data-ar="لا نستطيع الانتظار للاحتفال<br>بيومنا المميز معكم">
+
+            WE CAN'T WAIT TO CELEBRATE
+            <br>
+            OUR SPECIAL DAY WITH YOU
+
+        </p>
+
+        <div class="heart">♥</div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     COUNTDOWN
+========================================================= -->
+
+<section class="paper-section countdown-section">
+
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+
 
     <div
         class="countdown-title"
-        data-en="COUNTING DOWN TO OUR SPECIAL DAY"
-        data-ar="العد التنازلي ليومنا المميز">
-        COUNTING DOWN TO OUR SPECIAL DAY
+        data-en="COUNTING THE MOMENTS"
+        data-ar="نعد اللحظات">
+        COUNTING THE MOMENTS
     </div>
+
 
     <div class="countdown">
 
-        <div class="count-item">
-            <div class="count-number" id="days">00</div>
+        <div class="count-box">
+
+            <div class="count-number" id="days">
+                00
+            </div>
+
             <div
                 class="count-label"
                 data-en="DAYS"
                 data-ar="يوم">
                 DAYS
             </div>
+
         </div>
 
-        <div class="count-item">
-            <div class="count-number" id="hours">00</div>
+
+        <div class="count-box">
+
+            <div class="count-number" id="hours">
+                00
+            </div>
+
             <div
                 class="count-label"
                 data-en="HOURS"
                 data-ar="ساعة">
                 HOURS
             </div>
+
         </div>
 
-        <div class="count-item">
-            <div class="count-number" id="minutes">00</div>
+
+        <div class="count-box">
+
+            <div class="count-number" id="minutes">
+                00
+            </div>
+
             <div
                 class="count-label"
                 data-en="MINUTES"
                 data-ar="دقيقة">
                 MINUTES
             </div>
+
         </div>
 
-        <div class="count-item">
-            <div class="count-number" id="seconds">00</div>
+
+        <div class="count-box">
+
+            <div class="count-number" id="seconds">
+                00
+            </div>
+
             <div
                 class="count-label"
                 data-en="SECONDS"
                 data-ar="ثانية">
                 SECONDS
             </div>
+
         </div>
 
     </div>
@@ -1435,11 +2194,15 @@ body.arabic .rsvp-form{
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      CHURCH
-========================= -->
+========================================================= -->
 
 <section class="paper-section event">
+
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+
 
     <div
         class="event-label"
@@ -1448,11 +2211,13 @@ body.arabic .rsvp-form{
         OUR CEREMONY
     </div>
 
+
     <h2
         data-en="SAINT SHENODA CHURCH"
         data-ar="كنيسة القديس شنودة">
         SAINT SHENODA CHURCH
     </h2>
+
 
     <div
         class="event-time"
@@ -1461,12 +2226,14 @@ body.arabic .rsvp-form{
         SUNDAY · 04 OCTOBER 2026 · 5:00 PM
     </div>
 
+
     <div
         class="event-place"
         data-en="St. Shenoda Church"
         data-ar="كنيسة القديس شنودة">
         St. Shenoda Church
     </div>
+
 
     <div
         class="event-address"
@@ -1475,83 +2242,31 @@ body.arabic .rsvp-form{
         Hurghada, Red Sea, Egypt
     </div>
 
+
     <a
         class="gold-button"
         href="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac"
         target="_blank"
-        rel="noopener">
-        ♧ &nbsp;
-        <span
-            data-en="VIEW ON GOOGLE MAPS"
-            data-ar="عرض الموقع على الخريطة">
-            VIEW ON GOOGLE MAPS
-        </span>
+        rel="noopener"
+        data-en="♧ &nbsp; VIEW ON GOOGLE MAPS"
+        data-ar="♧ &nbsp; عرض الموقع على خرائط جوجل">
+
+        ♧ &nbsp; VIEW ON GOOGLE MAPS
+
     </a>
 
 </section>
 
 
-<!-- =========================
-     RECEPTION
-========================= -->
-
-<section class="paper-section reception">
-
-    <div
-        class="reception-subtitle"
-        data-en="Specially For You"
-        data-ar="خصيصًا لكم">
-        Specially For You
-    </div>
-
-    <h2
-        data-en="HEAVEN WEDDING SPOT"
-        data-ar="HEAVEN WEDDING SPOT">
-        HEAVEN WEDDING SPOT
-    </h2>
-
-    <div
-        class="reception-time"
-        data-en="AT 7:00 PM"
-        data-ar="الساعة 7:00 مساءً">
-        AT 7:00 PM
-    </div>
-
-    <div
-        class="reception-place"
-        data-en="Jumana Hall"
-        data-ar="قاعة جمانة">
-        Jumana Hall
-    </div>
-
-    <div
-        class="reception-address"
-        data-en="Al-Hijaz St. · Hurghada"
-        data-ar="شارع الحجاز · الغردقة">
-        Al-Hijaz St. · Hurghada
-    </div>
-
-    <a
-        class="gold-button"
-        href="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac"
-        target="_blank"
-        rel="noopener">
-        ♧ &nbsp;
-        <span
-            data-en="VIEW ON GOOGLE MAPS"
-            data-ar="عرض الموقع على الخريطة">
-            VIEW ON GOOGLE MAPS
-        </span>
-    </a>
-
-</section>
-
-
-<!-- =========================
+<!-- =========================================================
      HENNA
-========================= -->
+========================================================= -->
 
 <section class="paper-section henna">
+
+    <div class="corner bottom-left"></div>
+    <div class="corner bottom-right"></div>
+
 
     <div
         class="henna-title"
@@ -1560,11 +2275,18 @@ body.arabic .rsvp-form{
         BEFORE OUR SPECIAL DAY
     </div>
 
+
     <h3
         data-en="HENNA NIGHT"
         data-ar="ليلة الحنة">
         HENNA NIGHT
     </h3>
+
+
+    <div class="divider">
+        <span>❦</span>
+    </div>
+
 
     <div
         class="event-time"
@@ -1573,12 +2295,14 @@ body.arabic .rsvp-form{
         FRIDAY · 02 OCTOBER 2026 · 8:00 PM
     </div>
 
+
     <div
         class="event-place"
         data-en="Star Sky Hall"
-        data-ar="قاعة Star Sky">
+        data-ar="قاعة ستار سكاي">
         Star Sky Hall
     </div>
+
 
     <div
         class="event-address"
@@ -1587,63 +2311,169 @@ body.arabic .rsvp-form{
         Shatea El Gaish · Al-Qiyadat St. · Hurghada
     </div>
 
+
     <a
         class="gold-button"
         href="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac"
         target="_blank"
-        rel="noopener">
-        ♧ &nbsp;
-        <span
-            data-en="VIEW ON GOOGLE MAPS"
-            data-ar="عرض الموقع على الخريطة">
-            VIEW ON GOOGLE MAPS
-        </span>
+        rel="noopener"
+        data-en="♧ &nbsp; VIEW ON GOOGLE MAPS"
+        data-ar="♧ &nbsp; عرض الموقع على خرائط جوجل">
+
+        ♧ &nbsp; VIEW ON GOOGLE MAPS
+
     </a>
 
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
+     RECEPTION
+========================================================= -->
+
+<section class="paper-section reception">
+
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+    <div class="corner bottom-left"></div>
+    <div class="corner bottom-right"></div>
+
+
+    <div
+        class="reception-subtitle"
+        data-en="Specially For You"
+        data-ar="خصيصًا من أجلكم">
+        Specially For You
+    </div>
+
+
+    <div class="divider">
+        <span>♥</span>
+    </div>
+
+
+    <h2
+        data-en="HEAVEN WEDDING SPOT"
+        data-ar="هيفن ويدنج سبوت">
+        HEAVEN WEDDING SPOT
+    </h2>
+
+
+    <div
+        class="reception-time"
+        data-en="AT 7:00 PM"
+        data-ar="الساعة 7:00 مساءً">
+        AT 7:00 PM
+    </div>
+
+
+    <div
+        class="reception-place"
+        data-en="Jumana Hall"
+        data-ar="قاعة جمانة">
+        Jumana Hall
+    </div>
+
+
+    <div
+        class="reception-address"
+        data-en="Al-Hijaz St. · Hurghada"
+        data-ar="شارع الحجاز · الغردقة">
+        Al-Hijaz St. · Hurghada
+    </div>
+
+
+    <a
+        class="gold-button"
+        href="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac"
+        target="_blank"
+        rel="noopener"
+        data-en="♧ &nbsp; VIEW ON GOOGLE MAPS"
+        data-ar="♧ &nbsp; عرض الموقع على خرائط جوجل">
+
+        ♧ &nbsp; VIEW ON GOOGLE MAPS
+
+    </a>
+
+</section>
+
+
+<!-- =========================================================
      GALLERY
-========================= -->
+========================================================= -->
 
 <section class="paper-section gallery-section">
 
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+
+
     <div
-        class="gallery-title"
-        data-en="A FEW MOMENTS WE LOVE"
-        data-ar="بعض اللحظات التي نحبها">
-        A FEW MOMENTS WE LOVE
+        class="section-title"
+        data-en="OUR BEAUTIFUL MOMENTS"
+        data-ar="أجمل لحظاتنا">
+        OUR BEAUTIFUL MOMENTS
     </div>
+
 
     <div class="gallery">
 
-        <img src="photos/1.jpg" alt="Kerollos and Marina">
-        <img src="photos/2.jpg" alt="Kerollos and Marina">
-        <img src="photos/3.jpg" alt="Kerollos and Marina">
-        <img src="photos/4.jpg" alt="Kerollos and Marina">
-        <img src="photos/5.jpg" alt="Kerollos and Marina">
-        <img src="photos/6.jpg" alt="Kerollos and Marina">
-        <img src="photos/7.jpg" alt="Kerollos and Marina">
-        <img src="photos/8.jpg" alt="Kerollos and Marina">
+        <div class="gallery-item">
+            <img src="photos/1.jpg" alt="">
+        </div>
+
+        <div class="gallery-item">
+            <img src="photos/2.jpg" alt="">
+        </div>
+
+        <div class="gallery-item">
+            <img src="photos/3.jpg" alt="">
+        </div>
+
+        <div class="gallery-item">
+            <img src="photos/4.jpg" alt="">
+        </div>
+
+        <div class="gallery-item">
+            <img src="photos/5.jpg" alt="">
+        </div>
+
+        <div class="gallery-item">
+            <img src="photos/6.jpg" alt="">
+        </div>
+
+        <div class="gallery-item">
+            <img src="photos/7.jpg" alt="">
+        </div>
+
+        <div class="gallery-item">
+            <img src="photos/8.jpg" alt="">
+        </div>
 
     </div>
 
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      RSVP
-========================= -->
+========================================================= -->
 
 <section class="paper-section rsvp">
+
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+    <div class="corner bottom-left"></div>
+    <div class="corner bottom-right"></div>
+
 
     <div
         class="rsvp-script"
         data-en="Leave Us a Message"
-        data-ar="اتركوا لنا رسالة">
+        data-ar="اترك لنا رسالة">
         Leave Us a Message
     </div>
+
 
     <h2
         data-en="WE WOULD LOVE TO HEAR FROM YOU"
@@ -1651,9 +2481,8 @@ body.arabic .rsvp-form{
         WE WOULD LOVE TO HEAR FROM YOU
     </h2>
 
-    <form
-        class="rsvp-form"
-        id="rsvpForm">
+
+    <form class="rsvp-form" id="rsvpForm">
 
         <label
             class="form-label"
@@ -1668,15 +2497,19 @@ body.arabic .rsvp-form{
             id="guestName"
             type="text"
             placeholder="Your Name"
+            data-placeholder-en="Your Name"
+            data-placeholder-ar="اسمك"
             autocomplete="name"
             required>
+
 
         <label
             class="form-label"
             data-en="WILL YOU BE ATTENDING?"
-            data-ar="هل ستحضر؟">
+            data-ar="هل ستحضرون؟">
             WILL YOU BE ATTENDING?
         </label>
+
 
         <div class="attendance">
 
@@ -1694,6 +2527,7 @@ body.arabic .rsvp-form{
                 YES
             </label>
 
+
             <input
                 type="radio"
                 name="attendance"
@@ -1709,6 +2543,7 @@ body.arabic .rsvp-form{
 
         </div>
 
+
         <label
             class="form-label"
             for="guestMessage"
@@ -1720,14 +2555,19 @@ body.arabic .rsvp-form{
         <textarea
             class="form-textarea"
             id="guestMessage"
-            placeholder="Write your message..."></textarea>
+            placeholder="Write your message..."
+            data-placeholder-en="Write your message..."
+            data-placeholder-ar="اكتب رسالتك..."></textarea>
+
 
         <button
             class="submit-button"
             type="submit"
             data-en="SEND MESSAGE"
             data-ar="إرسال الرسالة">
+
             SEND MESSAGE
+
         </button>
 
     </form>
@@ -1735,327 +2575,428 @@ body.arabic .rsvp-form{
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      FOOTER
-========================= -->
+========================================================= -->
 
-<footer>
+<section class="paper-section footer">
+
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+    <div class="corner bottom-left"></div>
+    <div class="corner bottom-right"></div>
+
+
+    <div class="divider">
+        <span>❦</span>
+    </div>
+
 
     <div
         class="footer-message"
-        data-en="THANK YOU FOR BEING A PART OF OUR SPECIAL DAY"
-        data-ar="شكرًا لكونكم جزءًا من يومنا المميز">
-        THANK YOU FOR BEING A PART OF OUR SPECIAL DAY
+        data-en="THANK YOU FOR BEING A PART OF<br>OUR SPECIAL DAY"
+        data-ar="شكرًا لكونكم جزءًا من<br>يومنا المميز">
+
+        THANK YOU FOR BEING A PART OF
+        <br>
+        OUR SPECIAL DAY
+
     </div>
 
-    <!-- KM intentionally remains English -->
+
     <div class="footer-km">
         KM
     </div>
+
 
     <div class="footer-date">
         04 · 10 · 2026
     </div>
 
-</footer>
+</section>
+
 
 </main>
 
 
-<!-- =========================
+<!-- =========================================================
      TOAST
-========================= -->
+========================================================= -->
 
-<div
-    class="toast"
-    id="toast">
-</div>
+<div class="toast" id="toast"></div>
 
 
 <script>
 
-/* =========================
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const opening = document.getElementById("opening");
+const envelope = document.getElementById("envelope");
+const mainSite = document.getElementById("mainSite");
+
+const music = document.getElementById("weddingMusic");
+const musicButton = document.getElementById("musicButton");
+const musicHint = document.getElementById("musicHint");
+
+const languageButton = document.getElementById("languageButton");
+
+const toast = document.getElementById("toast");
+
+
+/* =========================================================
    LANGUAGE
-========================= */
+========================================================= */
 
 let currentLanguage =
     localStorage.getItem("weddingLanguage") || "en";
 
-const languageButton =
-    document.getElementById("languageButton");
-
 
 function updateLanguage(){
 
-    document.documentElement.lang =
-        currentLanguage;
+    document.documentElement.lang = currentLanguage;
+
 
     document.body.classList.toggle(
         "arabic",
         currentLanguage === "ar"
     );
 
-    document
-        .querySelectorAll("[data-en]")
-        .forEach(element => {
 
-            const value =
-                currentLanguage === "ar"
-                    ? element.dataset.ar
-                    : element.dataset.en;
+    /*
+       Change every element that has
+       data-en and data-ar.
+    */
 
-            if(value){
-                element.innerHTML = value;
-            }
+    document.querySelectorAll("[data-en]").forEach(element => {
 
-        });
+        const value =
+            currentLanguage === "ar"
+                ? element.dataset.ar
+                : element.dataset.en;
+
+        if(value){
+
+            element.innerHTML = value;
+
+        }
+
+    });
+
+
+    /*
+       Change input and textarea placeholders.
+    */
+
+    document.querySelectorAll(
+        "[data-placeholder-en]"
+    ).forEach(element => {
+
+        element.placeholder =
+            currentLanguage === "ar"
+                ? element.dataset.placeholderAr
+                : element.dataset.placeholderEn;
+
+    });
+
+
+    /*
+       The language button itself stays
+       in the same position.
+    */
 
     languageButton.textContent =
         currentLanguage === "en"
             ? "عربي"
             : "English";
 
-    updateFormPlaceholders();
-}
 
-
-function updateFormPlaceholders(){
-
-    const nameInput =
-        document.getElementById("guestName");
-
-    const messageInput =
-        document.getElementById("guestMessage");
-
-    if(currentLanguage === "ar"){
-
-        nameInput.placeholder =
-            "اسمك";
-
-        messageInput.placeholder =
-            "اكتب رسالتك...";
-
-    }else{
-
-        nameInput.placeholder =
-            "Your Name";
-
-        messageInput.placeholder =
-            "Write your message...";
-
-    }
+    updateMusicText();
 
 }
 
 
-languageButton.addEventListener(
-    "click",
-    function(){
+languageButton.addEventListener("click", () => {
 
-        currentLanguage =
-            currentLanguage === "en"
-                ? "ar"
-                : "en";
-
-        localStorage.setItem(
-            "weddingLanguage",
-            currentLanguage
-        );
-
-        updateLanguage();
-
-    }
-);
+    currentLanguage =
+        currentLanguage === "en"
+            ? "ar"
+            : "en";
 
 
-/* =========================
-   OPEN ENVELOPE
-========================= */
+    localStorage.setItem(
+        "weddingLanguage",
+        currentLanguage
+    );
 
-const openingScreen =
-    document.getElementById("openingScreen");
 
-const envelope =
-    document.getElementById("envelope");
+    updateLanguage();
 
-const music =
-    document.getElementById("weddingMusic");
+});
 
-const musicControl =
-    document.getElementById("musicControl");
 
+/* =========================================================
+   MUSIC
+========================================================= */
 
 let musicPlaying = false;
 
 
-function openInvitation(){
+function updateMusicText(){
 
-    openingScreen.classList.add("hidden");
+    if(musicPlaying){
 
-    music
-        .play()
-        .then(() => {
-            musicPlaying = true;
-            musicControl.textContent = "♫";
-        })
-        .catch(() => {
-            musicPlaying = false;
-        });
+        musicButton.textContent = "❚❚";
+
+        musicHint.textContent =
+            currentLanguage === "ar"
+                ? "♫ إيقاف الموسيقى"
+                : "♫ Pause Music";
+
+    }else{
+
+        musicButton.textContent = "▶";
+
+        musicHint.textContent =
+            currentLanguage === "ar"
+                ? "♫ تشغيل الموسيقى"
+                : "♫ Play Music";
+
+    }
 
 }
 
 
-envelope.addEventListener(
-    "click",
-    openInvitation
-);
+async function playMusic(){
 
+    try{
 
-/* =========================
-   MUSIC CONTROL
-========================= */
+        await music.play();
 
-musicControl.addEventListener(
-    "click",
-    function(){
+        musicPlaying = true;
 
-        if(music.paused){
+        musicButton.classList.add("playing");
 
-            music
-                .play()
-                .then(() => {
+        updateMusicText();
 
-                    musicPlaying = true;
+    }catch(error){
 
-                    musicControl.textContent =
-                        "♫";
+        console.log("Music could not start:", error);
 
-                })
-                .catch(() => {});
+        musicPlaying = false;
 
-        }else{
+        updateMusicText();
 
-            music.pause();
-
-            musicPlaying = false;
-
-            musicControl.textContent =
-                "Ⅱ";
-
-        }
+        showToast(
+            currentLanguage === "ar"
+                ? "اضغط مرة أخرى لتشغيل الموسيقى"
+                : "Tap again to play the music"
+        );
 
     }
-);
+
+}
 
 
-/* =========================
+function pauseMusic(){
+
+    music.pause();
+
+    musicPlaying = false;
+
+    musicButton.classList.remove("playing");
+
+    updateMusicText();
+
+}
+
+
+musicButton.addEventListener("click", () => {
+
+    if(music.paused){
+
+        playMusic();
+
+    }else{
+
+        pauseMusic();
+
+    }
+
+});
+
+
+music.addEventListener("play", () => {
+
+    musicPlaying = true;
+
+    musicButton.classList.add("playing");
+
+    updateMusicText();
+
+});
+
+
+music.addEventListener("pause", () => {
+
+    musicPlaying = false;
+
+    musicButton.classList.remove("playing");
+
+    updateMusicText();
+
+});
+
+
+music.addEventListener("ended", () => {
+
+    musicPlaying = false;
+
+    musicButton.classList.remove("playing");
+
+    updateMusicText();
+
+});
+
+
+music.load();
+
+
+/* =========================================================
+   OPEN ENVELOPE
+========================================================= */
+
+let invitationOpened = false;
+
+
+envelope.addEventListener("click", async () => {
+
+    if(invitationOpened){
+        return;
+    }
+
+
+    invitationOpened = true;
+
+    opening.classList.add("opening-animation");
+
+
+    try{
+
+        await music.play();
+
+        musicPlaying = true;
+
+        musicButton.classList.add("playing");
+
+        updateMusicText();
+
+    }catch(error){
+
+        console.log("Autoplay blocked:", error);
+
+    }
+
+
+    setTimeout(() => {
+
+        opening.classList.add("hidden");
+
+        mainSite.classList.add("visible");
+
+        document.body.classList.remove("locked");
+
+        window.scrollTo({
+            top:0,
+            behavior:"instant"
+        });
+
+    },1600);
+
+});
+
+
+/* =========================================================
    COUNTDOWN
-========================= */
+========================================================= */
 
 const weddingDate =
-    new Date(
-        "2026-10-04T17:00:00+03:00"
-    );
+    new Date("2026-10-04T17:00:00+03:00");
+
+
+function pad(number){
+
+    return String(number).padStart(2,"0");
+
+}
 
 
 function updateCountdown(){
 
-    const now =
-        new Date();
+    const now = new Date();
 
-    const difference =
-        weddingDate - now;
+    let difference =
+        weddingDate.getTime() - now.getTime();
 
-    if(difference <= 0){
 
-        document.getElementById("days").textContent =
-            "00";
+    if(difference < 0){
 
-        document.getElementById("hours").textContent =
-            "00";
+        difference = 0;
 
-        document.getElementById("minutes").textContent =
-            "00";
-
-        document.getElementById("seconds").textContent =
-            "00";
-
-        return;
     }
 
+
+    const totalSeconds =
+        Math.floor(difference / 1000);
+
+
     const days =
-        Math.floor(
-            difference /
-            (1000 * 60 * 60 * 24)
-        );
+        Math.floor(totalSeconds / 86400);
+
 
     const hours =
         Math.floor(
-            (difference /
-            (1000 * 60 * 60)) % 24
+            (totalSeconds % 86400) / 3600
         );
+
 
     const minutes =
         Math.floor(
-            (difference /
-            (1000 * 60)) % 60
+            (totalSeconds % 3600) / 60
         );
 
+
     const seconds =
-        Math.floor(
-            (difference / 1000) % 60
-        );
+        totalSeconds % 60;
 
 
     document.getElementById("days").textContent =
-        String(days).padStart(2,"0");
+        days;
+
 
     document.getElementById("hours").textContent =
-        String(hours).padStart(2,"0");
+        pad(hours);
+
 
     document.getElementById("minutes").textContent =
-        String(minutes).padStart(2,"0");
+        pad(minutes);
+
 
     document.getElementById("seconds").textContent =
-        String(seconds).padStart(2,"0");
+        pad(seconds);
 
 }
 
 
 updateCountdown();
 
-setInterval(
-    updateCountdown,
-    1000
-);
+setInterval(updateCountdown,1000);
 
 
-/* =========================
-   TOAST
-========================= */
-
-function showToast(message){
-
-    const toast =
-        document.getElementById("toast");
-
-    toast.textContent =
-        message;
-
-    toast.classList.add("show");
-
-    setTimeout(() => {
-
-        toast.classList.remove("show");
-
-    },3500);
-
-}
-
-
-/* =========================
-   RSVP GOOGLE SHEETS
-========================= */
+/* =========================================================
+   RSVP - GOOGLE SHEETS
+========================================================= */
 
 const GOOGLE_SHEET_URL =
     "https://script.google.com/macros/s/AKfycbxcMU4vmdkqu8MpNm0PbcmHdXcf3obYwDDEci025eoF2N-4MbH0LITHw6KQg0nFMeZz/exec";
@@ -2063,195 +3004,233 @@ const GOOGLE_SHEET_URL =
 
 document
     .getElementById("rsvpForm")
-    .addEventListener(
-        "submit",
-        function(event){
+    .addEventListener("submit", function(event){
 
-            event.preventDefault();
-
-            const form =
-                this;
-
-            const submitButton =
-                form.querySelector(
-                    ".submit-button"
-                );
-
-            const name =
-                document
-                    .getElementById("guestName")
-                    .value
-                    .trim();
-
-            const attendance =
-                document.querySelector(
-                    'input[name="attendance"]:checked'
-                );
-
-            const message =
-                document
-                    .getElementById("guestMessage")
-                    .value
-                    .trim();
+        event.preventDefault();
 
 
-            if(!name || !attendance){
-
-                showToast(
-                    currentLanguage === "ar"
-                        ? "من فضلك أكمل البيانات"
-                        : "Please complete the required fields"
-                );
-
-                return;
-            }
+        const form = this;
 
 
-            submitButton.disabled =
-                true;
+        const submitButton =
+            form.querySelector(".submit-button");
+
+
+        const name =
+            document
+                .getElementById("guestName")
+                .value
+                .trim();
+
+
+        const attendance =
+            document.querySelector(
+                'input[name="attendance"]:checked'
+            );
+
+
+        const message =
+            document
+                .getElementById("guestMessage")
+                .value
+                .trim();
+
+
+        if(!name || !attendance){
+
+            showToast(
+                currentLanguage === "ar"
+                    ? "من فضلك أكمل البيانات"
+                    : "Please complete the required fields"
+            );
+
+            return;
+
+        }
+
+
+        submitButton.disabled = true;
+
+
+        submitButton.textContent =
+            currentLanguage === "ar"
+                ? "جاري الإرسال..."
+                : "SENDING...";
+
+
+        /* Create hidden iframe */
+
+        const iframe =
+            document.createElement("iframe");
+
+
+        iframe.name =
+            "rsvpSubmitFrame_" + Date.now();
+
+
+        iframe.style.display = "none";
+
+
+        document.body.appendChild(iframe);
+
+
+        /* Create native POST form */
+
+        const sendForm =
+            document.createElement("form");
+
+
+        sendForm.method = "POST";
+
+        sendForm.action = GOOGLE_SHEET_URL;
+
+        sendForm.target = iframe.name;
+
+        sendForm.style.display = "none";
+
+
+        /* Name */
+
+        const nameInput =
+            document.createElement("input");
+
+
+        nameInput.type = "hidden";
+
+        nameInput.name = "name";
+
+        nameInput.value = name;
+
+
+        /* Attendance */
+
+        const attendanceInput =
+            document.createElement("input");
+
+
+        attendanceInput.type = "hidden";
+
+        attendanceInput.name = "attendance";
+
+        attendanceInput.value =
+            attendance.value;
+
+
+        /* Message */
+
+        const messageInput =
+            document.createElement("input");
+
+
+        messageInput.type = "hidden";
+
+        messageInput.name = "message";
+
+        messageInput.value = message;
+
+
+        sendForm.appendChild(nameInput);
+
+        sendForm.appendChild(attendanceInput);
+
+        sendForm.appendChild(messageInput);
+
+
+        document.body.appendChild(sendForm);
+
+
+        /* Submit to Google Apps Script */
+
+        sendForm.submit();
+
+
+        /*
+           Give Google Apps Script enough time
+           to process the request.
+        */
+
+        setTimeout(() => {
+
+            showToast(
+                currentLanguage === "ar"
+                    ? "تم إرسال رسالتك بنجاح"
+                    : "Your message has been sent successfully"
+            );
+
+
+            form.reset();
+
+
+            submitButton.disabled = false;
+
 
             submitButton.textContent =
                 currentLanguage === "ar"
-                    ? "جاري الإرسال..."
-                    : "SENDING...";
+                    ? "إرسال الرسالة"
+                    : "SEND MESSAGE";
 
 
-            const iframe =
-                document.createElement(
-                    "iframe"
-                );
+            sendForm.remove();
 
-            iframe.name =
-                "rsvpSubmitFrame_" +
-                Date.now();
+            iframe.remove();
 
-            iframe.style.display =
+        },1500);
+
+    });
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+
+function showToast(message){
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+
+    clearTimeout(toastTimer);
+
+
+    toastTimer =
+        setTimeout(() => {
+
+            toast.classList.remove("show");
+
+        },3000);
+
+}
+
+
+/* =========================================================
+   HIDE BROKEN GALLERY IMAGES
+========================================================= */
+
+document
+    .querySelectorAll(".gallery-item img")
+    .forEach(img => {
+
+        img.addEventListener("error", () => {
+
+            img.closest(".gallery-item").style.display =
                 "none";
 
-            document.body.appendChild(
-                iframe
-            );
+        });
+
+    });
 
 
-            const sendForm =
-                document.createElement(
-                    "form"
-                );
-
-            sendForm.method =
-                "POST";
-
-            sendForm.action =
-                GOOGLE_SHEET_URL;
-
-            sendForm.target =
-                iframe.name;
-
-            sendForm.style.display =
-                "none";
-
-
-            const nameInput =
-                document.createElement(
-                    "input"
-                );
-
-            nameInput.type =
-                "hidden";
-
-            nameInput.name =
-                "name";
-
-            nameInput.value =
-                name;
-
-
-            const attendanceInput =
-                document.createElement(
-                    "input"
-                );
-
-            attendanceInput.type =
-                "hidden";
-
-            attendanceInput.name =
-                "attendance";
-
-            attendanceInput.value =
-                attendance.value;
-
-
-            const messageInput =
-                document.createElement(
-                    "input"
-                );
-
-            messageInput.type =
-                "hidden";
-
-            messageInput.name =
-                "message";
-
-            messageInput.value =
-                message;
-
-
-            sendForm.appendChild(
-                nameInput
-            );
-
-            sendForm.appendChild(
-                attendanceInput
-            );
-
-            sendForm.appendChild(
-                messageInput
-            );
-
-            document.body.appendChild(
-                sendForm
-            );
-
-            sendForm.submit();
-
-
-            setTimeout(() => {
-
-                showToast(
-                    currentLanguage === "ar"
-                        ? "تم إرسال رسالتك بنجاح"
-                        : "Your message has been sent successfully"
-                );
-
-
-                form.reset();
-
-
-                submitButton.disabled =
-                    false;
-
-
-                submitButton.textContent =
-                    currentLanguage === "ar"
-                        ? "إرسال الرسالة"
-                        : "SEND MESSAGE";
-
-
-                sendForm.remove();
-
-                iframe.remove();
-
-            },1500);
-
-        }
-    );
-
-
-/* =========================
-   INITIAL LANGUAGE
-========================= */
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
 updateLanguage();
+
+updateMusicText();
 
 </script>
 
