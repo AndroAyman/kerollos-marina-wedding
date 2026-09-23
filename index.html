@@ -7,11 +7,11 @@
 
 <title>Kerollos & Marina | Wedding Invitation</title>
 
-<!-- Elegant Wedding Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Kufi+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+
 
 <style>
 
@@ -1190,14 +1190,15 @@ textarea{
 
 .rsvp{
     text-align:center;
-
     padding:80px 35px;
 }
 
 .rsvp-script{
     font-family:"Great Vibes",cursive;
 
-    font-size:42px;
+    font-size:44px;
+
+    line-height:1.2;
 
     color:#604831;
 
@@ -1211,23 +1212,31 @@ textarea{
 
     letter-spacing:3px;
 
+    font-weight:500;
+
     color:#17110c;
 
     margin-bottom:35px;
 }
 
 .rsvp-form{
-    max-width:520px;
+    width:min(100%,520px);
 
-    margin:auto;
+    margin:0 auto;
+
+    padding:30px 34px;
+
+    background:rgba(255,255,255,.38);
+
+    border:1px solid rgba(185,145,79,.35);
+
+    box-shadow:
+        0 10px 30px rgba(50,30,15,.06);
 
     text-align:left;
 
-    padding:30px;
-
-    background:rgba(255,255,255,.35);
-
-    border:1px solid rgba(185,145,79,.35);
+    position:relative;
+    z-index:3;
 }
 
 .form-label{
@@ -1237,7 +1246,7 @@ textarea{
 
     font-size:10px;
 
-    letter-spacing:2px;
+    letter-spacing:2.5px;
 
     color:#59483b;
 
@@ -1254,34 +1263,61 @@ textarea{
 .form-textarea{
     width:100%;
 
-    border:1px solid rgba(120,90,55,.35);
+    border:1px solid rgba(185,145,79,.55);
 
-    background:rgba(255,255,255,.6);
+    background:rgba(252,248,239,.85);
 
-    color:var(--text);
+    color:#2a211c;
 
     padding:12px 14px;
 
     outline:none;
 
+    border-radius:2px;
+
     font-family:"Cormorant Garamond",serif;
 
-    font-size:16px;
+    font-size:17px;
 
-    transition:.3s;
+    transition:
+        border-color .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+}
+
+.form-input{
+    height:46px;
+}
+
+.form-textarea{
+    min-height:120px;
+
+    resize:vertical;
+
+    line-height:1.5;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder{
+    color:#9a8879;
+
+    opacity:.8;
 }
 
 .form-input:focus,
 .form-textarea:focus{
-    border-color:var(--gold);
-    background:#fff;
+    border-color:var(--gold-dark);
+
+    background:#fffdf8;
+
+    box-shadow:
+        0 0 0 2px rgba(185,145,79,.12);
 }
 
-.form-textarea{
-    min-height:110px;
 
-    resize:vertical;
-}
+/* =========================================================
+   ATTENDANCE
+========================================================= */
 
 .attendance{
     display:flex;
@@ -1290,26 +1326,68 @@ textarea{
 
     gap:10px;
 
-    margin:10px 0 5px;
+    margin-top:5px;
+
+    margin-bottom:10px;
 }
 
 .attendance input{
-    accent-color:var(--gold-dark);
+    position:absolute;
+
+    opacity:0;
+
+    pointer-events:none;
 }
 
 .attendance label{
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    min-width:85px;
+
+    height:40px;
+
+    padding:0 18px;
+
+    border:1px solid rgba(185,145,79,.55);
+
+    background:rgba(252,248,239,.85);
+
+    color:#4d4037;
+
     font-family:"Cinzel",serif;
 
-    font-size:10px;
+    font-size:9px;
 
     letter-spacing:2px;
 
-    color:#59483b;
-
-    margin-right:14px;
-
     cursor:pointer;
+
+    transition:.3s;
+
+    user-select:none;
 }
+
+.attendance label:hover{
+    border-color:var(--gold);
+
+    background:#fffdf8;
+}
+
+.attendance input:checked + label{
+    background:var(--brown);
+
+    color:#fff;
+
+    border-color:var(--brown);
+}
+
+
+/* =========================================================
+   RSVP SUBMIT
+========================================================= */
 
 .submit-button{
     display:block;
@@ -1318,7 +1396,7 @@ textarea{
 
     margin-top:28px;
 
-    padding:14px 20px;
+    padding:13px 20px;
 
     border:1px solid var(--gold);
 
@@ -1330,7 +1408,7 @@ textarea{
 
     font-size:10px;
 
-    letter-spacing:3px;
+    letter-spacing:2.5px;
 
     cursor:pointer;
 
@@ -1338,13 +1416,15 @@ textarea{
 }
 
 .submit-button:hover{
-    background:#21150e;
+    background:#241811;
+
+    border-color:#241811;
 }
 
 .submit-button:disabled{
-    opacity:.65;
+    opacity:.6;
 
-    cursor:not-allowed;
+    cursor:wait;
 }
 
 
@@ -1552,6 +1632,10 @@ body.arabic .music-control{
     right:20px;
 }
 
+body.arabic .rsvp-form{
+    text-align:right;
+}
+
 
 /* =========================================================
    MOBILE
@@ -1664,14 +1748,32 @@ body.arabic .music-control{
         height:180px;
     }
 
+    .rsvp{
+        padding:65px 22px;
+    }
+
+    .rsvp-script{
+        font-size:38px;
+    }
+
+    .rsvp h2{
+        font-size:13px;
+        letter-spacing:2px;
+        line-height:1.7;
+        padding:0 15px;
+    }
+
     .rsvp-form{
-        padding:22px;
+        padding:24px 20px;
+    }
+
+    .attendance label{
+        min-width:75px;
     }
 
     .footer{
         padding:80px 15px 70px;
     }
-
 }
 
 </style>
@@ -2218,6 +2320,7 @@ body.arabic .music-control{
             id="guestName"
             type="text"
             placeholder="Your Name"
+            autocomplete="name"
             required>
 
 
@@ -2319,21 +2422,11 @@ body.arabic .music-control{
 
 
 <!-- =========================================================
-     HIDDEN GOOGLE SHEETS FRAME
-========================================================= -->
-
-<iframe
-    name="googleSheetFrame"
-    id="googleSheetFrame"
-    style="display:none;">
-</iframe>
-
-
-<!-- =========================================================
      TOAST
 ========================================================= -->
 
 <div class="toast" id="toast"></div>
+
 
 
 <script>
@@ -2652,11 +2745,14 @@ function updateCountdown(){
     document.getElementById("days").textContent =
         days;
 
+
     document.getElementById("hours").textContent =
         pad(hours);
 
+
     document.getElementById("minutes").textContent =
         pad(minutes);
+
 
     document.getElementById("seconds").textContent =
         pad(seconds);
@@ -2679,13 +2775,12 @@ const GOOGLE_SHEET_URL =
 
 document
     .getElementById("rsvpForm")
-    .addEventListener("submit", function(event){
+    .addEventListener("submit", async function(event){
 
         event.preventDefault();
 
 
         const form = this;
-
 
         const submitButton =
             form.querySelector(".submit-button");
@@ -2726,74 +2821,42 @@ document
 
         submitButton.disabled = true;
 
-
         submitButton.textContent =
             currentLanguage === "ar"
                 ? "جاري الإرسال..."
                 : "SENDING...";
 
 
-        const hiddenForm =
-            document.createElement("form");
+        try{
+
+            const formData =
+                new URLSearchParams();
+
+            formData.append(
+                "name",
+                name
+            );
+
+            formData.append(
+                "attendance",
+                attendance.value
+            );
+
+            formData.append(
+                "message",
+                message
+            );
 
 
-        hiddenForm.method = "POST";
+            await fetch(
+                GOOGLE_SHEET_URL,
+                {
+                    method:"POST",
+                    mode:"no-cors",
+                    body:formData
+                }
+            );
 
-        hiddenForm.action =
-            GOOGLE_SHEET_URL;
-
-        hiddenForm.target =
-            "googleSheetFrame";
-
-        hiddenForm.style.display =
-            "none";
-
-
-        const nameInput =
-            document.createElement("input");
-
-        nameInput.type = "hidden";
-
-        nameInput.name = "name";
-
-        nameInput.value = name;
-
-
-        const attendanceInput =
-            document.createElement("input");
-
-        attendanceInput.type = "hidden";
-
-        attendanceInput.name = "attendance";
-
-        attendanceInput.value =
-            attendance.value;
-
-
-        const messageInput =
-            document.createElement("input");
-
-        messageInput.type = "hidden";
-
-        messageInput.name = "message";
-
-        messageInput.value = message;
-
-
-        hiddenForm.appendChild(nameInput);
-
-        hiddenForm.appendChild(attendanceInput);
-
-        hiddenForm.appendChild(messageInput);
-
-
-        document.body.appendChild(hiddenForm);
-
-
-        hiddenForm.submit();
-
-
-        setTimeout(() => {
 
             showToast(
                 currentLanguage === "ar"
@@ -2805,18 +2868,31 @@ document
             form.reset();
 
 
-            submitButton.disabled = false;
+        }catch(error){
 
+            console.error(
+                "RSVP error:",
+                error
+            );
+
+
+            showToast(
+                currentLanguage === "ar"
+                    ? "حدث خطأ. حاول مرة أخرى."
+                    : "Something went wrong. Please try again."
+            );
+
+
+        }finally{
+
+            submitButton.disabled = false;
 
             submitButton.textContent =
                 currentLanguage === "ar"
                     ? "إرسال الرسالة"
                     : "SEND MESSAGE";
 
-
-            hiddenForm.remove();
-
-        },1500);
+        }
 
     });
 
@@ -2873,6 +2949,7 @@ document
 updateLanguage();
 
 updateMusicText();
+
 
 </script>
 
