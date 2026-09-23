@@ -285,34 +285,6 @@
 
 <div class="divider"><div class="line"></div><div class="mark">✦</div><div class="line"></div></div>
 
-<!-- RSVP -->
-<section class="section" id="rsvp">
-  <div class="kicker">We'd Love to See You</div>
-  <h2>RSVP</h2>
-  <div class="rsvpcard">
-    <div class="q">Will you join us?</div>
-    <form id="rsvpForm">
-      <div class="field">
-        <label for="guestName">Full name</label>
-        <input id="guestName" type="text" required placeholder="Your name">
-      </div>
-      <div class="field">
-        <label for="attend">Will you attend?</label>
-        <select id="attend">
-          <option>Yes, joyfully!</option>
-          <option>Sorry, can't make it</option>
-          <option>Not sure yet</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="guestCount">Number of guests</label>
-        <input id="guestCount" type="number" min="1" value="1">
-      </div>
-      <button type="submit" class="btn solid" style="width:100%;padding:14px;">Send confirmation via WhatsApp</button>
-    </form>
-  </div>
-</section>
-
 <footer>
   We can't wait to celebrate with you
   <span class="small">Kerollos &amp; Marina</span>
@@ -380,8 +352,8 @@ document.querySelectorAll('[data-map]').forEach(function(el){
 (function(){
   var events = {
     henna: { title:'Henna Night - Kerollos & Marina', loc:'Star Sky Hall, Shatea El Gaish, Al-Qiyadat St, Hurghada', start:'20261002T180000Z', end:'20261002T210000Z' },
-    church: { title:'Wedding Ceremony - Kerollos & Marina', loc:'Anba Shenouda Head of the Hermits Church, Hurghada', start:'20261004T150000Z', end:'20261004T160000Z' },
-    reception: { title:'Reception - Kerollos & Marina', loc:'Gumana Hall, Al-Hijaz St, Hurghada', start:'20261004T170000Z', end:'20261004T210000Z' }
+    church: { title:'Wedding Ceremony - Kerollos & Marina', loc:'saint Shenouda Church, Hurghada', start:'20261004T150000Z', end:'20261004T160000Z' },
+    reception: { title:'Reception - Kerollos & Marina', loc:'jumana Hall, Al-Hijaz St, Hurghada', start:'20261004T170000Z', end:'20261004T210000Z' }
   };
   function icsFor(ev){
     return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Wedding//Invite//EN','BEGIN:VEVENT',
@@ -420,17 +392,6 @@ document.querySelectorAll('[data-map]').forEach(function(el){
     grid.appendChild(f);
   }
 })();
-
-/* ---------------- RSVP -> WhatsApp ---------------- */
-document.getElementById('rsvpForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  var name = document.getElementById('guestName').value.trim();
-  var attend = document.getElementById('attend').value;
-  var count = document.getElementById('guestCount').value;
-  var phone = '201000000000'; /* TEMPORARY placeholder — replace with the couple's WhatsApp number, digits only, country code first */
-  var msg = 'RSVP for Kerollos & Marina\'s wedding\nName: ' + name + '\nStatus: ' + attend + '\nGuests: ' + count;
-  window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
-});
 
 /* ---------------- share ---------------- */
 document.getElementById('shareBtn').addEventListener('click', async function(){
