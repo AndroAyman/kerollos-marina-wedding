@@ -12,7 +12,6 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Kufi+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
 
-
 <style>
 
 /* =========================================================
@@ -1779,9 +1778,7 @@ body.arabic .rsvp-form{
 </style>
 </head>
 
-
 <body class="locked">
-
 
 <!-- =========================================================
      LANGUAGE SWITCH
@@ -1878,7 +1875,6 @@ body.arabic .rsvp-form{
     </div>
 
 </section>
-
 
 
 <!-- =========================================================
@@ -1996,7 +1992,6 @@ body.arabic .rsvp-form{
 </section>
 
 
-
 <!-- =========================================================
      COUNTDOWN
 ========================================================= -->
@@ -2072,7 +2067,6 @@ body.arabic .rsvp-form{
 </section>
 
 
-
 <!-- =========================================================
      CHURCH
 ========================================================= -->
@@ -2119,7 +2113,6 @@ body.arabic .rsvp-form{
     </a>
 
 </section>
-
 
 
 <!-- =========================================================
@@ -2173,7 +2166,6 @@ body.arabic .rsvp-form{
     </a>
 
 </section>
-
 
 
 <!-- =========================================================
@@ -2231,7 +2223,6 @@ body.arabic .rsvp-form{
 </section>
 
 
-
 <!-- =========================================================
      GALLERY
 ========================================================= -->
@@ -2284,7 +2275,6 @@ body.arabic .rsvp-form{
     </div>
 
 </section>
-
 
 
 <!-- =========================================================
@@ -2379,7 +2369,6 @@ body.arabic .rsvp-form{
 </section>
 
 
-
 <!-- =========================================================
      FOOTER
 ========================================================= -->
@@ -2426,7 +2415,6 @@ body.arabic .rsvp-form{
 ========================================================= -->
 
 <div class="toast" id="toast"></div>
-
 
 
 <script>
@@ -2770,12 +2758,12 @@ setInterval(updateCountdown,1000);
 ========================================================= */
 
 const GOOGLE_SHEET_URL =
-    "https://script.google.com/macros/s/AKfycbwOcPdxJfwyumoLFB72iT4YWWRC2N6BJ6ZoUBkHCEDh0D1Ey8oX9vwgSTd9Dscxk8b-/exec";
+    "https://script.google.com/macros/s/AKfycbxcMU4vmdkqu8MpNm0PbcmHdXcf3obYwDDEci025eoF2N-4MbH0LITHw6KQg0nFMeZz/exec";
 
 
 document
     .getElementById("rsvpForm")
-    .addEventListener("submit", async function(event){
+    .addEventListener("submit", function(event){
 
         event.preventDefault();
 
@@ -2827,36 +2815,91 @@ document
                 : "SENDING...";
 
 
-        try{
+        /* Create hidden iframe */
 
-            const formData =
-                new URLSearchParams();
+        const iframe =
+            document.createElement("iframe");
 
-            formData.append(
-                "name",
-                name
-            );
+        iframe.name =
+            "rsvpSubmitFrame_" + Date.now();
 
-            formData.append(
-                "attendance",
-                attendance.value
-            );
+        iframe.style.display = "none";
 
-            formData.append(
-                "message",
-                message
-            );
+        document.body.appendChild(iframe);
 
 
-            await fetch(
-                GOOGLE_SHEET_URL,
-                {
-                    method:"POST",
-                    mode:"no-cors",
-                    body:formData
-                }
-            );
+        /* Create native POST form */
 
+        const sendForm =
+            document.createElement("form");
+
+        sendForm.method = "POST";
+
+        sendForm.action = GOOGLE_SHEET_URL;
+
+        sendForm.target = iframe.name;
+
+        sendForm.style.display = "none";
+
+
+        /* Name */
+
+        const nameInput =
+            document.createElement("input");
+
+        nameInput.type = "hidden";
+
+        nameInput.name = "name";
+
+        nameInput.value = name;
+
+
+        /* Attendance */
+
+        const attendanceInput =
+            document.createElement("input");
+
+        attendanceInput.type = "hidden";
+
+        attendanceInput.name = "attendance";
+
+        attendanceInput.value =
+            attendance.value;
+
+
+        /* Message */
+
+        const messageInput =
+            document.createElement("input");
+
+        messageInput.type = "hidden";
+
+        messageInput.name = "message";
+
+        messageInput.value = message;
+
+
+        sendForm.appendChild(nameInput);
+
+        sendForm.appendChild(attendanceInput);
+
+        sendForm.appendChild(messageInput);
+
+
+        document.body.appendChild(sendForm);
+
+
+        /* Submit to Google Apps Script */
+
+        sendForm.submit();
+
+
+        /*
+           Give Google Apps Script enough time
+           to process the request.
+        */
+
+        setTimeout(() => {
 
             showToast(
                 currentLanguage === "ar"
@@ -2868,23 +2911,6 @@ document
             form.reset();
 
 
-        }catch(error){
-
-            console.error(
-                "RSVP error:",
-                error
-            );
-
-
-            showToast(
-                currentLanguage === "ar"
-                    ? "حدث خطأ. حاول مرة أخرى."
-                    : "Something went wrong. Please try again."
-            );
-
-
-        }finally{
-
             submitButton.disabled = false;
 
             submitButton.textContent =
@@ -2892,7 +2918,12 @@ document
                     ? "إرسال الرسالة"
                     : "SEND MESSAGE";
 
-        }
+
+            sendForm.remove();
+
+            iframe.remove();
+
+        },1500);
 
     });
 
@@ -2949,7 +2980,6 @@ document
 updateLanguage();
 
 updateMusicText();
-
 
 </script>
 
