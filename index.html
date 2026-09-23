@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kerollos & Marina</title>
+<title>Kerollos & Marina Wedding</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
 :root{
   --cream:#FFF9F5;
   --cream-2:#FFFDFB;
@@ -40,80 +42,31 @@ html{
 
 body{
   background:
-    radial-gradient(circle at 10% 10%, rgba(248,221,226,.45), transparent 28%),
-    radial-gradient(circle at 90% 30%, rgba(232,169,181,.18), transparent 25%),
-    var(--cream);
+    radial-gradient(circle at 10% 10%, rgba(232,169,181,.18), transparent 30%),
+    radial-gradient(circle at 90% 20%, rgba(196,154,103,.12), transparent 28%),
+    linear-gradient(180deg,var(--cream),var(--cream-2));
 
   color:var(--ink);
+
   font-family:'Jost',sans-serif;
+
   overflow-x:hidden;
 }
 
 body.arabic{
   font-family:'Noto Kufi Arabic',sans-serif;
-}
-
-body.arabic .serif,
-body.arabic h1,
-body.arabic h2,
-body.arabic .couple-names{
-  font-family:'Noto Kufi Arabic',sans-serif;
-}
-
-button,
-a{
-  -webkit-tap-highlight-color:transparent;
+  direction:rtl;
 }
 
 button{
   font-family:inherit;
+  border:0;
+  cursor:pointer;
 }
 
-/* =========================
-   FLOATING DECORATIONS
-========================= */
-
-#petals{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  overflow:hidden;
-  z-index:50;
-}
-
-.petal{
-  position:absolute;
-  top:-60px;
-  width:22px;
-  height:22px;
-  opacity:.75;
-  animation:fall linear forwards;
-}
-
-@keyframes fall{
-  0%{
-    transform:
-      translate3d(0,-40px,0)
-      rotate(0deg);
-    opacity:0;
-  }
-
-  10%{
-    opacity:.75;
-  }
-
-  50%{
-    transform:
-      translate3d(var(--drift1),50vh,0)
-      rotate(180deg);
-  }
-
-  100%{
-    transform:
-      translate3d(var(--drift2),110vh,0)
-      rotate(360deg);
-    opacity:0;
-  }
+a{
+  color:inherit;
+  text-decoration:none;
 }
 
 /* =========================
@@ -123,135 +76,176 @@ button{
 .top-controls{
   position:fixed;
   top:18px;
+  left:18px;
   right:18px;
-  z-index:100;
+
   display:flex;
-  gap:10px;
+  justify-content:space-between;
   align-items:center;
+
+  z-index:1000;
+
+  pointer-events:none;
 }
 
-.control-btn{
-  border:none;
-  background:rgba(255,255,255,.94);
-  color:var(--pink-dark);
-  border:1px solid rgba(201,120,139,.25);
-  box-shadow:0 8px 25px rgba(120,70,80,.12);
-  cursor:pointer;
-  transition:.25s ease;
-  backdrop-filter:blur(10px);
+.top-controls button{
+  pointer-events:auto;
 }
 
 .lang-btn{
-  height:44px;
-  min-width:76px;
-  padding:0 15px;
-  border-radius:24px;
+  background:rgba(255,255,255,.88);
+  border:1px solid rgba(169,87,108,.18);
+
+  color:var(--pink-dark);
+
+  padding:9px 15px;
+
+  border-radius:30px;
+
   font-size:13px;
   font-weight:600;
-  letter-spacing:.4px;
+
+  box-shadow:0 8px 25px rgba(89,67,74,.08);
+
+  transition:.3s;
 }
 
 .lang-btn:hover{
   transform:translateY(-2px);
-  background:var(--pink-dark);
-  color:white;
 }
 
-.music-wrapper{
+/* =========================
+   MUSIC BUTTON
+========================= */
+
+.music-wrap{
   position:relative;
 }
 
 .music-btn{
-  width:54px;
-  height:54px;
+  width:48px;
+  height:48px;
+
   border-radius:50%;
+
+  background:var(--pink-dark);
+  color:white;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:23px;
-  position:relative;
+
+  font-size:20px;
+
+  box-shadow:
+    0 8px 22px rgba(169,87,108,.28);
+
+  transition:.3s;
 }
 
-.music-btn::before,
-.music-btn::after{
-  content:"";
-  position:absolute;
-  inset:-5px;
-  border:2px solid rgba(201,120,139,.38);
-  border-radius:50%;
-  animation:musicPulse 2s infinite;
-  pointer-events:none;
-}
-
-.music-btn::after{
-  animation-delay:1s;
+.music-btn:hover{
+  transform:scale(1.06);
 }
 
 .music-btn.playing{
-  background:var(--pink-dark);
-  color:white;
-}
-
-.music-btn.playing::before,
-.music-btn.playing::after{
-  border-color:rgba(201,120,139,.55);
+  animation:musicPulse 1.7s infinite;
 }
 
 @keyframes musicPulse{
   0%{
-    transform:scale(.85);
-    opacity:.8;
+    box-shadow:0 0 0 0 rgba(169,87,108,.45);
   }
 
   70%{
-    transform:scale(1.25);
-    opacity:0;
+    box-shadow:0 0 0 13px rgba(169,87,108,0);
   }
 
   100%{
-    transform:scale(1.25);
-    opacity:0;
+    box-shadow:0 0 0 0 rgba(169,87,108,0);
   }
 }
 
 .music-hint{
   position:absolute;
+
+  top:58px;
   right:0;
-  top:63px;
-  background:var(--pink-dark);
-  color:white;
-  padding:7px 12px;
-  border-radius:20px;
+
   white-space:nowrap;
+
+  background:white;
+  color:var(--pink-dark);
+
+  padding:7px 11px;
+
+  border-radius:10px;
+
   font-size:11px;
-  font-weight:500;
-  box-shadow:0 7px 18px rgba(120,70,80,.18);
-  animation:hintFloat 1.8s ease-in-out infinite;
+
+  box-shadow:0 7px 20px rgba(89,67,74,.1);
+
+  opacity:0;
+  transform:translateY(-5px);
+
+  pointer-events:none;
+
+  transition:.3s;
 }
 
-.music-hint::before{
-  content:"";
+.music-hint.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* =========================
+   FLOATING PETALS
+========================= */
+
+#petals{
+  position:fixed;
+  inset:0;
+
+  pointer-events:none;
+
+  overflow:hidden;
+
+  z-index:1;
+}
+
+.petal{
   position:absolute;
-  right:18px;
-  top:-5px;
-  width:10px;
-  height:10px;
-  background:var(--pink-dark);
-  transform:rotate(45deg);
+
+  top:-30px;
+
+  width:9px;
+  height:13px;
+
+  background:rgba(232,169,181,.55);
+
+  border-radius:70% 30% 70% 30%;
+
+  animation:fall linear forwards;
 }
 
-@keyframes hintFloat{
-  0%,100%{
-    transform:translateY(0);
+@keyframes fall{
+
+  0%{
+    transform:translateY(-30px) rotate(0deg);
+    opacity:0;
   }
 
-  50%{
-    transform:translateY(-4px);
+  10%{
+    opacity:.8;
   }
-}
 
-.music-hint.hidden{
-  display:none;
+  90%{
+    opacity:.6;
+  }
+
+  100%{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
 }
 
 /* =========================
@@ -259,133 +253,124 @@ button{
 ========================= */
 
 .hero{
-  min-height:100svh;
-  padding:95px 20px 55px;
+  min-height:100vh;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   position:relative;
+
+  padding:80px 20px 50px;
+
   text-align:center;
-  overflow:hidden;
-}
-
-.hero::before,
-.hero::after{
-  position:absolute;
-  font-size:70px;
-  color:rgba(201,120,139,.10);
-  pointer-events:none;
-}
-
-.hero::before{
-  content:"♡";
-  left:4%;
-  top:18%;
-  transform:rotate(-15deg);
-}
-
-.hero::after{
-  content:"♡";
-  right:4%;
-  bottom:14%;
-  transform:rotate(18deg);
 }
 
 .hero-inner{
-  width:min(900px,100%);
+  max-width:950px;
+  width:100%;
+
   position:relative;
   z-index:2;
 }
 
-.small-label{
-  text-transform:uppercase;
-  letter-spacing:4px;
+.invite-small{
   color:var(--pink-dark);
-  font-size:11px;
-  font-weight:600;
-  margin-bottom:24px;
+
+  letter-spacing:4px;
+
+  font-size:13px;
+
+  text-transform:uppercase;
+
+  margin-bottom:25px;
 }
 
-body.arabic .small-label{
+body.arabic .invite-small{
   letter-spacing:0;
 }
 
-.couple-frame{
-  width:180px;
-  height:180px;
-  margin:0 auto 27px;
-  padding:7px;
-  background:linear-gradient(135deg,#fff,#f8dde2);
-  border:1px solid rgba(201,120,139,.28);
-  box-shadow:
-    0 20px 45px rgba(120,70,80,.13),
-    0 0 0 8px rgba(248,221,226,.30);
-  border-radius:50%;
-  animation:heroFloat 5s ease-in-out infinite;
-}
+.couple-photo{
+  width:min(280px,72vw);
+  height:min(360px,92vw);
 
-.couple-frame img{
-  width:100%;
-  height:100%;
   object-fit:cover;
-  border-radius:50%;
-  display:block;
-}
 
-@keyframes heroFloat{
-  0%,100%{
-    transform:translateY(0);
-  }
+  border-radius:150px 150px 20px 20px;
 
-  50%{
-    transform:translateY(-7px);
-  }
+  border:7px solid rgba(255,255,255,.9);
+
+  box-shadow:
+    0 25px 70px rgba(89,67,74,.18);
+
+  margin-bottom:30px;
 }
 
 .couple-names{
   font-family:'Cormorant Garamond',serif;
+
   font-size:clamp(56px,12vw,100px);
+
   line-height:.88;
+
   font-weight:500;
+
   color:var(--pink-dark);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
-.amp{
+.couple-names span{
+  display:block;
+}
+
+.couple-names .amp{
   font-size:.52em;
+
   color:var(--gold);
-  margin:0 7px;
-  vertical-align:middle;
+
+  margin:10px 0;
+
+  line-height:.7;
 }
 
-.date-line{
-  margin-top:24px;
+body.arabic .couple-names{
+  font-family:'Noto Kufi Arabic',sans-serif;
+
+  font-size:clamp(35px,9vw,70px);
+
+  line-height:1.4;
+}
+
+.date-main{
+  margin-top:27px;
+
+  font-family:'Cormorant Garamond',serif;
+
+  font-size:clamp(24px,5vw,38px);
+
   color:var(--ink);
-  font-size:15px;
-  letter-spacing:3px;
-  text-transform:uppercase;
+
+  letter-spacing:1px;
 }
 
-body.arabic .date-line{
+body.arabic .date-main{
+  font-family:'Noto Kufi Arabic',sans-serif;
   letter-spacing:0;
 }
 
-.date-line strong{
-  color:var(--pink-dark);
-}
+.invitation-text{
+  max-width:620px;
 
-.divider{
-  width:70px;
-  height:1px;
-  background:var(--pink);
-  margin:27px auto;
-}
+  margin:20px auto 0;
 
-.invite-text{
-  max-width:570px;
-  margin:0 auto;
   color:var(--ink-soft);
+
   font-size:15px;
-  line-height:1.9;
+
+  line-height:1.8;
 }
 
 /* =========================
@@ -393,71 +378,86 @@ body.arabic .date-line{
 ========================= */
 
 .countdown{
-  margin:35px auto 0;
   display:flex;
+
   justify-content:center;
-  gap:10px;
+
+  gap:12px;
+
+  margin-top:38px;
+
   flex-wrap:wrap;
 }
 
-.time-box{
-  min-width:72px;
-  padding:13px 10px 10px;
-  background:rgba(255,255,255,.82);
-  border:1px solid rgba(232,169,181,.45);
-  border-radius:14px;
-  box-shadow:0 8px 22px rgba(120,70,80,.06);
+.count-box{
+  width:80px;
+
+  padding:13px 8px;
+
+  background:rgba(255,255,255,.72);
+
+  border:1px solid rgba(169,87,108,.12);
+
+  border-radius:18px;
+
+  box-shadow:0 10px 30px rgba(89,67,74,.06);
 }
 
-.time-box span{
+.count-number{
   display:block;
-}
 
-.time-number{
-  font-size:25px;
-  font-weight:500;
+  font-family:'Cormorant Garamond',serif;
+
+  font-size:31px;
+
   color:var(--pink-dark);
 }
 
-.time-label{
-  margin-top:3px;
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:1px;
+.count-label{
+  font-size:10px;
+
   color:var(--ink-soft);
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
 }
 
-body.arabic .time-label{
+body.arabic .count-label{
   letter-spacing:0;
 }
 
 /* =========================
-   SECTIONS
+   GENERAL SECTIONS
 ========================= */
 
 section{
-  padding:85px 20px;
+  position:relative;
+  z-index:2;
 }
 
 .section-inner{
-  width:min(950px,100%);
+  width:min(1100px,92%);
+
   margin:auto;
 }
 
 .section-title{
   text-align:center;
+
   font-family:'Cormorant Garamond',serif;
-  font-size:47px;
+
+  font-size:clamp(38px,7vw,58px);
+
   font-weight:500;
+
   color:var(--pink-dark);
-  margin-bottom:12px;
+
+  margin-bottom:45px;
 }
 
-.section-subtitle{
-  text-align:center;
-  color:var(--ink-soft);
-  font-size:13px;
-  margin-bottom:40px;
+body.arabic .section-title{
+  font-family:'Noto Kufi Arabic',sans-serif;
 }
 
 /* =========================
@@ -465,129 +465,169 @@ section{
 ========================= */
 
 .verse-section{
-  background:rgba(255,255,255,.38);
+  padding:80px 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(253,241,242,.6),
+      rgba(255,253,251,.4)
+    );
 }
 
 .verse{
-  max-width:720px;
+  max-width:760px;
+
   margin:auto;
+
   text-align:center;
+
   font-family:'Cormorant Garamond',serif;
-  font-size:27px;
-  line-height:1.65;
+
+  font-size:clamp(24px,4vw,34px);
+
+  line-height:1.5;
+
   color:var(--ink);
 }
 
 body.arabic .verse{
   font-family:'Noto Kufi Arabic',sans-serif;
-  font-size:18px;
-  line-height:2.1;
+
+  font-size:clamp(17px,4vw,24px);
+
+  line-height:2;
 }
 
 .verse-mark{
-  font-size:35px;
-  color:var(--pink);
-  margin-bottom:10px;
+  text-align:center;
+
+  color:var(--gold);
+
+  font-size:28px;
+
+  margin-bottom:20px;
 }
 
 /* =========================
    EVENTS
 ========================= */
 
-.events{
+.events-section{
+  padding:90px 0;
+}
+
+.events-grid{
   display:grid;
+
   grid-template-columns:repeat(3,1fr);
-  gap:18px;
+
+  gap:22px;
 }
 
 .event-card{
-  background:rgba(255,255,255,.83);
-  border:1px solid rgba(232,169,181,.38);
-  border-radius:22px;
-  padding:30px 22px;
+  background:rgba(255,255,255,.78);
+
+  border:1px solid rgba(169,87,108,.12);
+
+  border-radius:28px;
+
+  padding:35px 25px;
+
   text-align:center;
-  box-shadow:0 12px 35px rgba(120,70,80,.06);
-  transition:.3s ease;
+
+  box-shadow:0 15px 45px rgba(89,67,74,.07);
+
+  transition:.35s;
 }
 
 .event-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 18px 40px rgba(120,70,80,.11);
+  transform:translateY(-7px);
+
+  box-shadow:0 22px 50px rgba(89,67,74,.12);
 }
 
 .event-icon{
-  width:60px;
-  height:60px;
-  margin:0 auto 17px;
+  width:65px;
+  height:65px;
+
   border-radius:50%;
-  background:var(--cream-3);
+
+  margin:0 auto 20px;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:28px;
+
+  background:var(--cream-3);
+
+  color:var(--pink-dark);
+
+  font-size:27px;
 }
 
 .event-title{
   font-family:'Cormorant Garamond',serif;
-  font-size:31px;
+
+  font-size:32px;
+
   color:var(--pink-dark);
-  margin-bottom:8px;
+
+  margin-bottom:14px;
 }
 
 body.arabic .event-title{
   font-family:'Noto Kufi Arabic',sans-serif;
-  font-size:21px;
+
+  font-size:22px;
 }
 
 .event-date{
-  font-size:13px;
   font-weight:600;
+
   color:var(--ink);
-  margin-bottom:5px;
+
+  margin-bottom:10px;
 }
 
-.event-place{
-  font-size:14px;
-  font-weight:500;
+.event-time{
   color:var(--pink-dark);
-  margin-bottom:8px;
+
+  font-size:15px;
+
+  margin-bottom:12px;
 }
 
-.event-address{
+.event-location{
   color:var(--ink-soft);
-  font-size:12px;
-  line-height:1.6;
-  min-height:39px;
+
+  font-size:13px;
+
+  line-height:1.7;
+
+  min-height:45px;
 }
 
-.event-buttons{
+.map-btn{
   margin-top:20px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
 
-.event-btn{
-  width:100%;
-  border:none;
-  padding:11px 15px;
-  border-radius:22px;
+  padding:10px 18px;
+
+  border-radius:25px;
+
   background:var(--pink-dark);
+
   color:white;
+
   font-size:12px;
-  cursor:pointer;
-  transition:.25s ease;
+
+  transition:.3s;
 }
 
-.event-btn:hover{
+.map-btn:hover{
+  transform:translateY(-2px);
+
   background:var(--pink-deep);
-  transform:translateY(-1px);
-}
-
-.event-btn.secondary{
-  background:var(--cream-3);
-  color:var(--pink-dark);
-  border:1px solid rgba(201,120,139,.22);
 }
 
 /* =========================
@@ -595,101 +635,65 @@ body.arabic .event-title{
 ========================= */
 
 .map-section{
-  background:rgba(255,255,255,.45);
+  padding:80px 0;
+
+  background:var(--cream-3);
 }
 
-.map-box{
-  width:min(850px,100%);
+.map-container{
+  max-width:950px;
+
   margin:auto;
-  padding:15px;
-  border-radius:28px;
+
+  border-radius:30px;
+
+  overflow:hidden;
+
   background:white;
-  border:1px solid rgba(232,169,181,.35);
-  box-shadow:0 15px 40px rgba(120,70,80,.08);
+
+  box-shadow:0 20px 55px rgba(89,67,74,.08);
 }
 
-.map-box svg{
+.map-container svg{
   width:100%;
-  height:auto;
+
   display:block;
-}
-
-.map-road{
-  fill:none;
-  stroke:#f0dadd;
-  stroke-width:3;
-}
-
-.map-road.thin{
-  stroke-width:1.7;
-}
-
-.map-pin{
-  cursor:pointer;
-  transition:.2s;
-}
-
-.map-pin:hover{
-  transform:scale(1.08);
-  transform-origin:center;
-}
-
-.map-pin circle{
-  fill:var(--pink-dark);
-}
-
-.map-pin text{
-  fill:white;
-  font-size:11px;
-  font-weight:600;
 }
 
 /* =========================
    GALLERY
 ========================= */
 
+.gallery-section{
+  padding:90px 0;
+}
+
 .gallery{
   display:grid;
+
   grid-template-columns:repeat(4,1fr);
+
   gap:14px;
 }
 
-.gallery-item{
-  aspect-ratio:1/1;
-  background:white;
-  padding:7px;
-  border:1px solid rgba(232,169,181,.38);
-  box-shadow:0 10px 25px rgba(120,70,80,.07);
-  border-radius:16px;
-  position:relative;
-  overflow:hidden;
-  transition:.3s ease;
-}
-
-.gallery-item:hover{
-  transform:translateY(-4px) rotate(-1deg);
-  box-shadow:0 16px 30px rgba(120,70,80,.12);
-}
-
-.gallery-item:nth-child(even):hover{
-  transform:translateY(-4px) rotate(1deg);
-}
-
-.gallery-item img{
+.gallery img{
   width:100%;
-  height:100%;
-  display:block;
+
+  aspect-ratio:1/1;
+
   object-fit:cover;
-  border-radius:11px;
+
+  border-radius:18px;
+
+  cursor:pointer;
+
+  transition:.35s;
+
+  box-shadow:0 7px 20px rgba(89,67,74,.08);
 }
 
-.gallery-heart{
-  position:absolute;
-  right:12px;
-  bottom:10px;
-  color:white;
-  font-size:17px;
-  text-shadow:0 2px 7px rgba(0,0,0,.25);
+.gallery img:hover{
+  transform:scale(1.025);
 }
 
 /* =========================
@@ -697,19 +701,40 @@ body.arabic .event-title{
 ========================= */
 
 footer{
+  padding:70px 20px 45px;
+
   text-align:center;
-  padding:50px 20px 65px;
-  color:var(--ink-soft);
-  font-size:12px;
-  position:relative;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--cream-2),
+      var(--cream-3)
+    );
 }
 
-footer::before{
-  content:"♡";
-  display:block;
-  color:var(--pink);
-  font-size:30px;
+.footer-heart{
+  color:var(--pink-dark);
+
+  font-size:25px;
+
   margin-bottom:10px;
+}
+
+.footer-text{
+  font-family:'Cormorant Garamond',serif;
+
+  font-size:22px;
+
+  color:var(--pink-dark);
+}
+
+.footer-small{
+  margin-top:10px;
+
+  color:var(--ink-soft);
+
+  font-size:11px;
 }
 
 /* =========================
@@ -718,23 +743,35 @@ footer::before{
 
 .toast{
   position:fixed;
-  left:50%;
+
   bottom:25px;
-  transform:translate(-50%,20px);
-  background:var(--pink-dark);
+
+  left:50%;
+
+  transform:translate(-50%,30px);
+
+  background:var(--ink);
+
   color:white;
+
   padding:11px 18px;
+
   border-radius:25px;
+
   font-size:12px;
+
   opacity:0;
+
   pointer-events:none;
-  transition:.3s ease;
-  z-index:200;
-  white-space:nowrap;
+
+  transition:.3s;
+
+  z-index:2000;
 }
 
 .toast.show{
   opacity:1;
+
   transform:translate(-50%,0);
 }
 
@@ -742,167 +779,130 @@ footer::before{
    RTL
 ========================= */
 
-body.arabic{
-  direction:rtl;
-}
-
-body.arabic .top-controls{
-  right:auto;
-  left:18px;
-  direction:ltr;
-}
-
-body.arabic .music-hint{
-  right:auto;
-  left:0;
-}
-
-body.arabic .music-hint::before{
-  right:auto;
-  left:18px;
-}
-
 body.arabic .event-card,
-body.arabic .invite-text{
-  direction:rtl;
+body.arabic .invitation-text{
+  text-align:center;
 }
 
 /* =========================
    RESPONSIVE
 ========================= */
 
-@media(max-width:800px){
+@media(max-width:850px){
 
-  .events{
+  .events-grid{
     grid-template-columns:1fr;
-    max-width:520px;
-    margin:auto;
   }
 
   .gallery{
     grid-template-columns:repeat(2,1fr);
   }
 
-  section{
-    padding:70px 18px;
-  }
-
-  .section-title{
-    font-size:42px;
-  }
-
-  .couple-names{
-    font-size:clamp(48px,15vw,80px);
-  }
 }
 
-@media(max-width:480px){
-
-  .top-controls{
-    top:13px;
-    right:12px;
-    gap:7px;
-  }
-
-  body.arabic .top-controls{
-    left:12px;
-    right:auto;
-  }
-
-  .lang-btn{
-    min-width:67px;
-    height:40px;
-    padding:0 11px;
-    font-size:11px;
-  }
-
-  .music-btn{
-    width:48px;
-    height:48px;
-    font-size:20px;
-  }
-
-  .music-hint{
-    top:57px;
-    font-size:10px;
-    padding:6px 10px;
-  }
+@media(max-width:500px){
 
   .hero{
-    padding-top:82px;
+    padding-top:90px;
   }
 
-  .couple-frame{
-    width:150px;
-    height:150px;
+  .couple-photo{
+    width:220px;
+    height:290px;
   }
 
-  .date-line{
-    font-size:12px;
+  .count-box{
+    width:70px;
   }
 
-  .time-box{
-    min-width:64px;
-    padding:10px 7px;
+  .count-number{
+    font-size:27px;
   }
 
-  .time-number{
-    font-size:22px;
+  .section-inner{
+    width:90%;
   }
 
-  .verse{
-    font-size:23px;
-  }
-
-  body.arabic .verse{
-    font-size:16px;
-  }
-
-  .gallery{
-    gap:9px;
-  }
-
-  .gallery-item{
-    padding:5px;
-    border-radius:12px;
-  }
 }
 
-@media(prefers-reduced-motion:reduce){
-  *,
-  *::before,
-  *::after{
-    animation-duration:.01ms !important;
-    animation-iteration-count:1 !important;
-    scroll-behavior:auto !important;
-    transition:none !important;
-  }
+/* =========================
+   LIGHTBOX
+========================= */
+
+.lightbox{
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(30,20,23,.92);
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:25px;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:.3s;
+
+  z-index:3000;
 }
+
+.lightbox.show{
+  opacity:1;
+
+  pointer-events:auto;
+}
+
+.lightbox img{
+  max-width:95vw;
+
+  max-height:90vh;
+
+  object-fit:contain;
+
+  border-radius:12px;
+}
+
+.lightbox-close{
+  position:absolute;
+
+  top:20px;
+  right:25px;
+
+  color:white;
+
+  font-size:35px;
+
+  background:none;
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- =========================
+     TOP CONTROLS
+========================= -->
+
 <div class="top-controls">
 
-  <button
-    class="control-btn lang-btn"
-    id="languageToggle"
-    type="button">
+  <button id="langToggle" class="lang-btn">
     عربي
   </button>
 
-  <div class="music-wrapper">
+  <div class="music-wrap">
 
-    <button
-      class="control-btn music-btn"
-      id="musicToggle"
-      type="button"
-      aria-label="Play music">
-      ▶
+    <button id="musicToggle" class="music-btn" aria-label="Music">
+      ♫
     </button>
 
-    <div class="music-hint" id="musicHint">
+    <div id="musicHint" class="music-hint">
       ♫ Play Music
     </div>
 
@@ -910,75 +910,93 @@ body.arabic .invite-text{
 
 </div>
 
+<!-- =========================
+     MUSIC
+========================= -->
+
 <audio id="weddingMusic" loop preload="auto">
   <source src="photos/music.mp3" type="audio/mpeg">
 </audio>
 
+<!-- =========================
+     FLOATING PETALS
+========================= -->
+
 <div id="petals"></div>
 
-<header class="hero">
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
 
   <div class="hero-inner">
 
-    <div class="small-label"
-         data-en="Together with their families"
-         data-ar="بمشاركة عائلتيهما">
+    <div
+      class="invite-small"
+      data-en="Together with their families"
+      data-ar="بكل الحب وبحضور عائلتيهما"
+    >
       Together with their families
     </div>
 
-    <div class="couple-frame">
-      <img src="photos/couple.jpg"
-           alt="Kerollos and Marina">
-    </div>
+    <img
+      src="photos/couple.jpg"
+      alt="Kerollos and Marina"
+      class="couple-photo"
+    >
 
     <div class="couple-names">
+
       <span>Kerollos Gamal</span>
-      <span class="amp">&</span>
+
+      <span class="amp">&amp;</span>
+
       <span>Marina Ayman</span>
+
     </div>
 
-    <div class="date-line">
-      <strong data-en="Sunday, October 4th, 2026"
-              data-ar="الأحد، ٤ أكتوبر ٢٠٢٦">
-        Sunday, October 4th, 2026
-      </strong>
+    <div class="date-main">
+      Sunday, October 4th 2026
     </div>
 
-    <div class="divider"></div>
+    <div
+      class="invitation-text"
+      data-en="Invite you to celebrate their wedding day and share with them the joy of this beautiful beginning."
+      data-ar="يدعوانكم لمشاركتهما فرحة يوم زفافهما والاحتفال معهما بهذه البداية الجميلة."
+    >
+      Invite you to celebrate their wedding day and share with them the joy of this beautiful beginning.
+    </div>
 
-    <p class="invite-text"
-       data-en="With joyful hearts, we invite you to celebrate the beginning of our forever together."
-       data-ar="بكل فرح ومحبة، ندعوكم لمشاركتنا فرحتنا والاحتفال ببداية حياتنا معًا.">
-      With joyful hearts, we invite you to celebrate the beginning of our forever together.
-    </p>
+    <!-- COUNTDOWN -->
 
     <div class="countdown">
 
-      <div class="time-box">
-        <span class="time-number" id="days">--</span>
-        <span class="time-label" data-en="Days" data-ar="يوم">Days</span>
+      <div class="count-box">
+        <span id="days" class="count-number">00</span>
+        <span class="count-label" data-en="Days" data-ar="يوم">Days</span>
       </div>
 
-      <div class="time-box">
-        <span class="time-number" id="hours">--</span>
-        <span class="time-label" data-en="Hours" data-ar="ساعة">Hours</span>
+      <div class="count-box">
+        <span id="hours" class="count-number">00</span>
+        <span class="count-label" data-en="Hours" data-ar="ساعة">Hours</span>
       </div>
 
-      <div class="time-box">
-        <span class="time-number" id="minutes">--</span>
-        <span class="time-label" data-en="Minutes" data-ar="دقيقة">Minutes</span>
+      <div class="count-box">
+        <span id="minutes" class="count-number">00</span>
+        <span class="count-label" data-en="Minutes" data-ar="دقيقة">Minutes</span>
       </div>
 
-      <div class="time-box">
-        <span class="time-number" id="seconds">--</span>
-        <span class="time-label" data-en="Seconds" data-ar="ثانية">Seconds</span>
+      <div class="count-box">
+        <span id="seconds" class="count-number">00</span>
+        <span class="count-label" data-en="Seconds" data-ar="ثانية">Seconds</span>
       </div>
 
     </div>
 
   </div>
 
-</header>
+</section>
 
 <!-- =========================
      VERSE
@@ -988,11 +1006,15 @@ body.arabic .invite-text{
 
   <div class="section-inner">
 
-    <div class="verse-mark">♡</div>
+    <div class="verse-mark">
+      ♡
+    </div>
 
-    <div class="verse"
-         data-en="“Love is patient, love is kind. It always protects, always trusts, always hopes, always perseveres.”"
-         data-ar="«المحبة تتأنى وترفق. المحبة لا تسقط أبدًا، وتحمي دائمًا، وتثق دائمًا، وترجو دائمًا، وتصبر دائمًا.»">
+    <div
+      class="verse"
+      data-en="“Love is patient, love is kind. It always protects, always trusts, always hopes, always perseveres.”"
+      data-ar="«المحبة تتأنى وترفق. المحبة لا تسقط أبدًا، وتحمي دائمًا، وتثق دائمًا، وترجو دائمًا، وتصبر دائمًا.»"
+    >
       “Love is patient, love is kind. It always protects, always trusts, always hopes, always perseveres.”
     </div>
 
@@ -1011,173 +1033,155 @@ body.arabic .invite-text{
 
 </section>
 
-<section>
+<!-- =========================
+     EVENTS
+========================= -->
+
+<section class="events-section">
 
   <div class="section-inner">
 
-    <h2 class="section-title"
-        data-en="The Celebration"
-        data-ar="مواعيد الاحتفال">
+    <h2
+      class="section-title"
+      data-en="The Celebration"
+      data-ar="تفاصيل الاحتفال"
+    >
       The Celebration
     </h2>
 
-    <p class="section-subtitle"
-       data-en="Three special moments we would love to share with you"
-       data-ar="ثلاث لحظات مميزة نتمنى أن نشاركها معكم">
-      Three special moments we would love to share with you
-    </p>
+    <div class="events-grid">
 
-    <div class="events">
+      <!-- HENNA -->
 
-      <article class="event-card">
+      <div class="event-card">
 
-        <div class="event-icon">🌸</div>
+        <div class="event-icon">
+          ♡
+        </div>
 
-        <h3 class="event-title"
-            data-en="Henna Night"
-            data-ar="ليلة الحنة">
+        <div
+          class="event-title"
+          data-en="Henna Night"
+          data-ar="ليلة الحنة"
+        >
           Henna Night
-        </h3>
-
-        <div class="event-date"
-             data-en="Friday, October 2nd • 8:00 PM"
-             data-ar="الجمعة، ٢ أكتوبر • الساعة ٨ مساءً">
-          Friday, October 2nd • 8:00 PM
         </div>
 
-        <div class="event-place"
-             data-en="Star Sky Hall"
-             data-ar="قاعة ستار سكاي">
-          Star Sky Hall
+        <div class="event-date">
+          Friday, October 2nd 2026
         </div>
 
-        <div class="event-address"
-             data-en="Shatea El Gaish, Al-Qiyadat St., Hurghada"
-             data-ar="شاطئ الجيش، شارع القيادات، الغردقة">
+        <div class="event-time">
+          8:00 PM
+        </div>
+
+        <div
+          class="event-location"
+          data-en="Star Sky Hall<br>Shatea El Gaish, Al-Qiyadat St., Hurghada"
+          data-ar="قاعة ستار سكاي<br>شاطئ الجيش، شارع القيادات، الغردقة"
+        >
+          Star Sky Hall<br>
           Shatea El Gaish, Al-Qiyadat St., Hurghada
         </div>
 
-        <div class="event-buttons">
+        <button
+          class="map-btn"
+          data-map-url="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac"
+          data-en="View Location"
+          data-ar="عرض الموقع"
+        >
+          View Location
+        </button>
 
-          <button
-            class="event-btn map-btn"
-            data-map-url="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac"
-            data-en="Open Location"
-            data-ar="فتح الموقع">
-            Open Location
-          </button>
+      </div>
 
-          <button
-            class="event-btn secondary calendar-btn"
-            data-event="henna"
-            data-en="Add to Calendar"
-            data-ar="إضافة للتقويم">
-            Add to Calendar
-          </button>
+      <!-- CHURCH -->
 
+      <div class="event-card">
+
+        <div class="event-icon">
+          ♧
         </div>
 
-      </article>
-
-      <article class="event-card">
-
-        <div class="event-icon">♡</div>
-
-        <h3 class="event-title"
-            data-en="Wedding Ceremony"
-            data-ar="الكنيسة">
+        <div
+          class="event-title"
+          data-en="Wedding Ceremony"
+          data-ar="إكليل الزواج"
+        >
           Wedding Ceremony
-        </h3>
-
-        <div class="event-date"
-             data-en="Sunday, October 4th • 5:00 PM"
-             data-ar="الأحد، ٤ أكتوبر • الساعة ٥ مساءً">
-          Sunday, October 4th • 5:00 PM
         </div>
 
-        <div class="event-place"
-             data-en="Anba Shenouda, Head of the Hermits Church"
-             data-ar="كنيسة الأنبا شنودة، رئيس المتوحدين">
-          Anba Shenouda, Head of the Hermits Church
+        <div class="event-date">
+          Sunday, October 4th 2026
         </div>
 
-        <div class="event-address"
-             data-en="Hurghada"
-             data-ar="الغردقة">
+        <div class="event-time">
+          5:00 PM
+        </div>
+
+        <div
+          class="event-location"
+          data-en="Anba Shenouda, Head of the Hermits Church<br>Hurghada"
+          data-ar="كنيسة الأنبا شنودة، رئيس المتوحدين<br>الغردقة"
+        >
+          Anba Shenouda, Head of the Hermits Church<br>
           Hurghada
         </div>
 
-        <div class="event-buttons">
+        <button
+          class="map-btn"
+          data-map-url="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac"
+          data-en="View Location"
+          data-ar="عرض الموقع"
+        >
+          View Location
+        </button>
 
-          <button
-            class="event-btn map-btn"
-            data-map-url="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac"
-            data-en="Open Location"
-            data-ar="فتح الموقع">
-            Open Location
-          </button>
+      </div>
 
-          <button
-            class="event-btn secondary calendar-btn"
-            data-event="church"
-            data-en="Add to Calendar"
-            data-ar="إضافة للتقويم">
-            Add to Calendar
-          </button>
+      <!-- RECEPTION -->
 
+      <div class="event-card">
+
+        <div class="event-icon">
+          ♡
         </div>
 
-      </article>
-
-      <article class="event-card">
-
-        <div class="event-icon">🌷</div>
-
-        <h3 class="event-title"
-            data-en="Wedding Reception"
-            data-ar="حفل الزفاف">
+        <div
+          class="event-title"
+          data-en="Wedding Reception"
+          data-ar="حفل الزفاف"
+        >
           Wedding Reception
-        </h3>
-
-        <div class="event-date"
-             data-en="Sunday, October 4th • 7:00 PM"
-             data-ar="الأحد، ٤ أكتوبر • الساعة ٧ مساءً">
-          Sunday, October 4th • 7:00 PM
         </div>
 
-        <div class="event-place"
-             data-en="Gumana Hall"
-             data-ar="قاعة جمانة">
-          Gumana Hall
+        <div class="event-date">
+          Sunday, October 4th 2026
         </div>
 
-        <div class="event-address"
-             data-en="Al-Hijaz St., Hurghada"
-             data-ar="شارع الحجاز، الغردقة">
+        <div class="event-time">
+          7:00 PM
+        </div>
+
+        <div
+          class="event-location"
+          data-en="Gumana Hall<br>Al-Hijaz St., Hurghada"
+          data-ar="قاعة جمانة<br>شارع الحجاز، الغردقة"
+        >
+          Gumana Hall<br>
           Al-Hijaz St., Hurghada
         </div>
 
-        <div class="event-buttons">
+        <button
+          class="map-btn"
+          data-map-url="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac"
+          data-en="View Location"
+          data-ar="عرض الموقع"
+        >
+          View Location
+        </button>
 
-          <button
-            class="event-btn map-btn"
-            data-map-url="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac"
-            data-en="Open Location"
-            data-ar="فتح الموقع">
-            Open Location
-          </button>
-
-          <button
-            class="event-btn secondary calendar-btn"
-            data-event="reception"
-            data-en="Add to Calendar"
-            data-ar="إضافة للتقويم">
-            Add to Calendar
-          </button>
-
-        </div>
-
-      </article>
+      </div>
 
     </div>
 
@@ -1185,54 +1189,122 @@ body.arabic .invite-text{
 
 </section>
 
+<!-- =========================
+     MAP
+========================= -->
+
 <section class="map-section">
 
   <div class="section-inner">
 
-    <h2 class="section-title"
-        data-en="Find Us"
-        data-ar="أماكن الاحتفال">
-      Find Us
+    <h2
+      class="section-title"
+      data-en="Locations"
+      data-ar="المواقع"
+    >
+      Locations
     </h2>
 
-    <p class="section-subtitle"
-       data-en="Tap a pin to open the location"
-       data-ar="اضغط على أي علامة لفتح الموقع">
-      Tap a pin to open the location
-    </p>
+    <div class="map-container">
 
-    <div class="map-box">
+      <svg
+        viewBox="0 0 1000 500"
+        xmlns="http://www.w3.org/2000/svg"
+      >
 
-      <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+        <rect
+          width="1000"
+          height="500"
+          fill="#fdf1f2"
+        />
 
-        <rect x="0" y="0" width="300" height="220" rx="20" fill="#fff9f5"/>
+        <path
+          d="M0 120
+             C180 80 250 180 390 120
+             S650 80 1000 150
+             L1000 0
+             L0 0 Z"
+          fill="#f8dde2"
+        />
 
-        <path class="map-road" d="M10 45 C70 70 100 40 145 60 S220 95 290 60"/>
-        <path class="map-road" d="M20 170 C70 145 100 180 150 155 S220 120 285 145"/>
-        <path class="map-road thin" d="M65 10 C80 60 80 110 65 210"/>
-        <path class="map-road thin" d="M190 5 C180 55 205 90 195 145 S210 190 235 215"/>
-        <path class="map-road thin" d="M5 105 C80 100 110 110 160 105 S230 100 295 108"/>
+        <path
+          d="M0 380
+             C200 330 300 420 470 370
+             S750 320 1000 400"
+          fill="none"
+          stroke="#e8a9b5"
+          stroke-width="35"
+          opacity=".45"
+        />
 
-        <g class="map-pin map-btn"
-           data-map-url="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac"
-           transform="translate(70,150)">
-          <circle r="15"/>
-          <text text-anchor="middle" y="4">H</text>
-        </g>
+        <path
+          d="M100 250
+             C260 210 380 280 520 230
+             S760 190 900 250"
+          fill="none"
+          stroke="#fffdfb"
+          stroke-width="12"
+        />
 
-        <g class="map-pin map-btn"
-           data-map-url="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac"
-           transform="translate(150,80)">
-          <circle r="15"/>
-          <text text-anchor="middle" y="4">C</text>
-        </g>
+        <!-- Henna -->
 
-        <g class="map-pin map-btn"
-           data-map-url="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac"
-           transform="translate(230,120)">
-          <circle r="15"/>
-          <text text-anchor="middle" y="4">R</text>
-        </g>
+        <circle
+          cx="230"
+          cy="280"
+          r="12"
+          fill="#a9576c"
+        />
+
+        <text
+          x="230"
+          y="315"
+          text-anchor="middle"
+          fill="#59434a"
+          font-family="Jost"
+          font-size="17"
+        >
+          Henna
+        </text>
+
+        <!-- Church -->
+
+        <circle
+          cx="500"
+          cy="220"
+          r="12"
+          fill="#a9576c"
+        />
+
+        <text
+          x="500"
+          y="255"
+          text-anchor="middle"
+          fill="#59434a"
+          font-family="Jost"
+          font-size="17"
+        >
+          Church
+        </text>
+
+        <!-- Reception -->
+
+        <circle
+          cx="770"
+          cy="320"
+          r="12"
+          fill="#a9576c"
+        />
+
+        <text
+          x="770"
+          y="355"
+          text-anchor="middle"
+          fill="#59434a"
+          font-family="Jost"
+          font-size="17"
+        >
+          Reception
+        </text>
 
       </svg>
 
@@ -1242,226 +1314,185 @@ body.arabic .invite-text{
 
 </section>
 
-<section>
+<!-- =========================
+     GALLERY
+========================= -->
+
+<section class="gallery-section">
 
   <div class="section-inner">
 
-    <h2 class="section-title"
-        data-en="Our Moments"
-        data-ar="لحظاتنا">
+    <h2
+      class="section-title"
+      data-en="Our Moments"
+      data-ar="لحظاتنا"
+    >
       Our Moments
     </h2>
 
-    <p class="section-subtitle"
-       data-en="A few memories from our journey"
-       data-ar="بعض الذكريات من رحلتنا">
-      A few memories from our journey
-    </p>
-
-    <div class="gallery" id="gallery"></div>
+    <div id="gallery" class="gallery"></div>
 
   </div>
 
 </section>
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
-  <div
-    data-en="Thank you for being part of our special day."
-    data-ar="شكرًا لوجودكم ومشاركتكم يومنا المميز.">
-    Thank you for being part of our special day.
+  <div class="footer-heart">
+    ♡
   </div>
 
-  <div style="margin-top:8px;color:var(--pink-dark);">
-    Kerollos Gamal & Marina Ayman
+  <div
+    class="footer-text"
+    data-en="With love, Kerollos & Marina"
+    data-ar="بكل الحب، كيرولوس ومارينا"
+  >
+    With love, Kerollos & Marina
+  </div>
+
+  <div
+    class="footer-small"
+    data-en="October 4th, 2026 · Hurghada"
+    data-ar="4 أكتوبر 2026 · الغردقة"
+  >
+    October 4th, 2026 · Hurghada
   </div>
 
 </footer>
 
-<div class="toast" id="toast"></div>
+<!-- =========================
+     LIGHTBOX
+========================= -->
+
+<div id="lightbox" class="lightbox">
+
+  <button
+    id="lightboxClose"
+    class="lightbox-close"
+    aria-label="Close"
+  >
+    ×
+  </button>
+
+  <img id="lightboxImage" src="" alt="Wedding photo">
+
+</div>
+
+<!-- =========================
+     TOAST
+========================= -->
+
+<div id="toast" class="toast"></div>
 
 <script>
 
-/* =====================================================
+/* =========================
    LANGUAGE
-===================================================== */
+========================= */
 
-let currentLanguage =
-  localStorage.getItem("weddingLanguage") || "en";
-
-const languageToggle =
-  document.getElementById("languageToggle");
+const langToggle = document.getElementById("langToggle");
 
 function updateLanguage(){
 
+  const arabic =
+    document.body.classList.contains("arabic");
+
   document.documentElement.lang =
-    currentLanguage;
+    arabic ? "ar" : "en";
 
-  document.body.classList.toggle(
-    "arabic",
-    currentLanguage === "ar"
-  );
+  document.querySelectorAll("[data-en]").forEach(el => {
 
-  document.querySelectorAll("[data-en]")
-    .forEach(element => {
+    const text =
+      arabic
+        ? el.getAttribute("data-ar")
+        : el.getAttribute("data-en");
 
-      const text =
-        currentLanguage === "ar"
-          ? element.getAttribute("data-ar")
-          : element.getAttribute("data-en");
+    if(text !== null){
+      el.innerHTML = text;
+    }
 
-      if(text !== null){
-        element.textContent = text;
-      }
+  });
 
-    });
-
-  languageToggle.textContent =
-    currentLanguage === "en"
-      ? "عربي"
-      : "English";
+  langToggle.textContent =
+    arabic ? "English" : "عربي";
 
   updateMusicHint();
-
 }
 
-languageToggle.addEventListener("click", () => {
+langToggle.addEventListener("click", () => {
 
-  currentLanguage =
-    currentLanguage === "en"
-      ? "ar"
-      : "en";
+  document.body.classList.toggle("arabic");
 
   localStorage.setItem(
     "weddingLanguage",
-    currentLanguage
+    document.body.classList.contains("arabic")
+      ? "ar"
+      : "en"
   );
 
   updateLanguage();
 
 });
 
+/* =========================
+   INITIAL LANGUAGE
+========================= */
 
-/* =====================================================
-   FLOATING HEARTS & FLOWERS
-===================================================== */
+if(localStorage.getItem("weddingLanguage") === "ar"){
+  document.body.classList.add("arabic");
+}
+
+updateLanguage();
+
+/* =========================
+   FLOATING PETALS
+========================= */
 
 const petalsContainer =
   document.getElementById("petals");
 
-const decorations = [
-  {type:"heart",color:"#E8A9B5"},
-  {type:"heart",color:"#C9788B"},
-  {type:"flower",color:"#F2C3CC"},
-  {type:"flower",color:"#E8A9B5"},
-  {type:"heart",color:"#F3D0D6"}
-];
+function createPetal(){
 
-function createDecoration(){
-
-  const item =
-    decorations[
-      Math.floor(
-        Math.random() * decorations.length
-      )
-    ];
-
-  const el =
+  const petal =
     document.createElement("div");
 
-  el.className = "petal";
+  petal.className = "petal";
 
-  const size =
-    12 + Math.random() * 14;
+  petal.style.left =
+    Math.random() * 100 + "%";
 
-  el.style.width = size + "px";
-  el.style.height = size + "px";
+  petal.style.animationDuration =
+    (7 + Math.random() * 7) + "s";
 
-  el.style.left =
-    Math.random() * 100 + "vw";
+  petal.style.animationDelay =
+    Math.random() * 3 + "s";
 
-  el.style.animationDuration =
-    (8 + Math.random() * 8) + "s";
+  petal.style.transform =
+    `rotate(${Math.random()*360}deg)`;
 
-  el.style.animationDelay =
-    Math.random() * 2 + "s";
-
-  el.style.setProperty(
-    "--drift1",
-    (Math.random() * 160 - 80) + "px"
-  );
-
-  el.style.setProperty(
-    "--drift2",
-    (Math.random() * 220 - 110) + "px"
-  );
-
-  if(item.type === "heart"){
-
-    el.innerHTML = `
-      <svg viewBox="0 0 24 24"
-           width="100%"
-           height="100%">
-        <path
-          fill="${item.color}"
-          d="M12 21S3 15.4 3 8.7
-             C3 5.5 5.2 3.5 8 3.5
-             C9.7 3.5 11.2 4.4 12 5.8
-             C12.8 4.4 14.3 3.5 16 3.5
-             C18.8 3.5 21 5.5 21 8.7
-             C21 15.4 12 21 12 21Z"/>
-      </svg>
-    `;
-
-  }else{
-
-    el.innerHTML = `
-      <svg viewBox="0 0 100 100"
-           width="100%"
-           height="100%">
-        <g fill="${item.color}">
-          <circle cx="50" cy="50" r="20"/>
-          <circle cx="50" cy="20" r="18"/>
-          <circle cx="50" cy="80" r="18"/>
-          <circle cx="20" cy="50" r="18"/>
-          <circle cx="80" cy="50" r="18"/>
-        </g>
-      </svg>
-    `;
-
-  }
-
-  petalsContainer.appendChild(el);
+  petalsContainer.appendChild(petal);
 
   setTimeout(() => {
-    el.remove();
-  },18000);
-
+    petal.remove();
+  }, 16000);
 }
 
-if(
-  !window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches
-){
-
-  for(let i = 0; i < 15; i++){
-    setTimeout(createDecoration,i * 450);
-  }
-
-  setInterval(createDecoration,1200);
-
+for(let i=0;i<12;i++){
+  setTimeout(createPetal, i*450);
 }
 
+setInterval(createPetal, 850);
 
-/* =====================================================
+/* =========================
    COUNTDOWN
-===================================================== */
+========================= */
 
 const weddingDate =
-  new Date(
-    "2026-10-04T17:00:00+03:00"
-  ).getTime();
+  new Date("2026-10-04T17:00:00+03:00").getTime();
 
 function updateCountdown(){
 
@@ -1473,63 +1504,59 @@ function updateCountdown(){
 
   if(distance <= 0){
 
-    document.getElementById("days").textContent = "0";
-    document.getElementById("hours").textContent = "0";
-    document.getElementById("minutes").textContent = "0";
-    document.getElementById("seconds").textContent = "0";
+    document.getElementById("days").textContent = "00";
+    document.getElementById("hours").textContent = "00";
+    document.getElementById("minutes").textContent = "00";
+    document.getElementById("seconds").textContent = "00";
 
     return;
   }
 
   const days =
-    Math.floor(
-      distance /
-      (1000 * 60 * 60 * 24)
-    );
+    Math.floor(distance / (1000 * 60 * 60 * 24));
 
   const hours =
     Math.floor(
-      (distance %
-      (1000 * 60 * 60 * 24)) /
-      (1000 * 60 * 60)
+      (distance % (1000 * 60 * 60 * 24))
+      / (1000 * 60 * 60)
     );
 
   const minutes =
     Math.floor(
-      (distance %
-      (1000 * 60 * 60)) /
-      (1000 * 60)
+      (distance % (1000 * 60 * 60))
+      / (1000 * 60)
     );
 
   const seconds =
     Math.floor(
-      (distance %
-      (1000 * 60)) /
-      1000
+      (distance % (1000 * 60))
+      / 1000
     );
 
-  document.getElementById("days").textContent = days;
+  document.getElementById("days").textContent =
+    String(days).padStart(2,"0");
+
   document.getElementById("hours").textContent =
     String(hours).padStart(2,"0");
+
   document.getElementById("minutes").textContent =
     String(minutes).padStart(2,"0");
+
   document.getElementById("seconds").textContent =
     String(seconds).padStart(2,"0");
 
 }
 
 updateCountdown();
+
 setInterval(updateCountdown,1000);
 
-
-/* =====================================================
+/* =========================
    TOAST
-===================================================== */
+========================= */
 
 const toast =
   document.getElementById("toast");
-
-let toastTimer;
 
 function showToast(message){
 
@@ -1537,172 +1564,144 @@ function showToast(message){
 
   toast.classList.add("show");
 
-  clearTimeout(toastTimer);
-
-  toastTimer =
-    setTimeout(() => {
-      toast.classList.remove("show");
-    },2200);
-
+  setTimeout(() => {
+    toast.classList.remove("show");
+  },3000);
 }
 
+/* =========================
+   MAP BUTTONS
+========================= */
 
-/* =====================================================
-   GOOGLE MAPS
-===================================================== */
+document.querySelectorAll(".map-btn").forEach(button => {
 
-document.querySelectorAll(".map-btn")
-  .forEach(button => {
+  button.addEventListener("click", () => {
 
-    button.addEventListener("click",() => {
+    const url =
+      button.getAttribute("data-map-url");
 
-      const url =
-        button.getAttribute("data-map-url");
-
-      if(url){
-
-        window.open(
-          url,
-          "_blank",
-          "noopener"
-        );
-
-      }
-
-    });
+    if(url){
+      window.open(
+        url,
+        "_blank",
+        "noopener"
+      );
+    }
 
   });
 
+});
 
-/* =====================================================
-   CALENDAR
-===================================================== */
+/* =========================
+   CALENDAR DATA
+========================= */
 
 const calendarEvents = {
 
   henna:{
-    title:"Kerollos Gamal & Marina Ayman — Henna Night",
-    description:"Henna Night for Kerollos Gamal & Marina Ayman",
-    location:"Star Sky Hall, Shatea El Gaish, Al-Qiyadat St., Hurghada",
+    title:"Kerollos & Marina - Henna Night",
     start:"20261002T170000Z",
-    end:"20261002T200000Z"
+    end:"20261002T200000Z",
+    location:"Star Sky Hall, Shatea El Gaish, Al-Qiyadat St., Hurghada"
   },
 
   church:{
-    title:"Kerollos Gamal & Marina Ayman — Wedding Ceremony",
-    description:"Wedding Ceremony for Kerollos Gamal & Marina Ayman",
-    location:"Anba Shenouda, Head of the Hermits Church, Hurghada",
+    title:"Kerollos & Marina - Wedding Ceremony",
     start:"20261004T140000Z",
-    end:"20261004T150000Z"
+    end:"20261004T150000Z",
+    location:"Anba Shenouda, Head of the Hermits Church, Hurghada"
   },
 
   reception:{
-    title:"Kerollos Gamal & Marina Ayman — Wedding Reception",
-    description:"Wedding Reception for Kerollos Gamal & Marina Ayman",
-    location:"Gumana Hall, Al-Hijaz St., Hurghada",
+    title:"Kerollos & Marina - Wedding Reception",
     start:"20261004T160000Z",
-    end:"20261004T190000Z"
+    end:"20261004T190000Z",
+    location:"Gumana Hall, Al-Hijaz St., Hurghada"
   }
 
 };
 
-document.querySelectorAll(".calendar-btn")
-  .forEach(button => {
-
-    button.addEventListener("click",() => {
-
-      const type =
-        button.getAttribute("data-event");
-
-      const event =
-        calendarEvents[type];
-
-      if(!event) return;
-
-      const ics =
-`BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//Kerollos Gamal & Marina Ayman//Wedding//EN
-CALSCALE:GREGORIAN
-BEGIN:VEVENT
-UID:${type}-kerollos-marina-2026
-DTSTAMP:20260901T000000Z
-DTSTART:${event.start}
-DTEND:${event.end}
-SUMMARY:${event.title}
-DESCRIPTION:${event.description}
-LOCATION:${event.location}
-END:VEVENT
-END:VCALENDAR`;
-
-      const blob =
-        new Blob(
-          [ics],
-          {type:"text/calendar;charset=utf-8"}
-        );
-
-      const url =
-        URL.createObjectURL(blob);
-
-      const link =
-        document.createElement("a");
-
-      link.href = url;
-
-      link.download =
-        "Kerollos-Marina-" +
-        type +
-        ".ics";
-
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-
-      URL.revokeObjectURL(url);
-
-      showToast(
-        currentLanguage === "ar"
-          ? "تم تجهيز الموعد للتقويم"
-          : "Calendar event ready"
-      );
-
-    });
-
-  });
-
-
-/* =====================================================
+/* =========================
    GALLERY
-===================================================== */
+========================= */
 
 const gallery =
   document.getElementById("gallery");
 
-for(let i = 1; i <= 8; i++){
+for(let i=1;i<=8;i++){
 
-  const item =
-    document.createElement("div");
+  const img =
+    document.createElement("img");
 
-  item.className =
-    "gallery-item";
+  img.src =
+    `photos/${i}.jpg`;
 
-  item.innerHTML = `
-    <img
-      src="photos/${i}.jpg"
-      alt="Kerollos Gamal & Marina Ayman photo ${i}"
-      loading="lazy"
-      onerror="this.parentElement.style.display='none'">
-    <div class="gallery-heart">♡</div>
-  `;
+  img.alt =
+    `Wedding photo ${i}`;
 
-  gallery.appendChild(item);
+  img.loading =
+    "lazy";
+
+  img.addEventListener("error", () => {
+    img.remove();
+  });
+
+  gallery.appendChild(img);
+}
+
+/* =========================
+   LIGHTBOX
+========================= */
+
+const lightbox =
+  document.getElementById("lightbox");
+
+const lightboxImage =
+  document.getElementById("lightboxImage");
+
+const lightboxClose =
+  document.getElementById("lightboxClose");
+
+gallery.addEventListener("click", event => {
+
+  if(event.target.tagName !== "IMG"){
+    return;
+  }
+
+  lightboxImage.src =
+    event.target.src;
+
+  lightbox.classList.add("show");
+
+});
+
+function closeLightbox(){
+
+  lightbox.classList.remove("show");
+
+  lightboxImage.src = "";
 
 }
 
+lightboxClose.addEventListener(
+  "click",
+  closeLightbox
+);
 
-/* =====================================================
+lightbox.addEventListener(
+  "click",
+  event => {
+
+    if(event.target === lightbox){
+      closeLightbox();
+    }
+
+  }
+);
+
+/* =========================
    MUSIC
-===================================================== */
+========================= */
 
 const music =
   document.getElementById("weddingMusic");
@@ -1719,27 +1718,15 @@ function updateMusicButton(){
 
   if(musicPlaying){
 
-    musicToggle.textContent = "❚❚";
-    musicToggle.classList.add("playing");
+    musicToggle.textContent = "Ⅱ";
 
-    musicToggle.setAttribute(
-      "aria-label",
-      currentLanguage === "ar"
-        ? "إيقاف الموسيقى"
-        : "Pause music"
-    );
+    musicToggle.classList.add("playing");
 
   }else{
 
-    musicToggle.textContent = "▶";
-    musicToggle.classList.remove("playing");
+    musicToggle.textContent = "♫";
 
-    musicToggle.setAttribute(
-      "aria-label",
-      currentLanguage === "ar"
-        ? "تشغيل الموسيقى"
-        : "Play music"
-    );
+    musicToggle.classList.remove("playing");
 
   }
 
@@ -1747,17 +1734,24 @@ function updateMusicButton(){
 
 function updateMusicHint(){
 
+  if(!musicHint){
+    return;
+  }
+
+  const arabic =
+    document.body.classList.contains("arabic");
+
   if(musicPlaying){
 
     musicHint.textContent =
-      currentLanguage === "ar"
-        ? "♫ إيقاف الموسيقى"
-        : "♫ Pause Music";
+      arabic
+        ? "♫ الموسيقى تعمل"
+        : "♫ Music Playing";
 
   }else{
 
     musicHint.textContent =
-      currentLanguage === "ar"
+      arabic
         ? "♫ شغّل الموسيقى"
         : "♫ Play Music";
 
@@ -1765,111 +1759,72 @@ function updateMusicHint(){
 
 }
 
-music.addEventListener("play",() => {
+music.addEventListener("play", () => {
 
   musicPlaying = true;
 
   updateMusicButton();
   updateMusicHint();
 
-  musicHint.classList.add("hidden");
-
 });
 
-music.addEventListener("pause",() => {
+music.addEventListener("pause", () => {
 
   musicPlaying = false;
 
   updateMusicButton();
   updateMusicHint();
 
-  musicHint.classList.remove("hidden");
-
 });
 
-music.addEventListener("error",() => {
-
-  console.error(
-    "Music error:",
-    music.error
-  );
+music.addEventListener("error", () => {
 
   showToast(
-    currentLanguage === "ar"
-      ? "حدث خطأ أثناء تحميل الموسيقى"
-      : "There was an error loading the music"
+    document.body.classList.contains("arabic")
+      ? "تعذر تشغيل الموسيقى"
+      : "Unable to play the music"
   );
 
 });
 
 music.load();
 
-musicToggle.addEventListener(
-  "click",
-  async () => {
+musicToggle.addEventListener("click", async () => {
 
-    try{
+  try{
 
-      if(music.paused){
+    if(music.paused){
 
-        if(music.readyState === 0){
-          music.load();
-        }
-
-        await music.play();
-
-      }else{
-
-        music.pause();
-
+      if(music.readyState === 0){
+        music.load();
       }
 
-    }catch(error){
+      await music.play();
 
-      console.error(
-        "Music playback error:",
-        error
-      );
+    }else{
 
-      let message;
-
-      if(error.name === "NotAllowedError"){
-
-        message =
-          currentLanguage === "ar"
-            ? "اضغط على زر الموسيقى مرة أخرى لتشغيلها"
-            : "Tap the music button again to play";
-
-      }else if(error.name === "NotSupportedError"){
-
-        message =
-          currentLanguage === "ar"
-            ? "المتصفح لا يستطيع تشغيل صيغة ملف الموسيقى"
-            : "This browser cannot play this audio format";
-
-      }else{
-
-        message =
-          currentLanguage === "ar"
-            ? "حدث خطأ أثناء تشغيل الموسيقى"
-            : "There was an error playing the music";
-
-      }
-
-      showToast(message);
+      music.pause();
 
     }
 
+  }catch(error){
+
+    showToast(
+      document.body.classList.contains("arabic")
+        ? "اضغط مرة أخرى لتشغيل الموسيقى"
+        : "Tap again to play the music"
+    );
+
   }
-);
+
+});
 
 updateMusicButton();
 updateMusicHint();
 
-
-/* =====================================================
-   INITIALIZE
-===================================================== */
+/* =========================
+   FINAL INIT
+========================= */
 
 updateLanguage();
 
