@@ -1909,6 +1909,70 @@ function updateMusicHint(){
 
   }else{
 
+/* =====================================================
+   MUSIC
+===================================================== */
+
+const music =
+  document.getElementById("weddingMusic");
+
+const musicToggle =
+  document.getElementById("musicToggle");
+
+const musicHint =
+  document.getElementById("musicHint");
+
+let musicPlaying = false;
+
+
+/* Update button */
+
+function updateMusicButton(){
+
+  if(musicPlaying){
+
+    musicToggle.textContent = "❚❚";
+
+    musicToggle.classList.add("playing");
+
+    musicToggle.setAttribute(
+      "aria-label",
+      currentLanguage === "ar"
+        ? "إيقاف الموسيقى"
+        : "Pause music"
+    );
+
+  }else{
+
+    musicToggle.textContent = "▶";
+
+    musicToggle.classList.remove("playing");
+
+    musicToggle.setAttribute(
+      "aria-label",
+      currentLanguage === "ar"
+        ? "تشغيل الموسيقى"
+        : "Play music"
+    );
+
+  }
+
+}
+
+
+/* Update hint */
+
+function updateMusicHint(){
+
+  if(musicPlaying){
+
+    musicHint.textContent =
+      currentLanguage === "ar"
+        ? "♫ إيقاف الموسيقى"
+        : "♫ Pause Music";
+
+  }else{
+
     musicHint.textContent =
       currentLanguage === "ar"
         ? "♫ شغّل الموسيقى"
@@ -1918,6 +1982,56 @@ function updateMusicHint(){
 
 }
 
+
+/* Music events */
+
+music.addEventListener("play", () => {
+
+  musicPlaying = true;
+
+  updateMusicButton();
+  updateMusicHint();
+
+  musicHint.classList.add("hidden");
+
+});
+
+
+music.addEventListener("pause", () => {
+
+  musicPlaying = false;
+
+  updateMusicButton();
+  updateMusicHint();
+
+  musicHint.classList.remove("hidden");
+
+});
+
+
+music.addEventListener("error", () => {
+
+  console.error(
+    "Music error:",
+    music.error
+  );
+
+  showToast(
+    currentLanguage === "ar"
+      ? "حدث خطأ أثناء تحميل الموسيقى"
+      : "There was an error loading the music"
+  );
+
+});
+
+
+/* Load music */
+
+music.load();
+
+
+/* Play / Pause button */
+
 musicToggle.addEventListener(
   "click",
   async () => {
@@ -1926,42 +2040,58 @@ musicToggle.addEventListener(
 
       if(music.paused){
 
-        await music.play();
+        /*
+          Make sure the audio is loaded
+          before attempting playback.
+        */
 
-        musicPlaying = true;
+        if(music.readyState === 0){
+
+          music.load();
+
+        }
+
+        await music.play();
 
       }else{
 
         music.pause();
 
-        musicPlaying = false;
-
-      }
-
-      updateMusicButton();
-      updateMusicHint();
-
-      if(musicPlaying){
-
-        musicHint.classList.add(
-          "hidden"
-        );
-
-      }else{
-
-        musicHint.classList.remove(
-          "hidden"
-        );
-
       }
 
     }catch(error){
 
-      showToast(
-        currentLanguage === "ar"
-          ? "تأكد من وجود ملف music.mp3 داخل مجلد photos"
-          : "Make sure music.mp3 is inside the photos folder"
+      console.error(
+        "Music playback error:",
+        error
       );
+
+      let message;
+
+      if(error.name === "NotAllowedError"){
+
+        message =
+          currentLanguage === "ar"
+            ? "اضغط على زر الموسيقى مرة أخرى لتشغيلها"
+            : "Tap the music button again to play";
+
+      }else if(error.name === "NotSupportedError"){
+
+        message =
+          currentLanguage === "ar"
+            ? "المتصفح لا يستطيع تشغيل صيغة ملف الموسيقى"
+            : "This browser cannot play this audio format";
+
+      }else{
+
+        message =
+          currentLanguage === "ar"
+            ? "حدث خطأ أثناء تشغيل الموسيقى"
+            : "There was an error playing the music";
+
+      }
+
+      showToast(message);
 
     }
 
@@ -1969,6 +2099,10 @@ musicToggle.addEventListener(
 );
 
 
+/* Initial state */
+
+updateMusicButton();
+updateMusicHint();
 /* =====================================================
    INITIALIZE
 ===================================================== */
