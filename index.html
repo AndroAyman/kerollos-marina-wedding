@@ -141,8 +141,6 @@ button{
   backdrop-filter:blur(10px);
 }
 
-/* Language */
-
 .lang-btn{
   height:44px;
   min-width:76px;
@@ -158,8 +156,6 @@ button{
   background:var(--pink-dark);
   color:white;
 }
-
-/* Music */
 
 .music-wrapper{
   position:relative;
@@ -872,8 +868,6 @@ body.arabic .invite-text{
   }
 }
 
-/* Reduced motion */
-
 @media(prefers-reduced-motion:reduce){
   *,
   *::before,
@@ -888,10 +882,6 @@ body.arabic .invite-text{
 </head>
 
 <body>
-
-<!-- =========================
-     TOP CONTROLS
-========================= -->
 
 <div class="top-controls">
 
@@ -920,16 +910,11 @@ body.arabic .invite-text{
 
 </div>
 
-<!-- Local wedding music -->
 <audio id="weddingMusic" loop preload="auto">
   <source src="photos/music.mp3" type="audio/mpeg">
 </audio>
 
 <div id="petals"></div>
-
-<!-- =========================
-     HERO
-========================= -->
 
 <header class="hero">
 
@@ -947,9 +932,9 @@ body.arabic .invite-text{
     </div>
 
     <div class="couple-names">
-      <span>Kerollos</span>
+      <span>Kerollos Gamal</span>
       <span class="amp">&</span>
-      <span>Marina</span>
+      <span>Marina Ayman</span>
     </div>
 
     <div class="date-line">
@@ -971,38 +956,22 @@ body.arabic .invite-text{
 
       <div class="time-box">
         <span class="time-number" id="days">--</span>
-        <span class="time-label"
-              data-en="Days"
-              data-ar="يوم">
-          Days
-        </span>
+        <span class="time-label" data-en="Days" data-ar="يوم">Days</span>
       </div>
 
       <div class="time-box">
         <span class="time-number" id="hours">--</span>
-        <span class="time-label"
-              data-en="Hours"
-              data-ar="ساعة">
-          Hours
-        </span>
+        <span class="time-label" data-en="Hours" data-ar="ساعة">Hours</span>
       </div>
 
       <div class="time-box">
         <span class="time-number" id="minutes">--</span>
-        <span class="time-label"
-              data-en="Minutes"
-              data-ar="دقيقة">
-          Minutes
-        </span>
+        <span class="time-label" data-en="Minutes" data-ar="دقيقة">Minutes</span>
       </div>
 
       <div class="time-box">
         <span class="time-number" id="seconds">--</span>
-        <span class="time-label"
-              data-en="Seconds"
-              data-ar="ثانية">
-          Seconds
-        </span>
+        <span class="time-label" data-en="Seconds" data-ar="ثانية">Seconds</span>
       </div>
 
     </div>
@@ -1022,18 +991,25 @@ body.arabic .invite-text{
     <div class="verse-mark">♡</div>
 
     <div class="verse"
-         data-en="“Two hearts, one journey, one beautiful beginning.”"
-         data-ar="«قلبان، رحلة واحدة، وبداية جميلة تجمعهما.»">
-      “Two hearts, one journey, one beautiful beginning.”
+         data-en="“Love is patient, love is kind. It always protects, always trusts, always hopes, always perseveres.”"
+         data-ar="«المحبة تتأنى وترفق. المحبة لا تسقط أبدًا، وتحمي دائمًا، وتثق دائمًا، وترجو دائمًا، وتصبر دائمًا.»">
+      “Love is patient, love is kind. It always protects, always trusts, always hopes, always perseveres.”
+    </div>
+
+    <div style="
+      text-align:center;
+      margin-top:15px;
+      color:var(--pink-dark);
+      font-family:'Cormorant Garamond',serif;
+      font-size:16px;
+      font-weight:600;
+    ">
+      1 Corinthians 13
     </div>
 
   </div>
 
 </section>
-
-<!-- =========================
-     EVENTS
-========================= -->
 
 <section>
 
@@ -1052,8 +1028,6 @@ body.arabic .invite-text{
     </p>
 
     <div class="events">
-
-      <!-- HENNA -->
 
       <article class="event-card">
 
@@ -1105,8 +1079,6 @@ body.arabic .invite-text{
 
       </article>
 
-      <!-- CHURCH -->
-
       <article class="event-card">
 
         <div class="event-icon">♡</div>
@@ -1156,8 +1128,6 @@ body.arabic .invite-text{
         </div>
 
       </article>
-
-      <!-- RECEPTION -->
 
       <article class="event-card">
 
@@ -1215,10 +1185,6 @@ body.arabic .invite-text{
 
 </section>
 
-<!-- =========================
-     MAP
-========================= -->
-
 <section class="map-section">
 
   <div class="section-inner">
@@ -1239,13 +1205,7 @@ body.arabic .invite-text{
 
       <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
 
-        <rect
-          x="0"
-          y="0"
-          width="300"
-          height="220"
-          rx="20"
-          fill="#fff9f5"/>
+        <rect x="0" y="0" width="300" height="220" rx="20" fill="#fff9f5"/>
 
         <path class="map-road" d="M10 45 C70 70 100 40 145 60 S220 95 290 60"/>
         <path class="map-road" d="M20 170 C70 145 100 180 150 155 S220 120 285 145"/>
@@ -1253,7 +1213,6 @@ body.arabic .invite-text{
         <path class="map-road thin" d="M190 5 C180 55 205 90 195 145 S210 190 235 215"/>
         <path class="map-road thin" d="M5 105 C80 100 110 110 160 105 S230 100 295 108"/>
 
-        <!-- Henna -->
         <g class="map-pin map-btn"
            data-map-url="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac"
            transform="translate(70,150)">
@@ -1261,7 +1220,6 @@ body.arabic .invite-text{
           <text text-anchor="middle" y="4">H</text>
         </g>
 
-        <!-- Church -->
         <g class="map-pin map-btn"
            data-map-url="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac"
            transform="translate(150,80)">
@@ -1269,7 +1227,6 @@ body.arabic .invite-text{
           <text text-anchor="middle" y="4">C</text>
         </g>
 
-        <!-- Reception -->
         <g class="map-pin map-btn"
            data-map-url="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac"
            transform="translate(230,120)">
@@ -1284,10 +1241,6 @@ body.arabic .invite-text{
   </div>
 
 </section>
-
-<!-- =========================
-     GALLERY
-========================= -->
 
 <section>
 
@@ -1311,10 +1264,6 @@ body.arabic .invite-text{
 
 </section>
 
-<!-- =========================
-     FOOTER
-========================= -->
-
 <footer>
 
   <div
@@ -1324,7 +1273,7 @@ body.arabic .invite-text{
   </div>
 
   <div style="margin-top:8px;color:var(--pink-dark);">
-    Kerollos & Marina
+    Kerollos Gamal & Marina Ayman
   </div>
 
 </footer>
@@ -1337,31 +1286,35 @@ body.arabic .invite-text{
    LANGUAGE
 ===================================================== */
 
-let currentLanguage = localStorage.getItem("weddingLanguage") || "en";
+let currentLanguage =
+  localStorage.getItem("weddingLanguage") || "en";
 
-const languageToggle = document.getElementById("languageToggle");
+const languageToggle =
+  document.getElementById("languageToggle");
 
 function updateLanguage(){
 
-  document.documentElement.lang = currentLanguage;
+  document.documentElement.lang =
+    currentLanguage;
 
   document.body.classList.toggle(
     "arabic",
     currentLanguage === "ar"
   );
 
-  document.querySelectorAll("[data-en]").forEach(element => {
+  document.querySelectorAll("[data-en]")
+    .forEach(element => {
 
-    const text =
-      currentLanguage === "ar"
-        ? element.getAttribute("data-ar")
-        : element.getAttribute("data-en");
+      const text =
+        currentLanguage === "ar"
+          ? element.getAttribute("data-ar")
+          : element.getAttribute("data-en");
 
-    if(text !== null){
-      element.textContent = text;
-    }
+      if(text !== null){
+        element.textContent = text;
+      }
 
-  });
+    });
 
   languageToggle.textContent =
     currentLanguage === "en"
@@ -1397,32 +1350,11 @@ const petalsContainer =
   document.getElementById("petals");
 
 const decorations = [
-
-  {
-    type:"heart",
-    color:"#E8A9B5"
-  },
-
-  {
-    type:"heart",
-    color:"#C9788B"
-  },
-
-  {
-    type:"flower",
-    color:"#F2C3CC"
-  },
-
-  {
-    type:"flower",
-    color:"#E8A9B5"
-  },
-
-  {
-    type:"heart",
-    color:"#F3D0D6"
-  }
-
+  {type:"heart",color:"#E8A9B5"},
+  {type:"heart",color:"#C9788B"},
+  {type:"flower",color:"#F2C3CC"},
+  {type:"flower",color:"#E8A9B5"},
+  {type:"heart",color:"#F3D0D6"}
 ];
 
 function createDecoration(){
@@ -1503,7 +1435,7 @@ function createDecoration(){
 
   setTimeout(() => {
     el.remove();
-  }, 18000);
+  },18000);
 
 }
 
@@ -1514,18 +1446,10 @@ if(
 ){
 
   for(let i = 0; i < 15; i++){
-
-    setTimeout(
-      createDecoration,
-      i * 450
-    );
-
+    setTimeout(createDecoration,i * 450);
   }
 
-  setInterval(
-    createDecoration,
-    1200
-  );
+  setInterval(createDecoration,1200);
 
 }
 
@@ -1584,26 +1508,18 @@ function updateCountdown(){
       1000
     );
 
-  document.getElementById("days")
-    .textContent = days;
-
-  document.getElementById("hours")
-    .textContent = String(hours).padStart(2,"0");
-
-  document.getElementById("minutes")
-    .textContent = String(minutes).padStart(2,"0");
-
-  document.getElementById("seconds")
-    .textContent = String(seconds).padStart(2,"0");
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent =
+    String(hours).padStart(2,"0");
+  document.getElementById("minutes").textContent =
+    String(minutes).padStart(2,"0");
+  document.getElementById("seconds").textContent =
+    String(seconds).padStart(2,"0");
 
 }
 
 updateCountdown();
-
-setInterval(
-  updateCountdown,
-  1000
-);
+setInterval(updateCountdown,1000);
 
 
 /* =====================================================
@@ -1625,10 +1541,8 @@ function showToast(message){
 
   toastTimer =
     setTimeout(() => {
-
       toast.classList.remove("show");
-
-    }, 2200);
+    },2200);
 
 }
 
@@ -1640,7 +1554,7 @@ function showToast(message){
 document.querySelectorAll(".map-btn")
   .forEach(button => {
 
-    button.addEventListener("click", () => {
+    button.addEventListener("click",() => {
 
       const url =
         button.getAttribute("data-map-url");
@@ -1666,25 +1580,25 @@ document.querySelectorAll(".map-btn")
 
 const calendarEvents = {
 
-  henna: {
-    title:"Kerollos & Marina — Henna Night",
-    description:"Henna Night for Kerollos & Marina",
+  henna:{
+    title:"Kerollos Gamal & Marina Ayman — Henna Night",
+    description:"Henna Night for Kerollos Gamal & Marina Ayman",
     location:"Star Sky Hall, Shatea El Gaish, Al-Qiyadat St., Hurghada",
     start:"20261002T170000Z",
     end:"20261002T200000Z"
   },
 
-  church: {
-    title:"Kerollos & Marina — Wedding Ceremony",
-    description:"Wedding Ceremony for Kerollos & Marina",
+  church:{
+    title:"Kerollos Gamal & Marina Ayman — Wedding Ceremony",
+    description:"Wedding Ceremony for Kerollos Gamal & Marina Ayman",
     location:"Anba Shenouda, Head of the Hermits Church, Hurghada",
     start:"20261004T140000Z",
     end:"20261004T150000Z"
   },
 
-  reception: {
-    title:"Kerollos & Marina — Wedding Reception",
-    description:"Wedding Reception for Kerollos & Marina",
+  reception:{
+    title:"Kerollos Gamal & Marina Ayman — Wedding Reception",
+    description:"Wedding Reception for Kerollos Gamal & Marina Ayman",
     location:"Gumana Hall, Al-Hijaz St., Hurghada",
     start:"20261004T160000Z",
     end:"20261004T190000Z"
@@ -1695,7 +1609,7 @@ const calendarEvents = {
 document.querySelectorAll(".calendar-btn")
   .forEach(button => {
 
-    button.addEventListener("click", () => {
+    button.addEventListener("click",() => {
 
       const type =
         button.getAttribute("data-event");
@@ -1708,7 +1622,7 @@ document.querySelectorAll(".calendar-btn")
       const ics =
 `BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Kerollos & Marina//Wedding//EN
+PRODID:-//Kerollos Gamal & Marina Ayman//Wedding//EN
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
 UID:${type}-kerollos-marina-2026
@@ -1734,15 +1648,14 @@ END:VCALENDAR`;
         document.createElement("a");
 
       link.href = url;
+
       link.download =
         "Kerollos-Marina-" +
         type +
         ".ics";
 
       document.body.appendChild(link);
-
       link.click();
-
       link.remove();
 
       URL.revokeObjectURL(url);
@@ -1776,7 +1689,7 @@ for(let i = 1; i <= 8; i++){
   item.innerHTML = `
     <img
       src="photos/${i}.jpg"
-      alt="Kerollos & Marina photo ${i}"
+      alt="Kerollos Gamal & Marina Ayman photo ${i}"
       loading="lazy"
       onerror="this.parentElement.style.display='none'">
     <div class="gallery-heart">♡</div>
@@ -1788,66 +1701,6 @@ for(let i = 1; i <= 8; i++){
 
 
 /* =====================================================
-   SHARE
-===================================================== */
-
-const shareButton =
-  document.getElementById("shareBtn");
-
-if(shareButton){
-
-  shareButton.addEventListener(
-    "click",
-    async () => {
-
-      const shareData = {
-
-        title:"Kerollos & Marina",
-
-        text:
-          currentLanguage === "ar"
-            ? "Kerollos & Marina — دعوة الزفاف"
-            : "Kerollos & Marina — Wedding Invitation",
-
-        url:window.location.href
-
-      };
-
-      try{
-
-        if(navigator.share){
-
-          await navigator.share(
-            shareData
-          );
-
-        }else{
-
-          await navigator.clipboard.writeText(
-            window.location.href
-          );
-
-          showToast(
-            currentLanguage === "ar"
-              ? "تم نسخ رابط الدعوة"
-              : "Invitation link copied"
-          );
-
-        }
-
-      }catch(error){
-
-        /* User closed the share window */
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =====================================================
    MUSIC
 ===================================================== */
 
@@ -1867,72 +1720,6 @@ function updateMusicButton(){
   if(musicPlaying){
 
     musicToggle.textContent = "❚❚";
-
-    musicToggle.classList.add(
-      "playing"
-    );
-
-    musicToggle.setAttribute(
-      "aria-label",
-      currentLanguage === "ar"
-        ? "إيقاف الموسيقى"
-        : "Pause music"
-    );
-
-  }else{
-
-    musicToggle.textContent = "▶";
-
-    musicToggle.classList.remove(
-      "playing"
-    );
-
-    musicToggle.setAttribute(
-      "aria-label",
-      currentLanguage === "ar"
-        ? "تشغيل الموسيقى"
-        : "Play music"
-    );
-
-  }
-
-}
-
-function updateMusicHint(){
-
-  if(musicPlaying){
-
-    musicHint.textContent =
-      currentLanguage === "ar"
-        ? "♫ إيقاف الموسيقى"
-        : "♫ Pause Music";
-
-  }else{
-
-/* =====================================================
-   MUSIC
-===================================================== */
-
-const music =
-  document.getElementById("weddingMusic");
-
-const musicToggle =
-  document.getElementById("musicToggle");
-
-const musicHint =
-  document.getElementById("musicHint");
-
-let musicPlaying = false;
-
-
-/* Update button */
-
-function updateMusicButton(){
-
-  if(musicPlaying){
-
-    musicToggle.textContent = "❚❚";
-
     musicToggle.classList.add("playing");
 
     musicToggle.setAttribute(
@@ -1945,7 +1732,6 @@ function updateMusicButton(){
   }else{
 
     musicToggle.textContent = "▶";
-
     musicToggle.classList.remove("playing");
 
     musicToggle.setAttribute(
@@ -1958,9 +1744,6 @@ function updateMusicButton(){
   }
 
 }
-
-
-/* Update hint */
 
 function updateMusicHint(){
 
@@ -1982,10 +1765,7 @@ function updateMusicHint(){
 
 }
 
-
-/* Music events */
-
-music.addEventListener("play", () => {
+music.addEventListener("play",() => {
 
   musicPlaying = true;
 
@@ -1996,8 +1776,7 @@ music.addEventListener("play", () => {
 
 });
 
-
-music.addEventListener("pause", () => {
+music.addEventListener("pause",() => {
 
   musicPlaying = false;
 
@@ -2008,8 +1787,7 @@ music.addEventListener("pause", () => {
 
 });
 
-
-music.addEventListener("error", () => {
+music.addEventListener("error",() => {
 
   console.error(
     "Music error:",
@@ -2024,13 +1802,7 @@ music.addEventListener("error", () => {
 
 });
 
-
-/* Load music */
-
 music.load();
-
-
-/* Play / Pause button */
 
 musicToggle.addEventListener(
   "click",
@@ -2040,15 +1812,8 @@ musicToggle.addEventListener(
 
       if(music.paused){
 
-        /*
-          Make sure the audio is loaded
-          before attempting playback.
-        */
-
         if(music.readyState === 0){
-
           music.load();
-
         }
 
         await music.play();
@@ -2098,18 +1863,15 @@ musicToggle.addEventListener(
   }
 );
 
-
-/* Initial state */
-
 updateMusicButton();
 updateMusicHint();
+
+
 /* =====================================================
    INITIALIZE
 ===================================================== */
 
 updateLanguage();
-updateMusicButton();
-updateMusicHint();
 
 </script>
 
