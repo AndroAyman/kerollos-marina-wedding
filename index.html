@@ -3,45 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#3b281e">
 
-<title>Kerollos & Marina | Wedding Invitation</title>
+<title>Kerollos & Marina</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
-/* =========================================================
-   VARIABLES
-========================================================= */
-
 :root{
-    --brown-dark:#241811;
-    --brown:#3a261b;
-    --brown-light:#624635;
-
-    --cream:#f7f0e3;
-    --cream-light:#fcf8ef;
-
-    --gold:#b9914f;
-    --gold-light:#d8bd83;
-    --gold-dark:#86652e;
-
-    --black:#16110e;
-    --text:#2a211c;
-
-    --white:#ffffff;
-
-    --shadow:0 20px 60px rgba(0,0,0,.25);
+    --gold:#b89055;
+    --gold-light:#d6b47a;
+    --cream:#f8f3eb;
+    --paper:#f7f1e7;
+    --brown:#4a3425;
+    --dark:#17120f;
+    --green:#596f56;
 }
-
-
-/* =========================================================
-   RESET
-========================================================= */
 
 *{
     margin:0;
@@ -54,69 +34,120 @@ html{
 }
 
 body{
-    background:var(--cream);
-    color:var(--text);
-    font-family:"Cormorant Garamond",serif;
+    background:#f4eee5;
+    color:var(--brown);
+    font-family:"Montserrat",sans-serif;
     overflow-x:hidden;
 }
 
-body.locked{
-    overflow:hidden;
-}
-
-button,
-input,
-textarea{
-    font-family:inherit;
-}
-
-
-/* =========================================================
+/* =========================
    LANGUAGE
-========================================================= */
+========================= */
 
-.language-switch{
-    position:fixed;
-    top:22px;
-    right:22px;
-    z-index:10000;
+body.arabic{
+    direction:rtl;
 }
 
-.language-switch button{
-    border:1px solid rgba(255,255,255,.55);
-    background:rgba(20,13,9,.72);
-    color:#fff;
-    padding:9px 17px;
-    border-radius:3px;
+body.arabic .english-only{
+    display:none !important;
+}
 
-    font-family:"Cinzel",serif;
-    font-size:11px;
-    letter-spacing:2px;
+body:not(.arabic) .arabic-only{
+    display:none !important;
+}
+
+/* =========================
+   LANGUAGE SWITCH
+========================= */
+
+.lang-switch{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:10000;
+
+    display:flex;
+    gap:5px;
+
+    background:rgba(255,255,255,.88);
+    border:1px solid rgba(184,144,85,.35);
+    border-radius:30px;
+    padding:5px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.12);
+}
+
+.lang-switch button{
+    border:none;
+    background:transparent;
+
+    padding:7px 12px;
+
+    border-radius:20px;
 
     cursor:pointer;
-    backdrop-filter:blur(8px);
 
+    font-size:11px;
+    letter-spacing:1px;
+
+    color:#755b42;
     transition:.3s;
 }
 
-.language-switch button:hover{
+.lang-switch button.active{
     background:var(--gold);
-    color:#17100c;
+    color:white;
 }
 
+/* =========================
+   MUSIC
+========================= */
 
-/* =========================================================
+.music-control{
+    position:fixed;
+    top:20px;
+    left:20px;
+    z-index:10000;
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+    border:1px solid rgba(184,144,85,.5);
+
+    background:rgba(255,255,255,.88);
+
+    color:var(--gold);
+
+    cursor:pointer;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.12);
+
+    font-size:17px;
+}
+
+/* =========================
    OPENING SCREEN
-========================================================= */
+========================= */
 
 .opening{
     position:fixed;
     inset:0;
+
     z-index:9000;
 
     background:
-        radial-gradient(circle at center, rgba(140,100,60,.22), transparent 45%),
-        linear-gradient(135deg,#251710,#3c281c 50%,#1c120d);
+        radial-gradient(
+            circle at center,
+            rgba(255,255,255,.38),
+            transparent 45%
+        ),
+        linear-gradient(
+            135deg,
+            #e9dfd0,
+            #d9c7ae 50%,
+            #cbb79a
+        );
 
     display:flex;
     align-items:center;
@@ -131,497 +162,444 @@ textarea{
     touch-action:none;
 }
 
+.opening::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,255,255,.3),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(120,85,50,.08),
+            transparent 35%
+        );
+
+    opacity:.75;
+
+    pointer-events:none;
+}
+
 .opening.hidden{
     opacity:0;
     visibility:hidden;
-    pointer-events:none;
 }
 
-.opening::before{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    background-image:
-        radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
-
-    background-size:5px 5px;
-    opacity:.15;
-}
-
-
-/* =========================================================
+/* =========================
    OPENING CONTENT
-========================================================= */
+========================= */
 
 .opening-content{
     position:relative;
-    z-index:2;
 
     width:min(92vw,520px);
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+    height:100%;
 
-    text-align:center;
-
-    transition:
-        transform .8s ease,
-        opacity .8s ease;
-}
-
-.coming-title{
-    color:#f6ead5;
-
-    font-family:"Cinzel",serif;
-    font-size:clamp(17px,4vw,25px);
-    letter-spacing:5px;
-    line-height:1.6;
-
-    margin-bottom:28px;
-
-    text-shadow:0 3px 20px rgba(0,0,0,.5);
-}
-
-.ornament{
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:13px;
 
-    color:var(--gold-light);
+    flex-direction:column;
 
-    margin:14px 0;
+    z-index:2;
 }
 
-.ornament::before,
-.ornament::after{
-    content:"";
-    width:70px;
-    height:1px;
-    background:linear-gradient(
-        to right,
-        transparent,
-        var(--gold)
-    );
+/* =========================
+   TITLE
+========================= */
+
+.coming-title{
+    position:absolute;
+
+    top:12%;
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:15px;
+
+    letter-spacing:5px;
+
+    color:#4a3425;
+
+    text-align:center;
+
+    text-shadow:0 2px 10px rgba(255,255,255,.4);
+
+    opacity:1;
+
+    transition:opacity .6s ease;
 }
 
-.ornament::after{
-    background:linear-gradient(
-        to left,
-        transparent,
-        var(--gold)
-    );
+.tap-open{
+    position:absolute;
+
+    bottom:13%;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    color:#4a3425;
+
+    text-align:center;
+
+    opacity:1;
+
+    transition:opacity .6s ease;
 }
 
-.ornament span{
-    font-size:18px;
-}
-
-
-/* =========================================================
+/* =========================
    ENVELOPE
-========================================================= */
+========================= */
 
-.envelope-area{
+.envelope{
     position:relative;
 
-    width:min(82vw,390px);
-    height:min(58vw,270px);
+    width:min(84vw,430px);
+    aspect-ratio:1.55;
 
-    perspective:1200px;
+    background:
+        linear-gradient(
+            145deg,
+            #754b31,
+            #5b3926
+        );
+
+    border-radius:4px;
+
+    box-shadow:
+        0 25px 55px rgba(63,39,24,.35),
+        0 5px 15px rgba(0,0,0,.15);
 
     cursor:pointer;
 
-    filter:drop-shadow(0 30px 30px rgba(0,0,0,.45));
+    transform:translateY(0);
 
     transition:
-        transform .8s cubic-bezier(.16,1,.3,1);
+        transform 1.2s cubic-bezier(.22,1,.36,1),
+        box-shadow 1s ease;
+
+    z-index:5;
+
+    overflow:visible;
 }
 
-.envelope{
+.envelope:hover{
+    transform:translateY(-5px);
+}
+
+.envelope-back{
     position:absolute;
     inset:0;
 
     background:
         linear-gradient(
             145deg,
-            #6a4b37,
-            #4a3021 48%,
-            #362116
+            #805438,
+            #593925
         );
 
-    border-radius:3px;
-
-    box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,.08),
-        inset 0 0 30px rgba(0,0,0,.25);
-}
-
-.envelope-paper{
-    position:absolute;
-
-    left:7%;
-    right:7%;
-
-    bottom:7%;
-
-    height:76%;
-
-    background:
-        linear-gradient(
-            180deg,
-            #fffdf8,
-            #f7f0e3
-        );
-
-    border-radius:2px;
+    border-radius:4px;
 
     z-index:1;
-
-    transform:
-        translateY(15px);
-
-    box-shadow:
-        0 8px 20px rgba(0,0,0,.25);
-
-    overflow:hidden;
-
-    transition:
-        transform .15s linear,
-        height .15s linear;
 }
 
-.envelope-paper::before{
-    content:"";
-
-    position:absolute;
-    inset:9px;
-
-    border:1px solid rgba(185,145,79,.45);
-
-    pointer-events:none;
-}
+/* =========================
+   ENVELOPE FLAP
+========================= */
 
 .envelope-flap{
     position:absolute;
-    z-index:4;
 
-    left:0;
     top:0;
+    left:0;
 
     width:100%;
-    height:100%;
+    height:58%;
 
     background:
         linear-gradient(
             145deg,
-            #75533b,
-            #4c3223
+            #8b5a3a,
+            #69432c
         );
 
     clip-path:polygon(
         0 0,
         100% 0,
-        50% 60%
+        50% 100%
     );
 
     transform-origin:top center;
 
-    transition:
-        transform 1.2s cubic-bezier(.2,.75,.2,1);
+    z-index:7;
 
-    filter:brightness(.95);
+    transition:
+        transform 1.1s cubic-bezier(.77,0,.18,1);
 }
 
-.envelope-bottom{
-    position:absolute;
-    z-index:3;
+/* =========================
+   ENVELOPE FRONT
+========================= */
 
-    inset:0;
+.envelope-front{
+    position:absolute;
+
+    bottom:0;
+    left:0;
+
+    width:100%;
+    height:67%;
 
     background:
         linear-gradient(
-            155deg,
-            transparent 49%,
-            #5a3d2a 50%,
-            #422a1c 100%
+            145deg,
+            #74492f,
+            #583723
         );
 
     clip-path:polygon(
-        0 100%,
+        0 0,
+        50% 62%,
+        100% 0,
         100% 100%,
-        50% 45%
+        0 100%
     );
 
+    z-index:8;
+}
+
+/* =========================
+   WAX SEAL
+========================= */
+
+.wax-seal{
+    position:absolute;
+
+    z-index:10;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:76px;
+    height:76px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #2a211c,
+            #0d0b09 65%,
+            #000
+        );
+
+    border:3px solid #0a0908;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.45),
+        inset 0 0 0 2px rgba(255,255,255,.08);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:
+        transform 1s ease,
+        opacity .7s ease;
+
     pointer-events:none;
 }
 
-.envelope-left,
-.envelope-right{
+.wax-seal::before{
+    content:"";
+
     position:absolute;
-    inset:0;
+    inset:6px;
 
-    z-index:3;
+    border:1px solid var(--gold);
 
-    pointer-events:none;
+    border-radius:50%;
+
+    opacity:.9;
 }
 
-.envelope-left{
-    clip-path:polygon(0 0,50% 50%,0 100%);
-    background:rgba(35,21,14,.28);
+.wax-logo{
+    color:var(--gold-light);
+
+    font-family:"Great Vibes",cursive;
+
+    font-size:33px;
+
+    transform:rotate(-8deg);
+
+    position:relative;
+
+    z-index:2;
 }
 
-.envelope-right{
-    clip-path:polygon(100% 0,50% 50%,100% 100%);
-    background:rgba(35,21,14,.38);
+.wax-logo span{
+    margin-left:-9px;
 }
 
+/* =========================
+   LETTER
+========================= */
 
-/* =========================================================
-   LETTER CONTENT
-========================================================= */
-
-.letter-content{
+.letter{
     position:absolute;
 
-    top:34px;
-    left:22px;
-    right:22px;
+    left:50%;
+
+    bottom:0;
+
+    width:84%;
+
+    min-height:78%;
+
+    transform:
+        translateX(-50%)
+        translateY(62%);
+
+    background:
+        linear-gradient(
+            135deg,
+            #faf6ee,
+            #eee4d5
+        );
+
+    border-radius:2px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.18);
+
+    z-index:4;
+
+    padding:45px 25px 30px;
 
     text-align:center;
 
-    color:#2a211c;
-
-    opacity:0;
-
-    transform:
-        translateY(35px);
-
     transition:
-        opacity .8s ease,
-        transform .8s cubic-bezier(.16,1,.3,1);
+        transform .25s linear,
+        height .25s linear;
 }
 
-.letter-line{
-    width:45px;
-    height:1px;
+.letter-inner{
+    border:1px solid rgba(184,144,85,.4);
 
-    background:var(--gold);
+    min-height:100%;
 
-    margin:0 auto 17px;
+    padding:28px 15px;
 
-    transform:scaleX(0);
+    display:flex;
+    flex-direction:column;
 
-    transform-origin:center;
-
-    transition:
-        transform .8s cubic-bezier(.16,1,.3,1);
+    justify-content:center;
+    align-items:center;
 }
 
 .letter-small{
-    font-family:"Cinzel",serif;
-
-    font-size:8px;
-
-    letter-spacing:3px;
-
-    color:var(--gold-dark);
-
-    margin-bottom:13px;
-}
-
-.letter-names{
-    font-family:"Great Vibes",cursive;
-
-    font-size:42px;
-
-    line-height:1;
-
-    white-space:nowrap;
-
-    color:#17110d;
-}
-
-.letter-names span{
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:22px;
-
-    color:var(--gold-dark);
-
-    margin:0 5px;
-}
-
-.letter-date{
-    margin-top:15px;
-
-    font-family:"Cinzel",serif;
+    font-family:"Montserrat",sans-serif;
 
     font-size:9px;
 
-    letter-spacing:3px;
-
-    color:#6b5849;
-
-    opacity:0;
-
-    transform:translateY(12px);
-
-    transition:
-        opacity .8s ease,
-        transform .8s ease;
-}
-
-.letter-message{
-    margin-top:34px;
-
-    font-family:"Playfair Display",serif;
-
-    font-size:15px;
-
-    line-height:1.8;
-
-    color:#58483d;
-
-    opacity:0;
-
-    clip-path:inset(0 100% 0 0);
-
-    transition:
-        opacity .5s ease,
-        clip-path 1.8s cubic-bezier(.77,0,.18,1);
-}
-
-.letter-line.bottom{
-    margin-top:28px;
-}
-
-
-/* =========================================================
-   TAP / SCROLL INSTRUCTION
-========================================================= */
-
-.tap-open{
-    color:#f7ead6;
-
-    font-family:"Cinzel",serif;
-
-    font-size:11px;
     letter-spacing:4px;
 
-    margin-top:27px;
+    color:#8c7359;
 
-    animation:breathe 2s infinite;
-
-    transition:
-        opacity .5s ease,
-        transform .5s ease;
+    margin-bottom:16px;
 }
 
-.tap-line{
-    width:80px;
-    height:1px;
+.letter h1{
+    font-family:"Great Vibes",cursive;
 
-    background:var(--gold);
+    font-size:48px;
 
-    margin:12px auto 0;
+    font-weight:400;
 
-    opacity:.8;
+    color:#634a34;
 
-    transition:
-        opacity .5s ease,
-        transform .5s ease;
+    line-height:1.1;
+
+    margin-bottom:15px;
 }
+
+.letter-date{
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:20px;
+
+    letter-spacing:5px;
+
+    color:var(--gold);
+
+    margin-bottom:15px;
+}
+
+.letter-text{
+    max-width:280px;
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:16px;
+
+    line-height:1.6;
+
+    color:#6b5948;
+}
+
+/* =========================
+   SCROLL HINT
+========================= */
 
 .scroll-hint{
     position:absolute;
 
-    left:50%;
-    bottom:-55px;
-
-    transform:
-        translateX(-50%)
-        translateY(10px);
-
-    color:#f6ead5;
-
-    font-family:"Cinzel",serif;
+    bottom:7%;
 
     font-size:9px;
 
     letter-spacing:3px;
 
-    white-space:nowrap;
+    color:#4a3425;
 
     opacity:0;
 
-    transition:
-        opacity .8s ease,
-        transform .8s ease;
+    transition:opacity .5s ease;
 
-    animation:
-        scrollHint 2s infinite;
+    z-index:20;
 }
 
-.scroll-arrow{
-    display:block;
-
-    width:10px;
-    height:10px;
-
-    margin:9px auto 0;
-
-    border-right:1px solid var(--gold-light);
-    border-bottom:1px solid var(--gold-light);
-
-    transform:rotate(45deg);
+.opening.opening-animation .scroll-hint{
+    opacity:1;
 }
 
-@keyframes scrollHint{
-
-    0%,100%{
-        opacity:.35;
-        transform:
-            translateX(-50%)
-            translateY(0);
-    }
-
-    50%{
-        opacity:1;
-        transform:
-            translateX(-50%)
-            translateY(8px);
-    }
-
+.opening.opening-animation .tap-open{
+    opacity:0;
 }
 
-@keyframes breathe{
-
-    0%,100%{
-        opacity:.5;
-    }
-
-    50%{
-        opacity:1;
-    }
-
+.opening.opening-animation .coming-title{
+    opacity:0;
 }
 
+/* =========================
+   OPENING ANIMATION
+========================= */
 
-/* =========================================================
-   OPENING ANIMATION STATE
-========================================================= */
+.opening.opening-animation .envelope{
+    cursor:default;
+}
 
 .opening.opening-animation .envelope-flap{
     transform:rotateX(180deg);
-
-    z-index:1;
-}
-
-.opening.opening-animation .envelope-paper{
-    z-index:5;
 }
 
 .opening.opening-animation .wax-seal{
@@ -631,1284 +609,656 @@ textarea{
         translate(-50%,-50%)
         scale(.45)
         rotate(20deg);
+
+    transition-delay:.35s;
 }
 
-.opening.opening-animation .tap-open{
-    opacity:0;
-
-    transform:translateY(-10px);
-}
-
-.opening.opening-animation .tap-line{
-    opacity:0;
-}
-
-.opening.opening-animation .scroll-hint{
-    opacity:1;
-
+.opening.opening-animation .letter{
     transform:
         translateX(-50%)
-        translateY(0);
+        translateY(var(--letter-progress,62%));
 }
 
-.opening.opening-animation .letter-content{
-    opacity:1;
+/* =========================
+   MAIN HERO
+========================= */
 
-    transform:
-        translateY(0);
-}
+.hero{
+    min-height:100vh;
 
-.opening.opening-animation .letter-line{
-    transform:scaleX(1);
-}
+    position:relative;
 
-.opening.opening-animation .letter-date{
-    opacity:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    transform:translateY(0);
-}
+    text-align:center;
 
-.opening.opening-animation .letter-message{
-    opacity:1;
-
-    clip-path:inset(0 0 0 0);
-}
-
-
-/* =========================================================
-   LETTER SCROLL PROGRESS
-========================================================= */
-
-.opening.letter-complete .scroll-hint{
-    opacity:0;
-}
-
-.opening.letter-complete .opening-content{
-    transform:translateY(-20px);
-}
-
-
-/* =========================================================
-   MAIN SITE
-========================================================= */
-
-.main-site{
-    opacity:0;
-    visibility:hidden;
-
-    transition:opacity 1.2s ease;
+    padding:80px 20px;
 
     background:
         linear-gradient(
-            rgba(247,240,227,.95),
-            rgba(247,240,227,.95)
+            rgba(32,23,17,.25),
+            rgba(32,23,17,.45)
         ),
-        url("photos/1.jpg") center/cover fixed;
+        url("photos/1.jpg") center/cover no-repeat;
+
+    color:white;
 }
 
-.main-site.visible{
-    opacity:1;
-    visibility:visible;
+.hero::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            transparent,
+            rgba(0,0,0,.3)
+        );
 }
 
+.hero-content{
+    position:relative;
 
-/* =========================================================
-   PAPER / SECTIONS
-========================================================= */
+    z-index:2;
+
+    max-width:850px;
+}
+
+.hero-small{
+    font-size:11px;
+
+    letter-spacing:5px;
+
+    margin-bottom:25px;
+
+    text-transform:uppercase;
+}
+
+.hero h1{
+    font-family:"Great Vibes",cursive;
+
+    font-size:clamp(60px,10vw,120px);
+
+    font-weight:400;
+
+    line-height:1;
+
+    margin-bottom:25px;
+}
+
+.hero-date{
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:25px;
+
+    letter-spacing:7px;
+
+    margin-bottom:20px;
+}
+
+.hero-location{
+    font-size:11px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+}
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+.countdown{
+    background:var(--cream);
+
+    padding:70px 20px;
+
+    text-align:center;
+}
+
+.section-title{
+    font-family:"Great Vibes",cursive;
+
+    font-size:48px;
+
+    color:#70563d;
+
+    margin-bottom:30px;
+}
+
+.countdown-grid{
+    max-width:650px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:15px;
+}
+
+.count-box{
+    padding:20px 10px;
+
+    border-top:1px solid var(--gold);
+    border-bottom:1px solid var(--gold);
+}
+
+.count-number{
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:38px;
+
+    color:var(--gold);
+
+    display:block;
+}
+
+.count-label{
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    color:#806b56;
+
+    text-transform:uppercase;
+}
+
+/* =========================
+   PAPER SECTIONS
+========================= */
 
 .paper-section{
     position:relative;
 
-    width:min(94%,820px);
+    max-width:900px;
 
-    margin:0 auto;
+    margin:45px auto;
 
     padding:80px 35px;
 
     background:
         linear-gradient(
-            rgba(252,248,239,.96),
-            rgba(247,240,227,.96)
+            135deg,
+            #fbf7ef,
+            #eee5d8
         );
 
-    box-shadow:0 15px 50px rgba(50,30,15,.08);
+    box-shadow:
+        0 10px 35px rgba(74,52,37,.12);
 
-    overflow:hidden;
+    text-align:center;
 }
 
 .paper-section::before{
     content:"";
 
     position:absolute;
-    inset:16px;
 
-    border:1px solid rgba(185,145,79,.5);
+    inset:15px;
 
-    pointer-events:none;
-}
-
-.paper-section::after{
-    content:"";
-
-    position:absolute;
-    inset:24px;
-
-    border:1px solid rgba(185,145,79,.18);
+    border:1px solid rgba(184,144,85,.35);
 
     pointer-events:none;
 }
 
-
-/* =========================================================
-   ORNAMENTAL CORNERS
-========================================================= */
-
-.corner{
-    position:absolute;
-
-    width:80px;
-    height:80px;
-
-    color:var(--gold);
-
-    opacity:.8;
-
-    z-index:2;
-}
-
-.corner::before,
-.corner::after{
-    content:"";
-
-    position:absolute;
-
-    border-color:var(--gold);
-}
-
-.corner.top-left{
-    top:24px;
-    left:24px;
-
-    border-top:1px solid var(--gold);
-    border-left:1px solid var(--gold);
-}
-
-.corner.top-right{
-    top:24px;
-    right:24px;
-
-    border-top:1px solid var(--gold);
-    border-right:1px solid var(--gold);
-}
-
-.corner.bottom-left{
-    bottom:24px;
-    left:24px;
-
-    border-bottom:1px solid var(--gold);
-    border-left:1px solid var(--gold);
-}
-
-.corner.bottom-right{
-    bottom:24px;
-    right:24px;
-
-    border-bottom:1px solid var(--gold);
-    border-right:1px solid var(--gold);
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-    padding-top:100px;
-    text-align:center;
-}
-
-.hero-photo{
-    width:min(82vw,440px);
-
-    margin:0 auto 32px;
-
-    padding:9px;
-
-    background:#fff;
-
-    box-shadow:
-        0 18px 40px rgba(40,25,15,.22);
-
+.paper-section h2{
     position:relative;
-}
 
-.hero-photo img{
-    display:block;
-
-    width:100%;
-    aspect-ratio:4/5;
-
-    object-fit:cover;
-}
-
-
-/* =========================================================
-   SCRIPTURE
-========================================================= */
-
-.scripture{
-    max-width:650px;
-
-    margin:0 auto 32px;
-
-    color:#4d4037;
-
-    font-family:"Playfair Display",serif;
-
-    font-size:17px;
-
-    line-height:1.9;
-
-    letter-spacing:.5px;
-}
-
-.scripture-reference{
-    font-family:"Cinzel",serif;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-
-    margin-top:8px;
-
-    color:var(--gold-dark);
-}
-
-
-/* =========================================================
-   THE WEDDING OF
-========================================================= */
-
-.small-heading{
-    font-family:"Cinzel",serif;
-
-    font-size:12px;
-
-    letter-spacing:5px;
-
-    color:#59483b;
-
-    margin-bottom:8px;
-}
-
-.couple-names{
-    font-family:"Great Vibes",cursive;
-
-    font-size:clamp(50px,10vw,82px);
-
-    line-height:1;
-
-    color:#17110d;
-
-    margin-bottom:25px;
-}
-
-.couple-names span{
-    display:inline-block;
-}
-
-.couple-names .and{
     font-family:"Cormorant Garamond",serif;
 
-    font-size:.42em;
+    font-size:48px;
 
-    margin:0 13px;
+    font-weight:500;
 
-    color:var(--gold-dark);
+    color:#634b36;
 
-    vertical-align:middle;
+    margin:20px 0;
 }
-
-
-/* =========================================================
-   DATE
-========================================================= */
-
-.wedding-date{
-    font-family:"Cinzel",serif;
-
-    letter-spacing:4px;
-
-    color:#35281f;
-
-    line-height:1.8;
-}
-
-.wedding-date .day{
-    font-size:17px;
-}
-
-.wedding-date .year{
-    font-size:38px;
-
-    color:var(--gold-dark);
-
-    margin:2px 0;
-}
-
-.wedding-date .weekday{
-    font-size:13px;
-}
-
-.wedding-date .time{
-    font-size:14px;
-
-    margin-top:4px;
-}
-
-
-/* =========================================================
-   LOCATION
-========================================================= */
-
-.location-title{
-    font-family:"Cinzel",serif;
-
-    font-size:13px;
-
-    letter-spacing:3px;
-
-    margin-top:14px;
-
-    line-height:1.7;
-}
-
-.location-city{
-    font-family:"Cinzel",serif;
-
-    font-size:12px;
-
-    letter-spacing:4px;
-
-    color:var(--gold-dark);
-}
-
-
-/* =========================================================
-   GOLD DIVIDER
-========================================================= */
 
 .divider{
+    position:relative;
+
     display:flex;
 
+    justify-content:center;
     align-items:center;
 
-    justify-content:center;
-
-    gap:14px;
-
-    margin:42px auto;
+    gap:15px;
 
     color:var(--gold);
+
+    margin:20px 0;
 }
 
 .divider::before,
 .divider::after{
     content:"";
 
-    width:min(25vw,120px);
+    width:70px;
 
     height:1px;
 
-    background:linear-gradient(
-        to right,
-        transparent,
-        var(--gold)
-    );
-}
+    background:var(--gold);
 
-.divider::after{
-    background:linear-gradient(
-        to left,
-        transparent,
-        var(--gold)
-    );
+    opacity:.6;
 }
 
 .divider span{
-    font-size:18px;
-}
-
-
-/* =========================================================
-   MESSAGE
-========================================================= */
-
-.special-message{
-    text-align:center;
-
-    padding:70px 10px;
-}
-
-.special-message p{
-    font-family:"Cinzel",serif;
-
-    font-size:12px;
-
-    letter-spacing:3px;
-
-    line-height:2;
-
-    max-width:550px;
-
-    margin:auto;
-}
-
-.heart{
-    color:var(--gold-dark);
-
-    font-size:20px;
-
-    margin-top:18px;
-}
-
-
-/* =========================================================
-   COUNTDOWN
-========================================================= */
-
-.countdown-section{
-    text-align:center;
-
-    padding:20px 0 60px;
-}
-
-.countdown-title{
-    font-family:"Cinzel",serif;
-
-    letter-spacing:4px;
-
     font-size:14px;
-
-    margin-bottom:25px;
-}
-
-.countdown{
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:10px;
-
-    max-width:620px;
-
-    margin:auto;
-}
-
-.count-box{
-    background:rgba(255,255,255,.48);
-
-    border:1px solid rgba(185,145,79,.5);
-
-    padding:20px 8px;
-
-    min-height:95px;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.count-number{
-    font-family:"Cinzel",serif;
-
-    font-size:27px;
-
-    color:#211812;
-}
-
-.count-label{
-    font-family:"Cinzel",serif;
-
-    font-size:8px;
-
-    letter-spacing:2px;
-
-    color:var(--gold-dark);
-
-    margin-top:6px;
-}
-
-
-/* =========================================================
-   EVENT
-========================================================= */
-
-.event{
-    text-align:center;
-
-    padding:75px 20px;
-}
-
-.event-label{
-    font-family:"Cinzel",serif;
-
-    color:var(--gold-dark);
-
-    font-size:10px;
-
-    letter-spacing:4px;
-
-    margin-bottom:18px;
-}
-
-.event h2{
-    font-family:"Playfair Display",serif;
-
-    font-size:32px;
-
-    font-weight:500;
-
-    margin-bottom:20px;
 }
 
 .event-time{
-    font-family:"Cinzel",serif;
-
-    font-size:13px;
-
-    letter-spacing:3px;
-
-    margin-bottom:8px;
-}
-
-.event-place{
     font-family:"Cormorant Garamond",serif;
 
-    font-size:21px;
+    font-size:25px;
 
-    margin-bottom:6px;
+    color:var(--gold);
+
+    margin:15px 0;
 }
 
 .event-address{
-    font-size:16px;
+    font-size:11px;
 
-    color:#78675b;
+    letter-spacing:2px;
+
+    color:#796a5c;
 
     margin-bottom:25px;
 }
 
-
-/* =========================================================
-   BUTTON
-========================================================= */
-
 .gold-button{
-    display:inline-flex;
+    position:relative;
 
-    align-items:center;
-    justify-content:center;
+    display:inline-block;
 
-    gap:8px;
-
-    padding:12px 25px;
+    padding:12px 24px;
 
     border:1px solid var(--gold);
 
-    background:transparent;
-
-    color:#38271c;
+    color:#80623e;
 
     text-decoration:none;
-
-    font-family:"Cinzel",serif;
 
     font-size:9px;
 
     letter-spacing:2px;
 
-    cursor:pointer;
+    transition:.3s;
 
-    transition:.35s;
+    background:rgba(255,255,255,.3);
 }
 
 .gold-button:hover{
-    background:var(--brown);
-    color:#fff;
+    background:var(--gold);
 
-    border-color:var(--brown);
+    color:white;
 }
 
+/* =========================
+   CHURCH
+========================= */
 
-/* =========================================================
-   HENNA
-========================================================= */
-
-.henna{
-    text-align:center;
-
-    padding:35px 15px 65px;
+.church{
+    background:
+        linear-gradient(
+            rgba(255,255,255,.55),
+            rgba(255,255,255,.55)
+        ),
+        url("photos/2.jpg") center/cover;
 }
 
-.henna-title{
-    font-family:"Cinzel",serif;
+.church h2{
+    font-family:"Great Vibes",cursive;
 
-    font-size:11px;
-
-    letter-spacing:4px;
-
-    color:var(--gold-dark);
-
-    margin-bottom:15px;
+    font-size:65px;
 }
 
-.henna h3{
-    font-family:"Playfair Display",serif;
-
-    font-size:28px;
-
-    font-weight:500;
-}
-
-
-/* =========================================================
+/* =========================
    RECEPTION
-========================================================= */
+========================= */
 
 .reception{
-    text-align:center;
-
-    padding:80px 20px;
+    background:
+        linear-gradient(
+            rgba(255,255,255,.5),
+            rgba(255,255,255,.5)
+        ),
+        url("photos/3.jpg") center/cover;
 }
 
 .reception-subtitle{
+    position:relative;
+
     font-family:"Great Vibes",cursive;
 
-    font-size:42px;
+    font-size:34px;
 
-    color:#604831;
-
-    margin-bottom:8px;
+    color:#7a6044;
 }
 
 .reception h2{
-    font-family:"Cinzel",serif;
+    font-family:"Great Vibes",cursive;
 
-    font-size:20px;
-
-    letter-spacing:4px;
-
-    color:#17110c;
-
-    margin-bottom:18px;
+    font-size:65px;
 }
 
 .reception-time{
-    font-family:"Cinzel",serif;
+    position:relative;
 
-    font-size:14px;
+    font-family:"Cormorant Garamond",serif;
 
-    letter-spacing:3px;
+    font-size:25px;
 
-    margin-bottom:10px;
-}
+    color:var(--gold);
 
-.reception-place{
-    font-size:23px;
-
-    margin-bottom:5px;
+    margin:15px 0;
 }
 
 .reception-address{
-    color:#79675a;
+    position:relative;
 
-    font-size:16px;
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    color:#796a5c;
 
     margin-bottom:25px;
 }
 
+/* =========================
+   HENNA
+========================= */
 
-/* =========================================================
+.henna{
+    background:
+        linear-gradient(
+            rgba(255,255,255,.52),
+            rgba(255,255,255,.52)
+        ),
+        url("photos/4.jpg") center/cover;
+}
+
+.henna h2{
+    font-family:"Great Vibes",cursive;
+
+    font-size:65px;
+}
+
+/* =========================
    GALLERY
-========================================================= */
-
-.gallery-section{
-    padding:70px 10px;
-}
-
-.section-title{
-    text-align:center;
-
-    font-family:"Cinzel",serif;
-
-    letter-spacing:4px;
-
-    font-size:14px;
-
-    margin-bottom:35px;
-}
+========================= */
 
 .gallery{
+    padding:80px 20px;
+
+    background:#f7f1e8;
+
+    text-align:center;
+}
+
+.gallery-grid{
+    max-width:1100px;
+
+    margin:40px auto 0;
+
     display:grid;
 
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(4,1fr);
 
-    gap:9px;
-
-    max-width:650px;
-
-    margin:auto;
+    gap:15px;
 }
 
 .gallery-item{
     overflow:hidden;
 
-    background:#fff;
+    aspect-ratio:1;
 
-    padding:5px;
-
-    border:1px solid rgba(185,145,79,.3);
+    background:#e4d8c9;
 }
 
 .gallery-item img{
-    display:block;
-
     width:100%;
-    height:250px;
+    height:100%;
 
     object-fit:cover;
 
-    transition:transform .6s ease;
+    display:block;
+
+    transition:
+        transform .6s ease;
 }
 
 .gallery-item:hover img{
-    transform:scale(1.05);
+    transform:scale(1.06);
 }
 
-
-/* =========================================================
+/* =========================
    RSVP
-========================================================= */
+========================= */
 
 .rsvp{
+    padding:90px 20px;
+
+    background:
+        linear-gradient(
+            rgba(30,22,17,.72),
+            rgba(30,22,17,.72)
+        ),
+        url("photos/8.jpg") center/cover;
+
+    color:white;
+
     text-align:center;
-    padding:80px 35px;
 }
 
-.rsvp-script{
-    font-family:"Great Vibes",cursive;
-
-    font-size:44px;
-
-    line-height:1.2;
-
-    color:#604831;
-
-    margin-bottom:10px;
-}
-
-.rsvp h2{
-    font-family:"Cinzel",serif;
-
-    font-size:16px;
-
-    letter-spacing:3px;
-
-    font-weight:500;
-
-    color:#17110c;
-
-    margin-bottom:35px;
+.rsvp .section-title{
+    color:#e2c18d;
 }
 
 .rsvp-form{
-    width:min(100%,520px);
+    max-width:520px;
 
-    margin:0 auto;
-
-    padding:30px 34px;
-
-    background:rgba(255,255,255,.38);
-
-    border:1px solid rgba(185,145,79,.35);
-
-    box-shadow:
-        0 10px 30px rgba(50,30,15,.06);
-
-    text-align:left;
-
-    position:relative;
-    z-index:3;
+    margin:auto;
 }
 
-.form-label{
-    display:block;
-
-    font-family:"Cinzel",serif;
-
-    font-size:10px;
-
-    letter-spacing:2.5px;
-
-    color:#59483b;
-
-    margin-bottom:8px;
-
-    margin-top:20px;
+.form-group{
+    margin-bottom:18px;
 }
 
-.form-label:first-child{
-    margin-top:0;
-}
-
-.form-input,
-.form-textarea{
+.form-group input,
+.form-group select{
     width:100%;
 
-    border:1px solid rgba(185,145,79,.55);
+    padding:14px 15px;
 
-    background:rgba(252,248,239,.85);
+    border:none;
 
-    color:#2a211c;
+    border-bottom:1px solid rgba(255,255,255,.4);
 
-    padding:12px 14px;
+    background:transparent;
+
+    color:white;
 
     outline:none;
 
-    border-radius:2px;
-
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:17px;
-
-    transition:
-        border-color .3s ease,
-        box-shadow .3s ease,
-        background .3s ease;
+    font-family:"Montserrat",sans-serif;
 }
 
-.form-input{
-    height:46px;
+.form-group input::placeholder{
+    color:rgba(255,255,255,.7);
 }
 
-.form-textarea{
-    min-height:120px;
-
-    resize:vertical;
-
-    line-height:1.5;
+.form-group select{
+    color:white;
 }
 
-.form-input::placeholder,
-.form-textarea::placeholder{
-    color:#9a8879;
-
-    opacity:.8;
+.form-group select option{
+    color:#333;
 }
 
-.form-input:focus,
-.form-textarea:focus{
-    border-color:var(--gold-dark);
+.rsvp-button{
+    margin-top:10px;
 
-    background:#fffdf8;
+    padding:14px 35px;
 
-    box-shadow:
-        0 0 0 2px rgba(185,145,79,.12);
+    border:1px solid #d5b57b;
+
+    background:transparent;
+
+    color:#e5c795;
+
+    cursor:pointer;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    transition:.3s;
 }
 
+.rsvp-button:hover{
+    background:#d5b57b;
 
-/* =========================================================
-   ATTENDANCE
-========================================================= */
+    color:#fff;
+}
 
-.attendance{
-    display:flex;
+/* =========================
+   FOOTER
+========================= */
 
-    align-items:center;
+footer{
+    padding:45px 20px;
 
-    gap:10px;
+    background:#211813;
 
-    margin-top:5px;
+    color:#cbbca9;
+
+    text-align:center;
+}
+
+.footer-names{
+    font-family:"Great Vibes",cursive;
+
+    font-size:42px;
+
+    color:#d5b57b;
 
     margin-bottom:10px;
 }
 
-.attendance input{
+.footer-date{
+    font-size:9px;
+
+    letter-spacing:3px;
+}
+
+/* =========================
+   CORNERS
+========================= */
+
+.corner{
     position:absolute;
 
-    opacity:0;
+    width:25px;
+    height:25px;
 
-    pointer-events:none;
-}
-
-.attendance label{
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    min-width:85px;
-
-    height:40px;
-
-    padding:0 18px;
-
-    border:1px solid rgba(185,145,79,.55);
-
-    background:rgba(252,248,239,.85);
-
-    color:#4d4037;
-
-    font-family:"Cinzel",serif;
-
-    font-size:9px;
-
-    letter-spacing:2px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    user-select:none;
-}
-
-.attendance label:hover{
     border-color:var(--gold);
 
-    background:#fffdf8;
+    opacity:.65;
 }
 
-.attendance input:checked + label{
-    background:var(--brown);
+.corner.top-left{
+    top:25px;
+    left:25px;
 
-    color:#fff;
-
-    border-color:var(--brown);
+    border-top:1px solid;
+    border-left:1px solid;
 }
 
+.corner.top-right{
+    top:25px;
+    right:25px;
 
-/* =========================================================
-   RSVP SUBMIT
-========================================================= */
-
-.submit-button{
-    display:block;
-
-    width:100%;
-
-    margin-top:28px;
-
-    padding:13px 20px;
-
-    border:1px solid var(--gold);
-
-    background:var(--brown);
-
-    color:#fff;
-
-    font-family:"Cinzel",serif;
-
-    font-size:10px;
-
-    letter-spacing:2.5px;
-
-    cursor:pointer;
-
-    transition:.35s;
+    border-top:1px solid;
+    border-right:1px solid;
 }
 
-.submit-button:hover{
-    background:#241811;
-
-    border-color:#241811;
-}
-
-.submit-button:disabled{
-    opacity:.6;
-
-    cursor:wait;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer{
-    text-align:center;
-
-    padding:100px 20px 80px;
-}
-
-.footer-message{
-    font-family:"Cinzel",serif;
-
-    font-size:12px;
-
-    letter-spacing:3px;
-
-    line-height:2;
-}
-
-.footer-km{
-    font-family:"Great Vibes",cursive;
-
-    font-size:65px;
-
-    color:var(--gold-dark);
-
-    margin-top:30px;
-}
-
-.footer-date{
-    font-family:"Cinzel",serif;
-
-    font-size:10px;
-
-    letter-spacing:3px;
-
-    color:#766255;
-
-    margin-top:5px;
-}
-
-
-/* =========================================================
-   MUSIC BUTTON
-========================================================= */
-
-.music-control{
-    position:fixed;
-
-    left:20px;
-    top:20px;
-
-    z-index:10000;
-
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.music-button{
-    width:48px;
-    height:48px;
-
-    border-radius:50%;
-
-    border:1px solid var(--gold-light);
-
-    background:var(--brown);
-
-    color:var(--gold-light);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-
-    font-size:14px;
-
-    box-shadow:0 7px 25px rgba(0,0,0,.3);
-
-    transition:.3s;
-}
-
-.music-button.playing{
-    animation:musicPulse 1.7s infinite;
-
-    background:#21150e;
-}
-
-@keyframes musicPulse{
-
-    0%{
-        box-shadow:
-            0 0 0 0 rgba(185,145,79,.55),
-            0 7px 25px rgba(0,0,0,.3);
-    }
-
-    70%{
-        box-shadow:
-            0 0 0 15px rgba(185,145,79,0),
-            0 7px 25px rgba(0,0,0,.3);
-    }
-
-    100%{
-        box-shadow:
-            0 0 0 0 rgba(185,145,79,0),
-            0 7px 25px rgba(0,0,0,.3);
-    }
-
-}
-
-.music-hint{
-    background:rgba(30,20,14,.88);
-
-    color:#f6ead7;
-
-    padding:7px 11px;
-
-    font-family:"Cinzel",serif;
-
-    font-size:9px;
-
-    letter-spacing:1px;
-
-    border-radius:3px;
-
-    white-space:nowrap;
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast{
-    position:fixed;
-
-    left:50%;
-
+.corner.bottom-left{
     bottom:25px;
+    left:25px;
 
-    transform:translate(-50%,20px);
-
-    opacity:0;
-
-    visibility:hidden;
-
-    z-index:11000;
-
-    background:#2c1c14;
-
-    color:#fff;
-
-    padding:12px 20px;
-
-    font-family:"Cinzel",serif;
-
-    font-size:10px;
-
-    letter-spacing:1px;
-
-    transition:.4s;
+    border-bottom:1px solid;
+    border-left:1px solid;
 }
 
-.toast.show{
-    opacity:1;
+.corner.bottom-right{
+    bottom:25px;
+    right:25px;
 
-    visibility:visible;
-
-    transform:translate(-50%,0);
+    border-bottom:1px solid;
+    border-right:1px solid;
 }
 
-
-/* =========================================================
+/* =========================
    ARABIC
-========================================================= */
+========================= */
 
-body.arabic{
-    font-family:"Amiri",serif;
+body.arabic .hero-date{
+    letter-spacing:2px;
 }
 
-body.arabic .coming-title,
-body.arabic .tap-open,
-body.arabic .scripture,
-body.arabic .scripture-reference,
-body.arabic .small-heading,
-body.arabic .wedding-date,
-body.arabic .location-title,
-body.arabic .location-city,
-body.arabic .special-message p,
-body.arabic .countdown-title,
-body.arabic .count-label,
-body.arabic .event-label,
-body.arabic .event h2,
-body.arabic .event-time,
-body.arabic .event-place,
-body.arabic .event-address,
-body.arabic .gold-button,
-body.arabic .henna-title,
-body.arabic .henna h3,
-body.arabic .reception h2,
-body.arabic .reception-time,
-body.arabic .reception-place,
-body.arabic .reception-address,
+body.arabic .paper-section{
+    font-family:"Cairo","Montserrat",sans-serif;
+}
+
 body.arabic .section-title,
-body.arabic .rsvp h2,
-body.arabic .form-label,
-body.arabic .submit-button,
-body.arabic .footer-message{
-    font-family:"Amiri",serif;
-}
-
-body.arabic .couple-names{
-    font-family:"Great Vibes",cursive;
-}
-
+body.arabic .paper-section h2,
 body.arabic .reception-subtitle{
-    font-family:"Great Vibes",cursive;
+    font-family:"Cairo","Arial",sans-serif;
 }
 
-body.arabic .rsvp-script{
-    font-family:"Great Vibes",cursive;
-}
-
-body.arabic .footer-km{
-    font-family:"Great Vibes",cursive;
-}
-
-body.arabic .wax-logo{
-    font-family:"Great Vibes",cursive;
-}
-
-body.arabic .rsvp-form{
-    text-align:left;
-}
-
-body.arabic .scripture{
-    line-height:1.9;
-}
-
-body.arabic .special-message p{
-    line-height:2;
-}
-
-
-/* =========================================================
+/* =========================
    MOBILE
-========================================================= */
+========================= */
 
-@media(max-width:600px){
+@media(max-width:700px){
 
-    .language-switch{
-        top:14px;
-        right:14px;
+    .lang-switch{
+        top:12px;
+        right:12px;
     }
 
     .music-control{
-        top:14px;
-        left:14px;
-    }
-
-    .music-hint{
-        display:none;
-    }
-
-    .opening-content{
-        width:94vw;
+        top:12px;
+        left:12px;
     }
 
     .coming-title{
-        font-size:15px;
+        top:10%;
+
+        font-size:11px;
+
         letter-spacing:3px;
     }
 
-    .envelope-area{
-        width:85vw;
-        height:56vw;
+    .tap-open{
+        bottom:10%;
+
+        font-size:8px;
+
+        letter-spacing:2px;
+    }
+
+    .envelope{
+        width:88vw;
     }
 
     .wax-seal{
@@ -1920,1562 +1270,762 @@ body.arabic .special-message p{
         font-size:29px;
     }
 
-    .letter-content{
-        top:27px;
-        left:15px;
-        right:15px;
+    .letter{
+        width:82%;
+
+        padding:35px 15px 25px;
     }
 
-    .letter-small{
-        font-size:7px;
-        letter-spacing:2px;
-    }
-
-    .letter-names{
-        font-size:34px;
-    }
-
-    .letter-names span{
-        font-size:18px;
+    .letter h1{
+        font-size:39px;
     }
 
     .letter-date{
-        font-size:7px;
-        letter-spacing:2px;
+        font-size:17px;
+
+        letter-spacing:3px;
     }
 
-    .letter-message{
-        font-size:12px;
-        margin-top:25px;
-    }
-
-    .scroll-hint{
-        bottom:-48px;
-
-        font-size:8px;
-
-        letter-spacing:2px;
-    }
-
-    .paper-section{
-        width:96%;
-        padding:65px 22px;
-    }
-
-    .paper-section::before{
-        inset:11px;
-    }
-
-    .paper-section::after{
-        inset:17px;
+    .letter-text{
+        font-size:14px;
     }
 
     .hero{
-        padding-top:75px;
+        min-height:90vh;
+
+        padding:70px 20px;
     }
 
-    .hero-photo{
-        width:88%;
+    .hero h1{
+        font-size:65px;
     }
 
-    .scripture{
-        font-size:15px;
-        line-height:1.8;
-    }
+    .hero-date{
+        font-size:18px;
 
-    .couple-names{
-        font-size:58px;
-    }
-
-    .couple-names .and{
-        margin:0 6px;
-    }
-
-    .wedding-date .year{
-        font-size:32px;
+        letter-spacing:4px;
     }
 
     .countdown{
-        gap:5px;
+        padding:55px 15px;
     }
 
-    .count-box{
-        padding:15px 4px;
-        min-height:80px;
+    .section-title{
+        font-size:42px;
     }
 
-    .count-number{
-        font-size:21px;
+    .countdown-grid{
+        grid-template-columns:repeat(2,1fr);
+
+        gap:10px;
     }
 
-    .count-label{
-        font-size:6px;
-        letter-spacing:1px;
+    .paper-section{
+        margin:25px 12px;
+
+        padding:65px 20px;
     }
 
-    .event h2{
-        font-size:27px;
+    .paper-section h2{
+        font-size:40px;
+    }
+
+    .church h2,
+    .reception h2,
+    .henna h2{
+        font-size:55px;
+    }
+
+    .reception-subtitle{
+        font-size:28px;
     }
 
     .gallery{
-        grid-template-columns:1fr 1fr;
+        padding:65px 12px;
     }
 
-    .gallery-item img{
-        height:180px;
+    .gallery-grid{
+        grid-template-columns:repeat(2,1fr);
+
+        gap:8px;
     }
 
     .rsvp{
-        padding:65px 22px;
+        padding:70px 20px;
     }
 
-    .rsvp-script{
-        font-size:38px;
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media(max-width:400px){
+
+    .letter h1{
+        font-size:34px;
     }
 
-    .rsvp h2{
+    .letter-text{
         font-size:13px;
-        letter-spacing:2px;
-        line-height:1.7;
-        padding:0 15px;
     }
 
-    .rsvp-form{
-        padding:24px 20px;
+    .wax-seal{
+        width:60px;
+        height:60px;
     }
 
-    .attendance label{
-        min-width:75px;
+    .wax-logo{
+        font-size:26px;
     }
 
-    .footer{
-        padding:80px 15px 70px;
-    }
+}
 
+/* =========================
+   HIDDEN STATES
+========================= */
+
+.main-site{
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+        opacity 1.2s ease;
+}
+
+.main-site.visible{
+    opacity:1;
+
+    visibility:visible;
 }
 
 </style>
 </head>
 
-<body class="locked">
+<body>
 
-
-<!-- =========================================================
+<!-- =========================
      LANGUAGE SWITCH
-========================================================= -->
+========================= -->
 
-<div class="language-switch">
-
-    <button id="languageButton">
-        عربي
-    </button>
-
+<div class="lang-switch">
+    <button id="enBtn" class="active">EN</button>
+    <button id="arBtn">AR</button>
 </div>
 
-
-<!-- =========================================================
+<!-- =========================
      MUSIC
-========================================================= -->
+========================= -->
 
-<div class="music-control">
+<button class="music-control" id="musicBtn">
+    ♫
+</button>
 
-    <button
-        class="music-button"
-        id="musicButton"
-        aria-label="Play music">
-        ▶
-    </button>
-
-    <div
-        class="music-hint"
-        id="musicHint"
-        data-en="♫ Play Music"
-        data-ar="♫ تشغيل الموسيقى">
-        ♫ Play Music
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     AUDIO
-========================================================= -->
-
-<audio id="weddingMusic" loop preload="auto">
-
-    <source
-        src="photos/music.mp3"
-        type="audio/mpeg">
-
+<audio id="bgMusic" loop>
+    <source src="photos/music.mp3" type="audio/mpeg">
 </audio>
 
+<!-- =========================
+     OPENING SCREEN
+========================= -->
 
-<!-- =========================================================
-     OPENING ENVELOPE
-========================================================= -->
-
-<section class="opening" id="opening">
+<div class="opening" id="opening">
 
     <div class="opening-content">
 
-
         <div
             class="coming-title"
-            data-en="SOMETHING BEAUTIFUL<br>IS COMING"
-            data-ar="شيء جميل<br>قادم">
-
-            SOMETHING BEAUTIFUL
-            <br>
-            IS COMING
-
+            data-en="A SPECIAL INVITATION"
+            data-ar="دعوة مميزة">
+            A SPECIAL INVITATION
         </div>
 
+        <div class="envelope" id="envelope">
 
-        <div class="ornament">
+            <div class="envelope-back"></div>
 
-            <span>❦</span>
+            <div class="letter" id="letter">
 
-        </div>
+                <div class="letter-inner">
 
+                    <div
+                        class="letter-small"
+                        data-en="OUR STORY BEGINS"
+                        data-ar="تبدأ قصتنا">
+                        OUR STORY BEGINS
+                    </div>
 
-        <div
-            class="envelope-area"
-            id="envelope">
+                    <h1>
+                        Kerollos & Marina
+                    </h1>
 
+                    <div class="letter-date">
+                        04 · 10 · 2026
+                    </div>
 
-            <div class="envelope">
-
-
-                <!-- =================================================
-                     LETTER
-                ================================================== -->
-
-                <div class="envelope-paper">
-
-                    <div class="letter-content">
-
-
-                        <div class="letter-line"></div>
-
-
-                        <div
-                            class="letter-small"
-                            data-en="OUR STORY BEGINS"
-                            data-ar="تبدأ حكايتنا">
-
-                            OUR STORY BEGINS
-
-                        </div>
-
-
-                        <div class="letter-names">
-
-                            Kerollos
-
-                            <span>&</span>
-
-                            Marina
-
-                        </div>
-
-
-                        <div class="letter-date">
-
-                            04 · 10 · 2026
-
-                        </div>
-
-
-                        <div class="letter-message">
-
-                            A beautiful journey
-                            <br>
-                            is about to begin...
-
-                        </div>
-
-
-                        <div class="letter-line bottom"></div>
-
-
+                    <div
+                        class="letter-text"
+                        data-en="A beautiful journey is about to begin..."
+                        data-ar="رحلة جميلة على وشك أن تبدأ...">
+                        A beautiful journey is about to begin...
                     </div>
 
                 </div>
-
-
-                <!-- =================================================
-                     ENVELOPE FLAP
-                ================================================== -->
-
-                <div class="envelope-flap"></div>
-
-
-                <div class="envelope-left"></div>
-
-                <div class="envelope-right"></div>
-
-                <div class="envelope-bottom"></div>
-
-
-                <!-- =================================================
-                     KM SEAL
-                ================================================== -->
-
-                <div class="wax-seal">
-
-                    <div class="wax-logo">
-
-                        K<span>M</span>
-
-                    </div>
-
-                </div>
-
 
             </div>
 
-        </div>
+            <div class="envelope-flap"></div>
 
+            <div class="wax-seal">
+                <div class="wax-logo">
+                    K<span>M</span>
+                </div>
+            </div>
+
+            <div class="envelope-front"></div>
+
+        </div>
 
         <div
             class="tap-open"
             data-en="TAP TO OPEN"
-            data-ar="اضغط للفتح">
-
+            data-ar="اضغط لفتح الدعوة">
             TAP TO OPEN
-
         </div>
-
-
-        <div class="tap-line"></div>
-
-
-        <div class="scroll-hint">
-
-            <span
-                data-en="SCROLL TO REVEAL"
-                data-ar="اسحب للأعلى للكشف">
-
-                SCROLL TO REVEAL
-
-            </span>
-
-            <span class="scroll-arrow"></span>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     MAIN WEBSITE
-========================================================= -->
-
-<main class="main-site" id="mainSite">
-
-
-<!-- =========================================================
-     MAIN INVITATION
-========================================================= -->
-
-<section class="paper-section hero">
-
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
-
-
-    <div class="hero-photo">
-
-        <img
-            src="photos/couple.jpg"
-            alt="Kerollos and Marina">
-
-    </div>
-
-
-    <div
-        class="scripture"
-        data-en="“WHAT THEREFORE GOD HAS JOINED TOGETHER,<br>LET NOT MAN SEPARATE”"
-        data-ar="«فَالَّذِي جَمَعَهُ اللَّهُ لاَ يُفَرِّقْهُ إِنْسَانٌ»">
-
-        “WHAT THEREFORE GOD HAS JOINED TOGETHER,
-        <br>
-        LET NOT MAN SEPARATE
-
 
         <div
-            class="scripture-reference"
-            data-en="MATTHEW 19:6"
-            data-ar="مَتَّى 19: 6">
-
-            MATTHEW 19:6
-
+            class="scroll-hint"
+            data-en="SCROLL TO REVEAL"
+            data-ar="اسحب للأعلى لعرض الدعوة">
+            SCROLL TO REVEAL
         </div>
 
     </div>
 
-
-    <div class="divider">
-
-        <span>❦</span>
-
-    </div>
-
-
-    <div
-        class="small-heading"
-        data-en="THE WEDDING OF"
-        data-ar="حفل زفاف">
-
-        THE WEDDING OF
-
-    </div>
-
-
-    <div class="couple-names">
-
-        <span>Kerollos</span>
-
-        <span class="and">&</span>
-
-        <span>Marina</span>
-
-    </div>
-
-
-    <div class="wedding-date">
-
-        <div
-            class="day"
-            data-en="04<sup>th</sup> OF OCTOBER"
-            data-ar="04 أكتوبر">
-
-            04<sup>th</sup> OF OCTOBER
-
-        </div>
-
-
-        <div class="year">
-
-            2026
-
-        </div>
-
-
-        <div
-            class="weekday"
-            data-en="SUNDAY"
-            data-ar="الأحد">
-
-            SUNDAY
-
-        </div>
-
-
-        <div
-            class="time"
-            data-en="AT 5:00 PM"
-            data-ar="الساعة 5:00 مساءً">
-
-            AT 5:00 PM
-
-        </div>
-
-    </div>
-
-
-    <div
-        class="location-title"
-        data-en="AT. SAINT SHENODA CHURCH"
-        data-ar="في كنيسة القديس شنودة">
-
-        AT. SAINT SHENODA CHURCH
-
-    </div>
-
-
-    <div
-        class="location-city"
-        data-en="HURGHADA"
-        data-ar="الغردقة">
-
-        HURGHADA
-
-    </div>
-
-
-    <div class="divider">
-
-        <span>✦</span>
-
-    </div>
-
-
-    <div class="special-message">
-
-        <p
-            data-en="WE CAN'T WAIT TO CELEBRATE<br>OUR SPECIAL DAY WITH YOU"
-            data-ar="لا نستطيع الانتظار للاحتفال<br>بيومنا المميز معكم">
-
-            WE CAN'T WAIT TO CELEBRATE
-            <br>
-            OUR SPECIAL DAY WITH YOU
-
-        </p>
-
-
-        <div class="heart">
-
-            ♥
-            
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     COUNTDOWN
-========================================================= -->
-
-<section class="paper-section countdown-section">
-
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-
-
-    <div
-        class="countdown-title"
-        data-en="COUNTING THE MOMENTS"
-        data-ar="نعد اللحظات">
-
-        COUNTING THE MOMENTS
-
-    </div>
-
-
-    <div class="countdown">
-
-
-        <div class="count-box">
-
-            <div
-                class="count-number"
-                id="days">
-
-                00
-
-            </div>
-
-
-            <div
-                class="count-label"
-                data-en="DAYS"
-                data-ar="يوم">
-
-                DAYS
-
-            </div>
-
-        </div>
-
-
-        <div class="count-box">
-
-            <div
-                class="count-number"
-                id="hours">
-
-                00
-
-            </div>
-
-
-            <div
-                class="count-label"
-                data-en="HOURS"
-                data-ar="ساعة">
-
-                HOURS
-
-            </div>
-
-        </div>
-
-
-        <div class="count-box">
-
-            <div
-                class="count-number"
-                id="minutes">
-
-                00
-
-            </div>
-
-
-            <div
-                class="count-label"
-                data-en="MINUTES"
-                data-ar="دقيقة">
-
-                MINUTES
-
-            </div>
-
-        </div>
-
-
-        <div class="count-box">
-
-            <div
-                class="count-number"
-                id="seconds">
-
-                00
-
-            </div>
-
-
-            <div
-                class="count-label"
-                data-en="SECONDS"
-                data-ar="ثانية">
-
-                SECONDS
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     CHURCH
-========================================================= -->
-
-<section class="paper-section event">
-
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-
-
-    <div
-        class="event-label"
-        data-en="OUR CEREMONY"
-        data-ar="مراسم الزفاف">
-
-        OUR CEREMONY
-
-    </div>
-
-
-    <h2
-        data-en="SAINT SHENODA CHURCH"
-        data-ar="كنيسة القديس شنودة">
-
-        SAINT SHENODA CHURCH
-
-    </h2>
-
-
-    <div
-        class="event-time"
-        data-en="SUNDAY · 04 OCTOBER 2026 · 5:00 PM"
-        data-ar="الأحد · 04 أكتوبر 2026 · 5:00 مساءً">
-
-        SUNDAY · 04 OCTOBER 2026 · 5:00 PM
-
-    </div>
-
-
-    <div
-        class="event-place"
-        data-en="St. Shenoda Church"
-        data-ar="كنيسة القديس شنودة">
-
-        St. Shenoda Church
-
-    </div>
-
-
-    <div
-        class="event-address"
-        data-en="Hurghada, Red Sea, Egypt"
-        data-ar="الغردقة، البحر الأحمر، مصر">
-
-        Hurghada, Red Sea, Egypt
-
-    </div>
-
-
-    <a
-        class="gold-button"
-        href="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac"
-        target="_blank"
-        rel="noopener"
-        data-en="♧ &nbsp; VIEW ON GOOGLE MAPS"
-        data-ar="♧ &nbsp; عرض الموقع على خرائط جوجل">
-
-        ♧ &nbsp; VIEW ON GOOGLE MAPS
-
-    </a>
-
-</section>
-
-
-<!-- =========================================================
-     HENNA
-========================================================= -->
-
-<section class="paper-section henna">
-
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
-
-
-    <div
-        class="henna-title"
-        data-en="BEFORE OUR SPECIAL DAY"
-        data-ar="قبل يومنا المميز">
-
-        BEFORE OUR SPECIAL DAY
-
-    </div>
-
-
-    <h3
-        data-en="HENNA NIGHT"
-        data-ar="ليلة الحنة">
-
-        HENNA NIGHT
-
-    </h3>
-
-
-    <div class="divider">
-
-        <span>❦</span>
-
-    </div>
-
-
-    <div
-        class="event-time"
-        data-en="FRIDAY · 02 OCTOBER 2026 · 8:00 PM"
-        data-ar="الجمعة · 02 أكتوبر 2026 · 8:00 مساءً">
-
-        FRIDAY · 02 OCTOBER 2026 · 8:00 PM
-
-    </div>
-
-
-    <div
-        class="event-place"
-        data-en="Star Sky Hall"
-        data-ar="قاعة ستار سكاي">
-
-        Star Sky Hall
-
-    </div>
-
-
-    <div
-        class="event-address"
-        data-en="Shatea El Gaish · Al-Qiyadat St. · Hurghada"
-        data-ar="شاطئ الجيش · شارع القيادات · الغردقة">
-
-        Shatea El Gaish · Al-Qiyadat St. · Hurghada
-
-    </div>
-
-
-    <a
-        class="gold-button"
-        href="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac"
-        target="_blank"
-        rel="noopener"
-        data-en="♧ &nbsp; VIEW ON GOOGLE MAPS"
-        data-ar="♧ &nbsp; عرض الموقع على خرائط جوجل">
-
-        ♧ &nbsp; VIEW ON GOOGLE MAPS
-
-    </a>
-
-</section>
-
-
-<!-- =========================================================
-     RECEPTION
-========================================================= -->
-
-<section class="paper-section reception">
-
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
-
-
-    <div
-        class="reception-subtitle"
-        data-en="Specially For You"
-        data-ar="خصيصًا من أجلكم">
-
-        Specially For You
-
-    </div>
-
-
-    <div class="divider">
-
-        <span>♥</span>
-
-    </div>
-
-
-    <h2
-        data-en="Jumana Hall"
-        data-ar="قاعة جمانة">
-
-        Jumana Hall
-
-    </h2>
-
-
-    <div
-        class="reception-time"
-        data-en="AT 7:00 PM"
-        data-ar="الساعة 7:00 مساءً">
-
-        AT 7:00 PM
-
-    </div>
-
-
-    <div
-        class="reception-address"
-        data-en="Al-Hijaz St. · Hurghada"
-        data-ar="شارع الحجاز · الغردقة">
-
-        Al-Hijaz St. · Hurghada
-
-    </div>
-
-
-    <a
-        class="gold-button"
-        href="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac"
-        target="_blank"
-        rel="noopener"
-        data-en="♧ &nbsp; VIEW ON GOOGLE MAPS"
-        data-ar="♧ &nbsp; عرض الموقع على خرائط جوجل">
-
-        ♧ &nbsp; VIEW ON GOOGLE MAPS
-
-    </a>
-
-</section>
-
-
-<!-- =========================================================
-     GALLERY
-========================================================= -->
-
-<section class="paper-section gallery-section">
-
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-
-
-    <div
-        class="section-title"
-        data-en="OUR BEAUTIFUL MOMENTS"
-        data-ar="أجمل لحظاتنا">
-
-        OUR BEAUTIFUL MOMENTS
-
-    </div>
-
-
-    <div class="gallery">
-
-
-        <div class="gallery-item">
-
-            <img
-                src="photos/1.jpg"
-                alt="">
-
-        </div>
-
-
-        <div class="gallery-item">
-
-            <img
-                src="photos/2.jpg"
-                alt="">
-
-        </div>
-
-
-        <div class="gallery-item">
-
-            <img
-                src="photos/3.jpg"
-                alt="">
-
-        </div>
-
-
-        <div class="gallery-item">
-
-            <img
-                src="photos/4.jpg"
-                alt="">
-
-        </div>
-
-
-        <div class="gallery-item">
-
-            <img
-                src="photos/5.jpg"
-                alt="">
-
-        </div>
-
-
-        <div class="gallery-item">
-
-            <img
-                src="photos/6.jpg"
-                alt="">
-
-        </div>
-
-
-        <div class="gallery-item">
-
-            <img
-                src="photos/7.jpg"
-                alt="">
-
-        </div>
-
-
-        <div class="gallery-item">
-
-            <img
-                src="photos/8.jpg"
-                alt="">
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     RSVP
-========================================================= -->
-
-<section class="paper-section rsvp">
-
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
-
-
-    <div
-        class="rsvp-script"
-        data-en="Leave Us a Message"
-        data-ar="اترك لنا رسالة">
-
-        Leave Us a Message
-
-    </div>
-
-
-    <h2
-        data-en="WE WOULD LOVE TO HEAR FROM YOU"
-        data-ar="يسعدنا أن نسمع منكم">
-
-        WE WOULD LOVE TO HEAR FROM YOU
-
-    </h2>
-
-
-    <form
-        class="rsvp-form"
-        id="rsvpForm">
-
-
-        <label
-            class="form-label"
-            for="guestName"
-            data-en="YOUR NAME"
-            data-ar="اسمك">
-
-            YOUR NAME
-
-        </label>
-
-
-        <input
-            class="form-input"
-            id="guestName"
-            type="text"
-            placeholder="Your Name"
-            data-placeholder-en="Your Name"
-            data-placeholder-ar="اسمك"
-            autocomplete="name"
-            required>
-
-
-        <label
-            class="form-label"
-            data-en="WILL YOU BE ATTENDING?"
-            data-ar="هل ستحضرون؟">
-
-            WILL YOU BE ATTENDING?
-
-        </label>
-
-
-        <div class="attendance">
-
-
-            <input
-                type="radio"
-                name="attendance"
-                id="yes"
-                value="YES"
-                required>
-
-
-            <label
-                for="yes"
-                data-en="YES"
-                data-ar="نعم">
-
-                YES
-
-            </label>
-
-
-            <input
-                type="radio"
-                name="attendance"
-                id="no"
-                value="NO">
-
-
-            <label
-                for="no"
-                data-en="NO"
-                data-ar="لا">
-
-                NO
-
-            </label>
-
-
-        </div>
-
-
-        <label
-            class="form-label"
-            for="guestMessage"
-            data-en="LEAVE US A MESSAGE"
-            data-ar="اترك لنا رسالة">
-
-            LEAVE US A MESSAGE
-
-        </label>
-
-
-        <textarea
-            class="form-textarea"
-            id="guestMessage"
-            placeholder="Write your message..."
-            data-placeholder-en="Write your message..."
-            data-placeholder-ar="اكتب رسالتك..."></textarea>
-
-
-        <button
-            class="submit-button"
-            type="submit"
-            data-en="SEND MESSAGE"
-            data-ar="إرسال الرسالة">
-
-            SEND MESSAGE
-
-        </button>
-
-
-    </form>
-
-</section>
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<section class="paper-section footer">
-
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
-
-
-    <div class="divider">
-
-        <span>❦</span>
-
-    </div>
-
-
-    <div
-        class="footer-message"
-        data-en="THANK YOU FOR BEING A PART OF<br>OUR SPECIAL DAY"
-        data-ar="شكرًا لكونكم جزءًا من<br>يومنا المميز">
-
-        THANK YOU FOR BEING A PART OF
-        <br>
-        OUR SPECIAL DAY
-
-    </div>
-
-
-    <div class="footer-km">
-
-        KM
-
-    </div>
-
-
-    <div class="footer-date">
-
-        04 · 10 · 2026
-
-    </div>
-
-</section>
-
-
-</main>
-
-
-<!-- =========================================================
-     TOAST
-========================================================= -->
-
-<div
-    class="toast"
-    id="toast">
 </div>
 
+<!-- =========================
+     MAIN SITE
+========================= -->
+
+<div class="main-site" id="mainSite">
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div
+                class="hero-small"
+                data-en="TOGETHER WITH THEIR FAMILIES"
+                data-ar="بكل الحب مع عائلتيهما">
+                TOGETHER WITH THEIR FAMILIES
+            </div>
+
+            <h1>
+                Kerollos & Marina
+            </h1>
+
+            <div class="hero-date">
+                04 · 10 · 2026
+            </div>
+
+            <div
+                class="hero-location"
+                data-en="Saint Shenoda Church · Hurghada"
+                data-ar="كنيسة القديس شنودة · الغردقة">
+                Saint Shenoda Church · Hurghada
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         COUNTDOWN
+    ========================= -->
+
+    <section class="countdown">
+
+        <div
+            class="section-title"
+            data-en="Counting The Moments"
+            data-ar="نعد اللحظات">
+            Counting The Moments
+        </div>
+
+        <div class="countdown-grid">
+
+            <div class="count-box">
+                <span class="count-number" id="days">00</span>
+
+                <span
+                    class="count-label"
+                    data-en="Days"
+                    data-ar="يوم">
+                    Days
+                </span>
+            </div>
+
+            <div class="count-box">
+                <span class="count-number" id="hours">00</span>
+
+                <span
+                    class="count-label"
+                    data-en="Hours"
+                    data-ar="ساعة">
+                    Hours
+                </span>
+            </div>
+
+            <div class="count-box">
+                <span class="count-number" id="minutes">00</span>
+
+                <span
+                    class="count-label"
+                    data-en="Minutes"
+                    data-ar="دقيقة">
+                    Minutes
+                </span>
+            </div>
+
+            <div class="count-box">
+                <span class="count-number" id="seconds">00</span>
+
+                <span
+                    class="count-label"
+                    data-en="Seconds"
+                    data-ar="ثانية">
+                    Seconds
+                </span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         CHURCH
+         FIRST
+    ========================= -->
+
+    <section class="paper-section church">
+
+        <div class="corner top-left"></div>
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+        <div class="corner bottom-right"></div>
+
+        <div
+            class="event-time"
+            data-en="AT 5:00 PM"
+            data-ar="الساعة 5:00 مساءً">
+            AT 5:00 PM
+        </div>
+
+        <div class="divider">
+            <span>♥</span>
+        </div>
+
+        <h2
+            data-en="Saint Shenoda Church"
+            data-ar="كنيسة القديس شنودة">
+            Saint Shenoda Church
+        </h2>
+
+        <div
+            class="event-address"
+            data-en="Hurghada"
+            data-ar="الغردقة">
+            Hurghada
+        </div>
+
+        <a
+            class="gold-button"
+            href="https://maps.app.goo.gl/7rRjJg3Gx5Q8m1Jt7?g_st=ac"
+            target="_blank"
+            rel="noopener"
+            data-en="♧ &nbsp; VIEW ON GOOGLE MAPS"
+            data-ar="♧ &nbsp; عرض الموقع على خرائط جوجل">
+            ♧ &nbsp; VIEW ON GOOGLE MAPS
+        </a>
+
+    </section>
+
+    <!-- =========================
+         RECEPTION
+         SECOND
+    ========================= -->
+
+    <section class="paper-section reception">
+
+        <div class="corner top-left"></div>
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+        <div class="corner bottom-right"></div>
+
+        <div
+            class="reception-subtitle"
+            data-en="Specially For You"
+            data-ar="خصيصًا من أجلكم">
+            Specially For You
+        </div>
+
+        <div class="divider">
+            <span>♥</span>
+        </div>
+
+        <h2
+            data-en="Jumana Hall"
+            data-ar="قاعة جمانة">
+            Jumana Hall
+        </h2>
+
+        <div
+            class="reception-time"
+            data-en="AT 7:00 PM"
+            data-ar="الساعة 7:00 مساءً">
+            AT 7:00 PM
+        </div>
+
+        <div
+            class="reception-address"
+            data-en="Al-Hijaz St. · Hurghada"
+            data-ar="شارع الحجاز · الغردقة">
+            Al-Hijaz St. · Hurghada
+        </div>
+
+        <a
+            class="gold-button"
+            href="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac"
+            target="_blank"
+            rel="noopener"
+            data-en="♧ &nbsp; VIEW ON GOOGLE MAPS"
+            data-ar="♧ &nbsp; عرض الموقع على خرائط جوجل">
+            ♧ &nbsp; VIEW ON GOOGLE MAPS
+        </a>
+
+    </section>
+
+    <!-- =========================
+         HENNA
+         THIRD
+    ========================= -->
+
+    <section class="paper-section henna">
+
+        <div class="corner top-left"></div>
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+        <div class="corner bottom-right"></div>
+
+        <div
+            class="event-time"
+            data-en="FRIDAY · 02 OCTOBER 2026 · 8:00 PM"
+            data-ar="الجمعة · 2 أكتوبر 2026 · الساعة 8:00 مساءً">
+            FRIDAY · 02 OCTOBER 2026 · 8:00 PM
+        </div>
+
+        <div class="divider">
+            <span>♥</span>
+        </div>
+
+        <h2
+            data-en="Henna Night"
+            data-ar="ليلة الحنة">
+            Henna Night
+        </h2>
+
+        <div
+            class="event-address"
+            data-en="Star Sky Hall · Shatea El Gaish · Al-Qiyadat St. · Hurghada"
+            data-ar="قاعة ستار سكاي · شاطئ الجيش · شارع القيادات · الغردقة">
+            Star Sky Hall · Shatea El Gaish · Al-Qiyadat St. · Hurghada
+        </div>
+
+        <a
+            class="gold-button"
+            href="https://maps.app.goo.gl/7wYhT3K6xVYc4sQF7?g_st=ac"
+            target="_blank"
+            rel="noopener"
+            data-en="♧ &nbsp; VIEW ON GOOGLE MAPS"
+            data-ar="♧ &nbsp; عرض الموقع على خرائط جوجل">
+            ♧ &nbsp; VIEW ON GOOGLE MAPS
+        </a>
+
+    </section>
+
+    <!-- =========================
+         GALLERY
+    ========================= -->
+
+    <section class="gallery">
+
+        <div
+            class="section-title"
+            data-en="Our Moments"
+            data-ar="لحظاتنا">
+            Our Moments
+        </div>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item">
+                <img src="photos/1.jpg" alt="Kerollos and Marina">
+            </div>
+
+            <div class="gallery-item">
+                <img src="photos/2.jpg" alt="Kerollos and Marina">
+            </div>
+
+            <div class="gallery-item">
+                <img src="photos/3.jpg" alt="Kerollos and Marina">
+            </div>
+
+            <div class="gallery-item">
+                <img src="photos/4.jpg" alt="Kerollos and Marina">
+            </div>
+
+            <div class="gallery-item">
+                <img src="photos/5.jpg" alt="Kerollos and Marina">
+            </div>
+
+            <div class="gallery-item">
+                <img src="photos/6.jpg" alt="Kerollos and Marina">
+            </div>
+
+            <div class="gallery-item">
+                <img src="photos/7.jpg" alt="Kerollos and Marina">
+            </div>
+
+            <div class="gallery-item">
+                <img src="photos/8.jpg" alt="Kerollos and Marina">
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         RSVP
+    ========================= -->
+
+    <section class="rsvp">
+
+        <div
+            class="section-title"
+            data-en="Will You Join Us?"
+            data-ar="هل ستشاركوننا فرحتنا؟">
+            Will You Join Us?
+        </div>
+
+        <form class="rsvp-form" id="rsvpForm">
+
+            <div class="form-group">
+
+                <input
+                    type="text"
+                    name="name"
+                    required
+                    placeholder="Your Name"
+                    data-placeholder-en="Your Name"
+                    data-placeholder-ar="اسمك">
+
+            </div>
+
+            <div class="form-group">
+
+                <select name="attendance" required>
+
+                    <option
+                        value=""
+                        selected
+                        disabled
+                        data-en="Will you attend?"
+                        data-ar="هل ستحضر؟">
+                        Will you attend?
+                    </option>
+
+                    <option
+                        value="Yes"
+                        data-en="Yes, I'll be there"
+                        data-ar="نعم، سأكون موجودًا">
+                        Yes, I'll be there
+                    </option>
+
+                    <option
+                        value="No"
+                        data-en="Sorry, I can't"
+                        data-ar="آسف، لن أستطيع الحضور">
+                        Sorry, I can't
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button
+                type="submit"
+                class="rsvp-button"
+                data-en="SEND RSVP"
+                data-ar="إرسال التأكيد">
+                SEND RSVP
+            </button>
+
+        </form>
+
+    </section>
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <div class="footer-names">
+            Kerollos & Marina
+        </div>
+
+        <div class="footer-date">
+            04 · 10 · 2026
+        </div>
+
+    </footer>
+
+</div>
 
 <script>
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
+/* =========================
+   GOOGLE SHEET
+========================= */
 
-const opening =
-    document.getElementById("opening");
-
-const envelope =
-    document.getElementById("envelope");
-
-const mainSite =
-    document.getElementById("mainSite");
-
-const music =
-    document.getElementById("weddingMusic");
-
-const musicButton =
-    document.getElementById("musicButton");
-
-const musicHint =
-    document.getElementById("musicHint");
-
-const languageButton =
-    document.getElementById("languageButton");
-
-const toast =
-    document.getElementById("toast");
-
-const envelopePaper =
-    document.querySelector(".envelope-paper");
-
-const letterContent =
-    document.querySelector(".letter-content");
+const GOOGLE_SHEET_URL =
+    "https://script.google.com/macros/s/AKfycbxcMU4vmdkqu8MpNm0PbcmHdXcf3obYwDDEci025eoF2N-4MbH0LITHw6KQg0nFMeZz/exec";
 
 
-/* =========================================================
-   LANGUAGE
-========================================================= */
+/* =========================
+   OPENING ANIMATION
+========================= */
 
-let currentLanguage =
-    localStorage.getItem("weddingLanguage") || "en";
+const opening = document.getElementById("opening");
+const envelope = document.getElementById("envelope");
+const letter = document.getElementById("letter");
+const mainSite = document.getElementById("mainSite");
+
+let opened = false;
+let progress = 0;
 
 
-function updateLanguage(){
+/* OPEN ENVELOPE */
 
-    document.documentElement.lang =
-        currentLanguage;
+envelope.addEventListener("click", function(){
+
+    if(opened) return;
+
+    opened = true;
+
+    opening.classList.add("opening-animation");
+
+    document.body.style.overflow = "hidden";
+
+    setTimeout(() => {
+
+        progress = 0;
+
+        letter.style.setProperty(
+            "--letter-progress",
+            "62%"
+        );
+
+    }, 100);
+
+});
 
 
-    document.body.classList.toggle(
-        "arabic",
-        currentLanguage === "ar"
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+function revealLetter(delta){
+
+    if(!opened) return;
+
+    progress += delta;
+
+    progress = Math.max(
+        0,
+        Math.min(100,progress)
     );
 
+    const start = 62;
+    const end = -42;
 
-    document
-        .querySelectorAll("[data-en]")
-        .forEach(element => {
+    const translate =
+        start + ((end - start) * progress / 100);
 
-            const value =
-                currentLanguage === "ar"
-                    ? element.dataset.ar
-                    : element.dataset.en;
-
-
-            if(value){
-
-                element.innerHTML =
-                    value;
-
-            }
-
-        });
-
-
-    document
-        .querySelectorAll(
-            "[data-placeholder-en]"
-        )
-        .forEach(element => {
-
-            element.placeholder =
-                currentLanguage === "ar"
-                    ? element.dataset.placeholderAr
-                    : element.dataset.placeholderEn;
-
-        });
-
-
-    languageButton.textContent =
-        currentLanguage === "en"
-            ? "عربي"
-            : "English";
-
-
-    updateMusicText();
-
-}
-
-
-languageButton.addEventListener(
-    "click",
-    () => {
-
-        currentLanguage =
-            currentLanguage === "en"
-                ? "ar"
-                : "en";
-
-
-        localStorage.setItem(
-            "weddingLanguage",
-            currentLanguage
-        );
-
-
-        updateLanguage();
-
-    }
-);
-
-
-/* =========================================================
-   MUSIC
-========================================================= */
-
-let musicPlaying = false;
-
-
-function updateMusicText(){
-
-    if(musicPlaying){
-
-        musicButton.textContent =
-            "❚❚";
-
-
-        musicHint.textContent =
-            currentLanguage === "ar"
-                ? "♫ إيقاف الموسيقى"
-                : "♫ Pause Music";
-
-    }else{
-
-        musicButton.textContent =
-            "▶";
-
-
-        musicHint.textContent =
-            currentLanguage === "ar"
-                ? "♫ تشغيل الموسيقى"
-                : "♫ Play Music";
-
-    }
-
-}
-
-
-async function playMusic(){
-
-    try{
-
-        await music.play();
-
-        musicPlaying =
-            true;
-
-        musicButton.classList.add(
-            "playing"
-        );
-
-        updateMusicText();
-
-    }catch(error){
-
-        console.log(
-            "Music could not start:",
-            error
-        );
-
-        musicPlaying =
-            false;
-
-        updateMusicText();
-
-        showToast(
-            currentLanguage === "ar"
-                ? "اضغط مرة أخرى لتشغيل الموسيقى"
-                : "Tap again to play the music"
-        );
-
-    }
-
-}
-
-
-function pauseMusic(){
-
-    music.pause();
-
-    musicPlaying =
-        false;
-
-    musicButton.classList.remove(
-        "playing"
+    letter.style.setProperty(
+        "--letter-progress",
+        translate + "%"
     );
 
-    updateMusicText();
+    if(progress >= 100){
+
+        finishOpening();
+
+    }
 
 }
 
 
-musicButton.addEventListener(
-    "click",
-    () => {
+/* =========================
+   FINISH OPENING
+========================= */
 
-        if(music.paused){
+function finishOpening(){
 
-            playMusic();
+    if(opening.classList.contains("finished"))
+        return;
 
-        }else{
+    opening.classList.add("finished");
 
-            pauseMusic();
+    setTimeout(() => {
 
-        }
+        opening.classList.add("hidden");
 
-    }
-);
+        mainSite.classList.add("visible");
 
+        document.body.style.overflow = "auto";
 
-music.addEventListener(
-    "play",
-    () => {
+    },700);
 
-        musicPlaying =
-            true;
-
-        musicButton.classList.add(
-            "playing"
-        );
-
-        updateMusicText();
-
-    }
-);
+}
 
 
-music.addEventListener(
-    "pause",
-    () => {
-
-        musicPlaying =
-            false;
-
-        musicButton.classList.remove(
-            "playing"
-        );
-
-        updateMusicText();
-
-    }
-);
-
-
-music.addEventListener(
-    "ended",
-    () => {
-
-        musicPlaying =
-            false;
-
-        musicButton.classList.remove(
-            "playing"
-        );
-
-        updateMusicText();
-
-    }
-);
-
-
-music.load();
-
-
-/* =========================================================
-   OPENING LETTER ANIMATION
-========================================================= */
-
-let invitationOpened =
-    false;
-
-let letterProgress =
-    0;
-
-let touchStartY =
-    0;
-
-let lastTouchY =
-    0;
-
-let completingInvitation =
-    false;
-
-
-/*
-   Open the envelope.
-*/
-
-envelope.addEventListener(
-    "click",
-    async () => {
-
-        if(invitationOpened){
-
-            return;
-
-        }
-
-
-        invitationOpened =
-            true;
-
-
-        opening.classList.add(
-            "opening-animation"
-        );
-
-
-        try{
-
-            await music.play();
-
-            musicPlaying =
-                true;
-
-            musicButton.classList.add(
-                "playing"
-            );
-
-            updateMusicText();
-
-        }catch(error){
-
-            console.log(
-                "Autoplay blocked:",
-                error
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   DESKTOP SCROLL
-========================================================= */
+/* =========================
+   DESKTOP WHEEL
+========================= */
 
 window.addEventListener(
     "wheel",
-    event => {
+    function(e){
 
-        if(
-            !invitationOpened ||
-            completingInvitation
-        ){
-
+        if(!opened)
             return;
 
+        if(!opening.classList.contains("finished")){
+
+            e.preventDefault();
+
+            revealLetter(
+                e.deltaY > 0 ? 5 : -5
+            );
+
         }
-
-
-        event.preventDefault();
-
-
-        const delta =
-            event.deltaY;
-
-
-        updateLetterProgress(
-            delta * 0.055
-        );
 
     },
     {
@@ -3484,26 +2034,21 @@ window.addEventListener(
 );
 
 
-/* =========================================================
-   MOBILE TOUCH SCROLL
-========================================================= */
+/* =========================
+   MOBILE TOUCH
+========================= */
+
+let touchStartY = 0;
 
 opening.addEventListener(
     "touchstart",
-    event => {
+    function(e){
 
-        if(!invitationOpened){
-
+        if(!opened)
             return;
 
-        }
-
-
         touchStartY =
-            event.touches[0].clientY;
-
-        lastTouchY =
-            touchStartY;
+            e.touches[0].clientY;
 
     },
     {
@@ -3511,40 +2056,30 @@ opening.addEventListener(
     }
 );
 
-
 opening.addEventListener(
     "touchmove",
-    event => {
+    function(e){
 
-        if(
-            !invitationOpened ||
-            completingInvitation
-        ){
-
+        if(!opened)
             return;
 
-        }
-
-
-        event.preventDefault();
-
+        e.preventDefault();
 
         const currentY =
-            event.touches[0].clientY;
+            e.touches[0].clientY;
 
+        const difference =
+            touchStartY - currentY;
 
-        const movement =
-            lastTouchY -
-            currentY;
+        if(Math.abs(difference) > 2){
 
+            revealLetter(
+                difference > 0 ? 2.5 : -2.5
+            );
 
-        lastTouchY =
-            currentY;
+            touchStartY = currentY;
 
-
-        updateLetterProgress(
-            movement * 0.18
-        );
+        }
 
     },
     {
@@ -3553,45 +2088,37 @@ opening.addEventListener(
 );
 
 
-/* =========================================================
-   KEYBOARD SUPPORT
-========================================================= */
+/* =========================
+   KEYBOARD
+========================= */
 
 window.addEventListener(
     "keydown",
-    event => {
+    function(e){
 
-        if(
-            !invitationOpened ||
-            completingInvitation
-        ){
-
+        if(!opened)
             return;
 
-        }
-
-
         if(
-            event.key === "ArrowUp" ||
-            event.key === "PageUp"
+            e.key === "ArrowDown" ||
+            e.key === "PageDown" ||
+            e.key === " "
         ){
 
-            event.preventDefault();
+            e.preventDefault();
 
-            updateLetterProgress(5);
+            revealLetter(5);
 
         }
 
-
         if(
-            event.key === "ArrowDown" ||
-            event.key === "PageDown" ||
-            event.key === " "
+            e.key === "ArrowUp" ||
+            e.key === "PageUp"
         ){
 
-            event.preventDefault();
+            e.preventDefault();
 
-            updateLetterProgress(5);
+            revealLetter(-5);
 
         }
 
@@ -3599,306 +2126,165 @@ window.addEventListener(
 );
 
 
-/* =========================================================
-   UPDATE LETTER
-========================================================= */
+/* =========================
+   LANGUAGE
+========================= */
 
-function updateLetterProgress(amount){
+const enBtn =
+    document.getElementById("enBtn");
 
-    letterProgress +=
-        amount;
-
-
-    letterProgress =
-        Math.max(
-            0,
-            Math.min(
-                100,
-                letterProgress
-            )
-        );
+const arBtn =
+    document.getElementById("arBtn");
 
 
-    renderLetter();
+function setLanguage(lang){
 
+    if(lang === "ar"){
 
-    if(
-        letterProgress >= 100 &&
-        !completingInvitation
-    ){
+        document.body.classList.add("arabic");
 
-        completeInvitation();
+        enBtn.classList.remove("active");
+        arBtn.classList.add("active");
+
+        document.documentElement.lang = "ar";
+
+    }else{
+
+        document.body.classList.remove("arabic");
+
+        arBtn.classList.remove("active");
+        enBtn.classList.add("active");
+
+        document.documentElement.lang = "en";
 
     }
+
+
+    document.querySelectorAll("[data-en]").forEach(
+        element => {
+
+            element.innerHTML =
+                lang === "ar"
+                ? element.dataset.ar
+                : element.dataset.en;
+
+        }
+    );
+
+
+    document.querySelectorAll(
+        "[data-placeholder-en]"
+    ).forEach(
+        element => {
+
+            element.placeholder =
+                lang === "ar"
+                ? element.dataset.placeholderAr
+                : element.dataset.placeholderEn;
+
+        }
+    );
+
+
+    document.querySelectorAll(
+        "option[data-en]"
+    ).forEach(
+        option => {
+
+            option.textContent =
+                lang === "ar"
+                ? option.dataset.ar
+                : option.dataset.en;
+
+        }
+    );
 
 }
 
 
-/* =========================================================
-   RENDER LETTER
-========================================================= */
+enBtn.addEventListener(
+    "click",
+    () => setLanguage("en")
+);
 
-function renderLetter(){
+arBtn.addEventListener(
+    "click",
+    () => setLanguage("ar")
+);
 
-    if(
-        !envelopePaper ||
-        !letterContent
-    ){
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+const weddingDate =
+    new Date("October 4, 2026 17:00:00").getTime();
+
+
+function updateCountdown(){
+
+    const now =
+        new Date().getTime();
+
+    const distance =
+        weddingDate - now;
+
+
+    if(distance <= 0){
+
+        document.getElementById("days").textContent = "00";
+        document.getElementById("hours").textContent = "00";
+        document.getElementById("minutes").textContent = "00";
+        document.getElementById("seconds").textContent = "00";
 
         return;
 
     }
 
 
-    const progress =
-        letterProgress / 100;
-
-
-    /*
-       Paper movement.
-
-       Starts inside the envelope,
-       then rises smoothly.
-    */
-
-    const translateY =
-        15 -
-        (progress * 270);
-
-
-    envelopePaper.style.transform =
-        `translateY(${translateY}px)`;
-
-
-    /*
-       The paper becomes longer
-       as the user scrolls.
-    */
-
-    const paperHeight =
-        76 +
-        (progress * 125);
-
-
-    envelopePaper.style.height =
-        `${paperHeight}%`;
-
-
-    /*
-       Move the writing slightly upward
-       as the letter is revealed.
-    */
-
-    const writingMovement =
-        progress * 55;
-
-
-    letterContent.style.transform =
-        `translateY(-${writingMovement}px)`;
-
-
-    /*
-       Reveal the writing progressively.
-    */
-
-    letterContent.style.opacity =
-        Math.min(
-            1,
-            .25 +
-            progress * .75
-        );
-
-
-    /*
-       Make the writing feel like
-       it is being revealed while
-       the paper comes out.
-    */
-
-    const reveal =
-        Math.min(
-            100,
-            progress * 115
-        );
-
-
-    letterContent.style.clipPath =
-        `inset(0 ${100 - reveal}% 0 0)`;
-
-
-    /*
-       Once the paper is mostly outside
-       the envelope, show the full content.
-    */
-
-    if(progress > .35){
-
-        letterContent.style.clipPath =
-            "inset(0 0 0 0)";
-
-    }
-
-}
-
-
-/* =========================================================
-   COMPLETE INVITATION
-========================================================= */
-
-function completeInvitation(){
-
-    completingInvitation =
-        true;
-
-
-    opening.classList.add(
-        "letter-complete"
-    );
-
-
-    setTimeout(
-        () => {
-
-            opening.classList.add(
-                "hidden"
-            );
-
-
-            mainSite.classList.add(
-                "visible"
-            );
-
-
-            document.body.classList.remove(
-                "locked"
-            );
-
-
-            window.scrollTo({
-                top:0,
-                behavior:"instant"
-            });
-
-
-            /*
-               Reset opening position
-               so the main website starts
-               exactly from the top.
-            */
-
-            setTimeout(
-                () => {
-
-                    opening.style.display =
-                        "none";
-
-                },
-                1200
-            );
-
-        },
-        850
-    );
-
-}
-
-
-/* =========================================================
-   COUNTDOWN
-========================================================= */
-
-const weddingDate =
-    new Date(
-        "2026-10-04T17:00:00+03:00"
-    );
-
-
-function pad(number){
-
-    return String(number)
-        .padStart(2,"0");
-
-}
-
-
-function updateCountdown(){
-
-    const now =
-        new Date();
-
-
-    let difference =
-        weddingDate.getTime()
-        -
-        now.getTime();
-
-
-    if(difference < 0){
-
-        difference =
-            0;
-
-    }
-
-
-    const totalSeconds =
-        Math.floor(
-            difference / 1000
-        );
-
-
     const days =
         Math.floor(
-            totalSeconds / 86400
+            distance /
+            (1000 * 60 * 60 * 24)
         );
-
 
     const hours =
         Math.floor(
-            (totalSeconds % 86400)
-            / 3600
+            (distance %
+            (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
         );
-
 
     const minutes =
         Math.floor(
-            (totalSeconds % 3600)
-            / 60
+            (distance %
+            (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
+
+    const seconds =
+        Math.floor(
+            (distance %
+            (1000 * 60)) /
+            1000
         );
 
 
-    const seconds =
-        totalSeconds % 60;
+    document.getElementById("days").textContent =
+        String(days).padStart(2,"0");
 
+    document.getElementById("hours").textContent =
+        String(hours).padStart(2,"0");
 
-    document.getElementById(
-        "days"
-    ).textContent =
-        days;
+    document.getElementById("minutes").textContent =
+        String(minutes).padStart(2,"0");
 
-
-    document.getElementById(
-        "hours"
-    ).textContent =
-        pad(hours);
-
-
-    document.getElementById(
-        "minutes"
-    ).textContent =
-        pad(minutes);
-
-
-    document.getElementById(
-        "seconds"
-    ).textContent =
-        pad(seconds);
+    document.getElementById("seconds").textContent =
+        String(seconds).padStart(2,"0");
 
 }
 
-
 updateCountdown();
-
 
 setInterval(
     updateCountdown,
@@ -3906,312 +2292,140 @@ setInterval(
 );
 
 
-/* =========================================================
-   RSVP - GOOGLE SHEETS
-========================================================= */
+/* =========================
+   MUSIC
+========================= */
 
-const GOOGLE_SHEET_URL =
-    "https://script.google.com/macros/s/AKfycbxcMU4vmdkqu8MpNm0PbcmHdXcf3obYwDDEci025eoF2N-4MbH0LITHw6KQg0nFMeZz/exec";
+const music =
+    document.getElementById("bgMusic");
 
+const musicBtn =
+    document.getElementById("musicBtn");
 
-document
-    .getElementById("rsvpForm")
-    .addEventListener(
-        "submit",
-        function(event){
-
-            event.preventDefault();
+let musicPlaying = false;
 
 
-            const form =
-                this;
+musicBtn.addEventListener(
+    "click",
+    function(){
+
+        if(musicPlaying){
+
+            music.pause();
+
+            musicPlaying = false;
+
+            musicBtn.textContent = "♫";
+
+        }else{
+
+            music.play()
+                .then(() => {
+
+                    musicPlaying = true;
+
+                    musicBtn.textContent = "❚❚";
+
+                })
+                .catch(() => {});
+
+        }
+
+    }
+);
 
 
-            const submitButton =
-                form.querySelector(
-                    ".submit-button"
-                );
+/* =========================
+   RSVP
+========================= */
+
+const rsvpForm =
+    document.getElementById("rsvpForm");
 
 
-            const name =
-                document
-                    .getElementById(
-                        "guestName"
-                    )
-                    .value
-                    .trim();
+rsvpForm.addEventListener(
+    "submit",
+    function(e){
+
+        e.preventDefault();
 
 
-            const attendance =
-                document.querySelector(
-                    'input[name="attendance"]:checked'
-                );
+        const formData =
+            new FormData(rsvpForm);
 
 
-            const message =
-                document
-                    .getElementById(
-                        "guestMessage"
-                    )
-                    .value
-                    .trim();
+        const data = {
+
+            name:
+                formData.get("name"),
+
+            attendance:
+                formData.get("attendance")
+
+        };
 
 
-            if(
-                !name ||
-                !attendance
-            ){
-
-                showToast(
-                    currentLanguage === "ar"
-                        ? "من فضلك أكمل البيانات"
-                        : "Please complete the required fields"
-                );
+        const button =
+            rsvpForm.querySelector(
+                ".rsvp-button"
+            );
 
 
-                return;
+        button.disabled = true;
+
+
+        fetch(
+            GOOGLE_SHEET_URL,
+            {
+
+                method:"POST",
+
+                mode:"no-cors",
+
+                headers:{
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify(data)
 
             }
+        )
+        .then(() => {
 
-
-            submitButton.disabled =
-                true;
-
-
-            submitButton.textContent =
-                currentLanguage === "ar"
-                    ? "جاري الإرسال..."
-                    : "SENDING...";
-
-
-            const iframe =
-                document.createElement(
-                    "iframe"
-                );
-
-
-            iframe.name =
-                "rsvpSubmitFrame_" +
-                Date.now();
-
-
-            iframe.style.display =
-                "none";
-
-
-            document.body.appendChild(
-                iframe
+            alert(
+                document.body.classList.contains("arabic")
+                ? "تم إرسال تأكيد الحضور بنجاح"
+                : "Your RSVP has been sent successfully."
             );
 
+            rsvpForm.reset();
 
-            const sendForm =
-                document.createElement(
-                    "form"
-                );
+            button.disabled = false;
 
+        })
+        .catch(() => {
 
-            sendForm.method =
-                "POST";
-
-
-            sendForm.action =
-                GOOGLE_SHEET_URL;
-
-
-            sendForm.target =
-                iframe.name;
-
-
-            sendForm.style.display =
-                "none";
-
-
-            const nameInput =
-                document.createElement(
-                    "input"
-                );
-
-
-            nameInput.type =
-                "hidden";
-
-
-            nameInput.name =
-                "name";
-
-
-            nameInput.value =
-                name;
-
-
-            const attendanceInput =
-                document.createElement(
-                    "input"
-                );
-
-
-            attendanceInput.type =
-                "hidden";
-
-
-            attendanceInput.name =
-                "attendance";
-
-
-            attendanceInput.value =
-                attendance.value;
-
-
-            const messageInput =
-                document.createElement(
-                    "input"
-                );
-
-
-            messageInput.type =
-                "hidden";
-
-
-            messageInput.name =
-                "message";
-
-
-            messageInput.value =
-                message;
-
-
-            sendForm.appendChild(
-                nameInput
+            alert(
+                document.body.classList.contains("arabic")
+                ? "حدث خطأ، حاول مرة أخرى."
+                : "Something went wrong. Please try again."
             );
 
+            button.disabled = false;
 
-            sendForm.appendChild(
-                attendanceInput
-            );
+        });
 
-
-            sendForm.appendChild(
-                messageInput
-            );
+    }
+);
 
 
-            document.body.appendChild(
-                sendForm
-            );
+/* =========================
+   INITIAL LANGUAGE
+========================= */
 
-
-            sendForm.submit();
-
-
-            setTimeout(
-                () => {
-
-                    showToast(
-                        currentLanguage === "ar"
-                            ? "تم إرسال رسالتك بنجاح"
-                            : "Your message has been sent successfully"
-                    );
-
-
-                    form.reset();
-
-
-                    submitButton.disabled =
-                        false;
-
-
-                    submitButton.textContent =
-                        currentLanguage === "ar"
-                            ? "إرسال الرسالة"
-                            : "SEND MESSAGE";
-
-
-                    sendForm.remove();
-
-                    iframe.remove();
-
-                },
-                1500
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-let toastTimer;
-
-
-function showToast(message){
-
-    toast.textContent =
-        message;
-
-
-    toast.classList.add(
-        "show"
-    );
-
-
-    clearTimeout(
-        toastTimer
-    );
-
-
-    toastTimer =
-        setTimeout(
-            () => {
-
-                toast.classList.remove(
-                    "show"
-                );
-
-            },
-            3000
-        );
-
-}
-
-
-/* =========================================================
-   HIDE BROKEN GALLERY IMAGES
-========================================================= */
-
-document
-    .querySelectorAll(
-        ".gallery-item img"
-    )
-    .forEach(
-        img => {
-
-            img.addEventListener(
-                "error",
-                () => {
-
-                    img
-                        .closest(
-                            ".gallery-item"
-                        )
-                        .style.display =
-                        "none";
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-updateLanguage();
-
-updateMusicText();
+setLanguage("en");
 
 </script>
 
