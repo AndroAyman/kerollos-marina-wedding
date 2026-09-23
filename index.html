@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kerollos & Marina</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
   :root{
     --cream:#FAF5EC;
@@ -21,10 +23,18 @@
     padding-top:env(safe-area-inset-top,0px);
     padding-bottom:env(safe-area-inset-bottom,0px);
   }
+
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);height:100%;}
+
+  html{
+    scroll-behavior:smooth;
+    scroll-padding-top:env(safe-area-inset-top,0px);
+    height:100%;
+  }
+
   body{
-    margin:0;height:100%;
+    margin:0;
+    height:100%;
     background:var(--cream);
     color:var(--ink);
     font-family:'Jost',sans-serif;
@@ -32,6 +42,7 @@
     overflow-x:hidden;
     position:relative;
   }
+
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
       --cream:#2A2420;
@@ -41,126 +52,476 @@
       --ink-soft:#C9B9A8;
     }
   }
+
   :root[data-theme="dark"]{
-    --cream:#2A2420;--cream-2:#332B25;--cashmere:#4A3B34;
-    --ink:#F1E6DA;--ink-soft:#C9B9A8;
+    --cream:#2A2420;
+    --cream-2:#332B25;
+    --cashmere:#4A3B34;
+    --ink:#F1E6DA;
+    --ink-soft:#C9B9A8;
   }
 
-  h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:600;margin:0;}
-  p{margin:0;line-height:1.85;}
-  a{color:inherit;text-decoration:none;}
-  button{font-family:inherit;}
+  h1,h2,h3{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    margin:0;
+  }
 
-  .section{position:relative;padding:80px 24px;max-width:600px;margin:0 auto;text-align:center;}
+  p{
+    margin:0;
+    line-height:1.85;
+  }
 
-  #petals{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
-  .petal{position:absolute;top:-40px;opacity:.7;animation:fall linear infinite;will-change:transform;}
+  a{
+    color:inherit;
+    text-decoration:none;
+  }
+
+  button{
+    font-family:inherit;
+  }
+
+  .section{
+    position:relative;
+    padding:80px 24px;
+    max-width:600px;
+    margin:0 auto;
+    text-align:center;
+  }
+
+  #petals{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+    overflow:hidden;
+  }
+
+  .petal{
+    position:absolute;
+    top:-40px;
+    opacity:.7;
+    animation:fall linear infinite;
+    will-change:transform;
+  }
+
   @keyframes fall{
-    0%{transform:translateY(-5vh) translateX(0) rotate(0deg);}
-    100%{transform:translateY(105vh) translateX(var(--drift,30px)) rotate(340deg);}
+    0%{
+      transform:translateY(-5vh) translateX(0) rotate(0deg);
+    }
+    100%{
+      transform:translateY(105vh) translateX(var(--drift,30px)) rotate(340deg);
+    }
   }
+
   @media (prefers-reduced-motion: reduce){
-    .petal{animation:none;display:none;}
-    *{scroll-behavior:auto !important;}
+    .petal{
+      animation:none;
+      display:none;
+    }
+
+    *{
+      scroll-behavior:auto !important;
+    }
   }
 
   .fab{
-    position:fixed;z-index:20;top:calc(16px + env(safe-area-inset-top,0px));
-    width:44px;height:44px;border-radius:50%;
-    background:var(--cream-2);border:1px solid var(--cashmere);
-    display:flex;align-items:center;justify-content:center;font-size:18px;
-    cursor:pointer;box-shadow:0 2px 10px rgba(74,59,52,.12);
+    position:fixed;
+    z-index:20;
+    top:calc(16px + env(safe-area-inset-top,0px));
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:var(--cream-2);
+    border:1px solid var(--cashmere);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    cursor:pointer;
+    box-shadow:0 2px 10px rgba(74,59,52,.12);
   }
-  #musicToggle{left:16px;}
-  #shareBtn{right:16px;}
 
-  .hero{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    padding:110px 24px 60px;position:relative;z-index:2;}
+  #musicToggle{
+    left:16px;
+  }
+
+  #shareBtn{
+    right:16px;
+  }
+
+  .hero{
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:110px 24px 60px;
+    position:relative;
+    z-index:2;
+  }
+
   .photo-frame{
-    width:140px;height:140px;border-radius:50%;
-    background:var(--cream-2);border:1px solid var(--cashmere);
-    display:flex;align-items:center;justify-content:center;overflow:hidden;
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:var(--cream-2);
+    border:1px solid var(--cashmere);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
     margin-bottom:26px;
   }
-  .photo-frame img{width:100%;height:100%;object-fit:cover;display:block;}
-  .photo-frame svg{width:44%;opacity:.5;color:var(--blush-deep);}
-  .monogram{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:var(--gold);letter-spacing:3px;margin-bottom:14px;}
-  .hero .names{font-size:clamp(38px,10vw,58px);line-height:1.2;color:var(--ink);}
-  .hero .amp{display:block;font-style:italic;font-size:24px;color:var(--blush-deep);margin:4px 0;}
-  .hero .tag{margin-top:20px;font-size:14px;color:var(--ink-soft);letter-spacing:.5px;max-width:340px;}
-  .hero .date{margin-top:12px;font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);letter-spacing:1px;}
 
-  .countdown{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap;justify-content:center;}
-  .cd-box{background:var(--cream-2);border:1px solid var(--cashmere);border-radius:10px;width:66px;padding:12px 0;}
-  .cd-num{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--blush-deep);}
-  .cd-lbl{font-size:10px;color:var(--ink-soft);margin-top:4px;letter-spacing:.5px;text-transform:uppercase;}
+  .photo-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
 
-  .scrolldown{margin-top:54px;font-size:11px;color:var(--ink-soft);letter-spacing:1px;
-    display:flex;flex-direction:column;align-items:center;gap:6px;}
-  .scrolldown span{display:block;width:1px;height:26px;background:var(--gold);animation:sd 1.8s ease-in-out infinite;}
-  @keyframes sd{0%{opacity:.2;}50%{opacity:1;}100%{opacity:.2;}}
+  .photo-frame svg{
+    width:44%;
+    opacity:.5;
+    color:var(--blush-deep);
+  }
 
-  .divider{display:flex;align-items:center;justify-content:center;gap:14px;padding:0 24px;color:var(--gold);
-    max-width:600px;margin:0 auto;}
-  .divider .line{flex:1;height:1px;background:var(--cashmere);}
-  .divider .mark{font-size:16px;}
+  .monogram{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:20px;
+    color:var(--gold);
+    letter-spacing:3px;
+    margin-bottom:14px;
+  }
 
-  .verse p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:var(--ink);line-height:2;}
-  .verse .ref{display:block;margin-top:16px;font-family:'Jost',sans-serif;font-size:12px;color:var(--ink-soft);letter-spacing:.5px;}
+  .hero .names{
+    font-size:clamp(38px,10vw,58px);
+    line-height:1.2;
+    color:var(--ink);
+  }
 
-  .kicker{font-size:12px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;text-transform:uppercase;}
-  .section h2{font-size:32px;color:var(--ink);margin-bottom:36px;}
+  .hero .amp{
+    display:block;
+    font-style:italic;
+    font-size:24px;
+    color:var(--blush-deep);
+    margin:4px 0;
+  }
 
-  .event{background:var(--cream-2);border:1px solid var(--cashmere);border-radius:18px;
-    padding:32px 26px;margin-bottom:20px;text-align:center;}
-  .event .icon{font-size:24px;margin-bottom:10px;display:block;}
-  .event .time{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--blush-deep);}
-  .event .venue{margin-top:10px;font-size:16px;font-weight:500;}
-  .event .addr{margin-top:4px;font-size:13px;color:var(--ink-soft);}
-  .event .btnrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px;}
+  .hero .tag{
+    margin-top:20px;
+    font-size:14px;
+    color:var(--ink-soft);
+    letter-spacing:.5px;
+    max-width:340px;
+  }
 
-  .btn{border:1px solid var(--blush-deep);color:var(--blush-deep);background:transparent;
-    padding:10px 18px;border-radius:999px;font-size:12px;letter-spacing:.3px;cursor:pointer;
-    transition:background .2s,color .2s;}
-  .btn:hover{background:var(--blush-deep);color:var(--cream);}
-  .btn.solid{background:var(--blush-deep);color:var(--cream);}
-  .btn.solid:hover{opacity:.9;}
-  .btn:focus-visible,.fab:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  .hero .date{
+    margin-top:12px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:20px;
+    color:var(--ink);
+    letter-spacing:1px;
+  }
 
-  .mapwrap{background:var(--cream-2);border:1px solid var(--cashmere);border-radius:18px;padding:20px;}
-  .mapwrap svg{width:100%;height:auto;display:block;}
-  .pin{cursor:pointer;}
-  .pin circle{transition:r .15s;}
-  .pin:hover circle{r:9;}
-  .maplegend{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:16px;font-size:12px;}
-  .maplegend .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle;}
+  .countdown{
+    display:flex;
+    gap:12px;
+    margin-top:36px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
 
-  .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
-  .frame{aspect-ratio:3/4;border-radius:14px;overflow:hidden;
+  .cd-box{
+    background:var(--cream-2);
+    border:1px solid var(--cashmere);
+    border-radius:10px;
+    width:66px;
+    padding:12px 0;
+  }
+
+  .cd-num{
+    font-family:'Cormorant Garamond',serif;
+    font-size:26px;
+    color:var(--blush-deep);
+  }
+
+  .cd-lbl{
+    font-size:10px;
+    color:var(--ink-soft);
+    margin-top:4px;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+  }
+
+  .scrolldown{
+    margin-top:54px;
+    font-size:11px;
+    color:var(--ink-soft);
+    letter-spacing:1px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+  }
+
+  .scrolldown span{
+    display:block;
+    width:1px;
+    height:26px;
+    background:var(--gold);
+    animation:sd 1.8s ease-in-out infinite;
+  }
+
+  @keyframes sd{
+    0%{opacity:.2;}
+    50%{opacity:1;}
+    100%{opacity:.2;}
+  }
+
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    padding:0 24px;
+    color:var(--gold);
+    max-width:600px;
+    margin:0 auto;
+  }
+
+  .divider .line{
+    flex:1;
+    height:1px;
+    background:var(--cashmere);
+  }
+
+  .divider .mark{
+    font-size:16px;
+  }
+
+  .verse p{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:21px;
+    color:var(--ink);
+    line-height:2;
+  }
+
+  .verse .ref{
+    display:block;
+    margin-top:16px;
+    font-family:'Jost',sans-serif;
+    font-size:12px;
+    color:var(--ink-soft);
+    letter-spacing:.5px;
+  }
+
+  .kicker{
+    font-size:12px;
+    color:var(--gold);
+    letter-spacing:2px;
+    margin-bottom:6px;
+    text-transform:uppercase;
+  }
+
+  .section h2{
+    font-size:32px;
+    color:var(--ink);
+    margin-bottom:36px;
+  }
+
+  .event{
+    background:var(--cream-2);
+    border:1px solid var(--cashmere);
+    border-radius:18px;
+    padding:32px 26px;
+    margin-bottom:20px;
+    text-align:center;
+  }
+
+  .event .icon{
+    font-size:24px;
+    margin-bottom:10px;
+    display:block;
+  }
+
+  .event .time{
+    font-family:'Cormorant Garamond',serif;
+    font-size:26px;
+    color:var(--blush-deep);
+  }
+
+  .event .venue{
+    margin-top:10px;
+    font-size:16px;
+    font-weight:500;
+  }
+
+  .event .addr{
+    margin-top:4px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+
+  .event .btnrow{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:18px;
+  }
+
+  .btn{
+    border:1px solid var(--blush-deep);
+    color:var(--blush-deep);
+    background:transparent;
+    padding:10px 18px;
+    border-radius:999px;
+    font-size:12px;
+    letter-spacing:.3px;
+    cursor:pointer;
+    transition:background .2s,color .2s;
+  }
+
+  .btn:hover{
+    background:var(--blush-deep);
+    color:var(--cream);
+  }
+
+  .btn.solid{
+    background:var(--blush-deep);
+    color:var(--cream);
+  }
+
+  .btn.solid:hover{
+    opacity:.9;
+  }
+
+  .btn:focus-visible,
+  .fab:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:2px;
+  }
+
+  .mapwrap{
+    background:var(--cream-2);
+    border:1px solid var(--cashmere);
+    border-radius:18px;
+    padding:20px;
+  }
+
+  .mapwrap svg{
+    width:100%;
+    height:auto;
+    display:block;
+  }
+
+  .pin{
+    cursor:pointer;
+  }
+
+  .pin circle{
+    transition:r .15s;
+  }
+
+  .pin:hover circle{
+    r:9;
+  }
+
+  .maplegend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+    justify-content:center;
+    margin-top:16px;
+    font-size:12px;
+  }
+
+  .maplegend .dot{
+    display:inline-block;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    margin-right:6px;
+    vertical-align:middle;
+  }
+
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
+
+  .frame{
+    aspect-ratio:3/4;
+    border-radius:14px;
+    overflow:hidden;
     background:linear-gradient(160deg,var(--cashmere),var(--cream-2));
-    display:flex;align-items:center;justify-content:center;border:1px solid var(--cashmere);}
-  .frame img{width:100%;height:100%;object-fit:cover;display:block;}
-  .frame svg{width:40%;opacity:.5;color:var(--blush-deep);}
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--cashmere);
+  }
 
-  .rsvpcard{background:var(--cream-2);border:1px solid var(--cashmere);border-radius:18px;padding:34px 26px;}
-  .rsvpcard .q{font-family:'Cormorant Garamond',serif;font-size:23px;color:var(--ink);margin-bottom:22px;}
-  .field{margin-bottom:16px;text-align:left;}
-  .field label{display:block;font-size:12px;color:var(--ink-soft);margin-bottom:6px;letter-spacing:.3px;}
-  .field input,.field select{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--cashmere);
-    background:var(--cream);color:var(--ink);font-family:inherit;font-size:15px;}
-  .field input:focus,.field select:focus{outline:2px solid var(--gold);outline-offset:1px;}
+  .frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
 
-  footer{text-align:center;padding:50px 24px 70px;font-family:'Cormorant Garamond',serif;font-style:italic;
-    font-size:18px;color:var(--blush-deep);}
-  footer .small{display:block;margin-top:10px;font-family:'Jost',sans-serif;font-style:normal;font-size:11px;
-    color:var(--ink-soft);letter-spacing:1px;text-transform:uppercase;}
+  .frame svg{
+    width:40%;
+    opacity:.5;
+    color:var(--blush-deep);
+  }
 
-  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
-    background:var(--ink);color:var(--cream);padding:10px 20px;border-radius:999px;font-size:13px;
-    opacity:0;transition:opacity .25s,transform .25s;z-index:30;pointer-events:none;}
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  footer{
+    text-align:center;
+    padding:50px 24px 70px;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:18px;
+    color:var(--blush-deep);
+  }
+
+  footer .small{
+    display:block;
+    margin-top:10px;
+    font-family:'Jost',sans-serif;
+    font-style:normal;
+    font-size:11px;
+    color:var(--ink-soft);
+    letter-spacing:1px;
+    text-transform:uppercase;
+  }
+
+  .toast{
+    position:fixed;
+    bottom:24px;
+    left:50%;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--ink);
+    color:var(--cream);
+    padding:10px 20px;
+    border-radius:999px;
+    font-size:13px;
+    opacity:0;
+    transition:opacity .25s,transform .25s;
+    z-index:30;
+    pointer-events:none;
+  }
+
+  .toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
 </style>
 </head>
+
 <body>
 
 <div id="petals"></div>
@@ -170,265 +531,904 @@
 
 <!-- HERO -->
 <section class="hero">
+
   <div class="photo-frame">
-    <img src="photos/couple.jpg" alt="Kerollos and Marina" onerror="this.replaceWith(this.nextElementSibling); this.nextElementSibling.style.display='block';">
-    <svg style="display:none" viewBox="0 0 60 60"><g fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="30" cy="30" r="5"/><path d="M30 25 C25 15 20 15 18 20 C16 25 22 28 30 25Z"/><path d="M30 25 C35 15 40 15 42 20 C44 25 38 28 30 25Z"/><path d="M30 35 C25 45 20 45 18 40 C16 35 22 32 30 35Z"/><path d="M30 35 C35 45 40 45 42 40 C44 35 38 32 30 35Z"/></g></svg>
-  </div>
-  <div class="monogram">K &amp; M</div>
-  <h1 class="names">Kerollos<span class="amp">&amp;</span>Marina</h1>
-  <p class="tag">Together with our families, we joyfully invite you to celebrate our wedding</p>
-  <p class="date">Sunday, October 4th 2026</p>
+    <img
+      src="photos/couple.jpg"
+      alt="Kerollos and Marina"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+    >
 
-  <div class="countdown" id="countdown" aria-live="polite">
-    <div class="cd-box"><div class="cd-num" id="cd-d">--</div><div class="cd-lbl">Days</div></div>
-    <div class="cd-box"><div class="cd-num" id="cd-h">--</div><div class="cd-lbl">Hrs</div></div>
-    <div class="cd-box"><div class="cd-num" id="cd-m">--</div><div class="cd-lbl">Min</div></div>
-    <div class="cd-box"><div class="cd-num" id="cd-s">--</div><div class="cd-lbl">Sec</div></div>
-  </div>
-
-  <div class="scrolldown">SCROLL<span></span></div>
-</section>
-
-<div class="divider"><div class="line"></div><div class="mark">✦</div><div class="line"></div></div>
-
-<section class="section verse">
-  <p>"Love is patient, love is kind... it always protects, always trusts, always hopes, always perseveres."</p>
-  <span class="ref">1 Corinthians 13</span>
-</section>
-
-<div class="divider"><div class="line"></div><div class="mark">✦</div><div class="line"></div></div>
-
-<!-- EVENTS -->
-<section class="section" id="events">
-  <div class="kicker">Celebration Schedule</div>
-  <h2>Wedding Events</h2>
-
-  <div class="event" id="henna">
-    <span class="icon">🌿</span>
-    <div class="time">Oct 2 &middot; 8:00 PM</div>
-    <div class="venue">Henna Night</div>
-    <div class="venue" style="font-weight:400;font-size:15px;margin-top:2px;">Star Sky Hall</div>
-    <div class="addr">Shatea El Gaish, Al-Qiyadat St, Hurghada</div>
-    <div class="btnrow">
-      <button class="btn" data-map="Star Sky Hall El Gaish beach at El Qiyadat Street Hurghada">📍 Directions</button>
-      <button class="btn solid" data-ics="henna">🗓️ Add to calendar</button>
-    </div>
-  </div>
-
-  <div class="event" id="church">
-    <span class="icon">⛪</span>
-    <div class="time">Oct 4 &middot; 5:00 PM</div>
-    <div class="venue">Wedding Ceremony</div>
-    <div class="venue" style="font-weight:400;font-size:15px;margin-top:2px;">Anba Shenouda, Head of the Hermits Church</div>
-    <div class="addr">Hurghada</div>
-    <div class="btnrow">
-      <button class="btn" data-map="Saint Shenouda Church in Hurghada">📍 Directions</button>
-      <button class="btn solid" data-ics="church">🗓️ Add to calendar</button>
-    </div>
-  </div>
-
-  <div class="event" id="reception">
-    <span class="icon">🥂</span>
-    <div class="time">Oct 4 &middot; 7:00 PM</div>
-    <div class="venue">Reception</div>
-    <div class="venue" style="font-weight:400;font-size:15px;margin-top:2px;">Gumana Hall</div>
-    <div class="addr">Al-Hijaz St, Hurghada</div>
-    <div class="btnrow">
-      <button class="btn" data-map="jumana Hall Al Hijaz Street Hurghada">📍 Directions</button>
-      <button class="btn solid" data-ics="reception">🗓️ Add to calendar</button>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><div class="line"></div><div class="mark">✦</div><div class="line"></div></div>
-
-<!-- MAP -->
-<section class="section" id="map">
-  <div class="kicker">Hurghada</div>
-  <h2>Find Us</h2>
-  <div class="mapwrap">
-    <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-      <rect x="0" y="0" width="300" height="200" rx="14" fill="var(--cream)"/>
-      <path d="M10 150 Q80 120 150 145 T290 130" stroke="var(--cashmere)" stroke-width="10" fill="none" stroke-linecap="round"/>
-      <path d="M20 40 Q100 70 180 40 T290 55" stroke="var(--cashmere)" stroke-width="6" fill="none" stroke-linecap="round" opacity=".6"/>
-      <g class="pin" data-map="Star Sky Hall Shatea El Gaish Al Qiyadat Street Hurghada">
-        <circle cx="70" cy="150" r="7" fill="var(--blush-deep)"/>
-        <text x="70" y="172" font-size="11" text-anchor="middle" fill="var(--ink)" font-family="Jost">Henna</text>
-      </g>
-      <g class="pin" data-map="Anba Shenouda Head of the Hermits Church Hurghada">
-        <circle cx="150" cy="80" r="7" fill="var(--gold)"/>
-        <text x="150" y="65" font-size="11" text-anchor="middle" fill="var(--ink)" font-family="Jost">Church</text>
-      </g>
-      <g class="pin" data-map="Gumana Hall Al Hijaz Street Hurghada">
-        <circle cx="230" cy="120" r="7" fill="var(--blush)"/>
-        <text x="230" y="142" font-size="11" text-anchor="middle" fill="var(--ink)" font-family="Jost">Reception</text>
+    <svg style="display:none" viewBox="0 0 60 60">
+      <g fill="none" stroke="currentColor" stroke-width="1.4">
+        <circle cx="30" cy="30" r="5"/>
+        <path d="M30 25 C25 15 20 15 18 20 C16 25 22 28 30 25Z"/>
+        <path d="M30 25 C35 15 40 15 42 20 C44 25 38 28 30 25Z"/>
+        <path d="M30 35 C25 45 20 45 18 40 C16 35 22 32 30 35Z"/>
+        <path d="M30 35 C35 45 40 45 42 40 C44 35 38 32 30 35Z"/>
       </g>
     </svg>
   </div>
-  <div class="maplegend">
-    <span><span class="dot" style="background:var(--blush-deep);"></span>Henna</span>
-    <span><span class="dot" style="background:var(--gold);"></span>Church</span>
-    <span><span class="dot" style="background:var(--blush);"></span>Reception</span>
+
+  <div class="monogram">K &amp; M</div>
+
+  <h1 class="names">
+    Kerollos
+    <span class="amp">&amp;</span>
+    Marina
+  </h1>
+
+  <p class="tag">
+    Together with our families, we joyfully invite you to celebrate our wedding
+  </p>
+
+  <p class="date">Sunday, October 4th 2026</p>
+
+  <div class="countdown" id="countdown" aria-live="polite">
+    <div class="cd-box">
+      <div class="cd-num" id="cd-d">--</div>
+      <div class="cd-lbl">Days</div>
+    </div>
+
+    <div class="cd-box">
+      <div class="cd-num" id="cd-h">--</div>
+      <div class="cd-lbl">Hrs</div>
+    </div>
+
+    <div class="cd-box">
+      <div class="cd-num" id="cd-m">--</div>
+      <div class="cd-lbl">Min</div>
+    </div>
+
+    <div class="cd-box">
+      <div class="cd-num" id="cd-s">--</div>
+      <div class="cd-lbl">Sec</div>
+    </div>
   </div>
-  <p style="margin-top:14px;font-size:12px;color:var(--ink-soft);">Tap a pin to open directions in Google Maps</p>
+
+  <div class="scrolldown">
+    SCROLL
+    <span></span>
+  </div>
+
 </section>
 
-<div class="divider"><div class="line"></div><div class="mark">✦</div><div class="line"></div></div>
+<div class="divider">
+  <div class="line"></div>
+  <div class="mark">✦</div>
+  <div class="line"></div>
+</div>
+
+<!-- VERSE -->
+<section class="section verse">
+  <p>
+    "Love is patient, love is kind... it always protects, always trusts, always hopes, always perseveres."
+  </p>
+
+  <span class="ref">1 Corinthians 13</span>
+</section>
+
+<div class="divider">
+  <div class="line"></div>
+  <div class="mark">✦</div>
+  <div class="line"></div>
+</div>
+
+<!-- EVENTS -->
+<section class="section" id="events">
+
+  <div class="kicker">Celebration Schedule</div>
+  <h2>Wedding Events</h2>
+
+  <!-- HENNA -->
+  <div class="event" id="henna">
+
+    <span class="icon">🌿</span>
+
+    <div class="time">Oct 2 &middot; 8:00 PM</div>
+
+    <div class="venue">Henna Night</div>
+
+    <div class="venue" style="font-weight:400;font-size:15px;margin-top:2px;">
+      Star Sky Hall
+    </div>
+
+    <div class="addr">
+      Shatea El Gaish, Al-Qiyadat St, Hurghada
+    </div>
+
+    <div class="btnrow">
+
+      <button
+        class="btn"
+        data-map-url="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac">
+        📍 Directions
+      </button>
+
+      <button
+        class="btn solid"
+        data-ics="henna">
+        🗓️ Add to calendar
+      </button>
+
+    </div>
+  </div>
+
+  <!-- CHURCH -->
+  <div class="event" id="church">
+
+    <span class="icon">⛪</span>
+
+    <div class="time">Oct 4 &middot; 5:00 PM</div>
+
+    <div class="venue">Wedding Ceremony</div>
+
+    <div class="venue" style="font-weight:400;font-size:15px;margin-top:2px;">
+      Anba Shenouda, Head of the Hermits Church
+    </div>
+
+    <div class="addr">
+      Hurghada
+    </div>
+
+    <div class="btnrow">
+
+      <button
+        class="btn"
+        data-map-url="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac">
+        📍 Directions
+      </button>
+
+      <button
+        class="btn solid"
+        data-ics="church">
+        🗓️ Add to calendar
+      </button>
+
+    </div>
+  </div>
+
+  <!-- RECEPTION -->
+  <div class="event" id="reception">
+
+    <span class="icon">🥂</span>
+
+    <div class="time">Oct 4 &middot; 7:00 PM</div>
+
+    <div class="venue">Reception</div>
+
+    <div class="venue" style="font-weight:400;font-size:15px;margin-top:2px;">
+      Gumana Hall
+    </div>
+
+    <div class="addr">
+      Al-Hijaz St, Hurghada
+    </div>
+
+    <div class="btnrow">
+
+      <button
+        class="btn"
+        data-map-url="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac">
+        📍 Directions
+      </button>
+
+      <button
+        class="btn solid"
+        data-ics="reception">
+        🗓️ Add to calendar
+      </button>
+
+    </div>
+  </div>
+
+</section>
+
+<div class="divider">
+  <div class="line"></div>
+  <div class="mark">✦</div>
+  <div class="line"></div>
+</div>
+
+<!-- MAP -->
+<section class="section" id="map">
+
+  <div class="kicker">Hurghada</div>
+  <h2>Find Us</h2>
+
+  <div class="mapwrap">
+
+    <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+
+      <rect
+        x="0"
+        y="0"
+        width="300"
+        height="200"
+        rx="14"
+        fill="var(--cream)"
+      />
+
+      <path
+        d="M10 150 Q80 120 150 145 T290 130"
+        stroke="var(--cashmere)"
+        stroke-width="10"
+        fill="none"
+        stroke-linecap="round"
+      />
+
+      <path
+        d="M20 40 Q100 70 180 40 T290 55"
+        stroke="var(--cashmere)"
+        stroke-width="6"
+        fill="none"
+        stroke-linecap="round"
+        opacity=".6"
+      />
+
+      <!-- HENNA PIN -->
+      <g
+        class="pin"
+        data-map-url="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac">
+
+        <circle
+          cx="70"
+          cy="150"
+          r="7"
+          fill="var(--blush-deep)"
+        />
+
+        <text
+          x="70"
+          y="172"
+          font-size="11"
+          text-anchor="middle"
+          fill="var(--ink)"
+          font-family="Jost">
+          Henna
+        </text>
+
+      </g>
+
+      <!-- CHURCH PIN -->
+      <g
+        class="pin"
+        data-map-url="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac">
+
+        <circle
+          cx="150"
+          cy="80"
+          r="7"
+          fill="var(--gold)"
+        />
+
+        <text
+          x="150"
+          y="65"
+          font-size="11"
+          text-anchor="middle"
+          fill="var(--ink)"
+          font-family="Jost">
+          Church
+        </text>
+
+      </g>
+
+      <!-- RECEPTION PIN -->
+      <g
+        class="pin"
+        data-map-url="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac">
+
+        <circle
+          cx="230"
+          cy="120"
+          r="7"
+          fill="var(--blush)"
+        />
+
+        <text
+          x="230"
+          y="142"
+          font-size="11"
+          text-anchor="middle"
+          fill="var(--ink)"
+          font-family="Jost">
+          Reception
+        </text>
+
+      </g>
+
+    </svg>
+
+  </div>
+
+  <div class="maplegend">
+
+    <span>
+      <span
+        class="dot"
+        style="background:var(--blush-deep);">
+      </span>
+      Henna
+    </span>
+
+    <span>
+      <span
+        class="dot"
+        style="background:var(--gold);">
+      </span>
+      Church
+    </span>
+
+    <span>
+      <span
+        class="dot"
+        style="background:var(--blush);">
+      </span>
+      Reception
+    </span>
+
+  </div>
+
+  <p style="margin-top:14px;font-size:12px;color:var(--ink-soft);">
+    Tap a pin to open directions in Google Maps
+  </p>
+
+</section>
+
+<div class="divider">
+  <div class="line"></div>
+  <div class="mark">✦</div>
+  <div class="line"></div>
+</div>
 
 <!-- GALLERY -->
 <section class="section" id="gallery">
+
   <div class="kicker">Our Moments</div>
   <h2>Gallery</h2>
+
   <div class="gallery" id="galleryGrid"></div>
-  <p style="margin-top:16px;font-size:12px;color:var(--ink-soft);">Drop photos into the /photos folder — they'll appear here automatically</p>
+
+  <p style="margin-top:16px;font-size:12px;color:var(--ink-soft);">
+    Drop photos into the /photos folder — they'll appear here automatically
+  </p>
+
 </section>
 
-<div class="divider"><div class="line"></div><div class="mark">✦</div><div class="line"></div></div>
+<div class="divider">
+  <div class="line"></div>
+  <div class="mark">✦</div>
+  <div class="line"></div>
+</div>
 
+<!-- FOOTER -->
 <footer>
+
   We can't wait to celebrate with you
-  <span class="small">Kerollos &amp; Marina</span>
+
+  <span class="small">
+    Kerollos &amp; Marina
+  </span>
+
 </footer>
 
 <div class="toast" id="toast"></div>
 
 <script>
+
 /* ---------------- petals ---------------- */
+
 (function(){
+
   var wrap = document.getElementById('petals');
-  var colors = ['#D79AA3','#E1CFBB','#B08D57'];
+
+  var colors = [
+    '#D79AA3',
+    '#E1CFBB',
+    '#B08D57'
+  ];
+
   var n = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 10;
-  for (var i=0;i<n;i++){
+
+  for (var i=0; i<n; i++){
+
     var p = document.createElement('div');
-    p.className='petal';
+
+    p.className = 'petal';
+
     var size = 10 + Math.random()*10;
+
     p.style.left = (Math.random()*100)+'vw';
-    p.style.setProperty('--drift', (Math.random()*80-40)+'px');
-    p.style.animationDuration = (14 + Math.random()*10)+'s';
-    p.style.animationDelay = (Math.random()*14)+'s';
+
+    p.style.setProperty(
+      '--drift',
+      (Math.random()*80-40)+'px'
+    );
+
+    p.style.animationDuration =
+      (14 + Math.random()*10)+'s';
+
+    p.style.animationDelay =
+      (Math.random()*14)+'s';
+
     var c = colors[i % colors.length];
-    p.innerHTML = '<svg width="'+size+'" height="'+size+'" viewBox="0 0 20 20"><path d="M10 0 C15 5 15 15 10 20 C5 15 5 5 10 0 Z" fill="'+c+'" opacity="0.8"/></svg>';
+
+    p.innerHTML =
+      '<svg width="'+size+'" height="'+size+'" viewBox="0 0 20 20">' +
+      '<path d="M10 0 C15 5 15 15 10 20 C5 15 5 5 10 0 Z" fill="'+c+'" opacity="0.8"/>' +
+      '</svg>';
+
     wrap.appendChild(p);
   }
+
 })();
+
 
 /* ---------------- countdown ---------------- */
+/*
+   Wedding ceremony:
+   October 4, 2026 — 5:00 PM Egypt time
+*/
+
 (function(){
-  var target = new Date("2026-10-04T17:00:00+02:00").getTime();
-  var d=document.getElementById('cd-d'), h=document.getElementById('cd-h'),
-      m=document.getElementById('cd-m'), s=document.getElementById('cd-s');
+
+  var target =
+    new Date("2026-10-04T17:00:00+03:00").getTime();
+
+  var d = document.getElementById('cd-d');
+  var h = document.getElementById('cd-h');
+  var m = document.getElementById('cd-m');
+  var s = document.getElementById('cd-s');
+
   function tick(){
+
     var diff = target - Date.now();
-    if (diff <= 0){ d.textContent=h.textContent=m.textContent=s.textContent='0'; return; }
-    var days = Math.floor(diff/86400000);
-    var hrs = Math.floor((diff%86400000)/3600000);
-    var mins = Math.floor((diff%3600000)/60000);
-    var secs = Math.floor((diff%60000)/1000);
-    d.textContent = days; h.textContent = String(hrs).padStart(2,'0');
-    m.textContent = String(mins).padStart(2,'0'); s.textContent = String(secs).padStart(2,'0');
+
+    if (diff <= 0){
+
+      d.textContent =
+      h.textContent =
+      m.textContent =
+      s.textContent = '0';
+
+      return;
+    }
+
+    var days =
+      Math.floor(diff / 86400000);
+
+    var hrs =
+      Math.floor((diff % 86400000) / 3600000);
+
+    var mins =
+      Math.floor((diff % 3600000) / 60000);
+
+    var secs =
+      Math.floor((diff % 60000) / 1000);
+
+    d.textContent = days;
+
+    h.textContent =
+      String(hrs).padStart(2,'0');
+
+    m.textContent =
+      String(mins).padStart(2,'0');
+
+    s.textContent =
+      String(secs).padStart(2,'0');
   }
+
   tick();
-  setInterval(tick, 1000);
+
+  setInterval(tick,1000);
+
 })();
+
 
 /* ---------------- toast ---------------- */
+
 function showToast(msg){
-  var t = document.getElementById('toast');
+
+  var t =
+    document.getElementById('toast');
+
   t.textContent = msg;
+
   t.classList.add('show');
+
   clearTimeout(showToast._h);
-  showToast._h = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+
+  showToast._h =
+    setTimeout(function(){
+      t.classList.remove('show');
+    },2600);
 }
 
-/* ---------------- maps ---------------- */
-document.querySelectorAll('[data-map]').forEach(function(el){
-  el.addEventListener('click', function(){
-    var q = el.getAttribute('data-map');
-    window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q), '_blank', 'noopener');
+
+/* ---------------- Google Maps ---------------- */
+
+document.querySelectorAll('[data-map-url]').forEach(function(el){
+
+  el.addEventListener('click',function(){
+
+    var url =
+      el.getAttribute('data-map-url');
+
+    window.open(
+      url,
+      '_blank',
+      'noopener'
+    );
+
   });
+
 });
 
-/* ---------------- calendar (.ics, plain Blob download — works on any host) ---------------- */
+
+/* ---------------- calendar (.ics) ---------------- */
+/*
+   All times below are converted to UTC
+   because Egypt is UTC+3 during October 2026.
+
+   Henna:
+   8:00 PM Egypt = 5:00 PM UTC
+
+   Church:
+   5:00 PM Egypt = 2:00 PM UTC
+
+   Reception:
+   7:00 PM Egypt = 4:00 PM UTC
+*/
+
 (function(){
+
   var events = {
-    henna: { title:'Henna Night - Kerollos & Marina', loc:'Star Sky Hall, Shatea El Gaish, Al-Qiyadat St, Hurghada', start:'20261002T180000Z', end:'20261002T210000Z' },
-    church: { title:'Wedding Ceremony - Kerollos & Marina', loc:'saint Shenouda Church, Hurghada', start:'20261004T150000Z', end:'20261004T160000Z' },
-    reception: { title:'Reception - Kerollos & Marina', loc:'jumana Hall, Al-Hijaz St, Hurghada', start:'20261004T170000Z', end:'20261004T210000Z' }
+
+    henna:{
+      title:'Henna Night - Kerollos & Marina',
+      loc:'Star Sky Hall, Shatea El Gaish, Al-Qiyadat St, Hurghada',
+      start:'20261002T170000Z',
+      end:'20261002T200000Z'
+    },
+
+    church:{
+      title:'Wedding Ceremony - Kerollos & Marina',
+      loc:'Anba Shenouda, Head of the Hermits Church, Hurghada',
+      start:'20261004T140000Z',
+      end:'20261004T150000Z'
+    },
+
+    reception:{
+      title:'Reception - Kerollos & Marina',
+      loc:'Gumana Hall, Al-Hijaz St, Hurghada',
+      start:'20261004T160000Z',
+      end:'20261004T190000Z'
+    }
+
   };
+
+
   function icsFor(ev){
-    return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Wedding//Invite//EN','BEGIN:VEVENT',
-      'UID:'+Math.random().toString(36).slice(2)+'@wedding-invite',
-      'DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z',
-      'DTSTART:'+ev.start,'DTEND:'+ev.end,'SUMMARY:'+ev.title,'LOCATION:'+ev.loc,
-      'END:VEVENT','END:VCALENDAR'].join('\r\n');
+
+    return [
+
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Kerollos & Marina//Wedding Invite//EN',
+      'CALSCALE:GREGORIAN',
+      'BEGIN:VEVENT',
+
+      'UID:' +
+      Math.random().toString(36).slice(2) +
+      '@wedding-invite',
+
+      'DTSTAMP:' +
+      new Date()
+        .toISOString()
+        .replace(/[-:]/g,'')
+        .split('.')[0] +
+      'Z',
+
+      'DTSTART:' + ev.start,
+
+      'DTEND:' + ev.end,
+
+      'SUMMARY:' + ev.title,
+
+      'LOCATION:' + ev.loc,
+
+      'END:VEVENT',
+      'END:VCALENDAR'
+
+    ].join('\r\n');
+
   }
-  document.querySelectorAll('[data-ics]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var ev = events[btn.getAttribute('data-ics')];
-      var blob = new Blob([icsFor(ev)], {type:'text/calendar'});
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url; a.download = btn.getAttribute('data-ics')+'.ics';
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      showToast('Event saved ✓');
+
+
+  document
+    .querySelectorAll('[data-ics]')
+    .forEach(function(btn){
+
+      btn.addEventListener('click',function(){
+
+        var ev =
+          events[
+            btn.getAttribute('data-ics')
+          ];
+
+        var blob =
+          new Blob(
+            [icsFor(ev)],
+            {type:'text/calendar'}
+          );
+
+        var url =
+          URL.createObjectURL(blob);
+
+        var a =
+          document.createElement('a');
+
+        a.href = url;
+
+        a.download =
+          btn.getAttribute('data-ics') +
+          '.ics';
+
+        document.body.appendChild(a);
+
+        a.click();
+
+        document.body.removeChild(a);
+
+        URL.revokeObjectURL(url);
+
+        showToast('Event saved ✓');
+
+      });
+
     });
-  });
+
 })();
 
-/* ---------------- gallery: reads photos/1.jpg ... photos/6.jpg, falls back to a flower motif ---------------- */
+
+/* ---------------- gallery ---------------- */
+
 (function(){
-  var grid = document.getElementById('galleryGrid');
-  var svgFlower = '<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="30" cy="30" r="5"/><path d="M30 25 C25 15 20 15 18 20 C16 25 22 28 30 25Z"/><path d="M30 25 C35 15 40 15 42 20 C44 25 38 28 30 25Z"/><path d="M30 35 C25 45 20 45 18 40 C16 35 22 32 30 35Z"/><path d="M30 35 C35 45 40 45 42 40 C44 35 38 32 30 35Z"/></g></svg>';
-  for (var i=1;i<=6;i++){
-    var f = document.createElement('div');
-    f.className='frame';
-    f.style.color = ['#D79AA3','#B08D57','#8B7A6C'][i%3];
-    var img = document.createElement('img');
-    img.src = 'photos/'+i+'.jpg';
-    img.alt = 'Wedding photo '+i;
-    img.onerror = function(){ this.style.display='none'; this.parentElement.innerHTML = svgFlower; };
+
+  var grid =
+    document.getElementById('galleryGrid');
+
+  var svgFlower =
+    '<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">' +
+    '<g fill="none" stroke="currentColor" stroke-width="1.4">' +
+    '<circle cx="30" cy="30" r="5"/>' +
+    '<path d="M30 25 C25 15 20 15 18 20 C16 25 22 28 30 25Z"/>' +
+    '<path d="M30 25 C35 15 40 15 42 20 C44 25 38 28 30 25Z"/>' +
+    '<path d="M30 35 C25 45 20 45 18 40 C16 35 22 32 30 35Z"/>' +
+    '<path d="M30 35 C35 45 40 45 42 40 C44 35 38 32 30 35Z"/>' +
+    '</g>' +
+    '</svg>';
+
+  for (var i=1; i<=6; i++){
+
+    var f =
+      document.createElement('div');
+
+    f.className = 'frame';
+
+    f.style.color =
+      ['#D79AA3','#B08D57','#8B7A6C'][i%3];
+
+    var img =
+      document.createElement('img');
+
+    img.src =
+      'photos/' + i + '.jpg';
+
+    img.alt =
+      'Wedding photo ' + i;
+
+    img.onerror =
+      function(){
+
+        this.style.display = 'none';
+
+        this.parentElement.innerHTML =
+          svgFlower;
+
+      };
+
     f.appendChild(img);
+
     grid.appendChild(f);
+
   }
+
 })();
+
 
 /* ---------------- share ---------------- */
-document.getElementById('shareBtn').addEventListener('click', async function(){
-  var shareData = { title:'Kerollos & Marina\'s Wedding', text:'Join us to celebrate our wedding on October 4th, 2026', url: location.href };
-  if (navigator.share){
-    try{ await navigator.share(shareData); } catch(e){}
-  } else {
-    try{ await navigator.clipboard.writeText(shareData.url); showToast('Invitation link copied'); }
-    catch(e){ showToast(shareData.url); }
-  }
+
+document
+  .getElementById('shareBtn')
+  .addEventListener('click',async function(){
+
+    var shareData = {
+
+      title:
+        'Kerollos & Marina\'s Wedding',
+
+      text:
+        'Join us to celebrate our wedding on October 4th, 2026',
+
+      url:
+        location.href
+
+    };
+
+    if (navigator.share){
+
+      try{
+
+        await navigator.share(shareData);
+
+      }catch(e){}
+
+    }else{
+
+      try{
+
+        await navigator.clipboard.writeText(
+          shareData.url
+        );
+
+        showToast(
+          'Invitation link copied'
+        );
+
+      }catch(e){
+
+        showToast(
+          shareData.url
+        );
+
+      }
+
+    }
+
 });
 
-/* ---------------- ambient music (generated tones, no external audio file needed) ---------------- */
+
+/* ---------------- ambient music ---------------- */
+/*
+   Generated tones.
+   No external audio file is required.
+*/
+
 (function(){
-  var btn = document.getElementById('musicToggle');
-  var ctx=null, playing=false, timer=null;
-  var notes=[523.25,587.33,659.25,783.99,880.0,783.99,659.25,587.33];
-  var idx=0;
-  function ensureCtx(){ if(!ctx){ var AC=window.AudioContext||window.webkitAudioContext; ctx=new AC(); } }
-  function pluck(freq,t){
-    var o=ctx.createOscillator(), g=ctx.createGain();
-    o.type='sine'; o.frequency.value=freq;
-    g.gain.setValueAtTime(0.0001,t);
-    g.gain.linearRampToValueAtTime(0.05,t+0.05);
-    g.gain.exponentialRampToValueAtTime(0.0001,t+1.4);
-    o.connect(g).connect(ctx.destination);
-    o.start(t); o.stop(t+1.5);
+
+  var btn =
+    document.getElementById('musicToggle');
+
+  var ctx = null;
+
+  var playing = false;
+
+  var timer = null;
+
+  var notes = [
+    523.25,
+    587.33,
+    659.25,
+    783.99,
+    880.0,
+    783.99,
+    659.25,
+    587.33
+  ];
+
+  var idx = 0;
+
+
+  function ensureCtx(){
+
+    if (!ctx){
+
+      var AC =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+      ctx = new AC();
+
+    }
+
   }
-  function loop(){ if(!playing) return; pluck(notes[idx%notes.length], ctx.currentTime); idx++; timer=setTimeout(loop,950); }
-  btn.addEventListener('click', function(){
+
+
+  function pluck(freq,t){
+
+    var o =
+      ctx.createOscillator();
+
+    var g =
+      ctx.createGain();
+
+    o.type = 'sine';
+
+    o.frequency.value = freq;
+
+    g.gain.setValueAtTime(
+      0.0001,
+      t
+    );
+
+    g.gain.linearRampToValueAtTime(
+      0.05,
+      t + 0.05
+    );
+
+    g.gain.exponentialRampToValueAtTime(
+      0.0001,
+      t + 1.4
+    );
+
+    o.connect(g).connect(
+      ctx.destination
+    );
+
+    o.start(t);
+
+    o.stop(t + 1.5);
+
+  }
+
+
+  function loop(){
+
+    if (!playing) return;
+
+    pluck(
+      notes[idx % notes.length],
+      ctx.currentTime
+    );
+
+    idx++;
+
+    timer =
+      setTimeout(loop,950);
+
+  }
+
+
+  btn.addEventListener('click',function(){
+
     ensureCtx();
-    if (ctx.state==='suspended') ctx.resume();
-    playing=!playing;
-    btn.textContent = playing ? '🔊' : '🔇';
-    if (playing) loop(); else clearTimeout(timer);
+
+    if (ctx.state === 'suspended'){
+      ctx.resume();
+    }
+
+    playing = !playing;
+
+    btn.textContent =
+      playing ? '🔊' : '🔇';
+
+    if (playing){
+
+      loop();
+
+    }else{
+
+      clearTimeout(timer);
+
+    }
+
   });
+
 })();
+
 </script>
+
 </body>
 </html>
