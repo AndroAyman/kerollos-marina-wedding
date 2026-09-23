@@ -123,8 +123,12 @@ textarea{
     justify-content:center;
 
     transition:
-        opacity 1s ease,
-        visibility 1s ease;
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+
+    overflow:hidden;
+
+    touch-action:none;
 }
 
 .opening.hidden{
@@ -161,6 +165,10 @@ textarea{
     align-items:center;
 
     text-align:center;
+
+    transition:
+        transform .8s ease,
+        opacity .8s ease;
 }
 
 .coming-title{
@@ -227,6 +235,9 @@ textarea{
     cursor:pointer;
 
     filter:drop-shadow(0 30px 30px rgba(0,0,0,.45));
+
+    transition:
+        transform .8s cubic-bezier(.16,1,.3,1);
 }
 
 .envelope{
@@ -258,27 +269,39 @@ textarea{
 
     height:76%;
 
-    background:var(--cream-light);
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7f0e3
+        );
 
     border-radius:2px;
 
     z-index:1;
 
-    transform:translateY(15px);
+    transform:
+        translateY(15px);
 
-    box-shadow:0 8px 20px rgba(0,0,0,.25);
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.25);
+
+    overflow:hidden;
 
     transition:
-        transform 1.4s cubic-bezier(.2,.8,.2,1),
-        z-index .1s 1s;
+        transform .15s linear,
+        height .15s linear;
 }
 
 .envelope-paper::before{
     content:"";
+
     position:absolute;
     inset:9px;
 
     border:1px solid rgba(185,145,79,.45);
+
+    pointer-events:none;
 }
 
 .envelope-flap{
@@ -357,78 +380,127 @@ textarea{
 
 
 /* =========================================================
-   KM SEAL
+   LETTER CONTENT
 ========================================================= */
 
-.wax-seal{
+.letter-content{
     position:absolute;
 
-    z-index:6;
+    top:34px;
+    left:22px;
+    right:22px;
 
-    left:50%;
-    top:50%;
+    text-align:center;
 
-    transform:translate(-50%,-50%);
+    color:#2a211c;
 
-    width:76px;
-    height:76px;
+    opacity:0;
 
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            #222,
-            #090807 65%,
-            #000
-        );
-
-    border:3px solid #0a0908;
-
-    box-shadow:
-        0 4px 10px rgba(0,0,0,.45),
-        inset 0 0 0 2px rgba(255,255,255,.08);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    transform:
+        translateY(35px);
 
     transition:
-        transform 1s ease,
-        opacity .6s ease;
+        opacity .8s ease,
+        transform .8s cubic-bezier(.16,1,.3,1);
 }
 
-.wax-seal::before{
-    content:"";
+.letter-line{
+    width:45px;
+    height:1px;
 
-    position:absolute;
-    inset:6px;
+    background:var(--gold);
 
-    border:1px solid var(--gold);
-    border-radius:50%;
+    margin:0 auto 17px;
 
-    opacity:.9;
+    transform:scaleX(0);
+
+    transform-origin:center;
+
+    transition:
+        transform .8s cubic-bezier(.16,1,.3,1);
 }
 
-.wax-logo{
-    color:var(--gold-light);
+.letter-small{
+    font-family:"Cinzel",serif;
 
+    font-size:8px;
+
+    letter-spacing:3px;
+
+    color:var(--gold-dark);
+
+    margin-bottom:13px;
+}
+
+.letter-names{
     font-family:"Great Vibes",cursive;
-    font-size:33px;
 
-    transform:rotate(-8deg);
+    font-size:42px;
 
-    position:relative;
-    z-index:2;
+    line-height:1;
+
+    white-space:nowrap;
+
+    color:#17110d;
 }
 
-.wax-logo span{
-    margin-left:-9px;
+.letter-names span{
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:22px;
+
+    color:var(--gold-dark);
+
+    margin:0 5px;
+}
+
+.letter-date{
+    margin-top:15px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    color:#6b5849;
+
+    opacity:0;
+
+    transform:translateY(12px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.letter-message{
+    margin-top:34px;
+
+    font-family:"Playfair Display",serif;
+
+    font-size:15px;
+
+    line-height:1.8;
+
+    color:#58483d;
+
+    opacity:0;
+
+    clip-path:inset(0 100% 0 0);
+
+    transition:
+        opacity .5s ease,
+        clip-path 1.8s cubic-bezier(.77,0,.18,1);
+}
+
+.letter-line.bottom{
+    margin-top:28px;
 }
 
 
 /* =========================================================
-   TAP TO OPEN
+   TAP / SCROLL INSTRUCTION
 ========================================================= */
 
 .tap-open{
@@ -442,6 +514,10 @@ textarea{
     margin-top:27px;
 
     animation:breathe 2s infinite;
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
 }
 
 .tap-line{
@@ -453,35 +529,162 @@ textarea{
     margin:12px auto 0;
 
     opacity:.8;
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+}
+
+.scroll-hint{
+    position:absolute;
+
+    left:50%;
+    bottom:-55px;
+
+    transform:
+        translateX(-50%)
+        translateY(10px);
+
+    color:#f6ead5;
+
+    font-family:"Cinzel",serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    white-space:nowrap;
+
+    opacity:0;
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+
+    animation:
+        scrollHint 2s infinite;
+}
+
+.scroll-arrow{
+    display:block;
+
+    width:10px;
+    height:10px;
+
+    margin:9px auto 0;
+
+    border-right:1px solid var(--gold-light);
+    border-bottom:1px solid var(--gold-light);
+
+    transform:rotate(45deg);
+}
+
+@keyframes scrollHint{
+
+    0%,100%{
+        opacity:.35;
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
+    50%{
+        opacity:1;
+        transform:
+            translateX(-50%)
+            translateY(8px);
+    }
+
 }
 
 @keyframes breathe{
-    0%,100%{opacity:.5}
-    50%{opacity:1}
+
+    0%,100%{
+        opacity:.5;
+    }
+
+    50%{
+        opacity:1;
+    }
+
 }
 
 
 /* =========================================================
-   OPENING ANIMATION
+   OPENING ANIMATION STATE
 ========================================================= */
 
 .opening.opening-animation .envelope-flap{
     transform:rotateX(180deg);
+
     z-index:1;
 }
 
 .opening.opening-animation .envelope-paper{
-    transform:translateY(-120px);
     z-index:5;
 }
 
 .opening.opening-animation .wax-seal{
     opacity:0;
-    transform:translate(-50%,-50%) scale(.5);
+
+    transform:
+        translate(-50%,-50%)
+        scale(.45)
+        rotate(20deg);
 }
 
 .opening.opening-animation .tap-open{
     opacity:0;
+
+    transform:translateY(-10px);
+}
+
+.opening.opening-animation .tap-line{
+    opacity:0;
+}
+
+.opening.opening-animation .scroll-hint{
+    opacity:1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+.opening.opening-animation .letter-content{
+    opacity:1;
+
+    transform:
+        translateY(0);
+}
+
+.opening.opening-animation .letter-line{
+    transform:scaleX(1);
+}
+
+.opening.opening-animation .letter-date{
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+.opening.opening-animation .letter-message{
+    opacity:1;
+
+    clip-path:inset(0 0 0 0);
+}
+
+
+/* =========================================================
+   LETTER SCROLL PROGRESS
+========================================================= */
+
+.opening.letter-complete .scroll-hint{
+    opacity:0;
+}
+
+.opening.letter-complete .opening-content{
+    transform:translateY(-20px);
 }
 
 
@@ -1519,6 +1722,7 @@ textarea{
 }
 
 @keyframes musicPulse{
+
     0%{
         box-shadow:
             0 0 0 0 rgba(185,145,79,.55),
@@ -1536,6 +1740,7 @@ textarea{
             0 0 0 0 rgba(185,145,79,0),
             0 7px 25px rgba(0,0,0,.3);
     }
+
 }
 
 .music-hint{
@@ -1602,21 +1807,11 @@ textarea{
 
 /* =========================================================
    ARABIC
-   Important:
-   No RTL direction is used.
-   The website layout stays exactly the same.
 ========================================================= */
 
 body.arabic{
     font-family:"Amiri",serif;
 }
-
-
-/*
-   Arabic text uses Amiri.
-   Names, KM and the wax seal stay in their
-   original English fonts.
-*/
 
 body.arabic .coming-title,
 body.arabic .tap-open,
@@ -1649,68 +1844,29 @@ body.arabic .footer-message{
     font-family:"Amiri",serif;
 }
 
-
-/*
-   Keep the original English decorative font
-   for the couple names.
-*/
-
 body.arabic .couple-names{
     font-family:"Great Vibes",cursive;
 }
-
-
-/*
-   Keep the original English font for
-   the reception decorative phrase.
-*/
 
 body.arabic .reception-subtitle{
     font-family:"Great Vibes",cursive;
 }
 
-
-/*
-   Keep the original English font for RSVP
-   decorative phrase.
-*/
-
 body.arabic .rsvp-script{
     font-family:"Great Vibes",cursive;
 }
-
-
-/*
-   Keep KM at the footer exactly as it is.
-*/
 
 body.arabic .footer-km{
     font-family:"Great Vibes",cursive;
 }
 
-
-/*
-   Keep KM inside the wax seal exactly as it is.
-*/
-
 body.arabic .wax-logo{
     font-family:"Great Vibes",cursive;
 }
 
-
-/*
-   Keep the form layout exactly the same.
-*/
-
 body.arabic .rsvp-form{
     text-align:left;
 }
-
-
-/*
-   Arabic text line-height adjustments only.
-   No sizes or layout positions are changed.
-*/
 
 body.arabic .scripture{
     line-height:1.9;
@@ -1762,6 +1918,43 @@ body.arabic .special-message p{
 
     .wax-logo{
         font-size:29px;
+    }
+
+    .letter-content{
+        top:27px;
+        left:15px;
+        right:15px;
+    }
+
+    .letter-small{
+        font-size:7px;
+        letter-spacing:2px;
+    }
+
+    .letter-names{
+        font-size:34px;
+    }
+
+    .letter-names span{
+        font-size:18px;
+    }
+
+    .letter-date{
+        font-size:7px;
+        letter-spacing:2px;
+    }
+
+    .letter-message{
+        font-size:12px;
+        margin-top:25px;
+    }
+
+    .scroll-hint{
+        bottom:-48px;
+
+        font-size:8px;
+
+        letter-spacing:2px;
     }
 
     .paper-section{
@@ -1858,6 +2051,7 @@ body.arabic .special-message p{
     .footer{
         padding:80px 15px 70px;
     }
+
 }
 
 </style>
@@ -1865,12 +2059,17 @@ body.arabic .special-message p{
 
 <body class="locked">
 
+
 <!-- =========================================================
      LANGUAGE SWITCH
 ========================================================= -->
 
 <div class="language-switch">
-    <button id="languageButton">عربي</button>
+
+    <button id="languageButton">
+        عربي
+    </button>
+
 </div>
 
 
@@ -1903,7 +2102,11 @@ body.arabic .special-message p{
 ========================================================= -->
 
 <audio id="weddingMusic" loop preload="auto">
-    <source src="photos/music.mp3" type="audio/mpeg">
+
+    <source
+        src="photos/music.mp3"
+        type="audio/mpeg">
+
 </audio>
 
 
@@ -1915,51 +2118,152 @@ body.arabic .special-message p{
 
     <div class="opening-content">
 
-        <div class="coming-title"
-             data-en="SOMETHING BEAUTIFUL<br>IS COMING"
-             data-ar="شيء جميل<br>قادم">
-            SOMETHING BEAUTIFUL<br>
+
+        <div
+            class="coming-title"
+            data-en="SOMETHING BEAUTIFUL<br>IS COMING"
+            data-ar="شيء جميل<br>قادم">
+
+            SOMETHING BEAUTIFUL
+            <br>
             IS COMING
+
         </div>
+
 
         <div class="ornament">
+
             <span>❦</span>
+
         </div>
 
 
-        <div class="envelope-area" id="envelope">
+        <div
+            class="envelope-area"
+            id="envelope">
+
 
             <div class="envelope">
 
-                <div class="envelope-paper"></div>
+
+                <!-- =================================================
+                     LETTER
+                ================================================== -->
+
+                <div class="envelope-paper">
+
+                    <div class="letter-content">
+
+
+                        <div class="letter-line"></div>
+
+
+                        <div
+                            class="letter-small"
+                            data-en="OUR STORY BEGINS"
+                            data-ar="تبدأ حكايتنا">
+
+                            OUR STORY BEGINS
+
+                        </div>
+
+
+                        <div class="letter-names">
+
+                            Kerollos
+
+                            <span>&</span>
+
+                            Marina
+
+                        </div>
+
+
+                        <div class="letter-date">
+
+                            04 · 10 · 2026
+
+                        </div>
+
+
+                        <div class="letter-message">
+
+                            A beautiful journey
+                            <br>
+                            is about to begin...
+
+                        </div>
+
+
+                        <div class="letter-line bottom"></div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     ENVELOPE FLAP
+                ================================================== -->
 
                 <div class="envelope-flap"></div>
 
+
                 <div class="envelope-left"></div>
+
                 <div class="envelope-right"></div>
 
                 <div class="envelope-bottom"></div>
 
+
+                <!-- =================================================
+                     KM SEAL
+                ================================================== -->
+
                 <div class="wax-seal">
 
                     <div class="wax-logo">
+
                         K<span>M</span>
+
                     </div>
 
                 </div>
+
 
             </div>
 
         </div>
 
 
-        <div class="tap-open"
-             data-en="TAP TO OPEN"
-             data-ar="اضغط للفتح">
+        <div
+            class="tap-open"
+            data-en="TAP TO OPEN"
+            data-ar="اضغط للفتح">
+
             TAP TO OPEN
+
         </div>
 
+
         <div class="tap-line"></div>
+
+
+        <div class="scroll-hint">
+
+            <span
+                data-en="SCROLL TO REVEAL"
+                data-ar="اسحب للأعلى للكشف">
+
+                SCROLL TO REVEAL
+
+            </span>
+
+            <span class="scroll-arrow"></span>
+
+        </div>
+
 
     </div>
 
@@ -2003,18 +2307,23 @@ body.arabic .special-message p{
         <br>
         LET NOT MAN SEPARATE
 
+
         <div
             class="scripture-reference"
             data-en="MATTHEW 19:6"
             data-ar="مَتَّى 19: 6">
+
             MATTHEW 19:6
+
         </div>
 
     </div>
 
 
     <div class="divider">
+
         <span>❦</span>
+
     </div>
 
 
@@ -2022,7 +2331,9 @@ body.arabic .special-message p{
         class="small-heading"
         data-en="THE WEDDING OF"
         data-ar="حفل زفاف">
+
         THE WEDDING OF
+
     </div>
 
 
@@ -2043,25 +2354,36 @@ body.arabic .special-message p{
             class="day"
             data-en="04<sup>th</sup> OF OCTOBER"
             data-ar="04 أكتوبر">
+
             04<sup>th</sup> OF OCTOBER
+
         </div>
 
+
         <div class="year">
+
             2026
+
         </div>
+
 
         <div
             class="weekday"
             data-en="SUNDAY"
             data-ar="الأحد">
+
             SUNDAY
+
         </div>
+
 
         <div
             class="time"
             data-en="AT 5:00 PM"
             data-ar="الساعة 5:00 مساءً">
+
             AT 5:00 PM
+
         </div>
 
     </div>
@@ -2071,19 +2393,26 @@ body.arabic .special-message p{
         class="location-title"
         data-en="AT. SAINT SHENODA CHURCH"
         data-ar="في كنيسة القديس شنودة">
+
         AT. SAINT SHENODA CHURCH
+
     </div>
+
 
     <div
         class="location-city"
         data-en="HURGHADA"
         data-ar="الغردقة">
+
         HURGHADA
+
     </div>
 
 
     <div class="divider">
+
         <span>✦</span>
+
     </div>
 
 
@@ -2099,7 +2428,12 @@ body.arabic .special-message p{
 
         </p>
 
-        <div class="heart">♥</div>
+
+        <div class="heart">
+
+            ♥
+            
+        </div>
 
     </div>
 
@@ -2120,23 +2454,33 @@ body.arabic .special-message p{
         class="countdown-title"
         data-en="COUNTING THE MOMENTS"
         data-ar="نعد اللحظات">
+
         COUNTING THE MOMENTS
+
     </div>
 
 
     <div class="countdown">
 
+
         <div class="count-box">
 
-            <div class="count-number" id="days">
+            <div
+                class="count-number"
+                id="days">
+
                 00
+
             </div>
+
 
             <div
                 class="count-label"
                 data-en="DAYS"
                 data-ar="يوم">
+
                 DAYS
+
             </div>
 
         </div>
@@ -2144,15 +2488,22 @@ body.arabic .special-message p{
 
         <div class="count-box">
 
-            <div class="count-number" id="hours">
+            <div
+                class="count-number"
+                id="hours">
+
                 00
+
             </div>
+
 
             <div
                 class="count-label"
                 data-en="HOURS"
                 data-ar="ساعة">
+
                 HOURS
+
             </div>
 
         </div>
@@ -2160,15 +2511,22 @@ body.arabic .special-message p{
 
         <div class="count-box">
 
-            <div class="count-number" id="minutes">
+            <div
+                class="count-number"
+                id="minutes">
+
                 00
+
             </div>
+
 
             <div
                 class="count-label"
                 data-en="MINUTES"
                 data-ar="دقيقة">
+
                 MINUTES
+
             </div>
 
         </div>
@@ -2176,18 +2534,26 @@ body.arabic .special-message p{
 
         <div class="count-box">
 
-            <div class="count-number" id="seconds">
+            <div
+                class="count-number"
+                id="seconds">
+
                 00
+
             </div>
+
 
             <div
                 class="count-label"
                 data-en="SECONDS"
                 data-ar="ثانية">
+
                 SECONDS
+
             </div>
 
         </div>
+
 
     </div>
 
@@ -2208,14 +2574,18 @@ body.arabic .special-message p{
         class="event-label"
         data-en="OUR CEREMONY"
         data-ar="مراسم الزفاف">
+
         OUR CEREMONY
+
     </div>
 
 
     <h2
         data-en="SAINT SHENODA CHURCH"
         data-ar="كنيسة القديس شنودة">
+
         SAINT SHENODA CHURCH
+
     </h2>
 
 
@@ -2223,7 +2593,9 @@ body.arabic .special-message p{
         class="event-time"
         data-en="SUNDAY · 04 OCTOBER 2026 · 5:00 PM"
         data-ar="الأحد · 04 أكتوبر 2026 · 5:00 مساءً">
+
         SUNDAY · 04 OCTOBER 2026 · 5:00 PM
+
     </div>
 
 
@@ -2231,7 +2603,9 @@ body.arabic .special-message p{
         class="event-place"
         data-en="St. Shenoda Church"
         data-ar="كنيسة القديس شنودة">
+
         St. Shenoda Church
+
     </div>
 
 
@@ -2239,7 +2613,9 @@ body.arabic .special-message p{
         class="event-address"
         data-en="Hurghada, Red Sea, Egypt"
         data-ar="الغردقة، البحر الأحمر، مصر">
+
         Hurghada, Red Sea, Egypt
+
     </div>
 
 
@@ -2272,19 +2648,25 @@ body.arabic .special-message p{
         class="henna-title"
         data-en="BEFORE OUR SPECIAL DAY"
         data-ar="قبل يومنا المميز">
+
         BEFORE OUR SPECIAL DAY
+
     </div>
 
 
     <h3
         data-en="HENNA NIGHT"
         data-ar="ليلة الحنة">
+
         HENNA NIGHT
+
     </h3>
 
 
     <div class="divider">
+
         <span>❦</span>
+
     </div>
 
 
@@ -2292,7 +2674,9 @@ body.arabic .special-message p{
         class="event-time"
         data-en="FRIDAY · 02 OCTOBER 2026 · 8:00 PM"
         data-ar="الجمعة · 02 أكتوبر 2026 · 8:00 مساءً">
+
         FRIDAY · 02 OCTOBER 2026 · 8:00 PM
+
     </div>
 
 
@@ -2300,7 +2684,9 @@ body.arabic .special-message p{
         class="event-place"
         data-en="Star Sky Hall"
         data-ar="قاعة ستار سكاي">
+
         Star Sky Hall
+
     </div>
 
 
@@ -2308,7 +2694,9 @@ body.arabic .special-message p{
         class="event-address"
         data-en="Shatea El Gaish · Al-Qiyadat St. · Hurghada"
         data-ar="شاطئ الجيش · شارع القيادات · الغردقة">
+
         Shatea El Gaish · Al-Qiyadat St. · Hurghada
+
     </div>
 
 
@@ -2343,19 +2731,25 @@ body.arabic .special-message p{
         class="reception-subtitle"
         data-en="Specially For You"
         data-ar="خصيصًا من أجلكم">
+
         Specially For You
+
     </div>
 
 
     <div class="divider">
+
         <span>♥</span>
+
     </div>
 
 
     <h2
         data-en="Jumana Hall"
         data-ar="قاعة جمانة">
+
         Jumana Hall
+
     </h2>
 
 
@@ -2363,7 +2757,9 @@ body.arabic .special-message p{
         class="reception-time"
         data-en="AT 7:00 PM"
         data-ar="الساعة 7:00 مساءً">
+
         AT 7:00 PM
+
     </div>
 
 
@@ -2371,7 +2767,9 @@ body.arabic .special-message p{
         class="reception-address"
         data-en="Al-Hijaz St. · Hurghada"
         data-ar="شارع الحجاز · الغردقة">
+
         Al-Hijaz St. · Hurghada
+
     </div>
 
 
@@ -2404,43 +2802,86 @@ body.arabic .special-message p{
         class="section-title"
         data-en="OUR BEAUTIFUL MOMENTS"
         data-ar="أجمل لحظاتنا">
+
         OUR BEAUTIFUL MOMENTS
+
     </div>
 
 
     <div class="gallery">
 
-        <div class="gallery-item">
-            <img src="photos/1.jpg" alt="">
-        </div>
 
         <div class="gallery-item">
-            <img src="photos/2.jpg" alt="">
+
+            <img
+                src="photos/1.jpg"
+                alt="">
+
         </div>
 
-        <div class="gallery-item">
-            <img src="photos/3.jpg" alt="">
-        </div>
 
         <div class="gallery-item">
-            <img src="photos/4.jpg" alt="">
+
+            <img
+                src="photos/2.jpg"
+                alt="">
+
         </div>
 
-        <div class="gallery-item">
-            <img src="photos/5.jpg" alt="">
-        </div>
 
         <div class="gallery-item">
-            <img src="photos/6.jpg" alt="">
+
+            <img
+                src="photos/3.jpg"
+                alt="">
+
         </div>
 
-        <div class="gallery-item">
-            <img src="photos/7.jpg" alt="">
-        </div>
 
         <div class="gallery-item">
-            <img src="photos/8.jpg" alt="">
+
+            <img
+                src="photos/4.jpg"
+                alt="">
+
         </div>
+
+
+        <div class="gallery-item">
+
+            <img
+                src="photos/5.jpg"
+                alt="">
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+                src="photos/6.jpg"
+                alt="">
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+                src="photos/7.jpg"
+                alt="">
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+                src="photos/8.jpg"
+                alt="">
+
+        </div>
+
 
     </div>
 
@@ -2463,26 +2904,36 @@ body.arabic .special-message p{
         class="rsvp-script"
         data-en="Leave Us a Message"
         data-ar="اترك لنا رسالة">
+
         Leave Us a Message
+
     </div>
 
 
     <h2
         data-en="WE WOULD LOVE TO HEAR FROM YOU"
         data-ar="يسعدنا أن نسمع منكم">
+
         WE WOULD LOVE TO HEAR FROM YOU
+
     </h2>
 
 
-    <form class="rsvp-form" id="rsvpForm">
+    <form
+        class="rsvp-form"
+        id="rsvpForm">
+
 
         <label
             class="form-label"
             for="guestName"
             data-en="YOUR NAME"
             data-ar="اسمك">
+
             YOUR NAME
+
         </label>
+
 
         <input
             class="form-input"
@@ -2499,11 +2950,14 @@ body.arabic .special-message p{
             class="form-label"
             data-en="WILL YOU BE ATTENDING?"
             data-ar="هل ستحضرون؟">
+
             WILL YOU BE ATTENDING?
+
         </label>
 
 
         <div class="attendance">
+
 
             <input
                 type="radio"
@@ -2512,11 +2966,14 @@ body.arabic .special-message p{
                 value="YES"
                 required>
 
+
             <label
                 for="yes"
                 data-en="YES"
                 data-ar="نعم">
+
                 YES
+
             </label>
 
 
@@ -2526,12 +2983,16 @@ body.arabic .special-message p{
                 id="no"
                 value="NO">
 
+
             <label
                 for="no"
                 data-en="NO"
                 data-ar="لا">
+
                 NO
+
             </label>
+
 
         </div>
 
@@ -2541,8 +3002,11 @@ body.arabic .special-message p{
             for="guestMessage"
             data-en="LEAVE US A MESSAGE"
             data-ar="اترك لنا رسالة">
+
             LEAVE US A MESSAGE
+
         </label>
+
 
         <textarea
             class="form-textarea"
@@ -2562,6 +3026,7 @@ body.arabic .special-message p{
 
         </button>
 
+
     </form>
 
 </section>
@@ -2580,7 +3045,9 @@ body.arabic .special-message p{
 
 
     <div class="divider">
+
         <span>❦</span>
+
     </div>
 
 
@@ -2597,12 +3064,16 @@ body.arabic .special-message p{
 
 
     <div class="footer-km">
+
         KM
+
     </div>
 
 
     <div class="footer-date">
+
         04 · 10 · 2026
+
     </div>
 
 </section>
@@ -2615,7 +3086,10 @@ body.arabic .special-message p{
      TOAST
 ========================================================= -->
 
-<div class="toast" id="toast"></div>
+<div
+    class="toast"
+    id="toast">
+</div>
 
 
 <script>
@@ -2624,17 +3098,35 @@ body.arabic .special-message p{
    ELEMENTS
 ========================================================= */
 
-const opening = document.getElementById("opening");
-const envelope = document.getElementById("envelope");
-const mainSite = document.getElementById("mainSite");
+const opening =
+    document.getElementById("opening");
 
-const music = document.getElementById("weddingMusic");
-const musicButton = document.getElementById("musicButton");
-const musicHint = document.getElementById("musicHint");
+const envelope =
+    document.getElementById("envelope");
 
-const languageButton = document.getElementById("languageButton");
+const mainSite =
+    document.getElementById("mainSite");
 
-const toast = document.getElementById("toast");
+const music =
+    document.getElementById("weddingMusic");
+
+const musicButton =
+    document.getElementById("musicButton");
+
+const musicHint =
+    document.getElementById("musicHint");
+
+const languageButton =
+    document.getElementById("languageButton");
+
+const toast =
+    document.getElementById("toast");
+
+const envelopePaper =
+    document.querySelector(".envelope-paper");
+
+const letterContent =
+    document.querySelector(".letter-content");
 
 
 /* =========================================================
@@ -2647,7 +3139,8 @@ let currentLanguage =
 
 function updateLanguage(){
 
-    document.documentElement.lang = currentLanguage;
+    document.documentElement.lang =
+        currentLanguage;
 
 
     document.body.classList.toggle(
@@ -2656,47 +3149,39 @@ function updateLanguage(){
     );
 
 
-    /*
-       Change every element that has
-       data-en and data-ar.
-    */
+    document
+        .querySelectorAll("[data-en]")
+        .forEach(element => {
 
-    document.querySelectorAll("[data-en]").forEach(element => {
-
-        const value =
-            currentLanguage === "ar"
-                ? element.dataset.ar
-                : element.dataset.en;
-
-        if(value){
-
-            element.innerHTML = value;
-
-        }
-
-    });
+            const value =
+                currentLanguage === "ar"
+                    ? element.dataset.ar
+                    : element.dataset.en;
 
 
-    /*
-       Change input and textarea placeholders.
-    */
+            if(value){
 
-    document.querySelectorAll(
-        "[data-placeholder-en]"
-    ).forEach(element => {
+                element.innerHTML =
+                    value;
 
-        element.placeholder =
-            currentLanguage === "ar"
-                ? element.dataset.placeholderAr
-                : element.dataset.placeholderEn;
+            }
 
-    });
+        });
 
 
-    /*
-       The language button itself stays
-       in the same position.
-    */
+    document
+        .querySelectorAll(
+            "[data-placeholder-en]"
+        )
+        .forEach(element => {
+
+            element.placeholder =
+                currentLanguage === "ar"
+                    ? element.dataset.placeholderAr
+                    : element.dataset.placeholderEn;
+
+        });
+
 
     languageButton.textContent =
         currentLanguage === "en"
@@ -2709,23 +3194,26 @@ function updateLanguage(){
 }
 
 
-languageButton.addEventListener("click", () => {
+languageButton.addEventListener(
+    "click",
+    () => {
 
-    currentLanguage =
-        currentLanguage === "en"
-            ? "ar"
-            : "en";
-
-
-    localStorage.setItem(
-        "weddingLanguage",
-        currentLanguage
-    );
+        currentLanguage =
+            currentLanguage === "en"
+                ? "ar"
+                : "en";
 
 
-    updateLanguage();
+        localStorage.setItem(
+            "weddingLanguage",
+            currentLanguage
+        );
 
-});
+
+        updateLanguage();
+
+    }
+);
 
 
 /* =========================================================
@@ -2739,7 +3227,9 @@ function updateMusicText(){
 
     if(musicPlaying){
 
-        musicButton.textContent = "❚❚";
+        musicButton.textContent =
+            "❚❚";
+
 
         musicHint.textContent =
             currentLanguage === "ar"
@@ -2748,7 +3238,9 @@ function updateMusicText(){
 
     }else{
 
-        musicButton.textContent = "▶";
+        musicButton.textContent =
+            "▶";
+
 
         musicHint.textContent =
             currentLanguage === "ar"
@@ -2766,17 +3258,24 @@ async function playMusic(){
 
         await music.play();
 
-        musicPlaying = true;
+        musicPlaying =
+            true;
 
-        musicButton.classList.add("playing");
+        musicButton.classList.add(
+            "playing"
+        );
 
         updateMusicText();
 
     }catch(error){
 
-        console.log("Music could not start:", error);
+        console.log(
+            "Music could not start:",
+            error
+        );
 
-        musicPlaying = false;
+        musicPlaying =
+            false;
 
         updateMusicText();
 
@@ -2795,118 +3294,513 @@ function pauseMusic(){
 
     music.pause();
 
-    musicPlaying = false;
+    musicPlaying =
+        false;
 
-    musicButton.classList.remove("playing");
+    musicButton.classList.remove(
+        "playing"
+    );
 
     updateMusicText();
 
 }
 
 
-musicButton.addEventListener("click", () => {
+musicButton.addEventListener(
+    "click",
+    () => {
 
-    if(music.paused){
+        if(music.paused){
 
-        playMusic();
+            playMusic();
 
-    }else{
+        }else{
 
-        pauseMusic();
+            pauseMusic();
+
+        }
 
     }
-
-});
-
-
-music.addEventListener("play", () => {
-
-    musicPlaying = true;
-
-    musicButton.classList.add("playing");
-
-    updateMusicText();
-
-});
+);
 
 
-music.addEventListener("pause", () => {
+music.addEventListener(
+    "play",
+    () => {
 
-    musicPlaying = false;
+        musicPlaying =
+            true;
 
-    musicButton.classList.remove("playing");
+        musicButton.classList.add(
+            "playing"
+        );
 
-    updateMusicText();
+        updateMusicText();
 
-});
+    }
+);
 
 
-music.addEventListener("ended", () => {
+music.addEventListener(
+    "pause",
+    () => {
 
-    musicPlaying = false;
+        musicPlaying =
+            false;
 
-    musicButton.classList.remove("playing");
+        musicButton.classList.remove(
+            "playing"
+        );
 
-    updateMusicText();
+        updateMusicText();
 
-});
+    }
+);
+
+
+music.addEventListener(
+    "ended",
+    () => {
+
+        musicPlaying =
+            false;
+
+        musicButton.classList.remove(
+            "playing"
+        );
+
+        updateMusicText();
+
+    }
+);
 
 
 music.load();
 
 
 /* =========================================================
-   OPEN ENVELOPE
+   OPENING LETTER ANIMATION
 ========================================================= */
 
-let invitationOpened = false;
+let invitationOpened =
+    false;
+
+let letterProgress =
+    0;
+
+let touchStartY =
+    0;
+
+let lastTouchY =
+    0;
+
+let completingInvitation =
+    false;
 
 
-envelope.addEventListener("click", async () => {
+/*
+   Open the envelope.
+*/
 
-    if(invitationOpened){
+envelope.addEventListener(
+    "click",
+    async () => {
+
+        if(invitationOpened){
+
+            return;
+
+        }
+
+
+        invitationOpened =
+            true;
+
+
+        opening.classList.add(
+            "opening-animation"
+        );
+
+
+        try{
+
+            await music.play();
+
+            musicPlaying =
+                true;
+
+            musicButton.classList.add(
+                "playing"
+            );
+
+            updateMusicText();
+
+        }catch(error){
+
+            console.log(
+                "Autoplay blocked:",
+                error
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   DESKTOP SCROLL
+========================================================= */
+
+window.addEventListener(
+    "wheel",
+    event => {
+
+        if(
+            !invitationOpened ||
+            completingInvitation
+        ){
+
+            return;
+
+        }
+
+
+        event.preventDefault();
+
+
+        const delta =
+            event.deltaY;
+
+
+        updateLetterProgress(
+            delta * 0.055
+        );
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+/* =========================================================
+   MOBILE TOUCH SCROLL
+========================================================= */
+
+opening.addEventListener(
+    "touchstart",
+    event => {
+
+        if(!invitationOpened){
+
+            return;
+
+        }
+
+
+        touchStartY =
+            event.touches[0].clientY;
+
+        lastTouchY =
+            touchStartY;
+
+    },
+    {
+        passive:true
+    }
+);
+
+
+opening.addEventListener(
+    "touchmove",
+    event => {
+
+        if(
+            !invitationOpened ||
+            completingInvitation
+        ){
+
+            return;
+
+        }
+
+
+        event.preventDefault();
+
+
+        const currentY =
+            event.touches[0].clientY;
+
+
+        const movement =
+            lastTouchY -
+            currentY;
+
+
+        lastTouchY =
+            currentY;
+
+
+        updateLetterProgress(
+            movement * 0.18
+        );
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+/* =========================================================
+   KEYBOARD SUPPORT
+========================================================= */
+
+window.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            !invitationOpened ||
+            completingInvitation
+        ){
+
+            return;
+
+        }
+
+
+        if(
+            event.key === "ArrowUp" ||
+            event.key === "PageUp"
+        ){
+
+            event.preventDefault();
+
+            updateLetterProgress(5);
+
+        }
+
+
+        if(
+            event.key === "ArrowDown" ||
+            event.key === "PageDown" ||
+            event.key === " "
+        ){
+
+            event.preventDefault();
+
+            updateLetterProgress(5);
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   UPDATE LETTER
+========================================================= */
+
+function updateLetterProgress(amount){
+
+    letterProgress +=
+        amount;
+
+
+    letterProgress =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                letterProgress
+            )
+        );
+
+
+    renderLetter();
+
+
+    if(
+        letterProgress >= 100 &&
+        !completingInvitation
+    ){
+
+        completeInvitation();
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER LETTER
+========================================================= */
+
+function renderLetter(){
+
+    if(
+        !envelopePaper ||
+        !letterContent
+    ){
+
         return;
-    }
-
-
-    invitationOpened = true;
-
-    opening.classList.add("opening-animation");
-
-
-    try{
-
-        await music.play();
-
-        musicPlaying = true;
-
-        musicButton.classList.add("playing");
-
-        updateMusicText();
-
-    }catch(error){
-
-        console.log("Autoplay blocked:", error);
 
     }
 
 
-    setTimeout(() => {
+    const progress =
+        letterProgress / 100;
 
-        opening.classList.add("hidden");
 
-        mainSite.classList.add("visible");
+    /*
+       Paper movement.
 
-        document.body.classList.remove("locked");
+       Starts inside the envelope,
+       then rises smoothly.
+    */
 
-        window.scrollTo({
-            top:0,
-            behavior:"instant"
-        });
+    const translateY =
+        15 -
+        (progress * 270);
 
-    },1600);
 
-});
+    envelopePaper.style.transform =
+        `translateY(${translateY}px)`;
+
+
+    /*
+       The paper becomes longer
+       as the user scrolls.
+    */
+
+    const paperHeight =
+        76 +
+        (progress * 125);
+
+
+    envelopePaper.style.height =
+        `${paperHeight}%`;
+
+
+    /*
+       Move the writing slightly upward
+       as the letter is revealed.
+    */
+
+    const writingMovement =
+        progress * 55;
+
+
+    letterContent.style.transform =
+        `translateY(-${writingMovement}px)`;
+
+
+    /*
+       Reveal the writing progressively.
+    */
+
+    letterContent.style.opacity =
+        Math.min(
+            1,
+            .25 +
+            progress * .75
+        );
+
+
+    /*
+       Make the writing feel like
+       it is being revealed while
+       the paper comes out.
+    */
+
+    const reveal =
+        Math.min(
+            100,
+            progress * 115
+        );
+
+
+    letterContent.style.clipPath =
+        `inset(0 ${100 - reveal}% 0 0)`;
+
+
+    /*
+       Once the paper is mostly outside
+       the envelope, show the full content.
+    */
+
+    if(progress > .35){
+
+        letterContent.style.clipPath =
+            "inset(0 0 0 0)";
+
+    }
+
+}
+
+
+/* =========================================================
+   COMPLETE INVITATION
+========================================================= */
+
+function completeInvitation(){
+
+    completingInvitation =
+        true;
+
+
+    opening.classList.add(
+        "letter-complete"
+    );
+
+
+    setTimeout(
+        () => {
+
+            opening.classList.add(
+                "hidden"
+            );
+
+
+            mainSite.classList.add(
+                "visible"
+            );
+
+
+            document.body.classList.remove(
+                "locked"
+            );
+
+
+            window.scrollTo({
+                top:0,
+                behavior:"instant"
+            });
+
+
+            /*
+               Reset opening position
+               so the main website starts
+               exactly from the top.
+            */
+
+            setTimeout(
+                () => {
+
+                    opening.style.display =
+                        "none";
+
+                },
+                1200
+            );
+
+        },
+        850
+    );
+
+}
 
 
 /* =========================================================
@@ -2914,48 +3808,62 @@ envelope.addEventListener("click", async () => {
 ========================================================= */
 
 const weddingDate =
-    new Date("2026-10-04T17:00:00+03:00");
+    new Date(
+        "2026-10-04T17:00:00+03:00"
+    );
 
 
 function pad(number){
 
-    return String(number).padStart(2,"0");
+    return String(number)
+        .padStart(2,"0");
 
 }
 
 
 function updateCountdown(){
 
-    const now = new Date();
+    const now =
+        new Date();
+
 
     let difference =
-        weddingDate.getTime() - now.getTime();
+        weddingDate.getTime()
+        -
+        now.getTime();
 
 
     if(difference < 0){
 
-        difference = 0;
+        difference =
+            0;
 
     }
 
 
     const totalSeconds =
-        Math.floor(difference / 1000);
+        Math.floor(
+            difference / 1000
+        );
 
 
     const days =
-        Math.floor(totalSeconds / 86400);
+        Math.floor(
+            totalSeconds / 86400
+        );
 
 
     const hours =
         Math.floor(
-            (totalSeconds % 86400) / 3600
+            (totalSeconds % 86400)
+            / 3600
         );
 
 
     const minutes =
         Math.floor(
-            (totalSeconds % 3600) / 60
+            (totalSeconds % 3600)
+            / 60
         );
 
 
@@ -2963,19 +3871,27 @@ function updateCountdown(){
         totalSeconds % 60;
 
 
-    document.getElementById("days").textContent =
+    document.getElementById(
+        "days"
+    ).textContent =
         days;
 
 
-    document.getElementById("hours").textContent =
+    document.getElementById(
+        "hours"
+    ).textContent =
         pad(hours);
 
 
-    document.getElementById("minutes").textContent =
+    document.getElementById(
+        "minutes"
+    ).textContent =
         pad(minutes);
 
 
-    document.getElementById("seconds").textContent =
+    document.getElementById(
+        "seconds"
+    ).textContent =
         pad(seconds);
 
 }
@@ -2983,7 +3899,11 @@ function updateCountdown(){
 
 updateCountdown();
 
-setInterval(updateCountdown,1000);
+
+setInterval(
+    updateCountdown,
+    1000
+);
 
 
 /* =========================================================
@@ -2996,179 +3916,226 @@ const GOOGLE_SHEET_URL =
 
 document
     .getElementById("rsvpForm")
-    .addEventListener("submit", function(event){
+    .addEventListener(
+        "submit",
+        function(event){
 
-        event.preventDefault();
+            event.preventDefault();
 
 
-        const form = this;
+            const form =
+                this;
 
 
-        const submitButton =
-            form.querySelector(".submit-button");
+            const submitButton =
+                form.querySelector(
+                    ".submit-button"
+                );
 
 
-        const name =
-            document
-                .getElementById("guestName")
-                .value
-                .trim();
+            const name =
+                document
+                    .getElementById(
+                        "guestName"
+                    )
+                    .value
+                    .trim();
 
 
-        const attendance =
-            document.querySelector(
-                'input[name="attendance"]:checked'
-            );
+            const attendance =
+                document.querySelector(
+                    'input[name="attendance"]:checked'
+                );
 
 
-        const message =
-            document
-                .getElementById("guestMessage")
-                .value
-                .trim();
+            const message =
+                document
+                    .getElementById(
+                        "guestMessage"
+                    )
+                    .value
+                    .trim();
 
 
-        if(!name || !attendance){
+            if(
+                !name ||
+                !attendance
+            ){
 
-            showToast(
-                currentLanguage === "ar"
-                    ? "من فضلك أكمل البيانات"
-                    : "Please complete the required fields"
-            );
+                showToast(
+                    currentLanguage === "ar"
+                        ? "من فضلك أكمل البيانات"
+                        : "Please complete the required fields"
+                );
 
-            return;
 
-        }
+                return;
 
+            }
 
-        submitButton.disabled = true;
 
-
-        submitButton.textContent =
-            currentLanguage === "ar"
-                ? "جاري الإرسال..."
-                : "SENDING...";
-
-
-        /* Create hidden iframe */
-
-        const iframe =
-            document.createElement("iframe");
-
-
-        iframe.name =
-            "rsvpSubmitFrame_" + Date.now();
-
-
-        iframe.style.display = "none";
-
-
-        document.body.appendChild(iframe);
-
-
-        /* Create native POST form */
-
-        const sendForm =
-            document.createElement("form");
-
-
-        sendForm.method = "POST";
-
-        sendForm.action = GOOGLE_SHEET_URL;
-
-        sendForm.target = iframe.name;
-
-        sendForm.style.display = "none";
-
-
-        /* Name */
-
-        const nameInput =
-            document.createElement("input");
-
-
-        nameInput.type = "hidden";
-
-        nameInput.name = "name";
-
-        nameInput.value = name;
-
-
-        /* Attendance */
-
-        const attendanceInput =
-            document.createElement("input");
-
-
-        attendanceInput.type = "hidden";
-
-        attendanceInput.name = "attendance";
-
-        attendanceInput.value =
-            attendance.value;
-
-
-        /* Message */
-
-        const messageInput =
-            document.createElement("input");
-
-
-        messageInput.type = "hidden";
-
-        messageInput.name = "message";
-
-        messageInput.value = message;
-
-
-        sendForm.appendChild(nameInput);
-
-        sendForm.appendChild(attendanceInput);
-
-        sendForm.appendChild(messageInput);
-
-
-        document.body.appendChild(sendForm);
-
-
-        /* Submit to Google Apps Script */
-
-        sendForm.submit();
-
-
-        /*
-           Give Google Apps Script enough time
-           to process the request.
-        */
-
-        setTimeout(() => {
-
-            showToast(
-                currentLanguage === "ar"
-                    ? "تم إرسال رسالتك بنجاح"
-                    : "Your message has been sent successfully"
-            );
-
-
-            form.reset();
-
-
-            submitButton.disabled = false;
+            submitButton.disabled =
+                true;
 
 
             submitButton.textContent =
                 currentLanguage === "ar"
-                    ? "إرسال الرسالة"
-                    : "SEND MESSAGE";
+                    ? "جاري الإرسال..."
+                    : "SENDING...";
 
 
-            sendForm.remove();
+            const iframe =
+                document.createElement(
+                    "iframe"
+                );
 
-            iframe.remove();
 
-        },1500);
+            iframe.name =
+                "rsvpSubmitFrame_" +
+                Date.now();
 
-    });
+
+            iframe.style.display =
+                "none";
+
+
+            document.body.appendChild(
+                iframe
+            );
+
+
+            const sendForm =
+                document.createElement(
+                    "form"
+                );
+
+
+            sendForm.method =
+                "POST";
+
+
+            sendForm.action =
+                GOOGLE_SHEET_URL;
+
+
+            sendForm.target =
+                iframe.name;
+
+
+            sendForm.style.display =
+                "none";
+
+
+            const nameInput =
+                document.createElement(
+                    "input"
+                );
+
+
+            nameInput.type =
+                "hidden";
+
+
+            nameInput.name =
+                "name";
+
+
+            nameInput.value =
+                name;
+
+
+            const attendanceInput =
+                document.createElement(
+                    "input"
+                );
+
+
+            attendanceInput.type =
+                "hidden";
+
+
+            attendanceInput.name =
+                "attendance";
+
+
+            attendanceInput.value =
+                attendance.value;
+
+
+            const messageInput =
+                document.createElement(
+                    "input"
+                );
+
+
+            messageInput.type =
+                "hidden";
+
+
+            messageInput.name =
+                "message";
+
+
+            messageInput.value =
+                message;
+
+
+            sendForm.appendChild(
+                nameInput
+            );
+
+
+            sendForm.appendChild(
+                attendanceInput
+            );
+
+
+            sendForm.appendChild(
+                messageInput
+            );
+
+
+            document.body.appendChild(
+                sendForm
+            );
+
+
+            sendForm.submit();
+
+
+            setTimeout(
+                () => {
+
+                    showToast(
+                        currentLanguage === "ar"
+                            ? "تم إرسال رسالتك بنجاح"
+                            : "Your message has been sent successfully"
+                    );
+
+
+                    form.reset();
+
+
+                    submitButton.disabled =
+                        false;
+
+
+                    submitButton.textContent =
+                        currentLanguage === "ar"
+                            ? "إرسال الرسالة"
+                            : "SEND MESSAGE";
+
+
+                    sendForm.remove();
+
+                    iframe.remove();
+
+                },
+                1500
+            );
+
+        }
+    );
 
 
 /* =========================================================
@@ -3180,20 +4147,31 @@ let toastTimer;
 
 function showToast(message){
 
-    toast.textContent = message;
+    toast.textContent =
+        message;
 
-    toast.classList.add("show");
+
+    toast.classList.add(
+        "show"
+    );
 
 
-    clearTimeout(toastTimer);
+    clearTimeout(
+        toastTimer
+    );
 
 
     toastTimer =
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            toast.classList.remove("show");
+                toast.classList.remove(
+                    "show"
+                );
 
-        },3000);
+            },
+            3000
+        );
 
 }
 
@@ -3203,17 +4181,28 @@ function showToast(message){
 ========================================================= */
 
 document
-    .querySelectorAll(".gallery-item img")
-    .forEach(img => {
+    .querySelectorAll(
+        ".gallery-item img"
+    )
+    .forEach(
+        img => {
 
-        img.addEventListener("error", () => {
+            img.addEventListener(
+                "error",
+                () => {
 
-            img.closest(".gallery-item").style.display =
-                "none";
+                    img
+                        .closest(
+                            ".gallery-item"
+                        )
+                        .style.display =
+                        "none";
 
-        });
+                }
+            );
 
-    });
+        }
+    );
 
 
 /* =========================================================
