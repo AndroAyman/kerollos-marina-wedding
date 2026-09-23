@@ -115,7 +115,7 @@ a{
 }
 
 /* =========================
-   MUSIC BUTTON
+   MUSIC
 ========================= */
 
 .music-wrap{
@@ -152,6 +152,7 @@ a{
 }
 
 @keyframes musicPulse{
+
   0%{
     box-shadow:0 0 0 0 rgba(169,87,108,.45);
   }
@@ -163,6 +164,7 @@ a{
   100%{
     box-shadow:0 0 0 0 rgba(169,87,108,0);
   }
+
 }
 
 .music-hint{
@@ -185,6 +187,7 @@ a{
   box-shadow:0 7px 20px rgba(89,67,74,.1);
 
   opacity:0;
+
   transform:translateY(-5px);
 
   pointer-events:none;
@@ -198,7 +201,7 @@ a{
 }
 
 /* =========================
-   FLOATING PETALS
+   PETALS
 ========================= */
 
 #petals{
@@ -246,6 +249,7 @@ a{
     transform:translateY(110vh) rotate(360deg);
     opacity:0;
   }
+
 }
 
 /* =========================
@@ -306,6 +310,10 @@ body.arabic .invite-small{
   margin-bottom:30px;
 }
 
+/* =========================
+   NAMES
+========================= */
+
 .couple-names{
   font-family:'Cormorant Garamond',serif;
 
@@ -318,7 +326,9 @@ body.arabic .invite-small{
   color:var(--pink-dark);
 
   display:flex;
+
   flex-direction:column;
+
   align-items:center;
 }
 
@@ -343,6 +353,10 @@ body.arabic .couple-names{
 
   line-height:1.4;
 }
+
+/* =========================
+   DATE
+========================= */
 
 .date-main{
   margin-top:27px;
@@ -428,7 +442,7 @@ body.arabic .count-label{
 }
 
 /* =========================
-   GENERAL SECTIONS
+   SECTIONS
 ========================= */
 
 section{
@@ -475,6 +489,16 @@ body.arabic .section-title{
     );
 }
 
+.verse-mark{
+  text-align:center;
+
+  color:var(--gold);
+
+  font-size:28px;
+
+  margin-bottom:20px;
+}
+
 .verse{
   max-width:760px;
 
@@ -497,16 +521,6 @@ body.arabic .verse{
   font-size:clamp(17px,4vw,24px);
 
   line-height:2;
-}
-
-.verse-mark{
-  text-align:center;
-
-  color:var(--gold);
-
-  font-size:28px;
-
-  margin-bottom:20px;
 }
 
 /* =========================
@@ -608,26 +622,56 @@ body.arabic .event-title{
   min-height:45px;
 }
 
-.map-btn{
+.event-actions{
   margin-top:20px;
 
-  padding:10px 18px;
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+}
+
+.map-btn,
+.calendar-btn{
+  padding:10px 15px;
 
   border-radius:25px;
-
-  background:var(--pink-dark);
-
-  color:white;
 
   font-size:12px;
 
   transition:.3s;
 }
 
-.map-btn:hover{
-  transform:translateY(-2px);
+.map-btn{
+  background:var(--pink-dark);
 
+  color:white;
+}
+
+.calendar-btn{
+  background:var(--cream-3);
+
+  color:var(--pink-dark);
+
+  border:1px solid rgba(169,87,108,.15);
+}
+
+.map-btn:hover,
+.calendar-btn:hover{
+  transform:translateY(-2px);
+}
+
+.map-btn:hover{
   background:var(--pink-deep);
+}
+
+.calendar-btn:hover{
+  background:var(--pink-light);
 }
 
 /* =========================
@@ -766,63 +810,13 @@ footer{
 
   transition:.3s;
 
-  z-index:2000;
+  z-index:4000;
 }
 
 .toast.show{
   opacity:1;
 
   transform:translate(-50%,0);
-}
-
-/* =========================
-   RTL
-========================= */
-
-body.arabic .event-card,
-body.arabic .invitation-text{
-  text-align:center;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:850px){
-
-  .events-grid{
-    grid-template-columns:1fr;
-  }
-
-  .gallery{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-}
-
-@media(max-width:500px){
-
-  .hero{
-    padding-top:90px;
-  }
-
-  .couple-photo{
-    width:220px;
-    height:290px;
-  }
-
-  .count-box{
-    width:70px;
-  }
-
-  .count-number{
-    font-size:27px;
-  }
-
-  .section-inner{
-    width:90%;
-  }
-
 }
 
 /* =========================
@@ -881,6 +875,56 @@ body.arabic .invitation-text{
   background:none;
 }
 
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:850px){
+
+  .events-grid{
+    grid-template-columns:1fr;
+  }
+
+  .gallery{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:500px){
+
+  .hero{
+    padding-top:90px;
+  }
+
+  .couple-photo{
+    width:220px;
+    height:290px;
+  }
+
+  .count-box{
+    width:70px;
+  }
+
+  .count-number{
+    font-size:27px;
+  }
+
+  .section-inner{
+    width:90%;
+  }
+
+  .event-actions{
+    flex-direction:column;
+  }
+
+  .map-btn,
+  .calendar-btn{
+    width:100%;
+  }
+
+}
+
 </style>
 </head>
 
@@ -898,7 +942,11 @@ body.arabic .invitation-text{
 
   <div class="music-wrap">
 
-    <button id="musicToggle" class="music-btn" aria-label="Music">
+    <button
+      id="musicToggle"
+      class="music-btn"
+      aria-label="Music"
+    >
       ♫
     </button>
 
@@ -919,7 +967,7 @@ body.arabic .invitation-text{
 </audio>
 
 <!-- =========================
-     FLOATING PETALS
+     PETALS
 ========================= -->
 
 <div id="petals"></div>
@@ -974,22 +1022,46 @@ body.arabic .invitation-text{
 
       <div class="count-box">
         <span id="days" class="count-number">00</span>
-        <span class="count-label" data-en="Days" data-ar="يوم">Days</span>
+        <span
+          class="count-label"
+          data-en="Days"
+          data-ar="يوم"
+        >
+          Days
+        </span>
       </div>
 
       <div class="count-box">
         <span id="hours" class="count-number">00</span>
-        <span class="count-label" data-en="Hours" data-ar="ساعة">Hours</span>
+        <span
+          class="count-label"
+          data-en="Hours"
+          data-ar="ساعة"
+        >
+          Hours
+        </span>
       </div>
 
       <div class="count-box">
         <span id="minutes" class="count-number">00</span>
-        <span class="count-label" data-en="Minutes" data-ar="دقيقة">Minutes</span>
+        <span
+          class="count-label"
+          data-en="Minutes"
+          data-ar="دقيقة"
+        >
+          Minutes
+        </span>
       </div>
 
       <div class="count-box">
         <span id="seconds" class="count-number">00</span>
-        <span class="count-label" data-en="Seconds" data-ar="ثانية">Seconds</span>
+        <span
+          class="count-label"
+          data-en="Seconds"
+          data-ar="ثانية"
+        >
+          Seconds
+        </span>
       </div>
 
     </div>
@@ -1084,14 +1156,27 @@ body.arabic .invitation-text{
           Shatea El Gaish, Al-Qiyadat St., Hurghada
         </div>
 
-        <button
-          class="map-btn"
-          data-map-url="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac"
-          data-en="View Location"
-          data-ar="عرض الموقع"
-        >
-          View Location
-        </button>
+        <div class="event-actions">
+
+          <button
+            class="map-btn"
+            data-map-url="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac"
+            data-en="View Location"
+            data-ar="عرض الموقع"
+          >
+            View Location
+          </button>
+
+          <button
+            class="calendar-btn"
+            data-calendar="henna"
+            data-en="Add to Calendar"
+            data-ar="إضافة للتقويم"
+          >
+            Add to Calendar
+          </button>
+
+        </div>
 
       </div>
 
@@ -1128,14 +1213,27 @@ body.arabic .invitation-text{
           Hurghada
         </div>
 
-        <button
-          class="map-btn"
-          data-map-url="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac"
-          data-en="View Location"
-          data-ar="عرض الموقع"
-        >
-          View Location
-        </button>
+        <div class="event-actions">
+
+          <button
+            class="map-btn"
+            data-map-url="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac"
+            data-en="View Location"
+            data-ar="عرض الموقع"
+          >
+            View Location
+          </button>
+
+          <button
+            class="calendar-btn"
+            data-calendar="church"
+            data-en="Add to Calendar"
+            data-ar="إضافة للتقويم"
+          >
+            Add to Calendar
+          </button>
+
+        </div>
 
       </div>
 
@@ -1172,14 +1270,27 @@ body.arabic .invitation-text{
           Al-Hijaz St., Hurghada
         </div>
 
-        <button
-          class="map-btn"
-          data-map-url="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac"
-          data-en="View Location"
-          data-ar="عرض الموقع"
-        >
-          View Location
-        </button>
+        <div class="event-actions">
+
+          <button
+            class="map-btn"
+            data-map-url="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac"
+            data-en="View Location"
+            data-ar="عرض الموقع"
+          >
+            View Location
+          </button>
+
+          <button
+            class="calendar-btn"
+            data-calendar="reception"
+            data-en="Add to Calendar"
+            data-ar="إضافة للتقويم"
+          >
+            Add to Calendar
+          </button>
+
+        </div>
 
       </div>
 
@@ -1246,8 +1357,6 @@ body.arabic .invitation-text{
           stroke-width="12"
         />
 
-        <!-- Henna -->
-
         <circle
           cx="230"
           cy="280"
@@ -1266,8 +1375,6 @@ body.arabic .invitation-text{
           Henna
         </text>
 
-        <!-- Church -->
-
         <circle
           cx="500"
           cy="220"
@@ -1285,8 +1392,6 @@ body.arabic .invitation-text{
         >
           Church
         </text>
-
-        <!-- Reception -->
 
         <circle
           cx="770"
@@ -1378,7 +1483,11 @@ body.arabic .invitation-text{
     ×
   </button>
 
-  <img id="lightboxImage" src="" alt="Wedding photo">
+  <img
+    id="lightboxImage"
+    src=""
+    alt="Wedding photo"
+  >
 
 </div>
 
@@ -1394,7 +1503,8 @@ body.arabic .invitation-text{
    LANGUAGE
 ========================= */
 
-const langToggle = document.getElementById("langToggle");
+const langToggle =
+  document.getElementById("langToggle");
 
 function updateLanguage(){
 
@@ -1421,6 +1531,7 @@ function updateLanguage(){
     arabic ? "English" : "عربي";
 
   updateMusicHint();
+
 }
 
 langToggle.addEventListener("click", () => {
@@ -1438,18 +1549,14 @@ langToggle.addEventListener("click", () => {
 
 });
 
-/* =========================
-   INITIAL LANGUAGE
-========================= */
-
-if(localStorage.getItem("weddingLanguage") === "ar"){
+if(
+  localStorage.getItem("weddingLanguage") === "ar"
+){
   document.body.classList.add("arabic");
 }
 
-updateLanguage();
-
 /* =========================
-   FLOATING PETALS
+   PETALS
 ========================= */
 
 const petalsContainer =
@@ -1478,71 +1585,92 @@ function createPetal(){
 
   setTimeout(() => {
     petal.remove();
-  }, 16000);
+  },16000);
+
 }
 
 for(let i=0;i<12;i++){
-  setTimeout(createPetal, i*450);
+  setTimeout(createPetal,i*450);
 }
 
-setInterval(createPetal, 850);
+setInterval(createPetal,850);
 
 /* =========================
    COUNTDOWN
 ========================= */
 
 const weddingDate =
-  new Date("2026-10-04T17:00:00+03:00").getTime();
+  new Date(
+    "2026-10-04T17:00:00+03:00"
+  ).getTime();
 
 function updateCountdown(){
 
   const now =
-    new Date().getTime();
+    Date.now();
 
   const distance =
     weddingDate - now;
 
+  const daysEl =
+    document.getElementById("days");
+
+  const hoursEl =
+    document.getElementById("hours");
+
+  const minutesEl =
+    document.getElementById("minutes");
+
+  const secondsEl =
+    document.getElementById("seconds");
+
   if(distance <= 0){
 
-    document.getElementById("days").textContent = "00";
-    document.getElementById("hours").textContent = "00";
-    document.getElementById("minutes").textContent = "00";
-    document.getElementById("seconds").textContent = "00";
+    daysEl.textContent = "00";
+    hoursEl.textContent = "00";
+    minutesEl.textContent = "00";
+    secondsEl.textContent = "00";
 
     return;
   }
 
   const days =
-    Math.floor(distance / (1000 * 60 * 60 * 24));
+    Math.floor(
+      distance /
+      (1000 * 60 * 60 * 24)
+    );
 
   const hours =
     Math.floor(
-      (distance % (1000 * 60 * 60 * 24))
-      / (1000 * 60 * 60)
+      (distance %
+      (1000 * 60 * 60 * 24)) /
+      (1000 * 60 * 60)
     );
 
   const minutes =
     Math.floor(
-      (distance % (1000 * 60 * 60))
-      / (1000 * 60)
+      (distance %
+      (1000 * 60 * 60)) /
+      (1000 * 60)
     );
 
   const seconds =
     Math.floor(
-      (distance % (1000 * 60))
-      / 1000
+      (distance %
+      (1000 * 60)) /
+      1000
     );
 
-  document.getElementById("days").textContent =
+  daysEl.textContent =
     String(days).padStart(2,"0");
 
-  document.getElementById("hours").textContent =
+  hoursEl.textContent =
     String(hours).padStart(2,"0");
 
-  document.getElementById("minutes").textContent =
+  minutesEl.textContent =
     String(minutes).padStart(2,"0");
 
-  document.getElementById("seconds").textContent =
+  secondsEl.textContent =
     String(seconds).padStart(2,"0");
 
 }
@@ -1560,66 +1688,202 @@ const toast =
 
 function showToast(message){
 
-  toast.textContent = message;
+  toast.textContent =
+    message;
 
   toast.classList.add("show");
 
   setTimeout(() => {
+
     toast.classList.remove("show");
+
   },3000);
+
 }
 
 /* =========================
-   MAP BUTTONS
+   GOOGLE MAPS
 ========================= */
 
-document.querySelectorAll(".map-btn").forEach(button => {
+document
+  .querySelectorAll(".map-btn")
+  .forEach(button => {
 
-  button.addEventListener("click", () => {
+    button.addEventListener(
+      "click",
+      () => {
 
-    const url =
-      button.getAttribute("data-map-url");
+        const url =
+          button.getAttribute(
+            "data-map-url"
+          );
 
-    if(url){
-      window.open(
-        url,
-        "_blank",
-        "noopener"
-      );
-    }
+        if(url){
+
+          window.open(
+            url,
+            "_blank",
+            "noopener"
+          );
+
+        }
+
+      }
+    );
 
   });
 
-});
-
 /* =========================
-   CALENDAR DATA
+   CALENDAR EVENTS
 ========================= */
 
 const calendarEvents = {
 
   henna:{
-    title:"Kerollos & Marina - Henna Night",
-    start:"20261002T170000Z",
-    end:"20261002T200000Z",
-    location:"Star Sky Hall, Shatea El Gaish, Al-Qiyadat St., Hurghada"
+    title:
+      "Kerollos & Marina - Henna Night",
+
+    start:
+      "20261002T170000Z",
+
+    end:
+      "20261002T200000Z",
+
+    location:
+      "Star Sky Hall, Shatea El Gaish, Al-Qiyadat St., Hurghada",
+
+    description:
+      "Henna Night for Kerollos & Marina"
   },
 
   church:{
-    title:"Kerollos & Marina - Wedding Ceremony",
-    start:"20261004T140000Z",
-    end:"20261004T150000Z",
-    location:"Anba Shenouda, Head of the Hermits Church, Hurghada"
+    title:
+      "Kerollos & Marina - Wedding Ceremony",
+
+    start:
+      "20261004T140000Z",
+
+    end:
+      "20261004T150000Z",
+
+    location:
+      "Anba Shenouda, Head of the Hermits Church, Hurghada",
+
+    description:
+      "Wedding Ceremony of Kerollos & Marina"
   },
 
   reception:{
-    title:"Kerollos & Marina - Wedding Reception",
-    start:"20261004T160000Z",
-    end:"20261004T190000Z",
-    location:"Gumana Hall, Al-Hijaz St., Hurghada"
+    title:
+      "Kerollos & Marina - Wedding Reception",
+
+    start:
+      "20261004T160000Z",
+
+    end:
+      "20261004T190000Z",
+
+    location:
+      "Gumana Hall, Al-Hijaz St., Hurghada",
+
+    description:
+      "Wedding Reception of Kerollos & Marina"
   }
 
 };
+
+function escapeICS(value){
+
+  return String(value)
+    .replace(/\\/g,"\\\\")
+    .replace(/;/g,"\\;")
+    .replace(/,/g,"\\,")
+    .replace(/\n/g,"\\n");
+
+}
+
+function downloadCalendar(eventKey){
+
+  const event =
+    calendarEvents[eventKey];
+
+  if(!event){
+    return;
+  }
+
+  const uid =
+    eventKey +
+    "-kerollos-marina-2026@wedding";
+
+  const ics =
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Kerollos Marina Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:${uid}
+DTSTAMP:20260923T000000Z
+DTSTART:${event.start}
+DTEND:${event.end}
+SUMMARY:${escapeICS(event.title)}
+DESCRIPTION:${escapeICS(event.description)}
+LOCATION:${escapeICS(event.location)}
+STATUS:CONFIRMED
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR`;
+
+  const blob =
+    new Blob(
+      [ics],
+      {
+        type:"text/calendar;charset=utf-8"
+      }
+    );
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const link =
+    document.createElement("a");
+
+  link.href = url;
+
+  link.download =
+    `${eventKey}-kerollos-marina.ics`;
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  link.remove();
+
+  setTimeout(() => {
+    URL.revokeObjectURL(url);
+  },1000);
+
+}
+
+document
+  .querySelectorAll(".calendar-btn")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        const eventKey =
+          button.getAttribute(
+            "data-calendar"
+          );
+
+        downloadCalendar(eventKey);
+
+      }
+    );
+
+  });
 
 /* =========================
    GALLERY
@@ -1642,11 +1906,15 @@ for(let i=1;i<=8;i++){
   img.loading =
     "lazy";
 
-  img.addEventListener("error", () => {
-    img.remove();
-  });
+  img.addEventListener(
+    "error",
+    () => {
+      img.remove();
+    }
+  );
 
   gallery.appendChild(img);
+
 }
 
 /* =========================
@@ -1657,23 +1925,32 @@ const lightbox =
   document.getElementById("lightbox");
 
 const lightboxImage =
-  document.getElementById("lightboxImage");
+  document.getElementById(
+    "lightboxImage"
+  );
 
 const lightboxClose =
-  document.getElementById("lightboxClose");
+  document.getElementById(
+    "lightboxClose"
+  );
 
-gallery.addEventListener("click", event => {
+gallery.addEventListener(
+  "click",
+  event => {
 
-  if(event.target.tagName !== "IMG"){
-    return;
+    if(
+      event.target.tagName !== "IMG"
+    ){
+      return;
+    }
+
+    lightboxImage.src =
+      event.target.src;
+
+    lightbox.classList.add("show");
+
   }
-
-  lightboxImage.src =
-    event.target.src;
-
-  lightbox.classList.add("show");
-
-});
+);
 
 function closeLightbox(){
 
@@ -1692,7 +1969,9 @@ lightbox.addEventListener(
   "click",
   event => {
 
-    if(event.target === lightbox){
+    if(
+      event.target === lightbox
+    ){
       closeLightbox();
     }
 
@@ -1704,13 +1983,19 @@ lightbox.addEventListener(
 ========================= */
 
 const music =
-  document.getElementById("weddingMusic");
+  document.getElementById(
+    "weddingMusic"
+  );
 
 const musicToggle =
-  document.getElementById("musicToggle");
+  document.getElementById(
+    "musicToggle"
+  );
 
 const musicHint =
-  document.getElementById("musicHint");
+  document.getElementById(
+    "musicHint"
+  );
 
 let musicPlaying = false;
 
@@ -1718,15 +2003,21 @@ function updateMusicButton(){
 
   if(musicPlaying){
 
-    musicToggle.textContent = "Ⅱ";
+    musicToggle.textContent =
+      "Ⅱ";
 
-    musicToggle.classList.add("playing");
+    musicToggle.classList.add(
+      "playing"
+    );
 
   }else{
 
-    musicToggle.textContent = "♫";
+    musicToggle.textContent =
+      "♫";
 
-    musicToggle.classList.remove("playing");
+    musicToggle.classList.remove(
+      "playing"
+    );
 
   }
 
@@ -1739,7 +2030,9 @@ function updateMusicHint(){
   }
 
   const arabic =
-    document.body.classList.contains("arabic");
+    document.body.classList.contains(
+      "arabic"
+    );
 
   if(musicPlaying){
 
@@ -1759,76 +2052,94 @@ function updateMusicHint(){
 
 }
 
-music.addEventListener("play", () => {
+music.addEventListener(
+  "play",
+  () => {
 
-  musicPlaying = true;
+    musicPlaying = true;
 
-  updateMusicButton();
-  updateMusicHint();
+    updateMusicButton();
+    updateMusicHint();
 
-});
+  }
+);
 
-music.addEventListener("pause", () => {
+music.addEventListener(
+  "pause",
+  () => {
 
-  musicPlaying = false;
+    musicPlaying = false;
 
-  updateMusicButton();
-  updateMusicHint();
+    updateMusicButton();
+    updateMusicHint();
 
-});
+  }
+);
 
-music.addEventListener("error", () => {
-
-  showToast(
-    document.body.classList.contains("arabic")
-      ? "تعذر تشغيل الموسيقى"
-      : "Unable to play the music"
-  );
-
-});
-
-music.load();
-
-musicToggle.addEventListener("click", async () => {
-
-  try{
-
-    if(music.paused){
-
-      if(music.readyState === 0){
-        music.load();
-      }
-
-      await music.play();
-
-    }else{
-
-      music.pause();
-
-    }
-
-  }catch(error){
+music.addEventListener(
+  "error",
+  () => {
 
     showToast(
-      document.body.classList.contains("arabic")
-        ? "اضغط مرة أخرى لتشغيل الموسيقى"
-        : "Tap again to play the music"
+      document.body.classList.contains(
+        "arabic"
+      )
+        ? "تعذر تشغيل الموسيقى"
+        : "Unable to play the music"
     );
 
   }
+);
 
-});
+music.load();
+
+musicToggle.addEventListener(
+  "click",
+  async () => {
+
+    try{
+
+      if(music.paused){
+
+        if(music.readyState === 0){
+          music.load();
+        }
+
+        await music.play();
+
+      }else{
+
+        music.pause();
+
+      }
+
+    }catch(error){
+
+      showToast(
+        document.body.classList.contains(
+          "arabic"
+        )
+          ? "اضغط مرة أخرى لتشغيل الموسيقى"
+          : "Tap again to play the music"
+      );
+
+    }
+
+  }
+);
+
+/* =========================
+   INITIALIZE
+========================= */
 
 updateMusicButton();
 updateMusicHint();
-
-/* =========================
-   FINAL INIT
-========================= */
-
 updateLanguage();
+updateCountdown();
 
 </script>
 
 </body>
 </html>
+
+ده المفروض يحافظ على الوظائف اللي كانت موجودة، والتغيير الأساسي في الأسماء هو الـ layout العمودي فقط. كمان رجعت زر Add to Calendar ووظيفة إنشاء ملف ".ics" لكل مناسبة، والـ Countdown مربوط بتوقيت مصر يوم 4 أكتوبر الساعة 5 مساءً.
