@@ -75,13 +75,13 @@ a{
 
 .top-controls{
   position:fixed;
+
   top:18px;
   left:18px;
-  right:18px;
 
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  gap:10px;
 
   z-index:1000;
 
@@ -94,6 +94,7 @@ a{
 
 .lang-btn{
   background:rgba(255,255,255,.88);
+
   border:1px solid rgba(169,87,108,.18);
 
   color:var(--pink-dark);
@@ -129,6 +130,7 @@ a{
   border-radius:50%;
 
   background:var(--pink-dark);
+
   color:white;
 
   display:flex;
@@ -154,15 +156,18 @@ a{
 @keyframes musicPulse{
 
   0%{
-    box-shadow:0 0 0 0 rgba(169,87,108,.45);
+    box-shadow:
+      0 0 0 0 rgba(169,87,108,.45);
   }
 
   70%{
-    box-shadow:0 0 0 13px rgba(169,87,108,0);
+    box-shadow:
+      0 0 0 13px rgba(169,87,108,0);
   }
 
   100%{
-    box-shadow:0 0 0 0 rgba(169,87,108,0);
+    box-shadow:
+      0 0 0 0 rgba(169,87,108,0);
   }
 
 }
@@ -171,11 +176,12 @@ a{
   position:absolute;
 
   top:58px;
-  right:0;
+  left:0;
 
   white-space:nowrap;
 
   background:white;
+
   color:var(--pink-dark);
 
   padding:7px 11px;
@@ -184,7 +190,8 @@ a{
 
   font-size:11px;
 
-  box-shadow:0 7px 20px rgba(89,67,74,.1);
+  box-shadow:
+    0 7px 20px rgba(89,67,74,.1);
 
   opacity:0;
 
@@ -893,6 +900,25 @@ footer{
 
 @media(max-width:500px){
 
+  .top-controls{
+    top:14px;
+    left:14px;
+    gap:8px;
+  }
+
+  .lang-btn{
+    padding:8px 13px;
+  }
+
+  .music-btn{
+    width:44px;
+    height:44px;
+  }
+
+  .music-hint{
+    top:53px;
+  }
+
   .hero{
     padding-top:90px;
   }
@@ -1004,7 +1030,11 @@ footer{
 
     </div>
 
-    <div class="date-main">
+    <div
+      class="date-main"
+      data-en="Sunday, October 4th 2026"
+      data-ar="الأحد، 4 أكتوبر 2026"
+    >
       Sunday, October 4th 2026
     </div>
 
@@ -1022,6 +1052,7 @@ footer{
 
       <div class="count-box">
         <span id="days" class="count-number">00</span>
+
         <span
           class="count-label"
           data-en="Days"
@@ -1033,6 +1064,7 @@ footer{
 
       <div class="count-box">
         <span id="hours" class="count-number">00</span>
+
         <span
           class="count-label"
           data-en="Hours"
@@ -1044,6 +1076,7 @@ footer{
 
       <div class="count-box">
         <span id="minutes" class="count-number">00</span>
+
         <span
           class="count-label"
           data-en="Minutes"
@@ -1055,6 +1088,7 @@ footer{
 
       <div class="count-box">
         <span id="seconds" class="count-number">00</span>
+
         <span
           class="count-label"
           data-en="Seconds"
@@ -1139,7 +1173,11 @@ footer{
           Henna Night
         </div>
 
-        <div class="event-date">
+        <div
+          class="event-date"
+          data-en="Friday, October 2nd 2026"
+          data-ar="الجمعة، 2 أكتوبر 2026"
+        >
           Friday, October 2nd 2026
         </div>
 
@@ -1196,7 +1234,11 @@ footer{
           Wedding Ceremony
         </div>
 
-        <div class="event-date">
+        <div
+          class="event-date"
+          data-en="Sunday, October 4th 2026"
+          data-ar="الأحد، 4 أكتوبر 2026"
+        >
           Sunday, October 4th 2026
         </div>
 
@@ -1253,7 +1295,11 @@ footer{
           Wedding Reception
         </div>
 
-        <div class="event-date">
+        <div
+          class="event-date"
+          data-en="Sunday, October 4th 2026"
+          data-ar="الأحد، 4 أكتوبر 2026"
+        >
           Sunday, October 4th 2026
         </div>
 
@@ -1549,10 +1595,23 @@ langToggle.addEventListener("click", () => {
 
 });
 
-if(
-  localStorage.getItem("weddingLanguage") === "ar"
-){
+/*
+  English is the default.
+  Arabic is only loaded if the user
+  previously selected Arabic.
+*/
+
+const savedLanguage =
+  localStorage.getItem("weddingLanguage");
+
+if(savedLanguage === "ar"){
+
   document.body.classList.add("arabic");
+
+}else{
+
+  document.body.classList.remove("arabic");
+
 }
 
 /* =========================
@@ -1584,16 +1643,26 @@ function createPetal(){
   petalsContainer.appendChild(petal);
 
   setTimeout(() => {
+
     petal.remove();
+
   },16000);
 
 }
 
 for(let i=0;i<12;i++){
-  setTimeout(createPetal,i*450);
+
+  setTimeout(
+    createPetal,
+    i*450
+  );
+
 }
 
-setInterval(createPetal,850);
+setInterval(
+  createPetal,
+  850
+);
 
 /* =========================
    COUNTDOWN
@@ -1632,6 +1701,7 @@ function updateCountdown(){
     secondsEl.textContent = "00";
 
     return;
+
   }
 
   const days =
@@ -1677,7 +1747,10 @@ function updateCountdown(){
 
 updateCountdown();
 
-setInterval(updateCountdown,1000);
+setInterval(
+  updateCountdown,
+  1000
+);
 
 /* =========================
    TOAST
@@ -1860,7 +1933,9 @@ END:VCALENDAR`;
   link.remove();
 
   setTimeout(() => {
+
     URL.revokeObjectURL(url);
+
   },1000);
 
 }
@@ -1909,7 +1984,9 @@ for(let i=1;i<=8;i++){
   img.addEventListener(
     "error",
     () => {
+
       img.remove();
+
     }
   );
 
@@ -1972,7 +2049,9 @@ lightbox.addEventListener(
     if(
       event.target === lightbox
     ){
+
       closeLightbox();
+
     }
 
   }
@@ -2102,7 +2181,9 @@ musicToggle.addEventListener(
       if(music.paused){
 
         if(music.readyState === 0){
+
           music.load();
+
         }
 
         await music.play();
