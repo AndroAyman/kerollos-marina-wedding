@@ -1205,164 +1205,138 @@ textarea{
     transform:scale(1.05);
 }
 
-
 /* =========================================================
    RSVP
 ========================================================= */
 
-.rsvp{
-    padding:80px 15px;
-
-    text-align:center;
-}
-
-.rsvp-script{
-    font-family:"Great Vibes",cursive;
-
-    font-size:50px;
-
-    color:#57402f;
-
-    margin-bottom:5px;
-}
-
-.rsvp h2{
-    font-family:"Cinzel",serif;
-
-    font-size:14px;
-
-    letter-spacing:4px;
-
-    margin-bottom:35px;
-}
-
-.rsvp-form{
-    max-width:560px;
-
-    margin:auto;
-
-    background:rgba(255,255,255,.55);
-
-    border:1px solid rgba(185,145,79,.5);
-
-    padding:30px;
-
-    text-align:left;
-}
-
-.form-label{
-    display:block;
-
-    font-family:"Cinzel",serif;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-
-    margin-bottom:8px;
-
-    color:#57483e;
-}
-
-.form-input,
-.form-textarea{
-    width:100%;
-
-    background:rgba(255,252,246,.75);
-
-    border:1px solid rgba(130,105,80,.4);
-
-    padding:13px;
-
-    outline:none;
-
-    color:#2d2119;
-
-    font-size:17px;
-
-    margin-bottom:22px;
-}
-
-.form-input:focus,
-.form-textarea:focus{
-    border-color:var(--gold);
-}
-
-.form-textarea{
-    min-height:130px;
-
-    resize:vertical;
-}
+const GOOGLE_SHEET_URL =
+    "https://script.google.com/macros/s/AKfycbwOcPdxJfwyumoLFB72iT4YWWRC2N6BJ6ZoUBkHCEDh0D1Ey8oX9vwgSTd9Dscxk8b-/exec";
 
 
-/* attendance */
+document
+    .getElementById("rsvpForm")
+    .addEventListener("submit", async function(event){
 
-.attendance{
-    display:flex;
+        event.preventDefault();
 
-    gap:10px;
 
-    margin-bottom:24px;
-}
+        const form = this;
 
-.attendance input{
-    display:none;
-}
+        const submitButton =
+            form.querySelector(".submit-button");
 
-.attendance label{
-    flex:1;
 
-    text-align:center;
+        const name =
+            document
+                .getElementById("guestName")
+                .value
+                .trim();
 
-    padding:12px;
 
-    border:1px solid rgba(130,105,80,.45);
+        const attendance =
+            document.querySelector(
+                'input[name="attendance"]:checked'
+            );
 
-    font-family:"Cinzel",serif;
 
-    font-size:10px;
+        const message =
+            document
+                .getElementById("guestMessage")
+                .value
+                .trim();
 
-    letter-spacing:2px;
 
-    cursor:pointer;
+        if(!name || !attendance){
 
-    transition:.3s;
-}
+            showToast(
+                currentLanguage === "ar"
+                    ? "من فضلك أكمل البيانات"
+                    : "Please complete the required fields"
+            );
 
-.attendance input:checked + label{
-    background:var(--brown);
+            return;
 
-    color:#fff;
+        }
 
-    border-color:var(--brown);
-}
 
-.submit-button{
-    width:100%;
+        submitButton.disabled = true;
 
-    padding:15px;
+        submitButton.textContent =
+            currentLanguage === "ar"
+                ? "جاري الإرسال..."
+                : "SENDING...";
 
-    background:var(--brown);
 
-    border:1px solid var(--brown);
+        try{
 
-    color:white;
+            const formData = new URLSearchParams();
 
-    font-family:"Cinzel",serif;
 
-    letter-spacing:3px;
+            formData.append(
+                "name",
+                name
+            );
 
-    font-size:10px;
 
-    cursor:pointer;
+            formData.append(
+                "attendance",
+                attendance.value
+            );
 
-    transition:.3s;
-}
 
-.submit-button:hover{
-    background:#5b3d2a;
-}
+            formData.append(
+                "message",
+                message
+            );
 
+
+            await fetch(
+                GOOGLE_SHEET_URL,
+                {
+                    method:"POST",
+                    mode:"no-cors",
+                    body:formData
+                }
+            );
+
+
+            showToast(
+                currentLanguage === "ar"
+                    ? "تم إرسال رسالتك بنجاح"
+                    : "Your message has been sent successfully"
+            );
+
+
+            form.reset();
+
+
+        }catch(error){
+
+            console.error(
+                "RSVP error:",
+                error
+            );
+
+
+            showToast(
+                currentLanguage === "ar"
+                    ? "حدث خطأ. حاول مرة أخرى."
+                    : "Something went wrong. Please try again."
+            );
+
+
+        }finally{
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                currentLanguage === "ar"
+                    ? "إرسال الرسالة"
+                    : "SEND MESSAGE";
+
+        }
+
+    });
 
 /* =========================================================
    FOOTER
