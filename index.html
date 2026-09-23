@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -13,10 +14,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Kufi+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================================================
-   VARIABLES
-========================================================= */
 
 :root{
     --brown-dark:#241811;
@@ -37,11 +34,6 @@
 
     --shadow:0 20px 60px rgba(0,0,0,.25);
 }
-
-
-/* =========================================================
-   RESET
-========================================================= */
 
 *{
     margin:0;
@@ -144,11 +136,6 @@ textarea{
     background-size:5px 5px;
     opacity:.15;
 }
-
-
-/* =========================================================
-   OPENING CONTENT
-========================================================= */
 
 .opening-content{
     position:relative;
@@ -1606,7 +1593,6 @@ textarea{
 
 body.arabic{
     direction:rtl;
-
     font-family:"Noto Kufi Arabic",sans-serif;
 }
 
@@ -1633,6 +1619,14 @@ body.arabic .music-control{
 
 body.arabic .rsvp-form{
     text-align:right;
+}
+
+body.arabic .event-time,
+body.arabic .reception-time,
+body.arabic .location-title,
+body.arabic .location-city,
+body.arabic .wedding-date{
+    letter-spacing:1px;
 }
 
 
@@ -1776,6 +1770,7 @@ body.arabic .rsvp-form{
 }
 
 </style>
+
 </head>
 
 <body class="locked">
@@ -1788,26 +1783,26 @@ body.arabic .rsvp-form{
     <button id="languageButton">عربي</button>
 </div>
 
-
 <!-- =========================================================
      MUSIC
 ========================================================= -->
 
 <div class="music-control">
 
-    <button
-        class="music-button"
-        id="musicButton"
-        aria-label="Play music">
-        ▶
-    </button>
+```
+<button
+    class="music-button"
+    id="musicButton"
+    aria-label="Play music">
+    ▶
+</button>
 
-    <div class="music-hint" id="musicHint">
-        ♫ Play Music
-    </div>
+<div class="music-hint" id="musicHint">
+    ♫ Play Music
+</div>
+```
 
 </div>
-
 
 <!-- =========================================================
      AUDIO
@@ -1817,65 +1812,63 @@ body.arabic .rsvp-form{
     <source src="photos/music.mp3" type="audio/mpeg">
 </audio>
 
-
 <!-- =========================================================
      OPENING ENVELOPE
 ========================================================= -->
 
 <section class="opening" id="opening">
 
-    <div class="opening-content">
+```
+<div class="opening-content">
 
-        <div class="coming-title"
-             data-en="SOMETHING BEAUTIFUL<br>IS COMING"
-             data-ar="شيء جميل<br>قادم">
-            SOMETHING BEAUTIFUL<br>
-            IS COMING
-        </div>
+    <div class="coming-title"
+         data-en="SOMETHING BEAUTIFUL<br>IS COMING"
+         data-ar="شيء جميل<br>قادم">
+        SOMETHING BEAUTIFUL<br>
+        IS COMING
+    </div>
 
-        <div class="ornament">
-            <span>❦</span>
-        </div>
+    <div class="ornament">
+        <span>❦</span>
+    </div>
 
+    <div class="envelope-area" id="envelope">
 
-        <div class="envelope-area" id="envelope">
+        <div class="envelope">
 
-            <div class="envelope">
+            <div class="envelope-paper"></div>
 
-                <div class="envelope-paper"></div>
+            <div class="envelope-flap"></div>
 
-                <div class="envelope-flap"></div>
+            <div class="envelope-left"></div>
+            <div class="envelope-right"></div>
 
-                <div class="envelope-left"></div>
-                <div class="envelope-right"></div>
+            <div class="envelope-bottom"></div>
 
-                <div class="envelope-bottom"></div>
+            <div class="wax-seal">
 
-                <div class="wax-seal">
-
-                    <div class="wax-logo">
-                        K<span>M</span>
-                    </div>
-
+                <div class="wax-logo">
+                    K<span>M</span>
                 </div>
 
             </div>
 
         </div>
 
-
-        <div class="tap-open"
-             data-en="TAP TO OPEN"
-             data-ar="اضغط للفتح">
-            TAP TO OPEN
-        </div>
-
-        <div class="tap-line"></div>
-
     </div>
 
-</section>
+    <div class="tap-open"
+         data-en="TAP TO OPEN"
+         data-ar="اضغط للفتح">
+        TAP TO OPEN
+    </div>
 
+    <div class="tap-line"></div>
+
+</div>
+```
+
+</section>
 
 <!-- =========================================================
      MAIN WEBSITE
@@ -1883,114 +1876,128 @@ body.arabic .rsvp-form{
 
 <main class="main-site" id="mainSite">
 
-
 <!-- =========================================================
      MAIN INVITATION
 ========================================================= -->
 
 <section class="paper-section hero">
 
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
+```
+<div class="corner top-left"></div>
+<div class="corner top-right"></div>
+<div class="corner bottom-left"></div>
+<div class="corner bottom-right"></div>
 
+<div class="hero-photo">
 
-    <div class="hero-photo">
+    <img
+        src="photos/couple.jpg"
+        alt="Kerollos and Marina">
 
-        <img
-            src="photos/couple.jpg"
-            alt="Kerollos and Marina">
+</div>
 
+<div class="scripture"
+     data-en="“WHAT THEREFORE GOD HAS JOINED TOGETHER,<br>LET NOT MAN SEPARATE”"
+     data-ar="«فَالَّذِي جَمَعَهُ اللَّهُ لاَ يُفَرِّقْهُ إِنْسَانٌ»">
+
+    “WHAT THEREFORE GOD HAS JOINED TOGETHER,
+    <br>
+    LET NOT MAN SEPARATE”
+
+    <div class="scripture-reference"
+         data-en="MATTHEW 19:6"
+         data-ar="مَتَّى 19: 6">
+        MATTHEW 19:6
     </div>
 
+</div>
 
-    <div class="scripture">
 
-        “WHAT THEREFORE GOD HAS JOINED TOGETHER,
-        LET NOT MAN SEPARATE”
+<div class="divider">
+    <span>❦</span>
+</div>
 
-        <div class="scripture-reference">
-            MATTHEW 19:6
-        </div>
 
+<div class="small-heading"
+     data-en="THE WEDDING OF"
+     data-ar="حفل زفاف">
+    THE WEDDING OF
+</div>
+
+
+<div class="couple-names">
+
+    <span>Kerollos</span>
+
+    <span class="and">&</span>
+
+    <span>Marina</span>
+
+</div>
+
+
+<div class="wedding-date">
+
+    <div class="day"
+         data-en="04<sup>th</sup> OF OCTOBER"
+         data-ar="04 أكتوبر">
+        04<sup>th</sup> OF OCTOBER
     </div>
 
-
-    <div class="divider">
-        <span>❦</span>
+    <div class="year">
+        2026
     </div>
 
-
-    <div class="small-heading"
-         data-en="THE WEDDING OF"
-         data-ar="حفل زفاف">
-        THE WEDDING OF
+    <div class="weekday"
+         data-en="SUNDAY"
+         data-ar="الأحد">
+        SUNDAY
     </div>
 
-
-    <div class="couple-names">
-
-        <span>Kerollos</span>
-
-        <span class="and">&</span>
-
-        <span>Marina</span>
-
+    <div class="time"
+         data-en="AT 5:00 PM"
+         data-ar="الساعة 5:00 مساءً">
+        AT 5:00 PM
     </div>
 
-
-    <div class="wedding-date">
-
-        <div class="day">
-            04<sup>th</sup> OF OCTOBER
-        </div>
-
-        <div class="year">
-            2026
-        </div>
-
-        <div class="weekday">
-            SUNDAY
-        </div>
-
-        <div class="time">
-            AT 5:00 PM
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="location-title">
-        AT. SAINT SHENODA CHURCH
-    </div>
+<div class="location-title"
+     data-en="AT. SAINT SHENODA CHURCH"
+     data-ar="في كنيسة القديس شنودة">
+    AT. SAINT SHENODA CHURCH
+</div>
 
-    <div class="location-city">
-        HURGHADA
-    </div>
+<div class="location-city"
+     data-en="HURGHADA"
+     data-ar="الغردقة">
+    HURGHADA
+</div>
 
 
-    <div class="divider">
-        <span>✦</span>
-    </div>
+<div class="divider">
+    <span>✦</span>
+</div>
 
 
-    <div class="special-message">
+<div class="special-message">
 
-        <p data-en="WE CAN'T WAIT TO CELEBRATE OUR SPECIAL DAY WITH YOU"
-           data-ar="لا نستطيع الانتظار للاحتفال بيومنا المميز معكم">
+    <p data-en="WE CAN'T WAIT TO CELEBRATE<br>OUR SPECIAL DAY WITH YOU"
+       data-ar="لا نستطيع الانتظار للاحتفال<br>بيومنا المميز معكم">
 
-            WE CAN'T WAIT TO CELEBRATE
-            OUR SPECIAL DAY WITH YOU
+        WE CAN'T WAIT TO CELEBRATE
+        <br>
+        OUR SPECIAL DAY WITH YOU
 
-        </p>
+    </p>
 
-        <div class="heart">♥</div>
+    <div class="heart">♥</div>
 
-    </div>
+</div>
+```
 
 </section>
-
 
 <!-- =========================================================
      COUNTDOWN
@@ -1998,74 +2005,82 @@ body.arabic .rsvp-form{
 
 <section class="paper-section countdown-section">
 
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
+```
+<div class="corner top-left"></div>
+<div class="corner top-right"></div>
+
+<div class="countdown-title"
+     data-en="COUNTING THE MOMENTS"
+     data-ar="نعد اللحظات">
+    COUNTING THE MOMENTS
+</div>
 
 
-    <div class="countdown-title"
-         data-en="COUNTING THE MOMENTS"
-         data-ar="نعد اللحظات">
-        COUNTING THE MOMENTS
-    </div>
+<div class="countdown">
 
+    <div class="count-box">
 
-    <div class="countdown">
-
-        <div class="count-box">
-
-            <div class="count-number" id="days">
-                00
-            </div>
-
-            <div class="count-label">
-                DAYS
-            </div>
-
+        <div class="count-number" id="days">
+            00
         </div>
 
-
-        <div class="count-box">
-
-            <div class="count-number" id="hours">
-                00
-            </div>
-
-            <div class="count-label">
-                HOURS
-            </div>
-
-        </div>
-
-
-        <div class="count-box">
-
-            <div class="count-number" id="minutes">
-                00
-            </div>
-
-            <div class="count-label">
-                MINUTES
-            </div>
-
-        </div>
-
-
-        <div class="count-box">
-
-            <div class="count-number" id="seconds">
-                00
-            </div>
-
-            <div class="count-label">
-                SECONDS
-            </div>
-
+        <div class="count-label"
+             data-en="DAYS"
+             data-ar="يوم">
+            DAYS
         </div>
 
     </div>
+
+
+    <div class="count-box">
+
+        <div class="count-number" id="hours">
+            00
+        </div>
+
+        <div class="count-label"
+             data-en="HOURS"
+             data-ar="ساعة">
+            HOURS
+        </div>
+
+    </div>
+
+
+    <div class="count-box">
+
+        <div class="count-number" id="minutes">
+            00
+        </div>
+
+        <div class="count-label"
+             data-en="MINUTES"
+             data-ar="دقيقة">
+            MINUTES
+        </div>
+
+    </div>
+
+
+    <div class="count-box">
+
+        <div class="count-number" id="seconds">
+            00
+        </div>
+
+        <div class="count-label"
+             data-en="SECONDS"
+             data-ar="ثانية">
+            SECONDS
+        </div>
+
+    </div>
+
+</div>
+```
 
 </section>
-
 
 <!-- =========================================================
      CHURCH
@@ -2073,100 +2088,60 @@ body.arabic .rsvp-form{
 
 <section class="paper-section event">
 
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
+```
+<div class="corner top-left"></div>
+<div class="corner top-right"></div>
 
 
-    <div class="event-label">
-        OUR CEREMONY
-    </div>
+<div class="event-label"
+     data-en="OUR CEREMONY"
+     data-ar="مراسم الزفاف">
+    OUR CEREMONY
+</div>
 
 
-    <h2>
-        SAINT SHENODA CHURCH
-    </h2>
+<h2
+    data-en="SAINT SHENODA CHURCH"
+    data-ar="كنيسة القديس شنودة">
+    SAINT SHENODA CHURCH
+</h2>
 
 
-    <div class="event-time">
-        SUNDAY · 04 OCTOBER 2026 · 5:00 PM
-    </div>
+<div class="event-time"
+     data-en="SUNDAY · 04 OCTOBER 2026 · 5:00 PM"
+     data-ar="الأحد · 04 أكتوبر 2026 · 5:00 مساءً">
+    SUNDAY · 04 OCTOBER 2026 · 5:00 PM
+</div>
 
 
-    <div class="event-place">
-        St. Shenoda Church
-    </div>
+<div class="event-place"
+     data-en="St. Shenoda Church"
+     data-ar="كنيسة القديس شنودة">
+    St. Shenoda Church
+</div>
 
 
-    <div class="event-address">
-        Hurghada, Red Sea, Egypt
-    </div>
+<div class="event-address"
+     data-en="Hurghada, Red Sea, Egypt"
+     data-ar="الغردقة، البحر الأحمر، مصر">
+    Hurghada, Red Sea, Egypt
+</div>
 
 
-    <a
-        class="gold-button"
-        href="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac"
-        target="_blank"
-        rel="noopener">
+<a
+    class="gold-button"
+    href="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac"
+    target="_blank"
+    rel="noopener"
+    data-en="♧ &nbsp; VIEW ON GOOGLE MAPS"
+    data-ar="♧ &nbsp; عرض الموقع على خرائط جوجل">
 
-        ♧ &nbsp; VIEW ON GOOGLE MAPS
+    ♧ &nbsp; VIEW ON GOOGLE MAPS
 
-    </a>
-
-</section>
-
-
-<!-- =========================================================
-     HENNA
-========================================================= -->
-
-<section class="paper-section henna">
-
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
-
-
-    <div class="henna-title">
-        BEFORE OUR SPECIAL DAY
-    </div>
-
-
-    <h3>
-        HENNA NIGHT
-    </h3>
-
-
-    <div class="divider">
-        <span>❦</span>
-    </div>
-
-
-    <div class="event-time">
-        FRIDAY · 02 OCTOBER 2026 · 8:00 PM
-    </div>
-
-
-    <div class="event-place">
-        Star Sky Hall
-    </div>
-
-
-    <div class="event-address">
-        Shatea El Gaish · Al-Qiyadat St. · Hurghada
-    </div>
-
-
-    <a
-        class="gold-button"
-        href="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac"
-        target="_blank"
-        rel="noopener">
-
-        ♧ &nbsp; VIEW ON GOOGLE MAPS
-
-    </a>
+</a>
+```
 
 </section>
-
 
 <!-- =========================================================
      RECEPTION
@@ -2174,54 +2149,133 @@ body.arabic .rsvp-form{
 
 <section class="paper-section reception">
 
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
+```
+<div class="corner top-left"></div>
+<div class="corner top-right"></div>
+<div class="corner bottom-left"></div>
+<div class="corner bottom-right"></div>
 
 
-    <div class="reception-subtitle">
-        Specially For You
-    </div>
+<div class="reception-subtitle"
+     data-en="Specially For You"
+     data-ar="خصيصًا من أجلكم">
+    Specially For You
+</div>
 
 
-    <div class="divider">
-        <span>♥</span>
-    </div>
+<div class="divider">
+    <span>♥</span>
+</div>
 
 
-    <h2>
-        HEAVEN WEDDING SPOT
-    </h2>
+<h2
+    data-en="HEAVEN WEDDING SPOT"
+    data-ar="هيفن ويدنج سبوت">
+    HEAVEN WEDDING SPOT
+</h2>
 
 
-    <div class="reception-time">
-        AT 7:00 PM
-    </div>
+<div class="reception-time"
+     data-en="AT 7:00 PM"
+     data-ar="الساعة 7:00 مساءً">
+    AT 7:00 PM
+</div>
 
 
-    <div class="reception-place">
-        Jumana Hall
-    </div>
+<div class="reception-place"
+     data-en="Jumana Hall"
+     data-ar="قاعة جمانة">
+    Jumana Hall
+</div>
 
 
-    <div class="reception-address">
-        Al-Hijaz St. · Hurghada
-    </div>
+<div class="reception-address"
+     data-en="Al-Hijaz St. · Hurghada"
+     data-ar="شارع الحجاز · الغردقة">
+    Al-Hijaz St. · Hurghada
+</div>
 
 
-    <a
-        class="gold-button"
-        href="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac"
-        target="_blank"
-        rel="noopener">
+<a
+    class="gold-button"
+    href="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac"
+    target="_blank"
+    rel="noopener"
+    data-en="♧ &nbsp; VIEW ON GOOGLE MAPS"
+    data-ar="♧ &nbsp; عرض الموقع على خرائط جوجل">
 
-        ♧ &nbsp; VIEW ON GOOGLE MAPS
+    ♧ &nbsp; VIEW ON GOOGLE MAPS
 
-    </a>
+</a>
+```
 
 </section>
 
+<!-- =========================================================
+     HENNA
+========================================================= -->
+
+<section class="paper-section henna">
+
+```
+<div class="corner bottom-left"></div>
+<div class="corner bottom-right"></div>
+
+
+<div class="henna-title"
+     data-en="BEFORE OUR SPECIAL DAY"
+     data-ar="قبل يومنا المميز">
+    BEFORE OUR SPECIAL DAY
+</div>
+
+
+<h3
+    data-en="HENNA NIGHT"
+    data-ar="ليلة الحنة">
+    HENNA NIGHT
+</h3>
+
+
+<div class="divider">
+    <span>❦</span>
+</div>
+
+
+<div class="event-time"
+     data-en="FRIDAY · 02 OCTOBER 2026 · 8:00 PM"
+     data-ar="الجمعة · 02 أكتوبر 2026 · 8:00 مساءً">
+    FRIDAY · 02 OCTOBER 2026 · 8:00 PM
+</div>
+
+
+<div class="event-place"
+     data-en="Star Sky Hall"
+     data-ar="قاعة ستار سكاي">
+    Star Sky Hall
+</div>
+
+
+<div class="event-address"
+     data-en="Shatea El Gaish · Al-Qiyadat St. · Hurghada"
+     data-ar="شاطئ الجيش · شارع القيادات · الغردقة">
+    Shatea El Gaish · Al-Qiyadat St. · Hurghada
+</div>
+
+
+<a
+    class="gold-button"
+    href="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac"
+    target="_blank"
+    rel="noopener"
+    data-en="♧ &nbsp; VIEW ON GOOGLE MAPS"
+    data-ar="♧ &nbsp; عرض الموقع على خرائط جوجل">
+
+    ♧ &nbsp; VIEW ON GOOGLE MAPS
+
+</a>
+```
+
+</section>
 
 <!-- =========================================================
      GALLERY
@@ -2229,53 +2283,56 @@ body.arabic .rsvp-form{
 
 <section class="paper-section gallery-section">
 
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
+```
+<div class="corner top-left"></div>
+<div class="corner top-right"></div>
 
 
-    <div class="section-title">
-        OUR BEAUTIFUL MOMENTS
+<div class="section-title"
+     data-en="OUR BEAUTIFUL MOMENTS"
+     data-ar="أجمل لحظاتنا">
+    OUR BEAUTIFUL MOMENTS
+</div>
+
+
+<div class="gallery">
+
+    <div class="gallery-item">
+        <img src="photos/1.jpg" alt="">
     </div>
 
-
-    <div class="gallery">
-
-        <div class="gallery-item">
-            <img src="photos/1.jpg" alt="">
-        </div>
-
-        <div class="gallery-item">
-            <img src="photos/2.jpg" alt="">
-        </div>
-
-        <div class="gallery-item">
-            <img src="photos/3.jpg" alt="">
-        </div>
-
-        <div class="gallery-item">
-            <img src="photos/4.jpg" alt="">
-        </div>
-
-        <div class="gallery-item">
-            <img src="photos/5.jpg" alt="">
-        </div>
-
-        <div class="gallery-item">
-            <img src="photos/6.jpg" alt="">
-        </div>
-
-        <div class="gallery-item">
-            <img src="photos/7.jpg" alt="">
-        </div>
-
-        <div class="gallery-item">
-            <img src="photos/8.jpg" alt="">
-        </div>
-
+    <div class="gallery-item">
+        <img src="photos/2.jpg" alt="">
     </div>
+
+    <div class="gallery-item">
+        <img src="photos/3.jpg" alt="">
+    </div>
+
+    <div class="gallery-item">
+        <img src="photos/4.jpg" alt="">
+    </div>
+
+    <div class="gallery-item">
+        <img src="photos/5.jpg" alt="">
+    </div>
+
+    <div class="gallery-item">
+        <img src="photos/6.jpg" alt="">
+    </div>
+
+    <div class="gallery-item">
+        <img src="photos/7.jpg" alt="">
+    </div>
+
+    <div class="gallery-item">
+        <img src="photos/8.jpg" alt="">
+    </div>
+
+</div>
+```
 
 </section>
-
 
 <!-- =========================================================
      RSVP
@@ -2283,91 +2340,118 @@ body.arabic .rsvp-form{
 
 <section class="paper-section rsvp">
 
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
+```
+<div class="corner top-left"></div>
+<div class="corner top-right"></div>
+<div class="corner bottom-left"></div>
+<div class="corner bottom-right"></div>
 
 
-    <div class="rsvp-script">
-        Leave Us a Message
+<div class="rsvp-script"
+     data-en="Leave Us a Message"
+     data-ar="اترك لنا رسالة">
+    Leave Us a Message
+</div>
+
+
+<h2
+    data-en="WE WOULD LOVE TO HEAR FROM YOU"
+    data-ar="يسعدنا أن نسمع منكم">
+    WE WOULD LOVE TO HEAR FROM YOU
+</h2>
+
+
+<form class="rsvp-form" id="rsvpForm">
+
+    <label class="form-label"
+           for="guestName"
+           data-en="YOUR NAME"
+           data-ar="اسمك">
+        YOUR NAME
+    </label>
+
+
+    <input
+        class="form-input"
+        id="guestName"
+        type="text"
+        placeholder="Your Name"
+        data-placeholder-en="Your Name"
+        data-placeholder-ar="اسمك"
+        autocomplete="name"
+        required>
+
+
+    <label class="form-label"
+           data-en="WILL YOU BE ATTENDING?"
+           data-ar="هل ستحضرون؟">
+        WILL YOU BE ATTENDING?
+    </label>
+
+
+    <div class="attendance">
+
+        <input
+            type="radio"
+            name="attendance"
+            id="yes"
+            value="YES"
+            required>
+
+        <label
+            for="yes"
+            data-en="YES"
+            data-ar="نعم">
+            YES
+        </label>
+
+
+        <input
+            type="radio"
+            name="attendance"
+            id="no"
+            value="NO">
+
+        <label
+            for="no"
+            data-en="NO"
+            data-ar="لا">
+            NO
+        </label>
+
     </div>
 
 
-    <h2>
-        WE WOULD LOVE TO HEAR FROM YOU
-    </h2>
+    <label class="form-label"
+           for="guestMessage"
+           data-en="LEAVE US A MESSAGE"
+           data-ar="اترك لنا رسالة">
+        LEAVE US A MESSAGE
+    </label>
 
 
-    <form class="rsvp-form" id="rsvpForm">
-
-        <label class="form-label" for="guestName">
-            YOUR NAME
-        </label>
-
-        <input
-            class="form-input"
-            id="guestName"
-            type="text"
-            placeholder="Your Name"
-            autocomplete="name"
-            required>
+    <textarea
+        class="form-textarea"
+        id="guestMessage"
+        placeholder="Write your message..."
+        data-placeholder-en="Write your message..."
+        data-placeholder-ar="اكتب رسالتك..."></textarea>
 
 
-        <label class="form-label">
-            WILL YOU BE ATTENDING?
-        </label>
+    <button
+        class="submit-button"
+        type="submit"
+        data-en="SEND MESSAGE"
+        data-ar="إرسال الرسالة">
 
+        SEND MESSAGE
 
-        <div class="attendance">
+    </button>
 
-            <input
-                type="radio"
-                name="attendance"
-                id="yes"
-                value="YES"
-                required>
-
-            <label for="yes">
-                YES
-            </label>
-
-
-            <input
-                type="radio"
-                name="attendance"
-                id="no"
-                value="NO">
-
-            <label for="no">
-                NO
-            </label>
-
-        </div>
-
-
-        <label class="form-label" for="guestMessage">
-            LEAVE US A MESSAGE
-        </label>
-
-        <textarea
-            class="form-textarea"
-            id="guestMessage"
-            placeholder="Write your message..."></textarea>
-
-
-        <button
-            class="submit-button"
-            type="submit">
-
-            SEND MESSAGE
-
-        </button>
-
-    </form>
+</form>
+```
 
 </section>
-
 
 <!-- =========================================================
      FOOTER
@@ -2375,47 +2459,48 @@ body.arabic .rsvp-form{
 
 <section class="paper-section footer">
 
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
+```
+<div class="corner top-left"></div>
+<div class="corner top-right"></div>
+<div class="corner bottom-left"></div>
+<div class="corner bottom-right"></div>
 
 
-    <div class="divider">
-        <span>❦</span>
-    </div>
+<div class="divider">
+    <span>❦</span>
+</div>
 
 
-    <div class="footer-message">
+<div class="footer-message"
+     data-en="THANK YOU FOR BEING A PART OF<br>OUR SPECIAL DAY"
+     data-ar="شكرًا لكونكم جزءًا من<br>يومنا المميز">
 
-        THANK YOU FOR BEING A PART OF
-        <br>
-        OUR SPECIAL DAY
+    THANK YOU FOR BEING A PART OF
+    <br>
+    OUR SPECIAL DAY
 
-    </div>
-
-
-    <div class="footer-km">
-        KM
-    </div>
+</div>
 
 
-    <div class="footer-date">
-        04 · 10 · 2026
-    </div>
+<div class="footer-km">
+    KM
+</div>
+
+
+<div class="footer-date">
+    04 · 10 · 2026
+</div>
+```
 
 </section>
 
-
 </main>
-
 
 <!-- =========================================================
      TOAST
 ========================================================= -->
 
 <div class="toast" id="toast"></div>
-
 
 <script>
 
@@ -2454,6 +2539,8 @@ function updateLanguage(){
     );
 
 
+    /* Normal text elements */
+
     document.querySelectorAll("[data-en]").forEach(element => {
 
         const value =
@@ -2461,12 +2548,28 @@ function updateLanguage(){
                 ? element.dataset.ar
                 : element.dataset.en;
 
-        if(value){
+        if(value !== undefined){
+
             element.innerHTML = value;
+
         }
 
     });
 
+
+    /* Input placeholders */
+
+    document.querySelectorAll("[data-placeholder-en]").forEach(element => {
+
+        element.placeholder =
+            currentLanguage === "ar"
+                ? element.dataset.placeholderAr
+                : element.dataset.placeholderEn;
+
+    });
+
+
+    /* Language button */
 
     languageButton.textContent =
         currentLanguage === "en"
@@ -2486,10 +2589,12 @@ languageButton.addEventListener("click", () => {
             ? "ar"
             : "en";
 
+
     localStorage.setItem(
         "weddingLanguage",
         currentLanguage
     );
+
 
     updateLanguage();
 
@@ -2893,11 +2998,6 @@ document
 
         sendForm.submit();
 
-
-        /*
-           Give Google Apps Script enough time
-           to process the request.
-        */
 
         setTimeout(() => {
 
