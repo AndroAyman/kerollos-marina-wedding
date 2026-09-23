@@ -3,913 +3,1329 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
 <title>Kerollos & Marina</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    --cream:#FAF5EC;
-    --cream-2:#F1E7D8;
-    --cashmere:#E1CFBB;
-    --blush:#EFC4CB;
-    --blush-deep:#D79AA3;
-    --ink:#4A3B34;
-    --ink-soft:#8B7A6C;
-    --gold:#B08D57;
-    box-sizing:border-box;
-    padding-top:env(safe-area-inset-top,0px);
-    padding-bottom:env(safe-area-inset-bottom,0px);
+:root{
+  --cream:#FFF9F5;
+  --cream-2:#FFFDFB;
+  --cream-3:#FDF1F2;
+
+  --pink-light:#F8DDE2;
+  --pink:#E8A9B5;
+  --pink-deep:#C9788B;
+  --pink-dark:#A9576C;
+
+  --ink:#59434A;
+  --ink-soft:#9A7F86;
+
+  --gold:#C49A67;
+  --white:#FFFFFF;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:
+    radial-gradient(circle at 10% 10%, rgba(248,221,226,.45), transparent 28%),
+    radial-gradient(circle at 90% 30%, rgba(232,169,181,.18), transparent 25%),
+    var(--cream);
+
+  color:var(--ink);
+  font-family:'Jost',sans-serif;
+  overflow-x:hidden;
+}
+
+body.arabic{
+  font-family:'Noto Kufi Arabic',sans-serif;
+}
+
+body.arabic .serif,
+body.arabic h1,
+body.arabic h2,
+body.arabic .couple-names{
+  font-family:'Noto Kufi Arabic',sans-serif;
+}
+
+button,
+a{
+  -webkit-tap-highlight-color:transparent;
+}
+
+button{
+  font-family:inherit;
+}
+
+/* =========================
+   FLOATING DECORATIONS
+========================= */
+
+#petals{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:50;
+}
+
+.petal{
+  position:absolute;
+  top:-60px;
+  width:22px;
+  height:22px;
+  opacity:.75;
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+  0%{
+    transform:
+      translate3d(0,-40px,0)
+      rotate(0deg);
+    opacity:0;
   }
 
-  *{box-sizing:border-box;}
-
-  html{
-    scroll-behavior:smooth;
-    scroll-padding-top:env(safe-area-inset-top,0px);
-    height:100%;
+  10%{
+    opacity:.75;
   }
 
-  body{
-    margin:0;
-    height:100%;
-    background:var(--cream);
-    color:var(--ink);
-    font-family:'Jost',sans-serif;
-    font-weight:300;
-    overflow-x:hidden;
-    position:relative;
+  50%{
+    transform:
+      translate3d(var(--drift1),50vh,0)
+      rotate(180deg);
   }
 
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --cream:#2A2420;
-      --cream-2:#332B25;
-      --cashmere:#4A3B34;
-      --ink:#F1E6DA;
-      --ink-soft:#C9B9A8;
-    }
+  100%{
+    transform:
+      translate3d(var(--drift2),110vh,0)
+      rotate(360deg);
+    opacity:0;
+  }
+}
+
+/* =========================
+   TOP CONTROLS
+========================= */
+
+.top-controls{
+  position:fixed;
+  top:18px;
+  right:18px;
+  z-index:100;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.control-btn{
+  border:none;
+  background:rgba(255,255,255,.94);
+  color:var(--pink-dark);
+  border:1px solid rgba(201,120,139,.25);
+  box-shadow:0 8px 25px rgba(120,70,80,.12);
+  cursor:pointer;
+  transition:.25s ease;
+  backdrop-filter:blur(10px);
+}
+
+/* Language */
+
+.lang-btn{
+  height:44px;
+  min-width:76px;
+  padding:0 15px;
+  border-radius:24px;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.4px;
+}
+
+.lang-btn:hover{
+  transform:translateY(-2px);
+  background:var(--pink-dark);
+  color:white;
+}
+
+/* Music */
+
+.music-wrapper{
+  position:relative;
+}
+
+.music-btn{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+  position:relative;
+}
+
+.music-btn::before,
+.music-btn::after{
+  content:"";
+  position:absolute;
+  inset:-5px;
+  border:2px solid rgba(201,120,139,.38);
+  border-radius:50%;
+  animation:musicPulse 2s infinite;
+  pointer-events:none;
+}
+
+.music-btn::after{
+  animation-delay:1s;
+}
+
+.music-btn.playing{
+  background:var(--pink-dark);
+  color:white;
+}
+
+.music-btn.playing::before,
+.music-btn.playing::after{
+  border-color:rgba(201,120,139,.55);
+}
+
+@keyframes musicPulse{
+  0%{
+    transform:scale(.85);
+    opacity:.8;
   }
 
-  :root[data-theme="dark"]{
-    --cream:#2A2420;
-    --cream-2:#332B25;
-    --cashmere:#4A3B34;
-    --ink:#F1E6DA;
-    --ink-soft:#C9B9A8;
+  70%{
+    transform:scale(1.25);
+    opacity:0;
   }
 
-  h1,h2,h3{
-    font-family:'Cormorant Garamond',serif;
-    font-weight:600;
-    margin:0;
+  100%{
+    transform:scale(1.25);
+    opacity:0;
+  }
+}
+
+.music-hint{
+  position:absolute;
+  right:0;
+  top:63px;
+  background:var(--pink-dark);
+  color:white;
+  padding:7px 12px;
+  border-radius:20px;
+  white-space:nowrap;
+  font-size:11px;
+  font-weight:500;
+  box-shadow:0 7px 18px rgba(120,70,80,.18);
+  animation:hintFloat 1.8s ease-in-out infinite;
+}
+
+.music-hint::before{
+  content:"";
+  position:absolute;
+  right:18px;
+  top:-5px;
+  width:10px;
+  height:10px;
+  background:var(--pink-dark);
+  transform:rotate(45deg);
+}
+
+@keyframes hintFloat{
+  0%,100%{
+    transform:translateY(0);
   }
 
-  p{
-    margin:0;
-    line-height:1.85;
+  50%{
+    transform:translateY(-4px);
+  }
+}
+
+.music-hint.hidden{
+  display:none;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:100svh;
+  padding:95px 20px 55px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  text-align:center;
+  overflow:hidden;
+}
+
+.hero::before,
+.hero::after{
+  position:absolute;
+  font-size:70px;
+  color:rgba(201,120,139,.10);
+  pointer-events:none;
+}
+
+.hero::before{
+  content:"♡";
+  left:4%;
+  top:18%;
+  transform:rotate(-15deg);
+}
+
+.hero::after{
+  content:"♡";
+  right:4%;
+  bottom:14%;
+  transform:rotate(18deg);
+}
+
+.hero-inner{
+  width:min(900px,100%);
+  position:relative;
+  z-index:2;
+}
+
+.small-label{
+  text-transform:uppercase;
+  letter-spacing:4px;
+  color:var(--pink-dark);
+  font-size:11px;
+  font-weight:600;
+  margin-bottom:24px;
+}
+
+body.arabic .small-label{
+  letter-spacing:0;
+}
+
+.couple-frame{
+  width:180px;
+  height:180px;
+  margin:0 auto 27px;
+  padding:7px;
+  background:linear-gradient(135deg,#fff,#f8dde2);
+  border:1px solid rgba(201,120,139,.28);
+  box-shadow:
+    0 20px 45px rgba(120,70,80,.13),
+    0 0 0 8px rgba(248,221,226,.30);
+  border-radius:50%;
+  animation:heroFloat 5s ease-in-out infinite;
+}
+
+.couple-frame img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:50%;
+  display:block;
+}
+
+@keyframes heroFloat{
+  0%,100%{
+    transform:translateY(0);
   }
 
-  a{
-    color:inherit;
-    text-decoration:none;
+  50%{
+    transform:translateY(-7px);
   }
+}
 
-  button{
-    font-family:inherit;
-  }
+.couple-names{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(56px,12vw,100px);
+  line-height:.88;
+  font-weight:500;
+  color:var(--pink-dark);
+}
 
-  .section{
-    position:relative;
-    padding:80px 24px;
-    max-width:600px;
-    margin:0 auto;
-    text-align:center;
-  }
+.amp{
+  font-size:.52em;
+  color:var(--gold);
+  margin:0 7px;
+  vertical-align:middle;
+}
 
-  #petals{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:1;
-    overflow:hidden;
-  }
+.date-line{
+  margin-top:24px;
+  color:var(--ink);
+  font-size:15px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
 
-  .petal{
-    position:absolute;
-    top:-40px;
-    opacity:.7;
-    animation:fall linear infinite;
-    will-change:transform;
-  }
+body.arabic .date-line{
+  letter-spacing:0;
+}
 
-  @keyframes fall{
-    0%{
-      transform:translateY(-5vh) translateX(0) rotate(0deg);
-    }
-    100%{
-      transform:translateY(105vh) translateX(var(--drift,30px)) rotate(340deg);
-    }
-  }
+.date-line strong{
+  color:var(--pink-dark);
+}
 
-  @media (prefers-reduced-motion: reduce){
-    .petal{
-      animation:none;
-      display:none;
-    }
+.divider{
+  width:70px;
+  height:1px;
+  background:var(--pink);
+  margin:27px auto;
+}
 
-    *{
-      scroll-behavior:auto !important;
-    }
-  }
+.invite-text{
+  max-width:570px;
+  margin:0 auto;
+  color:var(--ink-soft);
+  font-size:15px;
+  line-height:1.9;
+}
 
-  .fab{
-    position:fixed;
-    z-index:20;
-    top:calc(16px + env(safe-area-inset-top,0px));
-    width:44px;
-    height:44px;
-    border-radius:50%;
-    background:var(--cream-2);
-    border:1px solid var(--cashmere);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:18px;
-    cursor:pointer;
-    box-shadow:0 2px 10px rgba(74,59,52,.12);
-  }
+/* =========================
+   COUNTDOWN
+========================= */
 
-  #musicToggle{
-    left:16px;
-  }
+.countdown{
+  margin:35px auto 0;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
 
-  #shareBtn{
-    right:16px;
-  }
+.time-box{
+  min-width:72px;
+  padding:13px 10px 10px;
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(232,169,181,.45);
+  border-radius:14px;
+  box-shadow:0 8px 22px rgba(120,70,80,.06);
+}
 
-  .hero{
-    min-height:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding:110px 24px 60px;
-    position:relative;
-    z-index:2;
-  }
+.time-box span{
+  display:block;
+}
 
-  .photo-frame{
-    width:140px;
-    height:140px;
-    border-radius:50%;
-    background:var(--cream-2);
-    border:1px solid var(--cashmere);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    margin-bottom:26px;
-  }
+.time-number{
+  font-size:25px;
+  font-weight:500;
+  color:var(--pink-dark);
+}
 
-  .photo-frame img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-  }
+.time-label{
+  margin-top:3px;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:var(--ink-soft);
+}
 
-  .photo-frame svg{
-    width:44%;
-    opacity:.5;
-    color:var(--blush-deep);
-  }
+body.arabic .time-label{
+  letter-spacing:0;
+}
 
-  .monogram{
-    font-family:'Cormorant Garamond',serif;
-    font-style:italic;
-    font-size:20px;
-    color:var(--gold);
-    letter-spacing:3px;
-    margin-bottom:14px;
-  }
+/* =========================
+   SECTIONS
+========================= */
 
-  .hero .names{
-    font-size:clamp(38px,10vw,58px);
-    line-height:1.2;
-    color:var(--ink);
-  }
+section{
+  padding:85px 20px;
+}
 
-  .hero .amp{
-    display:block;
-    font-style:italic;
-    font-size:24px;
-    color:var(--blush-deep);
-    margin:4px 0;
-  }
+.section-inner{
+  width:min(950px,100%);
+  margin:auto;
+}
 
-  .hero .tag{
-    margin-top:20px;
-    font-size:14px;
-    color:var(--ink-soft);
-    letter-spacing:.5px;
-    max-width:340px;
-  }
+.section-title{
+  text-align:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:47px;
+  font-weight:500;
+  color:var(--pink-dark);
+  margin-bottom:12px;
+}
 
-  .hero .date{
-    margin-top:12px;
-    font-family:'Cormorant Garamond',serif;
-    font-size:20px;
-    color:var(--ink);
-    letter-spacing:1px;
-  }
+.section-subtitle{
+  text-align:center;
+  color:var(--ink-soft);
+  font-size:13px;
+  margin-bottom:40px;
+}
 
-  .countdown{
-    display:flex;
-    gap:12px;
-    margin-top:36px;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
+/* =========================
+   VERSE
+========================= */
 
-  .cd-box{
-    background:var(--cream-2);
-    border:1px solid var(--cashmere);
-    border-radius:10px;
-    width:66px;
-    padding:12px 0;
-  }
+.verse-section{
+  background:rgba(255,255,255,.38);
+}
 
-  .cd-num{
-    font-family:'Cormorant Garamond',serif;
-    font-size:26px;
-    color:var(--blush-deep);
-  }
+.verse{
+  max-width:720px;
+  margin:auto;
+  text-align:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:27px;
+  line-height:1.65;
+  color:var(--ink);
+}
 
-  .cd-lbl{
-    font-size:10px;
-    color:var(--ink-soft);
-    margin-top:4px;
-    letter-spacing:.5px;
-    text-transform:uppercase;
-  }
+body.arabic .verse{
+  font-family:'Noto Kufi Arabic',sans-serif;
+  font-size:18px;
+  line-height:2.1;
+}
 
-  .scrolldown{
-    margin-top:54px;
-    font-size:11px;
-    color:var(--ink-soft);
-    letter-spacing:1px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:6px;
-  }
+.verse-mark{
+  font-size:35px;
+  color:var(--pink);
+  margin-bottom:10px;
+}
 
-  .scrolldown span{
-    display:block;
-    width:1px;
-    height:26px;
-    background:var(--gold);
-    animation:sd 1.8s ease-in-out infinite;
-  }
+/* =========================
+   EVENTS
+========================= */
 
-  @keyframes sd{
-    0%{opacity:.2;}
-    50%{opacity:1;}
-    100%{opacity:.2;}
-  }
+.events{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
 
-  .divider{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:14px;
-    padding:0 24px;
-    color:var(--gold);
-    max-width:600px;
-    margin:0 auto;
-  }
+.event-card{
+  background:rgba(255,255,255,.83);
+  border:1px solid rgba(232,169,181,.38);
+  border-radius:22px;
+  padding:30px 22px;
+  text-align:center;
+  box-shadow:0 12px 35px rgba(120,70,80,.06);
+  transition:.3s ease;
+}
 
-  .divider .line{
-    flex:1;
-    height:1px;
-    background:var(--cashmere);
-  }
+.event-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 40px rgba(120,70,80,.11);
+}
 
-  .divider .mark{
-    font-size:16px;
-  }
+.event-icon{
+  width:60px;
+  height:60px;
+  margin:0 auto 17px;
+  border-radius:50%;
+  background:var(--cream-3);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+}
 
-  .verse p{
-    font-family:'Cormorant Garamond',serif;
-    font-style:italic;
-    font-size:21px;
-    color:var(--ink);
-    line-height:2;
-  }
+.event-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:31px;
+  color:var(--pink-dark);
+  margin-bottom:8px;
+}
 
-  .verse .ref{
-    display:block;
-    margin-top:16px;
-    font-family:'Jost',sans-serif;
-    font-size:12px;
-    color:var(--ink-soft);
-    letter-spacing:.5px;
-  }
+body.arabic .event-title{
+  font-family:'Noto Kufi Arabic',sans-serif;
+  font-size:21px;
+}
 
-  .kicker{
-    font-size:12px;
-    color:var(--gold);
-    letter-spacing:2px;
-    margin-bottom:6px;
-    text-transform:uppercase;
-  }
+.event-date{
+  font-size:13px;
+  font-weight:600;
+  color:var(--ink);
+  margin-bottom:5px;
+}
 
-  .section h2{
-    font-size:32px;
-    color:var(--ink);
-    margin-bottom:36px;
-  }
+.event-place{
+  font-size:14px;
+  font-weight:500;
+  color:var(--pink-dark);
+  margin-bottom:8px;
+}
 
-  .event{
-    background:var(--cream-2);
-    border:1px solid var(--cashmere);
-    border-radius:18px;
-    padding:32px 26px;
-    margin-bottom:20px;
-    text-align:center;
-  }
+.event-address{
+  color:var(--ink-soft);
+  font-size:12px;
+  line-height:1.6;
+  min-height:39px;
+}
 
-  .event .icon{
-    font-size:24px;
-    margin-bottom:10px;
-    display:block;
-  }
+.event-buttons{
+  margin-top:20px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
 
-  .event .time{
-    font-family:'Cormorant Garamond',serif;
-    font-size:26px;
-    color:var(--blush-deep);
-  }
+.event-btn{
+  width:100%;
+  border:none;
+  padding:11px 15px;
+  border-radius:22px;
+  background:var(--pink-dark);
+  color:white;
+  font-size:12px;
+  cursor:pointer;
+  transition:.25s ease;
+}
 
-  .event .venue{
-    margin-top:10px;
-    font-size:16px;
-    font-weight:500;
-  }
+.event-btn:hover{
+  background:var(--pink-deep);
+  transform:translateY(-1px);
+}
 
-  .event .addr{
-    margin-top:4px;
-    font-size:13px;
-    color:var(--ink-soft);
-  }
+.event-btn.secondary{
+  background:var(--cream-3);
+  color:var(--pink-dark);
+  border:1px solid rgba(201,120,139,.22);
+}
 
-  .event .btnrow{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
-    margin-top:18px;
-  }
+/* =========================
+   MAP
+========================= */
 
-  .btn{
-    border:1px solid var(--blush-deep);
-    color:var(--blush-deep);
-    background:transparent;
-    padding:10px 18px;
-    border-radius:999px;
-    font-size:12px;
-    letter-spacing:.3px;
-    cursor:pointer;
-    transition:background .2s,color .2s;
-  }
+.map-section{
+  background:rgba(255,255,255,.45);
+}
 
-  .btn:hover{
-    background:var(--blush-deep);
-    color:var(--cream);
-  }
+.map-box{
+  width:min(850px,100%);
+  margin:auto;
+  padding:15px;
+  border-radius:28px;
+  background:white;
+  border:1px solid rgba(232,169,181,.35);
+  box-shadow:0 15px 40px rgba(120,70,80,.08);
+}
 
-  .btn.solid{
-    background:var(--blush-deep);
-    color:var(--cream);
-  }
+.map-box svg{
+  width:100%;
+  height:auto;
+  display:block;
+}
 
-  .btn.solid:hover{
-    opacity:.9;
-  }
+.map-road{
+  fill:none;
+  stroke:#f0dadd;
+  stroke-width:3;
+}
 
-  .btn:focus-visible,
-  .fab:focus-visible{
-    outline:2px solid var(--gold);
-    outline-offset:2px;
-  }
+.map-road.thin{
+  stroke-width:1.7;
+}
 
-  .mapwrap{
-    background:var(--cream-2);
-    border:1px solid var(--cashmere);
-    border-radius:18px;
-    padding:20px;
-  }
+.map-pin{
+  cursor:pointer;
+  transition:.2s;
+}
 
-  .mapwrap svg{
-    width:100%;
-    height:auto;
-    display:block;
-  }
+.map-pin:hover{
+  transform:scale(1.08);
+  transform-origin:center;
+}
 
-  .pin{
-    cursor:pointer;
-  }
+.map-pin circle{
+  fill:var(--pink-dark);
+}
 
-  .pin circle{
-    transition:r .15s;
-  }
+.map-pin text{
+  fill:white;
+  font-size:11px;
+  font-weight:600;
+}
 
-  .pin:hover circle{
-    r:9;
-  }
+/* =========================
+   GALLERY
+========================= */
 
-  .maplegend{
-    display:flex;
-    flex-wrap:wrap;
-    gap:16px;
-    justify-content:center;
-    margin-top:16px;
-    font-size:12px;
-  }
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
 
-  .maplegend .dot{
-    display:inline-block;
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    margin-right:6px;
-    vertical-align:middle;
+.gallery-item{
+  aspect-ratio:1/1;
+  background:white;
+  padding:7px;
+  border:1px solid rgba(232,169,181,.38);
+  box-shadow:0 10px 25px rgba(120,70,80,.07);
+  border-radius:16px;
+  position:relative;
+  overflow:hidden;
+  transition:.3s ease;
+}
+
+.gallery-item:hover{
+  transform:translateY(-4px) rotate(-1deg);
+  box-shadow:0 16px 30px rgba(120,70,80,.12);
+}
+
+.gallery-item:nth-child(even):hover{
+  transform:translateY(-4px) rotate(1deg);
+}
+
+.gallery-item img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  border-radius:11px;
+}
+
+.gallery-heart{
+  position:absolute;
+  right:12px;
+  bottom:10px;
+  color:white;
+  font-size:17px;
+  text-shadow:0 2px 7px rgba(0,0,0,.25);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  text-align:center;
+  padding:50px 20px 65px;
+  color:var(--ink-soft);
+  font-size:12px;
+  position:relative;
+}
+
+footer::before{
+  content:"♡";
+  display:block;
+  color:var(--pink);
+  font-size:30px;
+  margin-bottom:10px;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,20px);
+  background:var(--pink-dark);
+  color:white;
+  padding:11px 18px;
+  border-radius:25px;
+  font-size:12px;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s ease;
+  z-index:200;
+  white-space:nowrap;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* =========================
+   RTL
+========================= */
+
+body.arabic{
+  direction:rtl;
+}
+
+body.arabic .top-controls{
+  right:auto;
+  left:18px;
+  direction:ltr;
+}
+
+body.arabic .music-hint{
+  right:auto;
+  left:0;
+}
+
+body.arabic .music-hint::before{
+  right:auto;
+  left:18px;
+}
+
+body.arabic .event-card,
+body.arabic .invite-text{
+  direction:rtl;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:800px){
+
+  .events{
+    grid-template-columns:1fr;
+    max-width:520px;
+    margin:auto;
   }
 
   .gallery{
-    display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:14px;
   }
 
-  .frame{
-    aspect-ratio:3/4;
-    border-radius:14px;
-    overflow:hidden;
-    background:linear-gradient(160deg,var(--cashmere),var(--cream-2));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:1px solid var(--cashmere);
+  section{
+    padding:70px 18px;
   }
 
-  .frame img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
+  .section-title{
+    font-size:42px;
   }
 
-  .frame svg{
-    width:40%;
-    opacity:.5;
-    color:var(--blush-deep);
+  .couple-names{
+    font-size:clamp(48px,15vw,80px);
+  }
+}
+
+@media(max-width:480px){
+
+  .top-controls{
+    top:13px;
+    right:12px;
+    gap:7px;
   }
 
-  footer{
-    text-align:center;
-    padding:50px 24px 70px;
-    font-family:'Cormorant Garamond',serif;
-    font-style:italic;
-    font-size:18px;
-    color:var(--blush-deep);
+  body.arabic .top-controls{
+    left:12px;
+    right:auto;
   }
 
-  footer .small{
-    display:block;
-    margin-top:10px;
-    font-family:'Jost',sans-serif;
-    font-style:normal;
+  .lang-btn{
+    min-width:67px;
+    height:40px;
+    padding:0 11px;
     font-size:11px;
-    color:var(--ink-soft);
-    letter-spacing:1px;
-    text-transform:uppercase;
   }
 
-  .toast{
-    position:fixed;
-    bottom:24px;
-    left:50%;
-    transform:translateX(-50%) translateY(20px);
-    background:var(--ink);
-    color:var(--cream);
-    padding:10px 20px;
-    border-radius:999px;
-    font-size:13px;
-    opacity:0;
-    transition:opacity .25s,transform .25s;
-    z-index:30;
-    pointer-events:none;
+  .music-btn{
+    width:48px;
+    height:48px;
+    font-size:20px;
   }
 
-  .toast.show{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
+  .music-hint{
+    top:57px;
+    font-size:10px;
+    padding:6px 10px;
   }
+
+  .hero{
+    padding-top:82px;
+  }
+
+  .couple-frame{
+    width:150px;
+    height:150px;
+  }
+
+  .date-line{
+    font-size:12px;
+  }
+
+  .time-box{
+    min-width:64px;
+    padding:10px 7px;
+  }
+
+  .time-number{
+    font-size:22px;
+  }
+
+  .verse{
+    font-size:23px;
+  }
+
+  body.arabic .verse{
+    font-size:16px;
+  }
+
+  .gallery{
+    gap:9px;
+  }
+
+  .gallery-item{
+    padding:5px;
+    border-radius:12px;
+  }
+}
+
+/* Reduced motion */
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+    transition:none !important;
+  }
+}
 </style>
 </head>
 
 <body>
 
+<!-- =========================
+     TOP CONTROLS
+========================= -->
+
+<div class="top-controls">
+
+  <button
+    class="control-btn lang-btn"
+    id="languageToggle"
+    type="button">
+    عربي
+  </button>
+
+  <div class="music-wrapper">
+
+    <button
+      class="control-btn music-btn"
+      id="musicToggle"
+      type="button"
+      aria-label="Play music">
+      ▶
+    </button>
+
+    <div class="music-hint" id="musicHint">
+      ♫ Play Music
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Local wedding music -->
+<audio id="weddingMusic" loop preload="auto">
+  <source src="photos/music.mp3" type="audio/mpeg">
+</audio>
+
 <div id="petals"></div>
 
-<button class="fab" id="musicToggle" aria-label="Toggle music" title="Music">🔇</button>
-<button class="fab" id="shareBtn" aria-label="Share invitation" title="Share">🔗</button>
+<!-- =========================
+     HERO
+========================= -->
 
-<!-- HERO -->
-<section class="hero">
+<header class="hero">
 
-  <div class="photo-frame">
-    <img
-      src="photos/couple.jpg"
-      alt="Kerollos and Marina"
-      onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-    >
+  <div class="hero-inner">
 
-    <svg style="display:none" viewBox="0 0 60 60">
-      <g fill="none" stroke="currentColor" stroke-width="1.4">
-        <circle cx="30" cy="30" r="5"/>
-        <path d="M30 25 C25 15 20 15 18 20 C16 25 22 28 30 25Z"/>
-        <path d="M30 25 C35 15 40 15 42 20 C44 25 38 28 30 25Z"/>
-        <path d="M30 35 C25 45 20 45 18 40 C16 35 22 32 30 35Z"/>
-        <path d="M30 35 C35 45 40 45 42 40 C44 35 38 32 30 35Z"/>
-      </g>
-    </svg>
+    <div class="small-label"
+         data-en="Together with their families"
+         data-ar="بمشاركة عائلتيهما">
+      Together with their families
+    </div>
+
+    <div class="couple-frame">
+      <img src="photos/couple.jpg"
+           alt="Kerollos and Marina">
+    </div>
+
+    <div class="couple-names">
+      <span>Kerollos</span>
+      <span class="amp">&</span>
+      <span>Marina</span>
+    </div>
+
+    <div class="date-line">
+      <strong data-en="Sunday, October 4th, 2026"
+              data-ar="الأحد، ٤ أكتوبر ٢٠٢٦">
+        Sunday, October 4th, 2026
+      </strong>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="invite-text"
+       data-en="With joyful hearts, we invite you to celebrate the beginning of our forever together."
+       data-ar="بكل فرح ومحبة، ندعوكم لمشاركتنا فرحتنا والاحتفال ببداية حياتنا معًا.">
+      With joyful hearts, we invite you to celebrate the beginning of our forever together.
+    </p>
+
+    <div class="countdown">
+
+      <div class="time-box">
+        <span class="time-number" id="days">--</span>
+        <span class="time-label"
+              data-en="Days"
+              data-ar="يوم">
+          Days
+        </span>
+      </div>
+
+      <div class="time-box">
+        <span class="time-number" id="hours">--</span>
+        <span class="time-label"
+              data-en="Hours"
+              data-ar="ساعة">
+          Hours
+        </span>
+      </div>
+
+      <div class="time-box">
+        <span class="time-number" id="minutes">--</span>
+        <span class="time-label"
+              data-en="Minutes"
+              data-ar="دقيقة">
+          Minutes
+        </span>
+      </div>
+
+      <div class="time-box">
+        <span class="time-number" id="seconds">--</span>
+        <span class="time-label"
+              data-en="Seconds"
+              data-ar="ثانية">
+          Seconds
+        </span>
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="monogram">K &amp; M</div>
+</header>
 
-  <h1 class="names">
-    Kerollos
-    <span class="amp">&amp;</span>
-    Marina
-  </h1>
+<!-- =========================
+     VERSE
+========================= -->
 
-  <p class="tag">
-    Together with our families, we joyfully invite you to celebrate our wedding
-  </p>
+<section class="verse-section">
 
-  <p class="date">Sunday, October 4th 2026</p>
+  <div class="section-inner">
 
-  <div class="countdown" id="countdown" aria-live="polite">
-    <div class="cd-box">
-      <div class="cd-num" id="cd-d">--</div>
-      <div class="cd-lbl">Days</div>
+    <div class="verse-mark">♡</div>
+
+    <div class="verse"
+         data-en="“Two hearts, one journey, one beautiful beginning.”"
+         data-ar="«قلبان، رحلة واحدة، وبداية جميلة تجمعهما.»">
+      “Two hearts, one journey, one beautiful beginning.”
     </div>
 
-    <div class="cd-box">
-      <div class="cd-num" id="cd-h">--</div>
-      <div class="cd-lbl">Hrs</div>
-    </div>
-
-    <div class="cd-box">
-      <div class="cd-num" id="cd-m">--</div>
-      <div class="cd-lbl">Min</div>
-    </div>
-
-    <div class="cd-box">
-      <div class="cd-num" id="cd-s">--</div>
-      <div class="cd-lbl">Sec</div>
-    </div>
-  </div>
-
-  <div class="scrolldown">
-    SCROLL
-    <span></span>
-  </div>
-
-</section>
-
-<div class="divider">
-  <div class="line"></div>
-  <div class="mark">✦</div>
-  <div class="line"></div>
-</div>
-
-<!-- VERSE -->
-<section class="section verse">
-  <p>
-    "Love is patient, love is kind... it always protects, always trusts, always hopes, always perseveres."
-  </p>
-
-  <span class="ref">1 Corinthians 13</span>
-</section>
-
-<div class="divider">
-  <div class="line"></div>
-  <div class="mark">✦</div>
-  <div class="line"></div>
-</div>
-
-<!-- EVENTS -->
-<section class="section" id="events">
-
-  <div class="kicker">Celebration Schedule</div>
-  <h2>Wedding Events</h2>
-
-  <!-- HENNA -->
-  <div class="event" id="henna">
-
-    <span class="icon">🌿</span>
-
-    <div class="time">Oct 2 &middot; 8:00 PM</div>
-
-    <div class="venue">Henna Night</div>
-
-    <div class="venue" style="font-weight:400;font-size:15px;margin-top:2px;">
-      Star Sky Hall
-    </div>
-
-    <div class="addr">
-      Shatea El Gaish, Al-Qiyadat St, Hurghada
-    </div>
-
-    <div class="btnrow">
-
-      <button
-        class="btn"
-        data-map-url="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac">
-        📍 Directions
-      </button>
-
-      <button
-        class="btn solid"
-        data-ics="henna">
-        🗓️ Add to calendar
-      </button>
-
-    </div>
-  </div>
-
-  <!-- CHURCH -->
-  <div class="event" id="church">
-
-    <span class="icon">⛪</span>
-
-    <div class="time">Oct 4 &middot; 5:00 PM</div>
-
-    <div class="venue">Wedding Ceremony</div>
-
-    <div class="venue" style="font-weight:400;font-size:15px;margin-top:2px;">
-      Anba Shenouda, Head of the Hermits Church
-    </div>
-
-    <div class="addr">
-      Hurghada
-    </div>
-
-    <div class="btnrow">
-
-      <button
-        class="btn"
-        data-map-url="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac">
-        📍 Directions
-      </button>
-
-      <button
-        class="btn solid"
-        data-ics="church">
-        🗓️ Add to calendar
-      </button>
-
-    </div>
-  </div>
-
-  <!-- RECEPTION -->
-  <div class="event" id="reception">
-
-    <span class="icon">🥂</span>
-
-    <div class="time">Oct 4 &middot; 7:00 PM</div>
-
-    <div class="venue">Reception</div>
-
-    <div class="venue" style="font-weight:400;font-size:15px;margin-top:2px;">
-      Gumana Hall
-    </div>
-
-    <div class="addr">
-      Al-Hijaz St, Hurghada
-    </div>
-
-    <div class="btnrow">
-
-      <button
-        class="btn"
-        data-map-url="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac">
-        📍 Directions
-      </button>
-
-      <button
-        class="btn solid"
-        data-ics="reception">
-        🗓️ Add to calendar
-      </button>
-
-    </div>
   </div>
 
 </section>
 
-<div class="divider">
-  <div class="line"></div>
-  <div class="mark">✦</div>
-  <div class="line"></div>
-</div>
+<!-- =========================
+     EVENTS
+========================= -->
 
-<!-- MAP -->
-<section class="section" id="map">
+<section>
 
-  <div class="kicker">Hurghada</div>
-  <h2>Find Us</h2>
+  <div class="section-inner">
 
-  <div class="mapwrap">
+    <h2 class="section-title"
+        data-en="The Celebration"
+        data-ar="مواعيد الاحتفال">
+      The Celebration
+    </h2>
 
-    <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+    <p class="section-subtitle"
+       data-en="Three special moments we would love to share with you"
+       data-ar="ثلاث لحظات مميزة نتمنى أن نشاركها معكم">
+      Three special moments we would love to share with you
+    </p>
 
-      <rect
-        x="0"
-        y="0"
-        width="300"
-        height="200"
-        rx="14"
-        fill="var(--cream)"
-      />
+    <div class="events">
 
-      <path
-        d="M10 150 Q80 120 150 145 T290 130"
-        stroke="var(--cashmere)"
-        stroke-width="10"
-        fill="none"
-        stroke-linecap="round"
-      />
+      <!-- HENNA -->
 
-      <path
-        d="M20 40 Q100 70 180 40 T290 55"
-        stroke="var(--cashmere)"
-        stroke-width="6"
-        fill="none"
-        stroke-linecap="round"
-        opacity=".6"
-      />
+      <article class="event-card">
 
-      <!-- HENNA PIN -->
-      <g
-        class="pin"
-        data-map-url="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac">
+        <div class="event-icon">🌸</div>
 
-        <circle
-          cx="70"
-          cy="150"
-          r="7"
-          fill="var(--blush-deep)"
-        />
+        <h3 class="event-title"
+            data-en="Henna Night"
+            data-ar="ليلة الحنة">
+          Henna Night
+        </h3>
 
-        <text
-          x="70"
-          y="172"
-          font-size="11"
-          text-anchor="middle"
-          fill="var(--ink)"
-          font-family="Jost">
-          Henna
-        </text>
+        <div class="event-date"
+             data-en="Friday, October 2nd • 8:00 PM"
+             data-ar="الجمعة، ٢ أكتوبر • الساعة ٨ مساءً">
+          Friday, October 2nd • 8:00 PM
+        </div>
 
-      </g>
+        <div class="event-place"
+             data-en="Star Sky Hall"
+             data-ar="قاعة ستار سكاي">
+          Star Sky Hall
+        </div>
 
-      <!-- CHURCH PIN -->
-      <g
-        class="pin"
-        data-map-url="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac">
+        <div class="event-address"
+             data-en="Shatea El Gaish, Al-Qiyadat St., Hurghada"
+             data-ar="شاطئ الجيش، شارع القيادات، الغردقة">
+          Shatea El Gaish, Al-Qiyadat St., Hurghada
+        </div>
 
-        <circle
-          cx="150"
-          cy="80"
-          r="7"
-          fill="var(--gold)"
-        />
+        <div class="event-buttons">
 
-        <text
-          x="150"
-          y="65"
-          font-size="11"
-          text-anchor="middle"
-          fill="var(--ink)"
-          font-family="Jost">
-          Church
-        </text>
+          <button
+            class="event-btn map-btn"
+            data-map-url="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac"
+            data-en="Open Location"
+            data-ar="فتح الموقع">
+            Open Location
+          </button>
 
-      </g>
+          <button
+            class="event-btn secondary calendar-btn"
+            data-event="henna"
+            data-en="Add to Calendar"
+            data-ar="إضافة للتقويم">
+            Add to Calendar
+          </button>
 
-      <!-- RECEPTION PIN -->
-      <g
-        class="pin"
-        data-map-url="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac">
+        </div>
 
-        <circle
-          cx="230"
-          cy="120"
-          r="7"
-          fill="var(--blush)"
-        />
+      </article>
 
-        <text
-          x="230"
-          y="142"
-          font-size="11"
-          text-anchor="middle"
-          fill="var(--ink)"
-          font-family="Jost">
-          Reception
-        </text>
+      <!-- CHURCH -->
 
-      </g>
+      <article class="event-card">
 
-    </svg>
+        <div class="event-icon">♡</div>
+
+        <h3 class="event-title"
+            data-en="Wedding Ceremony"
+            data-ar="الكنيسة">
+          Wedding Ceremony
+        </h3>
+
+        <div class="event-date"
+             data-en="Sunday, October 4th • 5:00 PM"
+             data-ar="الأحد، ٤ أكتوبر • الساعة ٥ مساءً">
+          Sunday, October 4th • 5:00 PM
+        </div>
+
+        <div class="event-place"
+             data-en="Anba Shenouda, Head of the Hermits Church"
+             data-ar="كنيسة الأنبا شنودة، رئيس المتوحدين">
+          Anba Shenouda, Head of the Hermits Church
+        </div>
+
+        <div class="event-address"
+             data-en="Hurghada"
+             data-ar="الغردقة">
+          Hurghada
+        </div>
+
+        <div class="event-buttons">
+
+          <button
+            class="event-btn map-btn"
+            data-map-url="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac"
+            data-en="Open Location"
+            data-ar="فتح الموقع">
+            Open Location
+          </button>
+
+          <button
+            class="event-btn secondary calendar-btn"
+            data-event="church"
+            data-en="Add to Calendar"
+            data-ar="إضافة للتقويم">
+            Add to Calendar
+          </button>
+
+        </div>
+
+      </article>
+
+      <!-- RECEPTION -->
+
+      <article class="event-card">
+
+        <div class="event-icon">🌷</div>
+
+        <h3 class="event-title"
+            data-en="Wedding Reception"
+            data-ar="حفل الزفاف">
+          Wedding Reception
+        </h3>
+
+        <div class="event-date"
+             data-en="Sunday, October 4th • 7:00 PM"
+             data-ar="الأحد، ٤ أكتوبر • الساعة ٧ مساءً">
+          Sunday, October 4th • 7:00 PM
+        </div>
+
+        <div class="event-place"
+             data-en="Gumana Hall"
+             data-ar="قاعة جمانة">
+          Gumana Hall
+        </div>
+
+        <div class="event-address"
+             data-en="Al-Hijaz St., Hurghada"
+             data-ar="شارع الحجاز، الغردقة">
+          Al-Hijaz St., Hurghada
+        </div>
+
+        <div class="event-buttons">
+
+          <button
+            class="event-btn map-btn"
+            data-map-url="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac"
+            data-en="Open Location"
+            data-ar="فتح الموقع">
+            Open Location
+          </button>
+
+          <button
+            class="event-btn secondary calendar-btn"
+            data-event="reception"
+            data-en="Add to Calendar"
+            data-ar="إضافة للتقويم">
+            Add to Calendar
+          </button>
+
+        </div>
+
+      </article>
+
+    </div>
 
   </div>
 
-  <div class="maplegend">
+</section>
 
-    <span>
-      <span
-        class="dot"
-        style="background:var(--blush-deep);">
-      </span>
-      Henna
-    </span>
+<!-- =========================
+     MAP
+========================= -->
 
-    <span>
-      <span
-        class="dot"
-        style="background:var(--gold);">
-      </span>
-      Church
-    </span>
+<section class="map-section">
 
-    <span>
-      <span
-        class="dot"
-        style="background:var(--blush);">
-      </span>
-      Reception
-    </span>
+  <div class="section-inner">
+
+    <h2 class="section-title"
+        data-en="Find Us"
+        data-ar="أماكن الاحتفال">
+      Find Us
+    </h2>
+
+    <p class="section-subtitle"
+       data-en="Tap a pin to open the location"
+       data-ar="اضغط على أي علامة لفتح الموقع">
+      Tap a pin to open the location
+    </p>
+
+    <div class="map-box">
+
+      <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+
+        <rect
+          x="0"
+          y="0"
+          width="300"
+          height="220"
+          rx="20"
+          fill="#fff9f5"/>
+
+        <path class="map-road" d="M10 45 C70 70 100 40 145 60 S220 95 290 60"/>
+        <path class="map-road" d="M20 170 C70 145 100 180 150 155 S220 120 285 145"/>
+        <path class="map-road thin" d="M65 10 C80 60 80 110 65 210"/>
+        <path class="map-road thin" d="M190 5 C180 55 205 90 195 145 S210 190 235 215"/>
+        <path class="map-road thin" d="M5 105 C80 100 110 110 160 105 S230 100 295 108"/>
+
+        <!-- Henna -->
+        <g class="map-pin map-btn"
+           data-map-url="https://maps.app.goo.gl/W15NzPfhe2gPrfMXA?g_st=ac"
+           transform="translate(70,150)">
+          <circle r="15"/>
+          <text text-anchor="middle" y="4">H</text>
+        </g>
+
+        <!-- Church -->
+        <g class="map-pin map-btn"
+           data-map-url="https://maps.app.goo.gl/4g4zXyhjXCUNuWFY9?g_st=ac"
+           transform="translate(150,80)">
+          <circle r="15"/>
+          <text text-anchor="middle" y="4">C</text>
+        </g>
+
+        <!-- Reception -->
+        <g class="map-pin map-btn"
+           data-map-url="https://maps.app.goo.gl/GUuyJf8bmPwaJqcP7?g_st=ac"
+           transform="translate(230,120)">
+          <circle r="15"/>
+          <text text-anchor="middle" y="4">R</text>
+        </g>
+
+      </svg>
+
+    </div>
 
   </div>
 
-  <p style="margin-top:14px;font-size:12px;color:var(--ink-soft);">
-    Tap a pin to open directions in Google Maps
-  </p>
+</section>
+
+<!-- =========================
+     GALLERY
+========================= -->
+
+<section>
+
+  <div class="section-inner">
+
+    <h2 class="section-title"
+        data-en="Our Moments"
+        data-ar="لحظاتنا">
+      Our Moments
+    </h2>
+
+    <p class="section-subtitle"
+       data-en="A few memories from our journey"
+       data-ar="بعض الذكريات من رحلتنا">
+      A few memories from our journey
+    </p>
+
+    <div class="gallery" id="gallery"></div>
+
+  </div>
 
 </section>
 
-<div class="divider">
-  <div class="line"></div>
-  <div class="mark">✦</div>
-  <div class="line"></div>
-</div>
+<!-- =========================
+     FOOTER
+========================= -->
 
-<!-- GALLERY -->
-<section class="section" id="gallery">
-
-  <div class="kicker">Our Moments</div>
-  <h2>Gallery</h2>
-
-  <div class="gallery" id="galleryGrid"></div>
-
-  <p style="margin-top:16px;font-size:12px;color:var(--ink-soft);">
-    Drop photos into the /photos folder — they'll appear here automatically
-  </p>
-
-</section>
-
-<div class="divider">
-  <div class="line"></div>
-  <div class="mark">✦</div>
-  <div class="line"></div>
-</div>
-
-<!-- FOOTER -->
 <footer>
 
-  We can't wait to celebrate with you
+  <div
+    data-en="Thank you for being part of our special day."
+    data-ar="شكرًا لوجودكم ومشاركتكم يومنا المميز.">
+    Thank you for being part of our special day.
+  </div>
 
-  <span class="small">
-    Kerollos &amp; Marina
-  </span>
+  <div style="margin-top:8px;color:var(--pink-dark);">
+    Kerollos & Marina
+  </div>
 
 </footer>
 
@@ -917,516 +1333,649 @@
 
 <script>
 
-/* ---------------- petals ---------------- */
+/* =====================================================
+   LANGUAGE
+===================================================== */
 
-(function(){
+let currentLanguage = localStorage.getItem("weddingLanguage") || "en";
 
-  var wrap = document.getElementById('petals');
+const languageToggle = document.getElementById("languageToggle");
 
-  var colors = [
-    '#D79AA3',
-    '#E1CFBB',
-    '#B08D57'
-  ];
+function updateLanguage(){
 
-  var n = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 10;
+  document.documentElement.lang = currentLanguage;
 
-  for (var i=0; i<n; i++){
+  document.body.classList.toggle(
+    "arabic",
+    currentLanguage === "ar"
+  );
 
-    var p = document.createElement('div');
+  document.querySelectorAll("[data-en]").forEach(element => {
 
-    p.className = 'petal';
+    const text =
+      currentLanguage === "ar"
+        ? element.getAttribute("data-ar")
+        : element.getAttribute("data-en");
 
-    var size = 10 + Math.random()*10;
-
-    p.style.left = (Math.random()*100)+'vw';
-
-    p.style.setProperty(
-      '--drift',
-      (Math.random()*80-40)+'px'
-    );
-
-    p.style.animationDuration =
-      (14 + Math.random()*10)+'s';
-
-    p.style.animationDelay =
-      (Math.random()*14)+'s';
-
-    var c = colors[i % colors.length];
-
-    p.innerHTML =
-      '<svg width="'+size+'" height="'+size+'" viewBox="0 0 20 20">' +
-      '<path d="M10 0 C15 5 15 15 10 20 C5 15 5 5 10 0 Z" fill="'+c+'" opacity="0.8"/>' +
-      '</svg>';
-
-    wrap.appendChild(p);
-  }
-
-})();
-
-
-/* ---------------- countdown ---------------- */
-/*
-   Wedding ceremony:
-   October 4, 2026 — 5:00 PM Egypt time
-*/
-
-(function(){
-
-  var target =
-    new Date("2026-10-04T17:00:00+03:00").getTime();
-
-  var d = document.getElementById('cd-d');
-  var h = document.getElementById('cd-h');
-  var m = document.getElementById('cd-m');
-  var s = document.getElementById('cd-s');
-
-  function tick(){
-
-    var diff = target - Date.now();
-
-    if (diff <= 0){
-
-      d.textContent =
-      h.textContent =
-      m.textContent =
-      s.textContent = '0';
-
-      return;
+    if(text !== null){
+      element.textContent = text;
     }
 
-    var days =
-      Math.floor(diff / 86400000);
+  });
 
-    var hrs =
-      Math.floor((diff % 86400000) / 3600000);
+  languageToggle.textContent =
+    currentLanguage === "en"
+      ? "عربي"
+      : "English";
 
-    var mins =
-      Math.floor((diff % 3600000) / 60000);
+  updateMusicHint();
 
-    var secs =
-      Math.floor((diff % 60000) / 1000);
-
-    d.textContent = days;
-
-    h.textContent =
-      String(hrs).padStart(2,'0');
-
-    m.textContent =
-      String(mins).padStart(2,'0');
-
-    s.textContent =
-      String(secs).padStart(2,'0');
-  }
-
-  tick();
-
-  setInterval(tick,1000);
-
-})();
-
-
-/* ---------------- toast ---------------- */
-
-function showToast(msg){
-
-  var t =
-    document.getElementById('toast');
-
-  t.textContent = msg;
-
-  t.classList.add('show');
-
-  clearTimeout(showToast._h);
-
-  showToast._h =
-    setTimeout(function(){
-      t.classList.remove('show');
-    },2600);
 }
 
+languageToggle.addEventListener("click", () => {
 
-/* ---------------- Google Maps ---------------- */
+  currentLanguage =
+    currentLanguage === "en"
+      ? "ar"
+      : "en";
 
-document.querySelectorAll('[data-map-url]').forEach(function(el){
+  localStorage.setItem(
+    "weddingLanguage",
+    currentLanguage
+  );
 
-  el.addEventListener('click',function(){
-
-    var url =
-      el.getAttribute('data-map-url');
-
-    window.open(
-      url,
-      '_blank',
-      'noopener'
-    );
-
-  });
+  updateLanguage();
 
 });
 
 
-/* ---------------- calendar (.ics) ---------------- */
-/*
-   All times below are converted to UTC
-   because Egypt is UTC+3 during October 2026.
+/* =====================================================
+   FLOATING HEARTS & FLOWERS
+===================================================== */
 
-   Henna:
-   8:00 PM Egypt = 5:00 PM UTC
+const petalsContainer =
+  document.getElementById("petals");
 
-   Church:
-   5:00 PM Egypt = 2:00 PM UTC
+const decorations = [
 
-   Reception:
-   7:00 PM Egypt = 4:00 PM UTC
-*/
+  {
+    type:"heart",
+    color:"#E8A9B5"
+  },
 
-(function(){
+  {
+    type:"heart",
+    color:"#C9788B"
+  },
 
-  var events = {
+  {
+    type:"flower",
+    color:"#F2C3CC"
+  },
 
-    henna:{
-      title:'Henna Night - Kerollos & Marina',
-      loc:'Star Sky Hall, Shatea El Gaish, Al-Qiyadat St, Hurghada',
-      start:'20261002T170000Z',
-      end:'20261002T200000Z'
-    },
+  {
+    type:"flower",
+    color:"#E8A9B5"
+  },
 
-    church:{
-      title:'Wedding Ceremony - Kerollos & Marina',
-      loc:'Anba Shenouda, Head of the Hermits Church, Hurghada',
-      start:'20261004T140000Z',
-      end:'20261004T150000Z'
-    },
+  {
+    type:"heart",
+    color:"#F3D0D6"
+  }
 
-    reception:{
-      title:'Reception - Kerollos & Marina',
-      loc:'Gumana Hall, Al-Hijaz St, Hurghada',
-      start:'20261004T160000Z',
-      end:'20261004T190000Z'
-    }
+];
 
-  };
+function createDecoration(){
 
+  const item =
+    decorations[
+      Math.floor(
+        Math.random() * decorations.length
+      )
+    ];
 
-  function icsFor(ev){
+  const el =
+    document.createElement("div");
 
-    return [
+  el.className = "petal";
 
-      'BEGIN:VCALENDAR',
-      'VERSION:2.0',
-      'PRODID:-//Kerollos & Marina//Wedding Invite//EN',
-      'CALSCALE:GREGORIAN',
-      'BEGIN:VEVENT',
+  const size =
+    12 + Math.random() * 14;
 
-      'UID:' +
-      Math.random().toString(36).slice(2) +
-      '@wedding-invite',
+  el.style.width = size + "px";
+  el.style.height = size + "px";
 
-      'DTSTAMP:' +
-      new Date()
-        .toISOString()
-        .replace(/[-:]/g,'')
-        .split('.')[0] +
-      'Z',
+  el.style.left =
+    Math.random() * 100 + "vw";
 
-      'DTSTART:' + ev.start,
+  el.style.animationDuration =
+    (8 + Math.random() * 8) + "s";
 
-      'DTEND:' + ev.end,
+  el.style.animationDelay =
+    Math.random() * 2 + "s";
 
-      'SUMMARY:' + ev.title,
+  el.style.setProperty(
+    "--drift1",
+    (Math.random() * 160 - 80) + "px"
+  );
 
-      'LOCATION:' + ev.loc,
+  el.style.setProperty(
+    "--drift2",
+    (Math.random() * 220 - 110) + "px"
+  );
 
-      'END:VEVENT',
-      'END:VCALENDAR'
+  if(item.type === "heart"){
 
-    ].join('\r\n');
+    el.innerHTML = `
+      <svg viewBox="0 0 24 24"
+           width="100%"
+           height="100%">
+        <path
+          fill="${item.color}"
+          d="M12 21S3 15.4 3 8.7
+             C3 5.5 5.2 3.5 8 3.5
+             C9.7 3.5 11.2 4.4 12 5.8
+             C12.8 4.4 14.3 3.5 16 3.5
+             C18.8 3.5 21 5.5 21 8.7
+             C21 15.4 12 21 12 21Z"/>
+      </svg>
+    `;
+
+  }else{
+
+    el.innerHTML = `
+      <svg viewBox="0 0 100 100"
+           width="100%"
+           height="100%">
+        <g fill="${item.color}">
+          <circle cx="50" cy="50" r="20"/>
+          <circle cx="50" cy="20" r="18"/>
+          <circle cx="50" cy="80" r="18"/>
+          <circle cx="20" cy="50" r="18"/>
+          <circle cx="80" cy="50" r="18"/>
+        </g>
+      </svg>
+    `;
 
   }
 
+  petalsContainer.appendChild(el);
 
-  document
-    .querySelectorAll('[data-ics]')
-    .forEach(function(btn){
+  setTimeout(() => {
+    el.remove();
+  }, 18000);
 
-      btn.addEventListener('click',function(){
+}
 
-        var ev =
-          events[
-            btn.getAttribute('data-ics')
-          ];
+if(
+  !window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches
+){
 
-        var blob =
-          new Blob(
-            [icsFor(ev)],
-            {type:'text/calendar'}
-          );
+  for(let i = 0; i < 15; i++){
 
-        var url =
-          URL.createObjectURL(blob);
-
-        var a =
-          document.createElement('a');
-
-        a.href = url;
-
-        a.download =
-          btn.getAttribute('data-ics') +
-          '.ics';
-
-        document.body.appendChild(a);
-
-        a.click();
-
-        document.body.removeChild(a);
-
-        URL.revokeObjectURL(url);
-
-        showToast('Event saved ✓');
-
-      });
-
-    });
-
-})();
-
-
-/* ---------------- gallery ---------------- */
-
-(function(){
-
-  var grid =
-    document.getElementById('galleryGrid');
-
-  var svgFlower =
-    '<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">' +
-    '<g fill="none" stroke="currentColor" stroke-width="1.4">' +
-    '<circle cx="30" cy="30" r="5"/>' +
-    '<path d="M30 25 C25 15 20 15 18 20 C16 25 22 28 30 25Z"/>' +
-    '<path d="M30 25 C35 15 40 15 42 20 C44 25 38 28 30 25Z"/>' +
-    '<path d="M30 35 C25 45 20 45 18 40 C16 35 22 32 30 35Z"/>' +
-    '<path d="M30 35 C35 45 40 45 42 40 C44 35 38 32 30 35Z"/>' +
-    '</g>' +
-    '</svg>';
-
-  for (var i=1; i<=6; i++){
-
-    var f =
-      document.createElement('div');
-
-    f.className = 'frame';
-
-    f.style.color =
-      ['#D79AA3','#B08D57','#8B7A6C'][i%3];
-
-    var img =
-      document.createElement('img');
-
-    img.src =
-      'photos/' + i + '.jpg';
-
-    img.alt =
-      'Wedding photo ' + i;
-
-    img.onerror =
-      function(){
-
-        this.style.display = 'none';
-
-        this.parentElement.innerHTML =
-          svgFlower;
-
-      };
-
-    f.appendChild(img);
-
-    grid.appendChild(f);
+    setTimeout(
+      createDecoration,
+      i * 450
+    );
 
   }
 
-})();
+  setInterval(
+    createDecoration,
+    1200
+  );
+
+}
 
 
-/* ---------------- share ---------------- */
+/* =====================================================
+   COUNTDOWN
+===================================================== */
 
-document
-  .getElementById('shareBtn')
-  .addEventListener('click',async function(){
+const weddingDate =
+  new Date(
+    "2026-10-04T17:00:00+03:00"
+  ).getTime();
 
-    var shareData = {
+function updateCountdown(){
 
-      title:
-        'Kerollos & Marina\'s Wedding',
+  const now =
+    new Date().getTime();
 
-      text:
-        'Join us to celebrate our wedding on October 4th, 2026',
+  const distance =
+    weddingDate - now;
 
-      url:
-        location.href
+  if(distance <= 0){
 
-    };
+    document.getElementById("days").textContent = "0";
+    document.getElementById("hours").textContent = "0";
+    document.getElementById("minutes").textContent = "0";
+    document.getElementById("seconds").textContent = "0";
 
-    if (navigator.share){
+    return;
+  }
 
-      try{
+  const days =
+    Math.floor(
+      distance /
+      (1000 * 60 * 60 * 24)
+    );
 
-        await navigator.share(shareData);
+  const hours =
+    Math.floor(
+      (distance %
+      (1000 * 60 * 60 * 24)) /
+      (1000 * 60 * 60)
+    );
 
-      }catch(e){}
+  const minutes =
+    Math.floor(
+      (distance %
+      (1000 * 60 * 60)) /
+      (1000 * 60)
+    );
 
-    }else{
+  const seconds =
+    Math.floor(
+      (distance %
+      (1000 * 60)) /
+      1000
+    );
 
-      try{
+  document.getElementById("days")
+    .textContent = days;
 
-        await navigator.clipboard.writeText(
-          shareData.url
-        );
+  document.getElementById("hours")
+    .textContent = String(hours).padStart(2,"0");
 
-        showToast(
-          'Invitation link copied'
-        );
+  document.getElementById("minutes")
+    .textContent = String(minutes).padStart(2,"0");
 
-      }catch(e){
+  document.getElementById("seconds")
+    .textContent = String(seconds).padStart(2,"0");
 
-        showToast(
-          shareData.url
+}
+
+updateCountdown();
+
+setInterval(
+  updateCountdown,
+  1000
+);
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+const toast =
+  document.getElementById("toast");
+
+let toastTimer;
+
+function showToast(message){
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(() => {
+
+      toast.classList.remove("show");
+
+    }, 2200);
+
+}
+
+
+/* =====================================================
+   GOOGLE MAPS
+===================================================== */
+
+document.querySelectorAll(".map-btn")
+  .forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const url =
+        button.getAttribute("data-map-url");
+
+      if(url){
+
+        window.open(
+          url,
+          "_blank",
+          "noopener"
         );
 
       }
 
-    }
-
-});
-
-
-/* ---------------- ambient music ---------------- */
-/*
-   Generated tones.
-   No external audio file is required.
-*/
-
-(function(){
-
-  var btn =
-    document.getElementById('musicToggle');
-
-  var ctx = null;
-
-  var playing = false;
-
-  var timer = null;
-
-  var notes = [
-    523.25,
-    587.33,
-    659.25,
-    783.99,
-    880.0,
-    783.99,
-    659.25,
-    587.33
-  ];
-
-  var idx = 0;
-
-
-  function ensureCtx(){
-
-    if (!ctx){
-
-      var AC =
-        window.AudioContext ||
-        window.webkitAudioContext;
-
-      ctx = new AC();
-
-    }
-
-  }
-
-
-  function pluck(freq,t){
-
-    var o =
-      ctx.createOscillator();
-
-    var g =
-      ctx.createGain();
-
-    o.type = 'sine';
-
-    o.frequency.value = freq;
-
-    g.gain.setValueAtTime(
-      0.0001,
-      t
-    );
-
-    g.gain.linearRampToValueAtTime(
-      0.05,
-      t + 0.05
-    );
-
-    g.gain.exponentialRampToValueAtTime(
-      0.0001,
-      t + 1.4
-    );
-
-    o.connect(g).connect(
-      ctx.destination
-    );
-
-    o.start(t);
-
-    o.stop(t + 1.5);
-
-  }
-
-
-  function loop(){
-
-    if (!playing) return;
-
-    pluck(
-      notes[idx % notes.length],
-      ctx.currentTime
-    );
-
-    idx++;
-
-    timer =
-      setTimeout(loop,950);
-
-  }
-
-
-  btn.addEventListener('click',function(){
-
-    ensureCtx();
-
-    if (ctx.state === 'suspended'){
-      ctx.resume();
-    }
-
-    playing = !playing;
-
-    btn.textContent =
-      playing ? '🔊' : '🔇';
-
-    if (playing){
-
-      loop();
-
-    }else{
-
-      clearTimeout(timer);
-
-    }
+    });
 
   });
 
-})();
+
+/* =====================================================
+   CALENDAR
+===================================================== */
+
+const calendarEvents = {
+
+  henna: {
+    title:"Kerollos & Marina — Henna Night",
+    description:"Henna Night for Kerollos & Marina",
+    location:"Star Sky Hall, Shatea El Gaish, Al-Qiyadat St., Hurghada",
+    start:"20261002T170000Z",
+    end:"20261002T200000Z"
+  },
+
+  church: {
+    title:"Kerollos & Marina — Wedding Ceremony",
+    description:"Wedding Ceremony for Kerollos & Marina",
+    location:"Anba Shenouda, Head of the Hermits Church, Hurghada",
+    start:"20261004T140000Z",
+    end:"20261004T150000Z"
+  },
+
+  reception: {
+    title:"Kerollos & Marina — Wedding Reception",
+    description:"Wedding Reception for Kerollos & Marina",
+    location:"Gumana Hall, Al-Hijaz St., Hurghada",
+    start:"20261004T160000Z",
+    end:"20261004T190000Z"
+  }
+
+};
+
+document.querySelectorAll(".calendar-btn")
+  .forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const type =
+        button.getAttribute("data-event");
+
+      const event =
+        calendarEvents[type];
+
+      if(!event) return;
+
+      const ics =
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Kerollos & Marina//Wedding//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:${type}-kerollos-marina-2026
+DTSTAMP:20260901T000000Z
+DTSTART:${event.start}
+DTEND:${event.end}
+SUMMARY:${event.title}
+DESCRIPTION:${event.description}
+LOCATION:${event.location}
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob =
+        new Blob(
+          [ics],
+          {type:"text/calendar;charset=utf-8"}
+        );
+
+      const url =
+        URL.createObjectURL(blob);
+
+      const link =
+        document.createElement("a");
+
+      link.href = url;
+      link.download =
+        "Kerollos-Marina-" +
+        type +
+        ".ics";
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+
+      URL.revokeObjectURL(url);
+
+      showToast(
+        currentLanguage === "ar"
+          ? "تم تجهيز الموعد للتقويم"
+          : "Calendar event ready"
+      );
+
+    });
+
+  });
+
+
+/* =====================================================
+   GALLERY
+===================================================== */
+
+const gallery =
+  document.getElementById("gallery");
+
+for(let i = 1; i <= 8; i++){
+
+  const item =
+    document.createElement("div");
+
+  item.className =
+    "gallery-item";
+
+  item.innerHTML = `
+    <img
+      src="photos/${i}.jpg"
+      alt="Kerollos & Marina photo ${i}"
+      loading="lazy"
+      onerror="this.parentElement.style.display='none'">
+    <div class="gallery-heart">♡</div>
+  `;
+
+  gallery.appendChild(item);
+
+}
+
+
+/* =====================================================
+   SHARE
+===================================================== */
+
+const shareButton =
+  document.getElementById("shareBtn");
+
+if(shareButton){
+
+  shareButton.addEventListener(
+    "click",
+    async () => {
+
+      const shareData = {
+
+        title:"Kerollos & Marina",
+
+        text:
+          currentLanguage === "ar"
+            ? "Kerollos & Marina — دعوة الزفاف"
+            : "Kerollos & Marina — Wedding Invitation",
+
+        url:window.location.href
+
+      };
+
+      try{
+
+        if(navigator.share){
+
+          await navigator.share(
+            shareData
+          );
+
+        }else{
+
+          await navigator.clipboard.writeText(
+            window.location.href
+          );
+
+          showToast(
+            currentLanguage === "ar"
+              ? "تم نسخ رابط الدعوة"
+              : "Invitation link copied"
+          );
+
+        }
+
+      }catch(error){
+
+        /* User closed the share window */
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   MUSIC
+===================================================== */
+
+const music =
+  document.getElementById("weddingMusic");
+
+const musicToggle =
+  document.getElementById("musicToggle");
+
+const musicHint =
+  document.getElementById("musicHint");
+
+let musicPlaying = false;
+
+function updateMusicButton(){
+
+  if(musicPlaying){
+
+    musicToggle.textContent = "❚❚";
+
+    musicToggle.classList.add(
+      "playing"
+    );
+
+    musicToggle.setAttribute(
+      "aria-label",
+      currentLanguage === "ar"
+        ? "إيقاف الموسيقى"
+        : "Pause music"
+    );
+
+  }else{
+
+    musicToggle.textContent = "▶";
+
+    musicToggle.classList.remove(
+      "playing"
+    );
+
+    musicToggle.setAttribute(
+      "aria-label",
+      currentLanguage === "ar"
+        ? "تشغيل الموسيقى"
+        : "Play music"
+    );
+
+  }
+
+}
+
+function updateMusicHint(){
+
+  if(musicPlaying){
+
+    musicHint.textContent =
+      currentLanguage === "ar"
+        ? "♫ إيقاف الموسيقى"
+        : "♫ Pause Music";
+
+  }else{
+
+    musicHint.textContent =
+      currentLanguage === "ar"
+        ? "♫ شغّل الموسيقى"
+        : "♫ Play Music";
+
+  }
+
+}
+
+musicToggle.addEventListener(
+  "click",
+  async () => {
+
+    try{
+
+      if(music.paused){
+
+        await music.play();
+
+        musicPlaying = true;
+
+      }else{
+
+        music.pause();
+
+        musicPlaying = false;
+
+      }
+
+      updateMusicButton();
+      updateMusicHint();
+
+      if(musicPlaying){
+
+        musicHint.classList.add(
+          "hidden"
+        );
+
+      }else{
+
+        musicHint.classList.remove(
+          "hidden"
+        );
+
+      }
+
+    }catch(error){
+
+      showToast(
+        currentLanguage === "ar"
+          ? "تأكد من وجود ملف music.mp3 داخل مجلد photos"
+          : "Make sure music.mp3 is inside the photos folder"
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+updateLanguage();
+updateMusicButton();
+updateMusicHint();
 
 </script>
 
