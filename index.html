@@ -13,7 +13,6 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Kufi+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
 
-
 <style>
 
 /* =========================================================
@@ -135,9 +134,6 @@ textarea{
     pointer-events:none;
 }
 
-
-/* subtle background texture */
-
 .opening::before{
     content:"";
     position:absolute;
@@ -253,9 +249,6 @@ textarea{
         inset 0 0 30px rgba(0,0,0,.25);
 }
 
-
-/* paper inside */
-
 .envelope-paper{
     position:absolute;
 
@@ -281,9 +274,6 @@ textarea{
         z-index .1s 1s;
 }
 
-
-/* paper decorative lines */
-
 .envelope-paper::before{
     content:"";
     position:absolute;
@@ -291,9 +281,6 @@ textarea{
 
     border:1px solid rgba(185,145,79,.45);
 }
-
-
-/* envelope flap */
 
 .envelope-flap{
     position:absolute;
@@ -326,9 +313,6 @@ textarea{
     filter:brightness(.95);
 }
 
-
-/* envelope bottom flap */
-
 .envelope-bottom{
     position:absolute;
     z-index:3;
@@ -351,9 +335,6 @@ textarea{
 
     pointer-events:none;
 }
-
-
-/* envelope side shadows */
 
 .envelope-left,
 .envelope-right{
@@ -552,9 +533,6 @@ textarea{
 
     overflow:hidden;
 }
-
-
-/* gold frame */
 
 .paper-section::before{
     content:"";
@@ -1205,138 +1183,170 @@ textarea{
     transform:scale(1.05);
 }
 
+
 /* =========================================================
    RSVP
 ========================================================= */
 
-const GOOGLE_SHEET_URL =
-    "https://script.google.com/macros/s/AKfycbwOcPdxJfwyumoLFB72iT4YWWRC2N6BJ6ZoUBkHCEDh0D1Ey8oX9vwgSTd9Dscxk8b-/exec";
+.rsvp{
+    text-align:center;
 
+    padding:80px 35px;
+}
 
-document
-    .getElementById("rsvpForm")
-    .addEventListener("submit", async function(event){
+.rsvp-script{
+    font-family:"Great Vibes",cursive;
 
-        event.preventDefault();
+    font-size:42px;
 
+    color:#604831;
 
-        const form = this;
+    margin-bottom:10px;
+}
 
-        const submitButton =
-            form.querySelector(".submit-button");
+.rsvp h2{
+    font-family:"Cinzel",serif;
 
+    font-size:16px;
 
-        const name =
-            document
-                .getElementById("guestName")
-                .value
-                .trim();
+    letter-spacing:3px;
 
+    color:#17110c;
 
-        const attendance =
-            document.querySelector(
-                'input[name="attendance"]:checked'
-            );
+    margin-bottom:35px;
+}
 
+.rsvp-form{
+    max-width:520px;
 
-        const message =
-            document
-                .getElementById("guestMessage")
-                .value
-                .trim();
+    margin:auto;
 
+    text-align:left;
 
-        if(!name || !attendance){
+    padding:30px;
 
-            showToast(
-                currentLanguage === "ar"
-                    ? "من فضلك أكمل البيانات"
-                    : "Please complete the required fields"
-            );
+    background:rgba(255,255,255,.35);
 
-            return;
+    border:1px solid rgba(185,145,79,.35);
+}
 
-        }
+.form-label{
+    display:block;
 
+    font-family:"Cinzel",serif;
 
-        submitButton.disabled = true;
+    font-size:10px;
 
-        submitButton.textContent =
-            currentLanguage === "ar"
-                ? "جاري الإرسال..."
-                : "SENDING...";
+    letter-spacing:2px;
 
+    color:#59483b;
 
-        try{
+    margin-bottom:8px;
 
-            const formData = new URLSearchParams();
+    margin-top:20px;
+}
 
+.form-label:first-child{
+    margin-top:0;
+}
 
-            formData.append(
-                "name",
-                name
-            );
+.form-input,
+.form-textarea{
+    width:100%;
 
+    border:1px solid rgba(120,90,55,.35);
 
-            formData.append(
-                "attendance",
-                attendance.value
-            );
+    background:rgba(255,255,255,.6);
 
+    color:var(--text);
 
-            formData.append(
-                "message",
-                message
-            );
+    padding:12px 14px;
 
+    outline:none;
 
-            await fetch(
-                GOOGLE_SHEET_URL,
-                {
-                    method:"POST",
-                    mode:"no-cors",
-                    body:formData
-                }
-            );
+    font-family:"Cormorant Garamond",serif;
 
+    font-size:16px;
 
-            showToast(
-                currentLanguage === "ar"
-                    ? "تم إرسال رسالتك بنجاح"
-                    : "Your message has been sent successfully"
-            );
+    transition:.3s;
+}
 
+.form-input:focus,
+.form-textarea:focus{
+    border-color:var(--gold);
+    background:#fff;
+}
 
-            form.reset();
+.form-textarea{
+    min-height:110px;
 
+    resize:vertical;
+}
 
-        }catch(error){
+.attendance{
+    display:flex;
 
-            console.error(
-                "RSVP error:",
-                error
-            );
+    align-items:center;
 
+    gap:10px;
 
-            showToast(
-                currentLanguage === "ar"
-                    ? "حدث خطأ. حاول مرة أخرى."
-                    : "Something went wrong. Please try again."
-            );
+    margin:10px 0 5px;
+}
 
+.attendance input{
+    accent-color:var(--gold-dark);
+}
 
-        }finally{
+.attendance label{
+    font-family:"Cinzel",serif;
 
-            submitButton.disabled = false;
+    font-size:10px;
 
-            submitButton.textContent =
-                currentLanguage === "ar"
-                    ? "إرسال الرسالة"
-                    : "SEND MESSAGE";
+    letter-spacing:2px;
 
-        }
+    color:#59483b;
 
-    });
+    margin-right:14px;
+
+    cursor:pointer;
+}
+
+.submit-button{
+    display:block;
+
+    width:100%;
+
+    margin-top:28px;
+
+    padding:14px 20px;
+
+    border:1px solid var(--gold);
+
+    background:var(--brown);
+
+    color:#fff;
+
+    font-family:"Cinzel",serif;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    cursor:pointer;
+
+    transition:.35s;
+}
+
+.submit-button:hover{
+    background:#21150e;
+}
+
+.submit-button:disabled{
+    opacity:.65;
+
+    cursor:not-allowed;
+}
+
 
 /* =========================================================
    FOOTER
@@ -1661,6 +1671,7 @@ body.arabic .music-control{
     .footer{
         padding:80px 15px 70px;
     }
+
 }
 
 </style>
@@ -1741,8 +1752,6 @@ body.arabic .music-control{
 
                 <div class="envelope-bottom"></div>
 
-                <!-- KM SEAL -->
-
                 <div class="wax-seal">
 
                     <div class="wax-logo">
@@ -1789,8 +1798,6 @@ body.arabic .music-control{
     <div class="corner bottom-right"></div>
 
 
-    <!-- COUPLE IMAGE -->
-
     <div class="hero-photo">
 
         <img
@@ -1799,8 +1806,6 @@ body.arabic .music-control{
 
     </div>
 
-
-    <!-- SCRIPTURE -->
 
     <div class="scripture">
 
@@ -1819,8 +1824,6 @@ body.arabic .music-control{
     </div>
 
 
-    <!-- NAMES -->
-
     <div class="small-heading"
          data-en="THE WEDDING OF"
          data-ar="حفل زفاف">
@@ -1838,8 +1841,6 @@ body.arabic .music-control{
 
     </div>
 
-
-    <!-- DATE -->
 
     <div class="wedding-date">
 
@@ -1875,8 +1876,6 @@ body.arabic .music-control{
         <span>✦</span>
     </div>
 
-
-    <!-- MESSAGE -->
 
     <div class="special-message">
 
@@ -2210,9 +2209,6 @@ body.arabic .music-control{
 
     <form class="rsvp-form" id="rsvpForm">
 
-
-        <!-- NAME -->
-
         <label class="form-label" for="guestName">
             YOUR NAME
         </label>
@@ -2224,8 +2220,6 @@ body.arabic .music-control{
             placeholder="Your Name"
             required>
 
-
-        <!-- ATTENDING -->
 
         <label class="form-label">
             WILL YOU BE ATTENDING?
@@ -2258,8 +2252,6 @@ body.arabic .music-control{
 
         </div>
 
-
-        <!-- MESSAGE -->
 
         <label class="form-label" for="guestMessage">
             LEAVE US A MESSAGE
@@ -2327,11 +2319,21 @@ body.arabic .music-control{
 
 
 <!-- =========================================================
+     HIDDEN GOOGLE SHEETS FRAME
+========================================================= -->
+
+<iframe
+    name="googleSheetFrame"
+    id="googleSheetFrame"
+    style="display:none;">
+</iframe>
+
+
+<!-- =========================================================
      TOAST
 ========================================================= -->
 
 <div class="toast" id="toast"></div>
-
 
 
 <script>
@@ -2555,11 +2557,8 @@ envelope.addEventListener("click", async () => {
 
     invitationOpened = true;
 
-
     opening.classList.add("opening-animation");
 
-
-    /* Start music from the same user interaction */
 
     try{
 
@@ -2578,11 +2577,6 @@ envelope.addEventListener("click", async () => {
     }
 
 
-    /*
-       Give the envelope animation time
-       before showing the website.
-    */
-
     setTimeout(() => {
 
         opening.classList.add("hidden");
@@ -2596,7 +2590,7 @@ envelope.addEventListener("click", async () => {
             behavior:"instant"
         });
 
-    }, 1600);
+    },1600);
 
 });
 
@@ -2658,14 +2652,11 @@ function updateCountdown(){
     document.getElementById("days").textContent =
         days;
 
-
     document.getElementById("hours").textContent =
         pad(hours);
 
-
     document.getElementById("minutes").textContent =
         pad(minutes);
-
 
     document.getElementById("seconds").textContent =
         pad(seconds);
@@ -2679,8 +2670,12 @@ setInterval(updateCountdown,1000);
 
 
 /* =========================================================
-   RSVP
+   RSVP - GOOGLE SHEETS
 ========================================================= */
+
+const GOOGLE_SHEET_URL =
+    "https://script.google.com/macros/s/AKfycbwOcPdxJfwyumoLFB72iT4YWWRC2N6BJ6ZoUBkHCEDh0D1Ey8oX9vwgSTd9Dscxk8b-/exec";
+
 
 document
     .getElementById("rsvpForm")
@@ -2689,8 +2684,18 @@ document
         event.preventDefault();
 
 
+        const form = this;
+
+
+        const submitButton =
+            form.querySelector(".submit-button");
+
+
         const name =
-            document.getElementById("guestName").value.trim();
+            document
+                .getElementById("guestName")
+                .value
+                .trim();
 
 
         const attendance =
@@ -2700,7 +2705,10 @@ document
 
 
         const message =
-            document.getElementById("guestMessage").value.trim();
+            document
+                .getElementById("guestMessage")
+                .value
+                .trim();
 
 
         if(!name || !attendance){
@@ -2716,20 +2724,99 @@ document
         }
 
 
-        /*
-           Currently the form is front-end only.
-           This prevents page refresh and confirms
-           that the message was entered.
-        */
+        submitButton.disabled = true;
 
-        showToast(
+
+        submitButton.textContent =
             currentLanguage === "ar"
-                ? "تم تسجيل رسالتك ❤️"
-                : "Your message has been recorded ❤️"
-        );
+                ? "جاري الإرسال..."
+                : "SENDING...";
 
 
-        document.getElementById("rsvpForm").reset();
+        const hiddenForm =
+            document.createElement("form");
+
+
+        hiddenForm.method = "POST";
+
+        hiddenForm.action =
+            GOOGLE_SHEET_URL;
+
+        hiddenForm.target =
+            "googleSheetFrame";
+
+        hiddenForm.style.display =
+            "none";
+
+
+        const nameInput =
+            document.createElement("input");
+
+        nameInput.type = "hidden";
+
+        nameInput.name = "name";
+
+        nameInput.value = name;
+
+
+        const attendanceInput =
+            document.createElement("input");
+
+        attendanceInput.type = "hidden";
+
+        attendanceInput.name = "attendance";
+
+        attendanceInput.value =
+            attendance.value;
+
+
+        const messageInput =
+            document.createElement("input");
+
+        messageInput.type = "hidden";
+
+        messageInput.name = "message";
+
+        messageInput.value = message;
+
+
+        hiddenForm.appendChild(nameInput);
+
+        hiddenForm.appendChild(attendanceInput);
+
+        hiddenForm.appendChild(messageInput);
+
+
+        document.body.appendChild(hiddenForm);
+
+
+        hiddenForm.submit();
+
+
+        setTimeout(() => {
+
+            showToast(
+                currentLanguage === "ar"
+                    ? "تم إرسال رسالتك بنجاح"
+                    : "Your message has been sent successfully"
+            );
+
+
+            form.reset();
+
+
+            submitButton.disabled = false;
+
+
+            submitButton.textContent =
+                currentLanguage === "ar"
+                    ? "إرسال الرسالة"
+                    : "SEND MESSAGE";
+
+
+            hiddenForm.remove();
+
+        },1500);
 
     });
 
@@ -2786,7 +2873,6 @@ document
 updateLanguage();
 
 updateMusicText();
-
 
 </script>
 
