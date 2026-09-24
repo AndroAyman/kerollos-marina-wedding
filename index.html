@@ -3706,9 +3706,7 @@ function renderLetter(){
 
 
     /*
-       بنحوّل الـ 65% إلى 100% بصريًا.
-       يعني عند وصول letterProgress إلى 65
-       يكون الظرف وصل لنهاية الحركة بالكامل.
+       تحويل الـ 65% إلى 100% بصريًا
     */
 
     const visualProgress =
@@ -3719,24 +3717,38 @@ function renderLetter(){
         );
 
 
+    /*
+       إخراج الورقة من الظرف
+       مع تقليل المسافة التي تتحركها
+    */
+
     const translateY =
         15 -
-        (visualProgress * 270);
+        (visualProgress * 125);
 
     envelopePaper.style.transform =
         `translateY(${translateY}px)`;
 
 
+    /*
+       الورقة تكبر فقط بالقدر المطلوب
+       لتحتوي النص الموجود عليها
+    */
+
     const paperHeight =
         76 +
-        (visualProgress * 125);
+        (visualProgress * 45);
 
     envelopePaper.style.height =
         `${paperHeight}%`;
 
 
+    /*
+       تحريك الكتابة مع خروج الورقة
+    */
+
     const writingMovement =
-        visualProgress * 55;
+        visualProgress * 20;
 
     letterContent.style.transform =
         `translateY(-${writingMovement}px)`;
@@ -3881,8 +3893,8 @@ function updateCountdown(){
 
     const minutes =
         Math.floor(
-            (totalSeconds % 3600)
-            / 60
+            (totalSeconds % 3600
+            ) / 60
         );
 
 
