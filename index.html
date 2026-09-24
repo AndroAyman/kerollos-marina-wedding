@@ -1741,6 +1741,77 @@ textarea{
 
 
 /* =========================================================
+   DESIGNED BY + SOCIAL LINKS
+========================================================= */
+
+.designed-by{
+    margin-top:45px;
+    padding-top:25px;
+    border-top:1px solid rgba(185,145,79,.25);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.designed-text{
+    font-family:"Cinzel",serif;
+    font-size:9px;
+    letter-spacing:2px;
+    color:#806b5a;
+    margin-bottom:18px;
+}
+
+.social-links{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+}
+
+.social-icon{
+    width:40px;
+    height:40px;
+
+    border:1px solid rgba(185,145,79,.55);
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:var(--gold-dark);
+
+    background:rgba(255,255,255,.25);
+
+    text-decoration:none;
+
+    transition:
+        transform .3s ease,
+        background .3s ease,
+        color .3s ease,
+        border-color .3s ease;
+}
+
+.social-icon svg{
+    width:18px;
+    height:18px;
+
+    fill:currentColor;
+}
+
+.social-icon:hover{
+    transform:translateY(-4px) scale(1.08);
+
+    background:var(--brown);
+
+    color:#fff;
+
+    border-color:var(--brown);
+}
+
+
+/* =========================================================
    MUSIC BUTTON
 ========================================================= */
 
@@ -2118,6 +2189,26 @@ body.arabic .special-message p{
 
     .footer{
         padding:80px 15px 70px;
+    }
+
+    .designed-by{
+        margin-top:38px;
+        padding-top:22px;
+    }
+
+    .designed-text{
+        font-size:8px;
+        letter-spacing:1.5px;
+        text-align:center;
+    }
+
+    .social-links{
+        gap:12px;
+    }
+
+    .social-icon{
+        width:38px;
+        height:38px;
     }
 
 }
@@ -3007,6 +3098,81 @@ body.arabic .special-message p{
         04 · 10 · 2026
     </div>
 
+
+    <div class="designed-by">
+
+        <div
+            class="designed-text"
+            data-en="Designed by Eng. Andro Ayman"
+            data-ar="تصميم المهندس أندرو أيمن">
+
+            Designed by Eng. Andro Ayman
+
+        </div>
+
+
+        <div class="social-links">
+
+            <a
+                href="https://wa.me/201092717907"
+                target="_blank"
+                rel="noopener"
+                class="social-icon whatsapp"
+                aria-label="WhatsApp">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <path
+                        d="M20.52 3.48A11.78 11.78 0 0 0 12.13 0C5.6 0 .28 5.32.28 11.85c0 2.09.55 4.13 1.59 5.93L.2 24l6.36-1.67a11.84 11.84 0 0 0 5.57 1.42h.01c6.53 0 11.85-5.32 11.85-11.85 0-3.17-1.23-6.15-3.47-8.42ZM12.14 21.7h-.01a9.83 9.83 0 0 1-5.01-1.37l-.36-.21-3.77.99 1.01-3.68-.23-.38a9.82 9.82 0 0 1-1.5-5.2C2.27 6.43 6.69 2 12.13 2a9.82 9.82 0 0 1 6.98 2.89 9.82 9.82 0 0 1 2.89 6.98c0 5.44-4.43 9.83-9.86 9.83Zm5.4-7.37c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.09 4.49.71.31 1.27.49 1.7.63.71.23 1.35.2 1.86.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
+
+                </svg>
+
+            </a>
+
+
+            <a
+                href="https://www.facebook.com/share/1ByqLJLs59/"
+                target="_blank"
+                rel="noopener"
+                class="social-icon facebook"
+                aria-label="Facebook">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <path
+                        d="M13.5 21v-8h2.7l.4-3h-3.1V8.08c0-.87.24-1.46 1.5-1.46h1.7V3.94c-.3-.04-1.34-.14-2.56-.14-2.53 0-4.27 1.54-4.27 4.37V10H7v3h2.87v8h3.63Z"/>
+
+                </svg>
+
+            </a>
+
+
+            <a
+                href="https://www.instagram.com/andro_ayman_?stkn=MWphcnI5MTIwdDI1YQ=="
+                target="_blank"
+                rel="noopener"
+                class="social-icon instagram"
+                aria-label="Instagram">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <path
+                        d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0-6Zm5.25-3.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/>
+
+                </svg>
+
+            </a>
+
+        </div>
+
+    </div>
+
 </section>
 
 </main>
@@ -3306,6 +3472,13 @@ let completingInvitation =
     false;
 
 
+/*
+   نسبة الحركة المطلوبة لإكمال فتح الظرف.
+   عند الوصول إلى 65% يتم فتح الصفحة الرئيسية.
+*/
+const LETTER_COMPLETE_PROGRESS = 65;
+
+
 envelope.addEventListener(
     "click",
     async () => {
@@ -3369,7 +3542,7 @@ window.addEventListener(
             event.deltaY;
 
         updateLetterProgress(
-            delta * 0.055
+            delta * 0.12
         );
 
     },
@@ -3428,7 +3601,7 @@ opening.addEventListener(
             currentY;
 
         updateLetterProgress(
-            movement * 0.18
+            movement * 0.35
         );
 
     },
@@ -3482,7 +3655,7 @@ window.addEventListener(
 
 
 /* =========================================================
-   UPDATE LETTER
+   UPDATE LETTER PROGRESS
 ========================================================= */
 
 function updateLetterProgress(amount){
@@ -3494,7 +3667,7 @@ function updateLetterProgress(amount){
         Math.max(
             0,
             Math.min(
-                100,
+                LETTER_COMPLETE_PROGRESS,
                 letterProgress
             )
         );
@@ -3503,7 +3676,7 @@ function updateLetterProgress(amount){
 
 
     if(
-        letterProgress >= 100 &&
+        letterProgress >= LETTER_COMPLETE_PROGRESS &&
         !completingInvitation
     ){
 
@@ -3527,13 +3700,28 @@ function renderLetter(){
         return;
     }
 
+
     const progress =
         letterProgress / 100;
 
 
+    /*
+       بنحوّل الـ 65% إلى 100% بصريًا.
+       يعني عند وصول letterProgress إلى 65
+       يكون الظرف وصل لنهاية الحركة بالكامل.
+    */
+
+    const visualProgress =
+        Math.min(
+            progress /
+            (LETTER_COMPLETE_PROGRESS / 100),
+            1
+        );
+
+
     const translateY =
         15 -
-        (progress * 270);
+        (visualProgress * 270);
 
     envelopePaper.style.transform =
         `translateY(${translateY}px)`;
@@ -3541,14 +3729,14 @@ function renderLetter(){
 
     const paperHeight =
         76 +
-        (progress * 125);
+        (visualProgress * 125);
 
     envelopePaper.style.height =
         `${paperHeight}%`;
 
 
     const writingMovement =
-        progress * 55;
+        visualProgress * 55;
 
     letterContent.style.transform =
         `translateY(-${writingMovement}px)`;
@@ -3558,21 +3746,21 @@ function renderLetter(){
         Math.min(
             1,
             .25 +
-            progress * .75
+            visualProgress * .75
         );
 
 
     const reveal =
         Math.min(
             100,
-            progress * 115
+            visualProgress * 115
         );
 
     letterContent.style.clipPath =
         `inset(0 ${100 - reveal}% 0 0)`;
 
 
-    if(progress > .35){
+    if(visualProgress > .35){
 
         letterContent.style.clipPath =
             "inset(0 0 0 0)";
@@ -3587,6 +3775,10 @@ function renderLetter(){
 ========================================================= */
 
 function completeInvitation(){
+
+    if(completingInvitation){
+        return;
+    }
 
     completingInvitation =
         true;
@@ -4042,4 +4234,4 @@ updateMusicText();
 </script>
 
 </body>
-</html>
+    </html>
